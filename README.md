@@ -1,4 +1,4 @@
-# ethzThesisSweave
+# myThesis
 
 This is a port from https://github.com/tuxu/ethz-thesis to `Sweave`. Please also
 consult the [README](https://github.com/tuxu/ethz-thesis/blob/master/README.md) there.

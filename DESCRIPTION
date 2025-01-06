@@ -1,10 +1,10 @@
-Package: ethzThesisSweave
-Title: Swave Template for Thesis at ETH Zurich
+Package: myThesis
+Title: Measuring and Modeling the Impact of Telework on Transport Demand - Data, Tools and Analysis
 Version: 0.0.0.9000
 Authors@R: 
     person("Daniel", "Heimgartner", email = "d.heimgartners@gmail.com", role = c("aut", "cre", "cph"),
     comment = c(ORCID = "0000-0002-0643-8690"))
-Description: This is a port from https://github.com/tuxu/ethz-thesis to Sweave.
+Description: My Thesis at ETH Zurich.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
