@@ -20,6 +20,8 @@
 
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
+## add libraries here
+
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
         digits = 3)
 @
