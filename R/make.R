@@ -5,6 +5,4 @@ make <- function(file = "thesis.Rnw", remove_build = TRUE) {
 
   Sweave(file)
   system("make")
-  file_ <- sub(".Rnw$", ".tex", file)
-  file.remove(file_)
 }
