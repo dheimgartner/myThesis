@@ -1,0 +1,11 @@
+\chapter{Sweave Chapter}
+\label{ch:sweave-chapter}
+
+\dictum[Daniel Heimgartner]{%
+  All models are wrong - some models are wronger! }%
+\vskip 1em
+
+<<>>=
+head(iris)
+@
+
