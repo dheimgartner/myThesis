@@ -5,4 +5,5 @@ make <- function(file = "thesis.Rnw", remove_build = TRUE) {
 
   Sweave(file)
   system("make")
+  remove_aux()
 }
