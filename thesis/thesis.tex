@@ -314,13 +314,13 @@ R> dat <- sim_dat$data
 R> head(dat)
 \end{Sinput}
 \begin{Soutput}
-  ys      yo    xs1    xs2    xo1    xo2
-1  1  4.5536 -0.706 -0.435  1.893  1.208
-2  3 -4.7574  1.892  0.581 -0.978  1.260
-3  2  0.0994 -0.407 -0.513  0.499  0.268
-4  2 -1.0102  0.430 -0.648  0.385 -1.201
-5  2 -3.0429 -0.648  0.500  0.186 -1.072
-6  3 -2.1041  1.197  0.235 -0.611  0.991
+  ys     yo     xs1    xs2     xo1    xo2
+1  2 -1.489 -0.8673 1.9097  1.4690 -0.173
+2  2 -0.801  0.0566 0.6560 -0.5378 -0.695
+3  3  1.304  1.0805 0.5980  1.9865  1.660
+4  3  0.458  0.4384 0.0718 -0.2807  0.307
+5  2  0.199 -0.0114 0.4776 -0.2607  0.123
+6  3 -1.359  0.1820 0.0829 -0.0907  1.257
 \end{Soutput}
 \end{Schunk}
 %
@@ -347,43 +347,46 @@ R> summary(fit)
 Call:
 opsr(formula = ys | yo ~ xs1 + xs2 | xo1 + xo2, data = dat, printLevel = 0)
 
-Meta information:
-BFGS maximization, 96 iterations
+BFGS maximization, 93 iterations
 Return code 0: successful convergence 
-Runtime: 0.442 secs
-Log-Likelihood: -2015 
-AIC: 4068 
-BIC: 4161 
+Runtime: 0.299 secs
 Number of regimes: 3 
-Number of observations: 1000 (161, 497, 342)
+Number of observations: 1000 (153, 552, 295)
 Estimated parameters: 19 
+
+Log-Likelihood: -1970 
+AIC: 3978 
+BIC: 4071 
+Pseudo R-squared (EL): 0.533 
+Pseudo R-squared (MS): 0.474 
+Multiple R-squared: 0.804 (0.844, 0.736, 0.857)
 
 Estimates:
                Estimate Std. error t value Pr(> t)    
-kappa1          -2.1277     0.1046  -20.35 < 2e-16 ***
-kappa2           0.8838     0.0638   13.85 < 2e-16 ***
-s_xs1            0.9971     0.0581   17.16 < 2e-16 ***
-s_xs2            1.5729     0.0744   21.14 < 2e-16 ***
-o1_(Intercept)   1.1067     0.1008   10.98 < 2e-16 ***
-o1_xo1           1.9227     0.0723   26.60 < 2e-16 ***
-o1_xo2           1.2981     0.0789   16.45 < 2e-16 ***
-o2_(Intercept)   1.0817     0.0525   20.62 < 2e-16 ***
-o2_xo1          -1.0494     0.0487  -21.54 < 2e-16 ***
-o2_xo2           1.4911     0.0527   28.27 < 2e-16 ***
-o3_(Intercept)   0.9330     0.0868   10.75 < 2e-16 ***
-o3_xo1           1.5339     0.0645   23.80 < 2e-16 ***
-o3_xo2          -1.9654     0.0523  -37.56 < 2e-16 ***
-sigma1           1.0283     0.0536   19.19 < 2e-16 ***
-sigma2           1.1054     0.0356   31.07 < 2e-16 ***
-sigma3           1.1838     0.0537   22.05 < 2e-16 ***
-rho1             0.3249     0.0997    3.26  0.0011 ** 
-rho2             0.2043     0.0770    2.65  0.0080 ** 
-rho3             0.4122     0.0858    4.81 1.5e-06 ***
+kappa1          -2.1261     0.0937  -22.69 < 2e-16 ***
+kappa2           1.0655     0.0670   15.89 < 2e-16 ***
+s_xs1            1.0506     0.0578   18.18 < 2e-16 ***
+s_xs2            1.5359     0.0732   20.98 < 2e-16 ***
+o1_(Intercept)   0.9410     0.1331    7.07 1.6e-12 ***
+o1_xo1           1.9671     0.0766   25.68 < 2e-16 ***
+o1_xo2           1.1149     0.0754   14.79 < 2e-16 ***
+o2_(Intercept)   1.0611     0.0466   22.78 < 2e-16 ***
+o2_xo1          -0.9733     0.0461  -21.10 < 2e-16 ***
+o2_xo2           1.4522     0.0414   35.07 < 2e-16 ***
+o3_(Intercept)   0.9605     0.0802   11.98 < 2e-16 ***
+o3_xo1           1.7088     0.0589   29.02 < 2e-16 ***
+o3_xo2          -1.9836     0.0611  -32.46 < 2e-16 ***
+sigma1           1.0235     0.0571   17.91 < 2e-16 ***
+sigma2           1.0871     0.0342   31.76 < 2e-16 ***
+sigma3           1.0653     0.0462   23.08 < 2e-16 ***
+rho1             0.1526     0.1371    1.11    0.27    
+rho2             0.3564     0.0672    5.31 1.1e-07 ***
+rho3             0.3785     0.0857    4.41 1.0e-05 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Wald chi2 (null): 4698 on 8 DF, p-value: < 0
-Wald chi2 (rho): 40.8 on 3 DF, p-value: < 0
+Wald chi2 (null): 4772 on 8 DF, p-value: < 0
+Wald chi2 (rho): 48.4 on 3 DF, p-value: < 0
 \end{Soutput}
 \end{Schunk}
 %
@@ -427,9 +430,9 @@ Model 1: ~Nullmodel
 Model 2: ys | yo ~ xs1 + xs2 | 1
 Model 3: ys | yo ~ xs1 + xs2 | xo1 + xo2
   logLik    Df  Test Restrictions Pr(>Chi)    
-1  -3302     8                                
-2  -2798    13  1008            5   <2e-16 ***
-3  -2015    19  1565            6   <2e-16 ***
+1  -3225     8                                
+2  -2745    13   959            5   <2e-16 ***
+3  -1970    19  1550            6   <2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{Soutput}
@@ -448,35 +451,35 @@ R> texreg::screenreg(list(fit_null, fit_intercept, fit),
 ==============================================================================
                  Model 1              Model 2              Model 3            
 ------------------------------------------------------------------------------
-kappa1              -0.99 (0.05) ***     -2.13 (0.10) ***     -2.13 (0.10) ***
-kappa2               0.41 (0.04) ***      0.88 (0.06) ***      0.88 (0.06) ***
-sigma1               2.60 (0.16) ***      2.60 (0.16) ***      1.03 (0.05) ***
-sigma2               2.15 (0.07) ***      2.15 (0.07) ***      1.11 (0.04) ***
-sigma3               2.70 (0.10) ***      2.70 (0.10) ***      1.18 (0.05) ***
-rho1                                      0.07 (0.14)          0.32 (0.10) ** 
-rho2                                      0.13 (0.07)          0.20 (0.08) ** 
-rho3                                      0.11 (0.11)          0.41 (0.09) ***
-s_xs1                                     1.01 (0.06) ***      1.00 (0.06) ***
-s_xs2                                     1.57 (0.07) ***      1.57 (0.07) ***
-o1_(Intercept)       0.91 (0.21) ***      1.04 (0.30) ***      1.11 (0.10) ***
-o1_xo1                                                         1.92 (0.07) ***
-o1_xo2                                                         1.30 (0.08) ***
-o2_(Intercept)       1.02 (0.10) ***      1.05 (0.10) ***      1.08 (0.05) ***
-o2_xo1                                                        -1.05 (0.05) ***
-o2_xo2                                                         1.49 (0.05) ***
-o3_(Intercept)       1.10 (0.15) ***      0.95 (0.21) ***      0.93 (0.09) ***
-o3_xo1                                                         1.53 (0.06) ***
-o3_xo2                                                        -1.97 (0.05) ***
+kappa1              -1.02 (0.05) ***     -2.13 (0.09) ***     -2.13 (0.09) ***
+kappa2               0.54 (0.04) ***      1.06 (0.07) ***      1.07 (0.07) ***
+sigma1               2.55 (0.15) ***      2.56 (0.15) ***      1.02 (0.06) ***
+sigma2               2.04 (0.06) ***      2.06 (0.07) ***      1.09 (0.03) ***
+sigma3               2.70 (0.11) ***      2.75 (0.11) ***      1.07 (0.05) ***
+rho1                                     -0.11 (0.14)          0.15 (0.14)    
+rho2                                      0.28 (0.07) ***      0.36 (0.07) ***
+rho3                                      0.47 (0.09) ***      0.38 (0.09) ***
+s_xs1                                     1.06 (0.06) ***      1.05 (0.06) ***
+s_xs2                                     1.54 (0.07) ***      1.54 (0.07) ***
+o1_(Intercept)       0.77 (0.20) ***      0.54 (0.34)          0.94 (0.13) ***
+o1_xo1                                                         1.97 (0.08) ***
+o1_xo2                                                         1.11 (0.08) ***
+o2_(Intercept)       1.05 (0.09) ***      1.10 (0.09) ***      1.06 (0.05) ***
+o2_xo1                                                        -0.97 (0.05) ***
+o2_xo2                                                         1.45 (0.04) ***
+o3_(Intercept)       1.38 (0.16) ***      0.63 (0.23) **       0.96 (0.08) ***
+o3_xo1                                                         1.71 (0.06) ***
+o3_xo2                                                        -1.98 (0.06) ***
 ------------------------------------------------------------------------------
-AIC               6619.01              5621.32              4067.99           
-BIC               6658.27              5685.12              4161.24           
-Log Likelihood   -3301.50             -2797.66             -2015.00           
-Pseudo R^2 (EL)      0.08                 0.54                 0.54           
-Pseudo R^2 (MS)     -0.00                 0.50                 0.50           
-R^2 (total)          0.00                 0.00                 0.80           
-R^2 (1)              0.00                 0.00                 0.85           
-R^2 (2)              0.00                 0.01                 0.74           
-R^2 (3)              0.00                 0.00                 0.82           
+AIC               6465.42              5516.41              3977.96           
+BIC               6504.68              5580.21              4071.20           
+Log Likelihood   -3224.71             -2745.20             -1969.98           
+Pseudo R^2 (EL)      0.11                 0.53                 0.53           
+Pseudo R^2 (MS)     -0.00                 0.47                 0.47           
+R^2 (total)          0.01                 0.04                 0.80           
+R^2 (1)              0.02                 0.02                 0.84           
+R^2 (2)              0.00                 0.03                 0.74           
+R^2 (3)              0.01                 0.07                 0.86           
 Num. obs.         1000                 1000                 1000              
 ==============================================================================
 *** p < 0.001; ** p < 0.01; * p < 0.05
@@ -655,3 +658,552 @@ Meanwhile, commute distance increases across the three teleworker groups, sugges
 \setkeys{Gin}{width=.8\textwidth}
 \begin{figure}[t!]
 \centering
+\includegraphics{thesis-boxplot}
+\caption{\label{fig:boxplot} Log weekly distance traveled and log commute distance for different telework statuses.}
+\end{figure}
+
+%% The model
+Before blindly trying to specify a full model using \pkg{OPSR} the analyst is advised to first, think of an identification restriction as mentioned in Section~\ref{sec:model} and second, estimate the models separately, e.g., using \fct{polr} from the \pkg{MASS} package \citep{Venables+Ripley:2002}, and \fct{lm} for the treatment groups separately. We reserve the international standard classification of occupations (ISCO-08) variables for the selection process.
+%
+\begin{Schunk}
+\begin{Sinput}
+R> drop <- c("id", "weekly_km", "log_weekly_km", "commute_km", "log_commute_km",
++    "wfh_days")
+R> dat_polr <- subset(timeuse_data, select = !(names(timeuse_data) %in% drop))
+R> dat_polr$wfh <- factor(dat_polr$wfh)
+R> fit_polr <- MASS::polr(wfh ~ ., dat_polr, method = "probit")
+\end{Sinput}
+\end{Schunk}
+%
+The \fct{stepAIC} function chooses a selection model specification by AIC in a stepwise algorithm.
+%
+\begin{Schunk}
+\begin{Sinput}
+R> fit_step <- MASS::stepAIC(fit_polr, trace = FALSE)
+R> fit_step$anova
+\end{Sinput}
+\begin{Soutput}
+Stepwise Model Path 
+Analysis of Deviance Table
+
+Initial Model:
+wfh ~ start_tracking + age + car_access + dogs + driverlicense + 
+    educ_higher + fixed_workplace + grocery_shopper + hh_income + 
+    hh_size + isco_clerical + isco_craft + isco_elementary + 
+    isco_managers + isco_plant + isco_professionals + isco_service + 
+    isco_agri + isco_tech + married + n_children + freq_onl_order + 
+    parking_home + parking_work + permanent_employed + rents_home + 
+    res_loc + sex_male + shift_work + swiss + vacation + workload + 
+    young_kids
+
+Final Model:
+wfh ~ age + car_access + educ_higher + fixed_workplace + grocery_shopper + 
+    hh_income + isco_clerical + isco_craft + isco_elementary + 
+    isco_tech + freq_onl_order + parking_home + permanent_employed + 
+    shift_work + workload + young_kids
+
+
+                   Step Df Deviance Resid. Df Resid. Dev  AIC
+1                                         778       1429 1521
+2      - start_tracking  6   2.0260       784       1431 1511
+3             - res_loc  3   2.8697       787       1434 1508
+4       - isco_managers  1   0.0133       788       1434 1506
+5           - isco_agri  1   0.0415       789       1434 1504
+6            - vacation  1   0.1212       790       1434 1502
+7       - driverlicense  1   0.2959       791       1434 1500
+8            - sex_male  1   0.5118       792       1435 1499
+9          - n_children  1   0.4769       793       1435 1497
+10            - hh_size  1   0.4137       794       1436 1496
+11            - married  1   0.3909       795       1436 1494
+12       - isco_service  1   0.4773       796       1437 1493
+13         - isco_plant  1   0.6176       797       1437 1491
+14         - rents_home  1   1.2327       798       1438 1490
+15       - parking_work  1   1.1424       799       1440 1490
+16              - swiss  1   1.5091       800       1441 1489
+17               - dogs  1   1.8158       801       1443 1489
+18 - isco_professionals  1   1.8728       802       1445 1489
+\end{Soutput}
+\end{Schunk}
+%
+Fitting the linear models separately, benefits an understanding of potential identification problems (e.g., colinear variables or missing factor levels in one of the groups). While the resulting estimates are potentially biased and their standard errors not reliable, it can still help to have a closer look at resulting estimates and goodness of fit indicators.
+%
+\begin{Schunk}
+\begin{Sinput}
+R> fit_lm <- function(data, group) {
++    f <- paste0("log_weekly_km ~ . - wfh")
++    dat <- subset(data, subset = wfh == group)
++    fit <- lm(f, dat)
++    fit
++  }
+R> drop <- c("id", "weekly_km", "commute_km", "log_commute_km", "wfh_days")
+R> dat_lm <- subset(timeuse_data,
++    select = !(names(timeuse_data) %in% drop) & !grepl("^isco_", names(timeuse_data)))
+R> fit_ntw <- fit_lm(dat_lm, group = 1)
+R> fit_nutw <- fit_lm(dat_lm, group = 2)
+R> fit_utw <- fit_lm(dat_lm, group = 3)
+R> summary(fit_utw)
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = f, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1358 -0.3212  0.0632  0.3096  0.9904 
+
+Coefficients: (2 not defined because of singularities)
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)           4.45333    0.73297    6.08  2.1e-08 ***
+start_tracking8      -0.03287    0.23776   -0.14   0.8903    
+start_tracking9       0.07150    0.23190    0.31   0.7585    
+start_tracking10      0.09169    0.21147    0.43   0.6655    
+start_tracking11     -0.18267    0.21163   -0.86   0.3901    
+start_tracking12      0.02403    0.22293    0.11   0.9144    
+age                  -0.00358    0.00664   -0.54   0.5907    
+car_access           -0.12417    0.14169   -0.88   0.3829    
+dogs                 -0.01616    0.15978   -0.10   0.9196    
+driverlicense        -0.09628    0.29254   -0.33   0.7428    
+educ_higher          -0.01777    0.11027   -0.16   0.8723    
+fixed_workplace      -0.36434    0.15000   -2.43   0.0169 *  
+grocery_shopper       0.02009    0.12016    0.17   0.8675    
+hh_income4001_8000    0.25702    0.25458    1.01   0.3151    
+hh_income8001_12000   0.17664    0.25069    0.70   0.4827    
+hh_income12001_16000  0.27060    0.26953    1.00   0.3178    
+hh_income16001+       0.26340    0.29683    0.89   0.3770    
+hh_incomeNA           0.54669    0.37849    1.44   0.1517    
+hh_size              -0.05528    0.07244   -0.76   0.4472    
+married              -0.02904    0.12535   -0.23   0.8173    
+n_children            0.01198    0.09314    0.13   0.8979    
+freq_onl_order       -0.00987    0.10955   -0.09   0.9284    
+parking_home               NA         NA      NA       NA    
+parking_work          0.28751    0.12155    2.37   0.0199 *  
+permanent_employed    0.46645    0.33901    1.38   0.1719    
+rents_home            0.00874    0.11645    0.08   0.9403    
+res_locrural          0.08757    0.27202    0.32   0.7482    
+res_locsuburban      -0.03755    0.25928   -0.14   0.8851    
+res_locurban         -0.24778    0.27434   -0.90   0.3685    
+sex_male              0.24664    0.12610    1.96   0.0532 .  
+shift_work                 NA         NA      NA       NA    
+swiss                 0.39131    0.14266    2.74   0.0072 ** 
+vacation             -0.02974    0.12819   -0.23   0.8170    
+workload              0.01438    0.04129    0.35   0.7283    
+young_kids           -0.05015    0.15969   -0.31   0.7541    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.531 on 102 degrees of freedom
+Multiple R-squared:  0.381,	Adjusted R-squared:  0.187 
+F-statistic: 1.96 on 32 and 102 DF,  p-value: 0.00593
+\end{Soutput}
+\end{Schunk}
+%
+Here, we have two singularity issues for the UTWers: First, \code{shift_work} is a constant and second, \code{parking_home} is colinear with \code{car_access}.
+
+We then follow the conventional (somewhat heuristic) model building strategy to specify the full identified model and then exclude all variables that do not produce significant estimates (at the 10\% level). The formula specification of the full model is hidden here for brevity.
+%
+%
+\begin{Schunk}
+\begin{Sinput}
+R> fit_full <- opsr(f_full, timeuse_data, printLevel = 0)
+R> f_red <- wfh | log_weekly_km ~
++    age + educ_higher + hh_income + young_kids + workload + fixed_workplace +
++    shift_work + permanent_employed + isco_craft + isco_tech + isco_clerical +
++    isco_elementary + car_access + parking_home + freq_onl_order +
++    grocery_shopper |
++    sex_male + res_loc + workload + permanent_employed + parking_work |
++    swiss + res_loc + young_kids + workload + parking_work |
++    sex_male + swiss + fixed_workplace + permanent_employed + parking_work
+R> fit_red <- opsr(f_red, timeuse_data, printLevel = 0)
+R> print(anova(fit_red, fit_full), print.formula = FALSE)
+\end{Sinput}
+\begin{Soutput}
+Likelihood Ratio Test
+
+   logLik      Df    Test Restrictions Pr(>Chi)
+1 -1337.0    50.0                              
+2 -1316.8    99.0    40.4           49      0.8
+\end{Soutput}
+\begin{Sinput}
+R> summary(fit_red)
+\end{Sinput}
+\begin{Soutput}
+Call:
+opsr(formula = f_red, data = timeuse_data, printLevel = 0)
+
+BFGS maximization, 234 iterations
+Return code 0: successful convergence 
+Runtime: 1.42 secs
+Number of regimes: 3 
+Number of observations: 824 (424, 265, 135)
+Estimated parameters: 50 
+
+Log-Likelihood: -1337 
+AIC: 2774 
+BIC: 3010 
+Pseudo R-squared (EL): 0.202 
+Pseudo R-squared (MS): 0.126 
+Multiple R-squared: 0.214 (0.203, 0.19, 0.291)
+
+Estimates:
+                       Estimate Std. error t value Pr(> t)    
+kappa1                  0.13345    0.40919    0.33 0.74433    
+kappa2                  1.25047    0.40781    3.07 0.00217 ** 
+s_age                   0.00725    0.00403    1.80 0.07219 .  
+s_educ_higher           0.44929    0.09295    4.83 1.3e-06 ***
+s_hh_income4001_8000   -1.06428    0.25627   -4.15 3.3e-05 ***
+s_hh_income8001_12000  -0.89366    0.25137   -3.56 0.00038 ***
+s_hh_income12001_16000 -0.72192    0.26184   -2.76 0.00583 ** 
+s_hh_income16001+      -0.69387    0.28776   -2.41 0.01590 *  
+s_hh_incomeNA          -0.63145    0.34501   -1.83 0.06722 .  
+s_young_kids            0.29617    0.10095    2.93 0.00335 ** 
+s_workload              0.05353    0.02404    2.23 0.02598 *  
+s_fixed_workplace      -0.55419    0.14298   -3.88 0.00011 ***
+s_shift_work           -0.82518    0.16677   -4.95 7.5e-07 ***
+s_permanent_employed    0.33270    0.18560    1.79 0.07305 .  
+s_isco_craft           -0.67913    0.22364   -3.04 0.00239 ** 
+s_isco_tech             0.21921    0.13246    1.65 0.09794 .  
+s_isco_clerical         0.55330    0.09817    5.64 1.7e-08 ***
+s_isco_elementary      -4.46545    1.29525   -3.45 0.00057 ***
+s_car_access           -0.71446    0.26447   -2.70 0.00690 ** 
+s_parking_home          0.64134    0.25170    2.55 0.01083 *  
+s_freq_onl_order        0.20944    0.08812    2.38 0.01747 *  
+s_grocery_shopper      -0.13267    0.08788   -1.51 0.13116    
+o1_(Intercept)          3.90114    0.17240   22.63 < 2e-16 ***
+o1_sex_male             0.09334    0.05623    1.66 0.09691 .  
+o1_res_locrural         0.21702    0.09467    2.29 0.02188 *  
+o1_res_locsuburban      0.10923    0.09818    1.11 0.26593    
+o1_res_locurban        -0.01088    0.10899   -0.10 0.92049    
+o1_workload             0.06058    0.01314    4.61 4.0e-06 ***
+o1_permanent_employed   0.29905    0.11690    2.56 0.01052 *  
+o1_parking_work         0.23222    0.05204    4.46 8.1e-06 ***
+o2_(Intercept)          3.88702    0.21570   18.02 < 2e-16 ***
+o2_swiss                0.18517    0.10900    1.70 0.08935 .  
+o2_res_locrural         0.43405    0.14799    2.93 0.00336 ** 
+o2_res_locsuburban      0.22649    0.14363    1.58 0.11482    
+o2_res_locurban         0.17387    0.16409    1.06 0.28933    
+o2_young_kids          -0.15630    0.06958   -2.25 0.02469 *  
+o2_workload             0.07455    0.01515    4.92 8.7e-07 ***
+o2_parking_work         0.16130    0.07033    2.29 0.02182 *  
+o3_(Intercept)          3.85223    0.33710   11.43 < 2e-16 ***
+o3_sex_male             0.23879    0.08908    2.68 0.00735 ** 
+o3_swiss                0.39109    0.12054    3.24 0.00118 ** 
+o3_fixed_workplace     -0.36832    0.12432   -2.96 0.00305 ** 
+o3_permanent_employed   0.54238    0.25706    2.11 0.03487 *  
+o3_parking_work         0.28905    0.09202    3.14 0.00168 ** 
+sigma1                  0.51246    0.02225   23.04 < 2e-16 ***
+sigma2                  0.54030    0.02954   18.29 < 2e-16 ***
+sigma3                  0.54263    0.05799    9.36 < 2e-16 ***
+rho1                    0.28712    0.19141    1.50 0.13360    
+rho2                   -0.18889    0.14349   -1.32 0.18804    
+rho3                    0.46193    0.22531    2.05 0.04034 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Wald chi2 (null): 2584 on 39 DF, p-value: < 0
+Wald chi2 (rho): 8.93 on 3 DF, p-value: < 0.03
+\end{Soutput}
+\end{Schunk}
+%
+The reduced model specification (\code{fit_red}) is not rejected in the likelihood ratio test. Further, there is significant error correlation between the selection process and the outcome process for the UTWers (\code{rho3}). The Wald-test suggests that the null hypothesis (\code{rho1} = \code{rho2} = \code{rho3} = 0) can be rejected at the 5\% level, suggesting that OPSR is beneficial given our model assumptions.
+
+However, so far we have neglected the commute distance which most likely impacts the propensity to telework (see Figure~\ref{fig:boxplot}) and naturally influences the weekly distance traveled. To illustrate this, the reduced model specification can be updated to include \code{log_weekly_km}
+%
+\begin{Schunk}
+\begin{Sinput}
+R> fit_commute <- update(fit_red, ~ . + log_commute_km | . + log_commute_km | . +
++    log_commute_km | . + log_commute_km)
+R> print(summary(fit_commute), print.call = FALSE)
+\end{Sinput}
+\begin{Soutput}
+BFGS maximization, 252 iterations
+Return code 0: successful convergence 
+Runtime: 1.68 secs
+Number of regimes: 3 
+Number of observations: 824 (424, 265, 135)
+Estimated parameters: 54 
+
+Log-Likelihood: -1195 
+AIC: 2499 
+BIC: 2754 
+Pseudo R-squared (EL): 0.22 
+Pseudo R-squared (MS): 0.145 
+Multiple R-squared: 0.42 (0.42, 0.423, 0.411)
+
+Estimates:
+                       Estimate Std. error t value Pr(> t)    
+kappa1                  0.62599    0.33120    1.89 0.05875 .  
+kappa2                  1.77835    0.33544    5.30 1.1e-07 ***
+s_age                   0.00720    0.00415    1.73 0.08301 .  
+s_educ_higher           0.44123    0.09697    4.55 5.4e-06 ***
+s_hh_income4001_8000   -1.16003    0.15062   -7.70 1.3e-14 ***
+s_hh_income8001_12000  -1.01456    0.16563   -6.13 9.1e-10 ***
+s_hh_income12001_16000 -0.83329    0.16961   -4.91 9.0e-07 ***
+s_hh_income16001+      -0.78611    0.20550   -3.83 0.00013 ***
+s_hh_incomeNA          -0.72432    0.22230   -3.26 0.00112 ** 
+s_young_kids            0.31155    0.10171    3.06 0.00219 ** 
+s_workload              0.04390    0.02398    1.83 0.06710 .  
+s_fixed_workplace      -0.47995    0.14363   -3.34 0.00083 ***
+s_shift_work           -0.84467    0.17413   -4.85 1.2e-06 ***
+s_permanent_employed    0.29698    0.18939    1.57 0.11686    
+s_isco_craft           -0.63875    0.23164   -2.76 0.00582 ** 
+s_isco_tech             0.19158    0.13026    1.47 0.14134    
+s_isco_clerical         0.58015    0.10092    5.75 9.0e-09 ***
+s_isco_elementary      -4.01667    4.38821   -0.92 0.36002    
+s_car_access           -0.80368    0.24670   -3.26 0.00112 ** 
+s_parking_home          0.65692    0.23484    2.80 0.00515 ** 
+s_freq_onl_order        0.22414    0.08937    2.51 0.01214 *  
+s_grocery_shopper      -0.09852    0.08733   -1.13 0.25929    
+s_log_commute_km        0.26436    0.04610    5.73 9.8e-09 ***
+o1_(Intercept)          3.46983    0.15893   21.83 < 2e-16 ***
+o1_sex_male             0.09656    0.04880    1.98 0.04784 *  
+o1_res_locrural         0.09827    0.09533    1.03 0.30261    
+o1_res_locsuburban     -0.00984    0.09638   -0.10 0.91867    
+o1_res_locurban        -0.00992    0.10848   -0.09 0.92712    
+o1_workload             0.04449    0.01286    3.46 0.00054 ***
+o1_permanent_employed   0.19371    0.10561    1.83 0.06661 .  
+o1_parking_work         0.11790    0.04459    2.64 0.00820 ** 
+o1_log_commute_km       0.32497    0.02930   11.09 < 2e-16 ***
+o2_(Intercept)          3.66032    0.19123   19.14 < 2e-16 ***
+o2_swiss                0.13600    0.08849    1.54 0.12430    
+o2_res_locrural         0.13492    0.12265    1.10 0.27129    
+o2_res_locsuburban     -0.03779    0.11644   -0.32 0.74550    
+o2_res_locurban        -0.08499    0.13607   -0.62 0.53222    
+o2_young_kids          -0.16561    0.06068   -2.73 0.00635 ** 
+o2_workload             0.05065    0.01321    3.83 0.00013 ***
+o2_parking_work         0.04425    0.05650    0.78 0.43351    
+o2_log_commute_km       0.29014    0.03989    7.27 3.5e-13 ***
+o3_(Intercept)          3.33474    0.29376   11.35 < 2e-16 ***
+o3_sex_male             0.10902    0.08520    1.28 0.20071    
+o3_swiss                0.39746    0.10344    3.84 0.00012 ***
+o3_fixed_workplace     -0.24254    0.09842   -2.46 0.01373 *  
+o3_permanent_employed   0.33954    0.18947    1.79 0.07313 .  
+o3_parking_work         0.23440    0.08658    2.71 0.00678 ** 
+o3_log_commute_km       0.27830    0.05043    5.52 3.4e-08 ***
+sigma1                  0.43374    0.01941   22.34 < 2e-16 ***
+sigma2                  0.45466    0.02510   18.12 < 2e-16 ***
+sigma3                  0.47517    0.04689   10.13 < 2e-16 ***
+rho1                    0.24339    0.21835    1.11 0.26499    
+rho2                   -0.17064    0.15079   -1.13 0.25780    
+rho3                    0.35299    0.24432    1.44 0.14851    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Wald chi2 (null): 1142 on 43 DF, p-value: < 0
+Wald chi2 (rho): 5.37 on 3 DF, p-value: < 0.147
+\end{Soutput}
+\end{Schunk}
+%
+where now all goodness of fit indicators improved (in particular R$^2$ for the continuous outcomes) and the rho coefficients are no longer significant at conventional levels. Similarly, the Wald-test (rho) can no longer reject the null at the 10\% level. Meanwhile, some of the coefficients slightly changed in magnitude and rendered insignificant or vice versa. For example, the effect of residential location (\code{o1_res_loc_rural} and \code{o2_res_loc_rural}) moderated the effect of commute distance in \code{fit_red}, suggesting that individuals living in more rural locations tend to have longer commutes.
+
+While this discussion (of omitted variable bias and/or endogeneity) is common for all regression analysis, it highlights here, why error correlation can occur. Both model specifications (\code{fit_red} and \code{fit_commute}) produce similar insights in the post-estimation that follows. However, we will demonstrate later, that not accounting for error correlation can lead to reverse (and most likely false) conclusions.
+
+%% The treatment effects
+We first define some helper functions to compute treatment effects.
+%
+\begin{Schunk}
+\begin{Sinput}
+R> tw_status <- c("NTW", "NUTW", "UTW")
+R> estimated_weekly_km <- function(object, type = "unlog-response") {
++    nReg <- object$nReg
++    out <- vector("list", nReg)
++    counterfacts <- vector("list", nReg)
++    for (g in 1:nReg) {
++      for (c in 1:nReg) {
++        counterfacts[[c]] <- predict(object, group = g, counterfact = c, type = type)
++      }
++      df <- as.data.frame(counterfacts)
++      names(df) <- tw_status
++      out[[g]] <- df
++    }
++    names(out) <- tw_status
++    out
++  }
+R> average <- function(object) {
++    ae <- lapply(object, function(x) {
++      apply(x, 2, function(x) mean(x, na.rm = TRUE))
++    })
++    as.data.frame(ae)
++  }
+R> pairwise_diff <- function(mat) {
++    n <- nrow(mat)
++    m <- ncol(mat)
++    result <- matrix(NA, nrow = n, ncol = m)
++    for (j in 1:m) {
++      result[, j] <- c(
++        mat[2, j] - mat[1, j],
++        mat[3, j] - mat[1, j],
++        mat[3, j] - mat[2, j]
++      )
++    }
++    rownames(result) <- c("NTW -> NUTW", "NTW -> UTW", "NUTW -> UTW")
++    colnames(result) <- c("NTW", "NUTW", "UTW")
++    result
++  }
+R> ate <- function(object) {
++    awk <- average(estimated_weekly_km(object))
++    ate <- pairwise_diff(awk)
++    ate
++  }
+R> ate(fit_commute)
+\end{Sinput}
+\begin{Soutput}
+              NTW  NUTW    UTW
+NTW -> NUTW  14.0 -20.5 -59.87
+NTW -> UTW  -50.2 -53.1 -63.14
+NUTW -> UTW -64.2 -32.7  -3.27
+\end{Soutput}
+\end{Schunk}
+%
+Telework reduces weekly kilometers traveled across all groups with the exception of NTWers who would slightly be more mobile when switching from NTW to NUTW (\code{NTW -> NUTW}). The treatment effects when switching from NTW to NUTW are strongest for UTWers, who have generally longer commutes. Treatment effects for NTW to UTW are similar across all three groups, again slightly stronger for UTWers. Interestingly, NTWers show a non-linear pattern, first increasing weekly kilometers when adopting some telework (NTW to NUTW) but then substantially decreasing weekly kilometers with more telework (NUTW to UTW). An explanation could be, that these individuals (living closer to their workplace) do initially not adjust activity chains and location choices when only occasionally teleworking. For example, an individual might stay subscribed to the gym close to the workplace and visit that facility even on a home office day. On the other hand, UTWers show somewhat an inverse pattern, first (NTW to NUTW) strongly reducing weekly kilometers but upon further telework adoption (NUTW to UTW) only minimally adjusting weekly kilometers. A similar argument could be made, that these individuals (living further from their workplace) already from the start adjust activity chains and location choices. One can therefore conclude, that the treatment effect over the full range (NTW to UTW) is similar across all groups but the main travel reduction happens at different treatment intensities. Figure~\ref{fig:treatment} (panel d) visualizes these average treatment effects and shows the linear pattern for NUTW and the (mirrored) hockey stick pattern for NTW and UTW.
+
+While the discussion above was based on average treatment effects, Figure~\ref{fig:treatment} shows the distributions of predicted weekly distance traveled by teleworker group. Each panel presents a pair of (un)treated telework statuses as the margins and the dashed lines are the empirical sample means. The solid black reference line marks the instances where weekly distance traveled is equal for both of the paired (un)treated telework statuses. I.e., points below the reference line indicate more travel under the regime depicted on the x-axis.
+%
+%
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[t!]
+\centering
+\includegraphics{thesis-plot-treatment}
+\caption{\label{fig:treatment} Treatment effects.}
+\end{figure}
+
+As already alluded, not controlling for commute distance implies that selection on unobservables exists, leading to error correlation and selection bias if not accounted for. As we will illustrate now, this also compromises treatment effects. Recalling that \code{fit_red} is our final model without commute distance (but significant error correlation, as we have seen), we derive a model (\code{fit_nocor}) without error correlation by setting the \code{rho} coefficients to 0. I.e., this is the same as separately estimating an ordered probit model and three linear regression models.
+%
+\begin{Schunk}
+\begin{Sinput}
+R> start <- coef(fit_red)
+R> fixed <- c("rho1", "rho2", "rho3")
+R> start[fixed] <- 0
+R> fit_nocor <- opsr(f_red, timeuse_data, start = start, fixed = fixed,
++    printLevel = 0)
+\end{Sinput}
+\end{Schunk}
+%
+The average treatment effects are
+%
+\begin{Schunk}
+\begin{Sinput}
+R> ate(fit_red)
+\end{Sinput}
+\begin{Soutput}
+              NTW  NUTW   UTW
+NTW -> NUTW  37.7 -10.6 -54.2
+NTW -> UTW  -54.7 -47.0 -44.3
+NUTW -> UTW -92.4 -36.4   9.9
+\end{Soutput}
+\begin{Sinput}
+R> ate(fit_nocor)
+\end{Sinput}
+\begin{Soutput}
+              NTW  NUTW   UTW
+NTW -> NUTW 17.72 14.14 14.55
+NTW -> UTW   8.80 12.31  7.89
+NUTW -> UTW -8.93 -1.83 -6.66
+\end{Soutput}
+\end{Schunk}
+%
+While resulting treatment effects based on \code{fit_red} are comparable to the ones based on \code{fit_commute}, \code{fit_nocor} yields completely different insights, in particular, that telework generally increases weekly distance traveled.
+
+Recall that for \code{fit_commute}, the Wald-test (rho) could not reject the null ($p$~value 0.15). Therefore, adding \code{log_commute_km} to the model without error correlation (\code{fit_nocor}) might yield less biased treatment effects
+%
+\begin{Schunk}
+\begin{Sinput}
+R> start <- coef(fit_commute)
+R> start[fixed] <- 0
+R> fit_nocor2 <- opsr(fit_commute$formula, timeuse_data, start = start,
++    fixed = fixed, printLevel = 0)
+R> ate(fit_nocor2)
+\end{Sinput}
+\begin{Soutput}
+               NTW   NUTW    UTW
+NTW -> NUTW  0.421  -2.15  -3.61
+NTW -> UTW  -9.054 -11.11 -20.93
+NUTW -> UTW -9.475  -8.96 -17.32
+\end{Soutput}
+\end{Schunk}
+%
+where now the direction of the treatment effects aligns with the OPSR models but the values are still considerably different. Since \code{fit_nocor2} is a nested model of \code{fit_commute} we can conduct a likelihood ratio test
+%
+\begin{Schunk}
+\begin{Sinput}
+R> print(anova(fit_nocor2, fit_commute), print.formula = FALSE)
+\end{Sinput}
+\begin{Soutput}
+Likelihood Ratio Test
+
+    logLik       Df     Test Restrictions Pr(>Chi)
+1 -1198.04    51.00                               
+2 -1195.47    54.00     5.14            3     0.16
+\end{Soutput}
+\end{Schunk}
+%
+which does not reject the null (at the 10\% level) that the simpler model is sufficient. As a conclusion should be noted that the modeled covariance matrix (in particular the magnitude of \code{rho}) potentially strongly influences the treatment effects.
+
+Lastly (using \code{fit_commute}), we would like to investigate to what degree foregone commute distance (when teleworking) is compensated with leisure travel. Therefore, we compute unit treatment effects and compare them to the average two-way commute distance for each group. The unit treatment effect is calculated by dividing the total treatment effect by the corresponding average teleworking frequency difference (\code{twdiff1} to \code{twdiff3} below). I.e., the treatment effect is standardized and therefore also comparable for different regime switching (e.g., NTW to NUTW vs. NUTW to UTW).
+%
+\begin{Schunk}
+\begin{Sinput}
+R> dat_ute <- subset(timeuse_data, select = c(commute_km, wfh, wfh_days))
+R> dat_ute <- aggregate(cbind(wfh_days, 2 * commute_km) ~ wfh, data = dat_ute,
++    FUN = mean)
+R> top <- t(dat_ute[2:3])
+R> colnames(top) <- c("NTW", "NUTW", "UTW")
+R> rownames(top) <- c("WFH (days)", "2-way commute (km)")
+R> i <- "WFH (days)"
+R> twdiff1 <- top[i, "NUTW"] - top[i, "NTW"]
+R> twdiff2 <- top[i, "UTW"] - top[i, "NTW"]
+R> twdiff3 <- top[i, "UTW"] - top[i, "NUTW"]
+R> twdiff <- matrix(c(rep(twdiff1, 3), rep(twdiff2, 3), rep(twdiff3, 3)), nrow = 3)
+R> bottom <- ate(fit_commute) / twdiff
+R> ute <- rbind(top, bottom)
+R> ute
+\end{Sinput}
+\begin{Soutput}
+                     NTW   NUTW    UTW
+WFH (days)           0.0   1.35   3.93
+2-way commute (km)  30.1  43.33  51.07
+NTW -> NUTW         10.4  -5.20 -23.15
+NTW -> UTW         -37.3 -13.51 -24.42
+NUTW -> UTW        -47.7  -8.31  -1.26
+\end{Soutput}
+\end{Schunk}
+%
+Generally, telework reduces weekly distance traveled by less than the foregone commute distance, which indicates, that a rebound effect (compensating leisure travel) exists. For example, the NUTWers could save 43.33 km in commute travel but only reduce 5.2 km per marginal teleworking day when switching from NTW to NUTW. This compensating travel exists for all TW groups except the NTWers (NTW to UTW and NUTW to UTW), where we observe diminished travel activity beyond foregone commutes. The insights from the discussion on average treatment effects caries over: Adjustments in weekly distance traveled are very different both across the three teleworker groups but also across the regime switching.
+
+%% -- Summary/conclusions/discussion -------------------------------------------
+
+\section{Summary and discussion} \label{sec:summary}
+
+In a real-world setting, the treatment is usually not exogenously prescribed but self-selected. Various methods in various statistical environments exist to account for selection-bias which arises if unobserved factors simultaneously influence both the selection and outcome process. OPSR is introduced as a special case of endogenous switching regression. The model frame for such Heckman-type models as well as their implementation in the \proglang{R} system for statistical computing is reviewed. The here presented \proglang{R} implementation in package \pkg{OPSR} re-uses design and functionality of the corresponding \proglang{R} software. Hence, the new function \fct{opsr} is straightforward to apply for model fitting and diagnostics. Further, it is fast and memory efficient thanks to the \proglang{C++} implementation of the log-likelihood function which can also be parallelized. \pkg{OPSR} handles log-transformed outcomes which need special consideration when computing conditional expectations and thus treatment effects. In the case study, the OPSR method is applied to a tracking and activity diary dataset, investigating the telework treatment effects on weekly distance traveled. We demonstrate, first, why error correlation occurs and second, in how far computed treatment effects differ if the error correlation is not accounted for. We find that non-teleworkers tend to have shorter commutes and adjust mobility patterns mainly when switching from non-usual telework to usual telework. On the other hand, weekly distance traveled slightly increases when initially adopting some telework. Contrary, usual teleworkers (had they not been teleworking) adjust mobility patterns strongly when adopting some telework but then only marginally reduce distance traveled when further adopting telework. Comparing the unit treatment effects to the two-way commute distance indicates that telework generally reduces weekly distance traveled and it does so by less than the foregone commute. Therefore, some compensating travel (rebound effects) exists for most of the teleworker groups.
+
+
+%% -- Optional special unnumbered sections -------------------------------------
+
+\section*{Computational details}
+
+The results in this paper were obtained using
+\proglang{R}~4.4.0 with the packages
+\pkg{OPSR}~0.1.2.9001, \pkg{MASS}~7.3.60, \pkg{texreg}~1.39.4, \pkg{gridExtra}~2.3 and \pkg{gridGraphics}~0.5.1. \proglang{R} itself
+and all packages used are available from the Comprehensive
+\proglang{R} Archive Network (CRAN) at
+\url{https://CRAN.R-project.org/}.
+
+
+\section*{Acknowledgments}
+
+\cleardoublepage%
+\def\dir{chapters/conclusion_outlook}
+\include{\dir/main}
+
+\appendix
+\cleardoublepage%
+\def\dir{chapters/appendix}
+\include{\dir/main}
+
+\cleardoublepage\include{frontbackmatter/bibliography}
+
+\bookmarksetup{startatroot}
+%\pagenumbering{gobble}
+\cleardoublepage\include{frontbackmatter/cv}
+\cleardoublepage\include{frontbackmatter/publications}
+
+\end{document}

@@ -16,7 +16,7 @@
 \input{preamble/commands}
 
 % Custom packages
-\input{preable/packages}
+\input{preamble/packages}
 
 % Bibliography
 \addbibresource[label=ownpubs]{ownpubs.bib}
