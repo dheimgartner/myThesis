@@ -12,6 +12,12 @@
 \input{preamble/general}
 \usepackage[final]{pdfpages}
 
+% Custom commands
+\input{preamble/commands}
+
+% Custom packages
+\input{preable/packages}
+
 % Bibliography
 \addbibresource[label=ownpubs]{ownpubs.bib}
 \addbibresource{bibliography.bib}
@@ -20,7 +26,11 @@
 
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
-## add libraries here
+library("OPSR")
+library("MASS")
+library("texreg")
+library("gridExtra")
+library("gridGraphics")
 
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
         digits = 3)
@@ -70,6 +80,9 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 
 \cleardoublepage%
 \SweaveInput{chapters/sweave-chapter/main}
+
+\cleardoublepage%
+\SweaveInput{chapters/opsr/main}
 
 \cleardoublepage%
 \def\dir{chapters/conclusion_outlook}
