@@ -28,6 +28,7 @@
 <<preliminaries, echo=FALSE, results=hide>>=
 ## add libraries here
 
+## maybe adjust width here...
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
         digits = 3)
 @
