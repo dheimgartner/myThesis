@@ -26,11 +26,7 @@
 
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
-library("OPSR")
-library("MASS")
-library("texreg")
-library("gridExtra")
-library("gridGraphics")
+## add libraries here
 
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
         digits = 3)
@@ -80,9 +76,6 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 
 \cleardoublepage%
 \SweaveInput{chapters/sweave-chapter/main}
-
-\cleardoublepage%
-\SweaveInput{chapters/opsr/main}
 
 \cleardoublepage%
 \def\dir{chapters/conclusion_outlook}
