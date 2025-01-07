@@ -3,7 +3,7 @@ remove_aux <- function() {
   system(cmd)
 }
 
-set_latexpath <- function(path = "~/.local/bin/") {
+set_latexpath <- function(path = "/home/daniehei/.local/bin") {
   if (!is.null(getOption("__latexpath"))) {
     path <- getOption("__latexpath")
   } else {
@@ -14,14 +14,22 @@ set_latexpath <- function(path = "~/.local/bin/") {
 
 check_latexmk <- function() {
   tryCatch(
-    system("latexmk --version"),
-    warning = function(w) stop("Make sure the correct path is set in latexmk()")
+    {
+      cat("--------------------------------------------\n")
+      system("latexmk --version")
+      cat("--------------------------------------------\n")
+    },
+    warning = function(w) stop("Make sure the correct path is set in set_latexpath()")
   )
 }
 
 check_pdflatex <- function() {
   tryCatch(
-    system("pdflatex --version"),
-    warning = function(w) stop("Make sure the correct path is set in latexmk()")
+    {
+      cat("--------------------------------------------\n")
+      system("pdflatex --version")
+      cat("--------------------------------------------\n")
+    },
+    warning = function(w) stop("Make sure the correct path is set in set_latexpath()")
   )
 }

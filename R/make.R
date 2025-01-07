@@ -1,6 +1,6 @@
 make <- function(dir = "thesis", file = "thesis.Rnw", remove_build = TRUE) {
   if (remove_build) {
-    unlink("build")
+    unlink("build", recursive = TRUE)
   }
 
   wd <- getwd()
@@ -12,10 +12,11 @@ make <- function(dir = "thesis", file = "thesis.Rnw", remove_build = TRUE) {
   check_pdflatex()
 
   Sweave(file)
-  system("make")
+  system("make", ignore.stderr = TRUE)
   remove_aux()
 
   file.copy("build", "..", recursive = TRUE)
+  unlink("build", recursive = TRUE)
   setwd(wd)
   options(o)
 
