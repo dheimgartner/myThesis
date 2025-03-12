@@ -52,14 +52,14 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 % Frontmatter
 %
 
-\include{frontbackmatter/dirtytitlepage}
-\include{frontbackmatter/titlepage}
-\include{frontbackmatter/titleback}
-\cleardoublepage\include{frontbackmatter/dedication}
-\cleardoublepage\include{frontbackmatter/abstract}
-\cleardoublepage\include{frontbackmatter/acknowledgments}
+\SweaveInput{frontbackmatter/dirtytitlepage}
+\SweaveInput{frontbackmatter/titlepage}
+\SweaveInput{frontbackmatter/titleback}
+\cleardoublepage\SweaveInput{frontbackmatter/dedication}
+\cleardoublepage\SweaveInput{frontbackmatter/abstract}
+\cleardoublepage\SweaveInput{frontbackmatter/acknowledgments}
 \pagestyle{scrheadings}
-\cleardoublepage\include{frontbackmatter/contents}
+\cleardoublepage\SweaveInput{frontbackmatter/contents}
 
 %
 % Mainmatter
@@ -87,11 +87,11 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 \def\dir{chapters/appendix}
 \include{\dir/main}
 
-\cleardoublepage\include{frontbackmatter/bibliography}
+\cleardoublepage\SweaveInput{frontbackmatter/bibliography}
 
 \bookmarksetup{startatroot}
 %\pagenumbering{gobble}
-\cleardoublepage\include{frontbackmatter/cv}
-\cleardoublepage\include{frontbackmatter/publications}
+\cleardoublepage\SweaveInput{frontbackmatter/cv}
+\cleardoublepage\SweaveInput{frontbackmatter/publications}
 
 \end{document}
