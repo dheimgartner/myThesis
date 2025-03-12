@@ -52,7 +52,7 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 % Frontmatter
 %
 
-\SweaveInput{frontbackmatter/dirtytitlepage}
+\SweaveInput{frontbackmatter/dirty}
 \SweaveInput{frontbackmatter/titlepage}
 \SweaveInput{frontbackmatter/titleback}
 \cleardoublepage\SweaveInput{frontbackmatter/dedication}
