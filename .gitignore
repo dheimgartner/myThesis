@@ -15,3 +15,5 @@ ltxpng/
 *.bak
 .Rproj.user
 .Rhistory
+/doc/
+/Meta/
