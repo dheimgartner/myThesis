@@ -4,6 +4,8 @@
 
 - [ ] keep the repos in sync...
 
+- The chapter titles do not necessarily have to be the paper titles.
+
 ## TODO
 
 - [x] What own packages do I need?
