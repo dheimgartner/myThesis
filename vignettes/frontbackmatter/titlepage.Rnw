@@ -38,7 +38,7 @@
             presented by\\
             \vspace{0.5em}
             \spacedlowsmallcaps{\myName}\\
-            MSc. Economics \\ Stockholm School of Economics \& University of St. Gallen\\
+            MSc. Economics \\ Stockholm School of Economics\\
             \vspace{0.5em}
             born on 22 August 1992\\
             citizen of Switzerland
@@ -49,8 +49,11 @@
         \begingroup
             accepted on the recommendation of\\
             \vspace{0.5em}
-            Prof.\ Dr.\ A. Kleiner, examiner\\
-            Prof.\ Dr.\ H. Burkhardt, co-examiner
+            Prof.\ Dr.\ D. Kaufmann, examiner\\
+            Prof.\ em.\ Dr.\ K. W. Axhausen co-examiner\\
+            Prof.\ Dr.\ T. Bernauer, co-examiner\\
+            Prof.\ Dr.\ M. Bierlaire, co-examiner\\
+            Prof.\ Dr.\ S. Hess, co-examiner
         \endgroup
 
         \vfill

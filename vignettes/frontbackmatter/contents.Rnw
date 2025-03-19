@@ -67,9 +67,15 @@
       %\toprule%
       %\tableheadline{Symbol} & \tableheadline{Meaning} \\
       %\midrule%
-      $E$ & energy \\
-      $m$ & rest mass \\
-      $p$ & impulse \\
+      TW & telework \\
+      TWers & teleworkers \\
+      TWing & teleworking \\
+      NTW & non-telework (0 days/week) \\
+      NUTW & non-usual telework (<3 days/week) \\
+      UTW & usual telework (3+ days/week) \\
+      OPSR & ordinal probit switching regression \\
+      TE & treatment effect \\
+      ATE & average treatment effect \\
       %\bottomrule
     \end{tabularx}
 
