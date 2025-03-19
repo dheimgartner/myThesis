@@ -73,18 +73,13 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 \include{\dir/main}
 
 \cleardoublepage%
-\def\dir{chapters/sample-chapter}
-\include{\dir/main}
-
-% Include some blind text
-\Blinddocument
+\SweaveInput{chapters/mpp/main}
 
 \cleardoublepage%
 \SweaveInput{chapters/sweave-chapter/main}
 
-\cleardoublepage%
-\def\dir{chapters/conclusion_outlook}
-\include{\dir/main}
+% \cleardoublepage%
+% \SweaveInput{}
 
 \appendix
 \cleardoublepage%

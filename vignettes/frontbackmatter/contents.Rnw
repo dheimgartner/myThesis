@@ -61,7 +61,7 @@
     \markboth{\spacedlowsmallcaps{Notation}}{\spacedlowsmallcaps{Notation}}
     \chapter*{Notation}
 
-    \section*{Frequently used symbols}%
+    \section*{Frequently used abbreviations}%
     \vskip -2em
     \begin{tabularx}{\textwidth}{lX}
       %\toprule%

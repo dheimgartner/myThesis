@@ -1,0 +1,39 @@
+\chapter{Modal splits before during and after the pandemic in Switzerland}
+\label{ch:mpp}
+
+\dictum[John Doe]{%
+  Hello world!}%
+\vskip 1em
+
+<<preliminaries, echo=FALSE, results=hide>>=
+library("mpp")
+library("mppData")
+library("tidyverse")
+library("lubridate")
+library("data.table")
+library("patchwork")
+library("apollo")
+library("kableExtra")
+
+MAX <- as.Date("2022-12-30")
+
+my_theme <-
+  ggplot2::theme_light() +
+  ggplot2::theme(legend.position = "bottom",
+                 strip.background = element_rect(fill = "white"),
+                 strip.text = element_text(colour = "black"))
+
+ggplot2::theme_set(my_theme)
+@
+
+The adjustments of mobility patterns during early stages of the pandemic are well understood. However, various effects are intertwined in these observations and therefore the findings' robustness remains questionable. The MOBIS-Covid data set provides a unique opportunity to put these initial findings in perspective as a large panel has been tracked from before the crisis up until today. Switzerland lifted all its measures counteracting the spread in mid February 2022, reaching a potential new equilibrium in the months that followed. A comprehensive set of descriptive indicators has been constructed for Switzerland in order to disentangle the narrative of the crisis from the perspective of transport demand. Special emphasis has been given to the question of how new hybrid working arrangements influence modal splits (as measured by mode distance shares). The descriptive findings are strengthened by a mixed multiple discrete-continuous extreme value model (MMDCEV). We find a shift in modal splits away from car and train, where in particular bus could expand its mode share most pronounced. While the cycling and walking booms were temporary, the bicycle still shows sightly higher mode distance shares (driven by more rather than longer trips). While there are observable differences between the different working arrangements (home office, mixture and in office), we do not find significant model parameters when allowing for unobserved heterogeneity. This suggests that the working arrangement segments the population along socioeconomic dimensions with different mobility behaviour and mode preferences. Modes are more satiated in the post-pandemic world indicating that people use fewer modes in their weekly modal mix but use them more intensely. However, the model suggests that the pandemic should not be read as a structural break in mode preferences. We will therefore likely see a further normalization in the months that come.
+
+This chapter consists of the following peer-reviewed journal paper:
+
+The contributions for this paper are as follows:
+
+\begin{leftbar}
+See also thesis by Reck...
+\end{leftbar}
+
+PROCEED HERE
