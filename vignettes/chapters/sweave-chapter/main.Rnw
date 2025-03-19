@@ -17,7 +17,7 @@ Command & Example \\
 \hline
 \verb|\proglang{}| & \proglang{R}, \proglang{C++} \\
 \verb|\pkg{}| & \pkg{OPSR}, \pkg{OPSRtools} \\
-\verb|\code{}| & \code{hello\_world}, \code{ys | yo ~ terms\_s | terms\_o} \\
+\verb|\code{}| & \code{hello\_world}, \code{ys | yo ~ terms_s | terms_o} \\
 \verb|\class{}| & \class{summary.opsr} \\
 \verb|\fct{}| & \fct{hello\_world} \\
 \hline
