@@ -6,15 +6,6 @@
 \vskip 1em
 
 <<preliminaries, echo=FALSE, results=hide>>=
-library("mpp")
-library("mppData")
-library("tidyverse")
-library("lubridate")
-library("data.table")
-library("patchwork")
-library("apollo")
-library("kableExtra")
-
 MAX <- as.Date("2022-12-30")
 
 my_theme <-
@@ -40,8 +31,6 @@ The contributions for this paper are as follows:
 \end{itemize}
 \end{leftbar}
 
-PROCEED HERE
-
 \section{Introduction}
 \label{sec:introduction}
 
@@ -49,7 +38,7 @@ The COVID Pandemic hit our system from various angles: First and foremost, it wa
 
 Several studies have been trying to describe the evolution of transport demand during early stages of the crisis and by different means such as tracking studies or questionnaires. But of course, all the effects outlined above, were intertwined and a clear attribution was difficult. Therefore, the question of whether or not these patterns persist in the post-pandemic world could not be answered.
 
-The MOBIS-Covid study \citep{molloyMOBISDatasetLarge2022} provides a unique opportunity to look at the persistence of these effects. A Swiss panel with comparably rich socioeconomic information has been tracked from before the crisis until today. In Switzerland, all restrictions and measures to contain the spread were lifted on February 17, 2022, and we potentially converged to a new equilibrium in the months that followed. Therefore, we have revisited the MOBIS-Covid data and tried to comment on how sustainable initial findings have proven to be and translate to recent times. For this purpose, a comprehensive set of descriptive indicators has been constructed in order to disentangle the narrative of the crisis. Special emphasis is given to the question of how new hybrid working arrangements (i.e. home office) drive modal splits (as measured by mode distance shares). The descriptive findings are strengthened by a mixed multiple discrete-continuous extreme value model (MMDCEV) where we model both the discrete and continuous dimension of weekly mode distance shares and compare the pre-pandemic to the arguably post-pandemic world.
+The MOBIS-Covid study \citep{Molloy+Etal:2022} provides a unique opportunity to look at the persistence of these effects. A Swiss panel with comparably rich socioeconomic information has been tracked from before the crisis until today. In Switzerland, all restrictions and measures to contain the spread were lifted on February 17, 2022, and we potentially converged to a new equilibrium in the months that followed. Therefore, we have revisited the MOBIS-Covid data and tried to comment on how sustainable initial findings have proven to be and translate to recent times. For this purpose, a comprehensive set of descriptive indicators has been constructed in order to disentangle the narrative of the crisis. Special emphasis is given to the question of how new hybrid working arrangements (i.e. home office) drive modal splits (as measured by mode distance shares). The descriptive findings are strengthened by a mixed multiple discrete-continuous extreme value model (MMDCEV) where we model both the discrete and continuous dimension of weekly mode distance shares and compare the pre-pandemic to the arguably post-pandemic world.
 
 The remainder of the text is structured as follows: In Section~\ref{sec:literature} we review the studies that explore the impact of COVID on mobility patterns with a focus on modal shifts. We then introduce the MOBIS-Covid sample and data collection process in Section~\ref{sec:data}. Section~\ref{sec:descriptive-analysis} is the core of the paper and discusses the narrative of the pandemic with various descriptive indicators. The MMDCEV modeling framework is introduced in Section~\ref{sec:mmdcev}. Results are presented and discussed in Section~\ref{sec:results}, while Section~\ref{sec:conclusion} concludes and provides an outlook.
 
@@ -58,35 +47,37 @@ The remainder of the text is structured as follows: In Section~\ref{sec:literatu
 
 Based both on the COVID case numbers and the measures imposed to counteract the spread of the virus, the following six phases can be distinguished. The phases are visualized together with COVID case numbers (rolling 14-day mean) in Figure~\ref{fig:participation-and-casenumbers}. The narrative of the pandemic is presented hereafter and summarized in Table~\ref{tab:phases}, where each phase of expansion (constraining the free movement) is followed by a phase of relaxation.
 
-\textit{Phase 1 (expansion):} COVID-19 reached Switzerland in early 2020. The situation deteriorated quickly and by March 20, 2020 over $4800$ people infected. This first phase can thus be characterized by a rapid spread of the virus as well as high uncertainty. On March 16, 2020 the Federal Council declared an extraordinary situation, which allowed it to introduce uniform measures in all cantons. A lockdown was imposed, closing all non-essential businesses, along with schools, recreational facilities and public parks. As a consequence, employers were urged to reorganize the working hours of their employees to avoid rush hour travel. Home office was implemented, wherever possible. The measures were extended until April 26, 2020 after which the Federal Council followed a strategy to gradually emerge from the lockdown in three stages.
+\emph{Phase 1 (restriction):} COVID-19 reached Switzerland in early 2020. The situation deteriorated quickly and by March 20, 2020 over $4800$ people infected. This first phase can thus be characterized by a rapid spread of the virus as well as high uncertainty. On March 16, 2020 the Federal Council declared an extraordinary situation, which allowed it to introduce uniform measures in all cantons. A lockdown was imposed, closing all non-essential businesses, along with schools, recreational facilities and public parks. As a consequence, employers were urged to reorganize the working hours of their employees to avoid rush hour travel. Home office was implemented, wherever possible. The measures were extended until April 26, 2020 after which the Federal Council followed a strategy to gradually emerge from the lockdown in three stages.
 
-\textit{Phase 2 (relaxation):} The gradual easing of the enforced measures ended on June 6, 2020, when all events up to $300$ people and spontaneous gatherings for up to $30$ people were allowed again. High schools and universities were able to resume, all leisure and entertainment businesses as well as tourist attractions re-opened. Relatively calm summer months followed, suggesting that the spread of the virus might follow seasonal patterns.
+\emph{Phase 2 (relaxation):} The gradual easing of the enforced measures ended on June 6, 2020, when all events up to $300$ people and spontaneous gatherings for up to $30$ people were allowed again. High schools and universities were able to resume, all leisure and entertainment businesses as well as tourist attractions re-opened. Relatively calm summer months followed, suggesting that the spread of the virus might follow seasonal patterns.
 
-\textit{Phase 3 (expansion):} Beginning October 19, 2020, a series of measures was introduced again as the situation worsened. Home office was recommended, culminating in a home office duty starting January 18, 2021. The duty was in place until June 26, 2021.
+\emph{Phase 3 (restriction):} Beginning October 19, 2020, a series of measures was introduced again as the situation worsened. Home office was recommended, culminating in a home office duty starting January 18, 2021. The duty was in place until June 26, 2021.
 
-\textit{Phase 4 (relaxation):} However, even before abolishing the home office duty, other measures constraining the free movement of people were gradually eased as the third COVID wave was rather shallow. That is, while commutes were still reduced during phase 4, leisure activities were not. Again, the summer months were relatively calm.
+\emph{Phase 4 (relaxation):} However, even before abolishing the home office duty, other measures constraining the free movement of people were gradually eased as the third COVID wave was rather shallow. That is, while commutes were still reduced during phase 4, leisure activities were not. Again, the summer months were relatively calm.
 
-\textit{Phase 5 (expansion):} With the onset of autumn end of September 2021, the last expansionary phase started. New, aggressive COVID variants emerged. As vaccination was fully rolled out with all the residents having had the opportunity to get vaccinated twice, a COVID certificate was required starting September 13, 2021. Political polarization was a consequence with society being divided into two segments with different constraints. However, home office became mandatory again for all, as of December 20, 2021 and was in place until February 3, 2022.
+\emph{Phase 5 (restriction):} With the onset of autumn end of September 2021, the last expansionary phase started. New, aggressive COVID variants emerged. As vaccination was fully rolled out with all the residents having had the opportunity to get vaccinated twice, a COVID certificate was required starting September 13, 2021. Political polarization was a consequence with society being divided into two segments with different constraints. However, home office became mandatory again for all, as of December 20, 2021 and was in place until February 3, 2022.
 
-\textit{Phase 6 (relaxation):} Despite rocketing case numbers, the path back to normalization has started during February 2022 (as intensive care stations were not at limiting capacities any longer). Almost all measures have been abolished by February 17, 2022. As transition to a relatively normal live might have taken some time, we define the normalization phase to begin March 1, 2022.
+\emph{Phase 6 (relaxation):} Despite rocketing case numbers, the path back to normalization has started during February 2022 (as intensive care stations were not at limiting capacities any longer). Almost all measures have been abolished by February 17, 2022. As transition to a relatively normal live might have taken some time, we define the normalization phase to begin March 1, 2022.
 
-The \textit{baseline} period is defined as all data points before October 31, 2019. The period from November, 2019 to the onset of the pandemic in late February, 2020 is discarded as a randomized controlled trial was conducted and mobility patterns are expected to be governed by the treatment.
-
-\begin{leftbar}
-Terminology in publication? Restriction and relaxation?
-\end{leftbar}
+The \emph{baseline} period is defined as all data points before October 31, 2019. The period from November, 2019 to the onset of the pandemic in late February, 2020 is discarded as a randomized controlled trial was conducted and mobility patterns are expected to be governed by the treatment.
 
 \begin{table}[htbp]
-<<results=tex, echo=FALSE>>=
-mpp::covid_phases %>%
-  mutate(label = as.character(1:6),
-         description = stringr::str_replace_all(description, "\\n", " "),
-         description = stringr::str_remove_all(description, "\\(restriction\\)|\\(relaxation\\)")) %>%
-  rename(Phase = label, Start = lower, End = upper, Description = description, Evolution = evolution) %>%
-  kableExtra::kbl(booktabs = TRUE, format = "latex", linesep = "") %>%
-  kableExtra::column_spec(4, width = "20em") %>%
-  kableExtra::kable_styling(latex_options = "scale_down") %>%
-  mpp::ivt_table()
-@
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllp{20em}l}
+\toprule
+Phase & Start & End & Description & Evolution\\
+\midrule
+1 & 2020-02-28 & 2020-04-26 & 1. Wave: Onset of the pandemic, high uncertainty, lockdown & Restriction\\
+2 & 2020-04-27 & 2020-10-18 & Calm summer months & Relaxation\\
+3 & 2020-10-19 & 2021-02-28 & 2. Wave: Home office recommendation followed by requirement (mid January) & Restriction\\
+4 & 2021-03-01 & 2021-09-12 & 3. Wave: Shallow third wave, calm summer months & Relaxation\\
+5 & 2021-09-13 & 2022-02-28 & 4. Wave: Spread of the Omicron variant, home office and certificate requirement & Restriction\\
+6 & 2022-03-01 & 2022-06-29 & Normalization & Relaxation\\
+\bottomrule
 \caption{\label{tab:phases} The evolution of the pandemic in six phases.}
+\end{tabular}
+}%
 \end{table}
+
+

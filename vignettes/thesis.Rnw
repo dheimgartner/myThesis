@@ -26,7 +26,15 @@
 
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
-## add libraries here
+## mpp
+library("mpp")
+library("mppData")
+library("tidyverse")
+library("lubridate")
+library("data.table")
+library("patchwork")
+library("apollo")
+library("kableExtra")
 
 ## maybe adjust width here...
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
