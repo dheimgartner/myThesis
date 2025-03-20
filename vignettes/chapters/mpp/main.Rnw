@@ -1,21 +1,30 @@
-\chapter{Modal splits before during and after the pandemic in Switzerland}
+\chapter{Modal splits before during and after the pandemic}
 \label{ch:mpp}
 
 \dictum[John Doe]{%
   Hello world!}%
 \vskip 1em
 
-<<preliminaries, echo=FALSE, results=hide>>=
+<<mpp-preliminaries, echo=FALSE, results=hide>>=
 MAX <- as.Date("2022-12-30")
+
+col_annot <- "grey40"
 
 my_theme <-
   ggplot2::theme_light() +
   ggplot2::theme(legend.position = "bottom",
+                 panel.border = element_rect(fill = NA, colour = "black",
+                                             linewidth = rel(1.2)),
+                 axis.ticks = element_line(colour = "black", linewidth = rel(1)),
                  strip.background = element_rect(fill = "white"),
-                 strip.text = element_text(colour = "black"))
+                 strip.text = element_text(colour = "black"),
+                 panel.grid.major.x = element_blank(),
+                 panel.grid.minor.x = element_blank())
 
 ggplot2::theme_set(my_theme)
 @
+
+%% -- Abstract -----------------------------------------------------------------
 
 The adjustments of mobility patterns during early stages of the pandemic are well understood. However, various effects are intertwined in these observations and therefore the findings' robustness remains questionable. The MOBIS-Covid data set provides a unique opportunity to put these initial findings in perspective as a large panel has been tracked from before the crisis up until today. Switzerland lifted all its measures counteracting the spread in mid February 2022, reaching a potential new equilibrium in the months that followed. A comprehensive set of descriptive indicators has been constructed for Switzerland in order to disentangle the narrative of the crisis from the perspective of transport demand. Special emphasis has been given to the question of how new hybrid working arrangements influence modal splits (as measured by mode distance shares). The descriptive findings are strengthened by a mixed multiple discrete-continuous extreme value model (MMDCEV). We find a shift in modal splits away from car and train, where in particular bus could expand its mode share most pronounced. While the cycling and walking booms were temporary, the bicycle still shows sightly higher mode distance shares (driven by more rather than longer trips). While there are observable differences between the different working arrangements (home office, mixture and in office), we do not find significant model parameters when allowing for unobserved heterogeneity. This suggests that the working arrangement segments the population along socioeconomic dimensions with different mobility behaviour and mode preferences. Modes are more satiated in the post-pandemic world indicating that people use fewer modes in their weekly modal mix but use them more intensely. However, the model suggests that the pandemic should not be read as a structural break in mode preferences. We will therefore likely see a further normalization in the months that come.
 
@@ -26,10 +35,13 @@ The contributions for this paper are as follows:
 \begin{leftbar}
 \begin{itemize}
 \item See also thesis by Reck...
+\item Conform to the contributions as mentioned in the paper!
 \item Maybe add \emph{The following adjusmtents were made to the published text...} or similar.
 \item Namespace labels.
 \end{itemize}
 \end{leftbar}
+
+%% -- Introduction -------------------------------------------------------------
 
 \section{Introduction}
 \label{sec:introduction}
@@ -47,17 +59,19 @@ The remainder of the text is structured as follows: In Section~\ref{sec:literatu
 
 Based both on the COVID case numbers and the measures imposed to counteract the spread of the virus, the following six phases can be distinguished. The phases are visualized together with COVID case numbers (rolling 14-day mean) in Figure~\ref{fig:participation-and-casenumbers}. The narrative of the pandemic is presented hereafter and summarized in Table~\ref{tab:phases}, where each phase of expansion (constraining the free movement) is followed by a phase of relaxation.
 
-\emph{Phase 1 (restriction):} COVID-19 reached Switzerland in early 2020. The situation deteriorated quickly and by March 20, 2020 over $4800$ people infected. This first phase can thus be characterized by a rapid spread of the virus as well as high uncertainty. On March 16, 2020 the Federal Council declared an extraordinary situation, which allowed it to introduce uniform measures in all cantons. A lockdown was imposed, closing all non-essential businesses, along with schools, recreational facilities and public parks. As a consequence, employers were urged to reorganize the working hours of their employees to avoid rush hour travel. Home office was implemented, wherever possible. The measures were extended until April 26, 2020 after which the Federal Council followed a strategy to gradually emerge from the lockdown in three stages.
+\begin{enumerate}
+\item Phase (restriction): COVID-19 reached Switzerland in early 2020. The situation deteriorated quickly and by March 20, 2020 over 4`800 people infected. This first phase can thus be characterized by a rapid spread of the virus as well as high uncertainty. On March 16, 2020 the Federal Council declared an extraordinary situation, which allowed it to introduce uniform measures in all cantons. A lockdown was imposed, closing all non-essential businesses, along with schools, recreational facilities and public parks. As a consequence, employers were urged to reorganize the working hours of their employees to avoid rush hour travel. Home office was implemented, wherever possible. The measures were extended until April 26, 2020 after which the Federal Council followed a strategy to gradually emerge from the lockdown in three stages.
 
-\emph{Phase 2 (relaxation):} The gradual easing of the enforced measures ended on June 6, 2020, when all events up to $300$ people and spontaneous gatherings for up to $30$ people were allowed again. High schools and universities were able to resume, all leisure and entertainment businesses as well as tourist attractions re-opened. Relatively calm summer months followed, suggesting that the spread of the virus might follow seasonal patterns.
+\item Phase (relaxation): The gradual easing of the enforced measures ended on June 6, 2020, when all events up to 300 people and spontaneous gatherings for up to 30 people were allowed again. High schools and universities were able to resume, all leisure and entertainment businesses as well as tourist attractions re-opened. Relatively calm summer months followed, suggesting that the spread of the virus might follow seasonal patterns.
 
-\emph{Phase 3 (restriction):} Beginning October 19, 2020, a series of measures was introduced again as the situation worsened. Home office was recommended, culminating in a home office duty starting January 18, 2021. The duty was in place until June 26, 2021.
+\item Phase (restriction): Beginning October 19, 2020, a series of measures was introduced again as the situation worsened. Home office was recommended, culminating in a home office duty starting January 18, 2021. The duty was in place until June 26, 2021.
 
-\emph{Phase 4 (relaxation):} However, even before abolishing the home office duty, other measures constraining the free movement of people were gradually eased as the third COVID wave was rather shallow. That is, while commutes were still reduced during phase 4, leisure activities were not. Again, the summer months were relatively calm.
+\item Phase (relaxation): However, even before abolishing the home office duty, other measures constraining the free movement of people were gradually eased as the third COVID wave was rather shallow. That is, while commutes were still reduced during phase 4, leisure activities were not. Again, the summer months were relatively calm.
 
-\emph{Phase 5 (restriction):} With the onset of autumn end of September 2021, the last expansionary phase started. New, aggressive COVID variants emerged. As vaccination was fully rolled out with all the residents having had the opportunity to get vaccinated twice, a COVID certificate was required starting September 13, 2021. Political polarization was a consequence with society being divided into two segments with different constraints. However, home office became mandatory again for all, as of December 20, 2021 and was in place until February 3, 2022.
+\item Phase (restriction): With the onset of autumn end of September 2021, the last expansionary phase started. New, aggressive COVID variants emerged. As vaccination was fully rolled out with all the residents having had the opportunity to get vaccinated twice, a COVID certificate was required starting September 13, 2021. Political polarization was a consequence with society being divided into two segments with different constraints. However, home office became mandatory again for all, as of December 20, 2021 and was in place until February 3, 2022.
 
-\emph{Phase 6 (relaxation):} Despite rocketing case numbers, the path back to normalization has started during February 2022 (as intensive care stations were not at limiting capacities any longer). Almost all measures have been abolished by February 17, 2022. As transition to a relatively normal live might have taken some time, we define the normalization phase to begin March 1, 2022.
+\item Phase (relaxation): Despite rocketing case numbers, the path back to normalization has started during February 2022 (as intensive care stations were not at limiting capacities any longer). Almost all measures have been abolished by February 17, 2022. As transition to a relatively normal live might have taken some time, we define the normalization phase to begin March 1, 2022.
+\end{enumerate}
 
 The \emph{baseline} period is defined as all data points before October 31, 2019. The period from November, 2019 to the onset of the pandemic in late February, 2020 is discarded as a randomized controlled trial was conducted and mobility patterns are expected to be governed by the treatment.
 
@@ -80,4 +94,484 @@ Phase & Start & End & Description & Evolution\\
 }%
 \end{table}
 
+%% -- Related work -------------------------------------------------------------
 
+\section{Related work}
+\label{sec:literature}
+
+In this section we review studies that explore the impact of COVID-19 on mobility patterns with a focus on modal shifts. Whereas changes during the pandemic are well understood, literature that looks beyond the crisis is sparse due to obvious reasons. Nevertheless, some work has been identified that tries to generalize the initial findings to an environment without COVID restrictions.
+
+\citet{Paul+Etal:2022} present a review of the global findings on changes in transportation behavior due to the COVID-19 pandemic. During the pandemic, a reduced usage of public transportation could be observed while reliance on private cars increased. While this is a global pattern, non-motorized vehicle usage and walking prevalence increased mostly in European countries. Trips for some particular purposes have remained high using only a specific mode of transport. Several studies report a decrease in commuting which can be attributed to either job loss or an increase in working from home. Similarly, sociodemographic attributes determine the trip frequency - among others mediated by home office access. Risk perceptions play an important role too.
+
+\citet{Abdullah+Etal:2020} report that trip purpose, mode choice, distance traveled, and frequency of trips were significantly different before and during the pandemic. Shopping trips were the dominant trip generating purpose. A shift from public transport to private and non-motorized modes could be observed. This can be attributed to people placing a higher priority on health related concerns when choosing a mode during the pandemic.
+
+\citet{Molloy+Etal:2021} use the MOBIS data set \citep{Molloy+Etal:2022} and conduct comprehensive descriptive analysis in order to report the impact of restrictive measures during the pandemic on mobility behavior. Reductions of around 60\% in the average daily distance were observed, with decreases of over 90\% for public transport. Meanwhile, the cycling mode share increased drastically. Modal shifts were considerable, especially for public transport subscription holders. The change in modal shares were particularly pronounced when restrictions were imposed and somewhat less so after restrictions were eased. However, pre-pandemic levels were never reached during the study period. The authors further find that home office is effective for suppressing travel demand with effects persisting over the enforced home office restrictions. The authors discuss long-term policy implications. However, the time-window from the onset of the pandemic until the middle of August 2020 was rather short and extrapolation beyond the pandemic situation has to be seen in that perspective. As we use the same data set and conduct very similar descriptive analysis, our work puts these preliminary findings in context and scrutinizes whether or not the observed changes during the pandemic were made habitual.
+
+\citet{Meister+Etal:2022} employ a mixed multiple discrete-continuous extreme value model (MMDCEV) to estimate mode distance shares for an urban population. Separate parameters were derived for four distinct segments, from September 2019 until the end of 2020 (still in midst of the crisis). Their findings confirm global trends: A substantial decrease in public transport usage (50\% depression at the end of their sample period), recovered car usage (with a temporary increase of 40\% during the pandemic) and a cycling boom (increase in travel distance up to 150\% and frequency increasing by 40\% during summer). The model sheds insights on a change in user group composition for PT and cycling.
+
+\citet{Currie+Etal:2021} is one of the few studies that pursues the question of whether post-pandemic travel behavior will be different to pre-pandemic travel. The study relies on survey data where respondents were asked to reveal their future expectations. PT ridership will recover but is not expected to reach pre-pandemic levels. The mode share of car will increase and offset reduced congestion due to working from home resulting in a net increase of car usage and higher peak volumes. Although the study was conducted in Melbourne, their results seem to generalize and support the findings by \citet{Shamshiripour+Etal:2020} and \citet{beckSlowlyComingOut2020b}.
+
+To summarize, the general narrative reveals a modal shift away from public transport to car and in particular to non-motorized forms of transport. Even though home office might reduce peak volumes, congestion on roads might increase due to a net increase of individualized transport. Sociodemographic peer groups adjust mode usage differently, mainly due to different risk perception (during the pandemic) or home office access. Previous work either extrapolated findings during the pandemic to the post-pandemic world or relied on respondents' expectations.
+
+%% -- Methodology --------------------------------------------------------------
+
+\section{Method}
+\label{sec:method}
+
+\begin{leftbar}
+Put some short blabla here.
+\end{leftbar}
+
+\subsection{Data}
+\label{sec:data}
+
+Starting in September 2019, a sample of 5`375 Swiss residents were recruited to take part in a mobility pricing field experiment called MOBIS. Using an app, the participants tracked their location and thereby mobility and activity patterns could be identified. They were tracked for 8 weeks in an ambition to investigate their response to a conceptual mobility pricing scheme in a randomized controlled trial. Participation and tracking numbers are depicted in Figure~\ref{fig:participation-and-casenumbers}, together with COVID case numbers and the six phases outlined before.
+
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}[htbp]
+\centering
+<<mpp-participation-and-casenumbers, echo=FALSE, fig=TRUE, width=9, height=7>>=
+df_part <-
+  mppData::mobis_analysis$participants_per_day %>%
+  pivot_longer(-day) %>%
+  mutate(sample = factor(name, labels = c("participants", "tracking"))) %>%
+  filter(day <= MAX) %>%
+  select(-name, date = day) %>%
+  pivot_wider(names_from = sample, values_from = value)
+
+df_cn <-
+  mpp::covid_numbers %>%
+  filter(georegion == "CH") %>%
+  select(date = datum, case_numbers = entries) %>%
+  arrange(date) %>%
+  mutate(case_numbers_rol = zoo::rollmean(case_numbers, k = 14, fill = NA)) %>%
+  drop_na() %>%
+  select(date, cn = case_numbers_rol)
+
+df_tog <-
+  df_part %>%
+  left_join(df_cn, by = "date")
+
+scl <- max(df_tog$participants, na.rm = TRUE) / max(df_tog$cn, na.rm = TRUE)
+
+p <-
+  df_tog %>%
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = participants, col = "Total"), alpha = 0.7) +
+  geom_line(aes(y = tracking, col = "Tracking"), alpha = 0.7) +
+  geom_line(aes(y = scl * cn), col = mpp::colors$all[2], size = 1.1) +
+  scale_x_date(date_breaks = "2 months",
+               date_labels = "%b-%y") +
+  scale_y_continuous(sec.axis = sec_axis(~./scl, name = "Average case numbers")) +
+  scale_colour_manual(values = mpp::colors$all[c(6, 3)]) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = "", y = "Number of participants", col = "Sample") +
+  guides(color = guide_legend(override.aes = list(alpha = 1)))
+
+df_ph <-
+  mpp::covid_phases %>%
+  left_join(df_cn, by = c("lower" = "date")) %>%
+  mutate(cn = ifelse(is.na(cn), 0, scl * cn))
+
+label_pos <- function(df) {
+  x <- df$label
+  y <- df$cn
+  pos <- sapply(seq_along(x), function(i) {
+    xi <- x[i]
+    yi <- y[i]
+    if (xi == "Phase 2") {
+      return(yi + scl * 12e3)
+    } else if (xi == "Phase 6") {
+      return(yi + scl * 7e3)
+    } else {
+      return(yi + scl * 3.5e3)
+    }
+  })
+  pos
+}
+
+p_ <- mpp:::add_annotations(p, y = label_pos(df_ph),
+                           text = TRUE, text_size = 2.5, col = col_annot)
+p_ + theme(panel.grid = element_blank(), panel.grid.minor = element_blank())
+@
+\caption{\label{fig:participation-and-casenumbers} Covid case numbers and timeline.}
+\end{figure}
+
+The 3`680 participants who completed the MOBIS study, were asked to reactivate the app in an effort to understand mobility behavior during the pandemic. Around 1`600 volunteered to do so building the panel of the MOBIS-Covid19 study which underlies this report.
+
+\begin{leftbar}
+Use MTMC mobility and transport micro census instead of MZ
+\end{leftbar}
+
+People were only eligible to participate in the MOBIS study if they used a car at least 2 days a week. This skewed our sample towards car drivers. However, comparing the sample to the last national travel diary Mikrozensus (MZ) 2015, the MOBIS-Covid19 sample was found to be broadly representative of the Swiss population \citep{Molloy+Etal:2021}.
+
+Since January 2021 we observe a gradual drop-out of participants as no further recruitment efforts have been made. Nevertheless, around 250 people are still using the app as of today. This raises the concern of a potential self-selection bias. In order to make statistics comparable over the full time horizon a re-weighting scheme is applied, comparing the characteristics of the remaining individuals against the original 22`000 participants which filled out the introductory survey. Weights are based on age, gender, income, education, mobility tool ownership and accessibility and are calculated for each person-week.
+
+The socioeconomic characteristics were collected in several surveys during various stages of the study. While some of the questions were included in several survey instruments, it is important to know that for most of the variables, we do not have longitudinal information. That is, only one particular point in time is reflected and some of the attributes might have changed over time. For example, the working arrangement variable \{Home office, Mixture, Work outside home\} is based on two work related surveys, fielded in April 2021 (Phase 3) and October 2021 (Phase 4), where respondents were asked how many days a week they work from home or in office respectively. Therefore it most certainly happened that some of the people were labelled home working in Phase 3 or 4 but switched back to in office without us noticing. Nevertheless, the working arrangement variable can be seen as a proxy.
+
+\subsection{Descriptive analysis of mobility patterns}
+\label{sec:descriptive-analysis}
+
+In this section the evolution of different mobility patterns is described. Different correlation patterns shed light on a possible narrative accompanying the evolution during the six phases (Table~\ref{tab:phases}). We first elaborate on activity spaces before looking at various mode-specific patterns.
+
+For all the time-series graphs moving averages (with a window size corresponding to 30 days) were computed in order to filter the noise. For most figures, the evolution is both depicted in absolute numbers, comparing the average of the different phases (bar charts) as well as in relation to the baseline period, reflecting percentage deviations (line charts). Dotted vertical lines segment the time axis into the seven phases (each segment corresponding to one bar). Triangles mark end of September days which is the mid-point of the baseline (and should therefore be comparable beyond seasonal patterns). Squares mark the end of the timeline, emphasizing the relative evolution since the beginning of the pandemic. The reader should keep in mind, that the baseline is a rather arbitrary point in time (e.g. capturing the seasonal patterns of Switzerland's autumn months) before the pandemic.
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<mpp-activity-spaces, echo=FALSE, fig=TRUE, width=12, height=10>>=
+limits <- c(-1, 1.1)
+
+p1_bar <-
+  mpp::activity_spaces$weekday_abs %>%
+  mpp::phase_comparison_chart(gv = weekday, tv = ellipse_area, colors = colors$all,
+                              x = "", y = "Activity space\n95% ellipse area (km2)", fill = "", x = "")
+
+p1 <-
+  mpp::base_plot(data = mpp::activity_spaces$weekday, MAX = MAX, .col = weekday, colors = mpp::colors$binary,
+                 x = "Week", y = "Activity space change (%)", color = "Day of week") +
+  scale_y_continuous(limits = limits, labels = scales::percent) +
+  mpp:::add_zero_line()
+
+p1 <-
+  mpp:::add_annotations(p1, y = 0.4, col = col_annot) %>%
+  mpp:::add_baseline_comparison(gv = weekday) %>%
+  mpp:::add_end_markers(gv = weekday)
+
+p2 <-
+  mpp::activity_spaces$working_arrangement %>%
+  drop_na(working_arrangement) %>%
+  mpp::base_plot(MAX, working_arrangement, colors = mpp::colors$working_arrangement,
+                 x = "Week", y = "Activity space change (%)", color = "Working arrangement") +
+  scale_y_continuous(limits = limits, labels = scales::percent) +
+  mpp:::add_zero_line()
+
+p2_bar <-
+  mpp::activity_spaces$working_arrangement_abs %>%
+  drop_na() %>%
+  mpp::phase_comparison_chart(gv = working_arrangement, tv = ellipse_area, colors = colors$all,
+                              order = c("Home office", "Mixture", "Work outside home"),
+                              x = "", y = "Activity space\n95% ellipse area (km2)", fill = "", x = "")
+
+p2 <-
+  mpp:::add_annotations(p2, y = 0.4, col = col_annot) %>%
+  mpp:::add_baseline_comparison(gv = working_arrangement) %>%
+  mpp:::add_end_markers(gv = working_arrangement)
+
+p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2, 3))
+@
+\caption{\label{fig:activity-spaces} Change in activity spaces.}
+\end{figure}
+
+Not surprisingly, activity spaces, as measured by the 95\% CI Ellipse area, were considerably depressed during the pandemic and are strongly governed by imposed COVID restrictions (Figure~\ref{fig:activity-spaces}). Seasonal patterns might exaggerate the effects of the pandemic with prevalence being higher during winter months where activity spaces usually are smaller. However, recent levels have not yet reached pre-pandemic ones. The home office population reduced activity spaces more pronounced at the onset of the crisis but had slightly larger activity spaces compared to the work outside home peers in the calm summer months (phase 4). However, in the normalization phase, the activity spaces of the in office population is again largest. Therefore it is not fully clear, whether home office depresses activity spaces in normal times. Further, considerable pre-pandemic differences in the levels exist: The participants working partly remote and partly in office had much larger activity ellipses in the baseline. Again, it is pivotal to understand, that these people were not necessarily working in a mixture working arrangement before the crisis, but did so at the time of the survey. Nevertheless, it highlights, that the working arrangement segments the population and impacts transport demand via depressing activity spaces of particularly mobile groups (with large activity spaces).
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<mpp-overview, echo=FALSE, fig=TRUE, width=12, height=10>>=
+limits <- c(-1, 1.1)
+
+p1 <-
+  mpp::average_daily_distance$total %>%
+  mpp::base_plot(MAX, mode, colors = mpp::colors$modes,
+                 x = "Week", y = "Change in average daily distance (%)", color = "Mode") +
+  scale_y_continuous(limits = limits, labels = scales::percent) +
+  mpp:::add_zero_line()
+
+p1 <-
+  p1 %>%
+  mpp:::add_annotations(y = 0.25, col = col_annot) %>%
+  mpp:::add_baseline_comparison(gv = mode) %>%
+  mpp:::add_end_markers(gv = mode)
+
+p1_bar <-
+  mpp::average_daily_distance$total_abs %>%
+  mutate(dist = dist / 1e3) %>%
+  mpp::phase_comparison_chart(mode, dist, colors = colors$all, y = "Average daily distance (km)", fill = "", x = "")
+
+p2 <-
+  mpp::number_of_stages$total %>%
+  mpp::base_plot(MAX, mode, colors = mpp::colors$modes,
+                 x = "Week", y = "Change in number of stages (%)", color = "Mode") +
+  scale_y_continuous(limits = limits, labels = scales::percent) +
+  mpp:::add_zero_line()
+
+p2 <-
+  p2 %>%
+  mpp:::add_annotations(y = 0.25, col = col_annot) %>%
+  mpp:::add_baseline_comparison(gv = mode) %>%
+  mpp:::add_end_markers(gv = mode)
+
+p2_bar <-
+  mpp::number_of_stages$total_abs %>%
+  mpp::phase_comparison_chart(mode, n_stages, colors = colors$all, y = "Average number of stages", fill = "", x = "")
+
+p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2, 3))
+@
+\caption{\label{fig:overview} Change in average daily distance and number of stages by mode.}
+\end{figure}
+
+In Figure~\ref{fig:overview} the change in average daily distance as well as change in number of stages by mode is depicted. A stage is the movement with one means of transport including possible waiting times, contrasting a trip, which is a sequence of stages from one activity to the next. All the modes react strongly to the evolution of the pandemic with bicycle being the only mode that shows cyclical (correlated with case numbers) patterns and walk being relatively stable. Public transport (PT: bus, train, tram) was considerably hit and has not yet recovered from the shift induced by the pandemic with bus being the exception. Daily distance and number of stages show very similar patterns with similar magnitudes (percentage deviations). Together with Figure~\ref{fig:activity-spaces} it could be argued that individuals tend to stay in closer proximity to their home location and therefore bicycle and bus are comparatively more frequently used (with the personal bicycle being available more freely).
+
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}[htbp]
+\centering
+<<mpp-day-on-day, echo=FALSE, fig=TRUE, width=12, height=15>>=
+p1 <-
+  mpp::axa_data$stage_length %>%
+  filter(week_start <= MAX) %>%
+  mutate(mode = factor(str_to_title(mode)),
+         rol = rol / 1e3) %>%
+  ggplot(aes(x = as.numeric(as.character(day)), y = rol, col = year, shape = year)) +
+  geom_point(size = 6, alpha = 0.8) +
+  facet_wrap(vars(mode), scales = "free_y", ncol = 1) +
+  scale_color_manual(values = mpp::colors$all[c(4, 2, 6, 7)]) +
+  scale_shape_manual(values = c(15, 16, 17, 18)) +
+  labs(x = "Day of year", y = "Trip leg length [km/leg]", col = "Year", shape = "Year")
+
+
+p2 <-
+  mpp::axa_data$stages_per_day %>%
+  filter(week_start <= MAX) %>%
+  mutate(mode = factor(str_to_title(mode))) %>%
+  ggplot(aes(x = as.numeric(as.character(day)), y = rol, col = year, shape = year)) +
+  geom_point(size = 6, alpha = 0.8) +
+  facet_wrap(vars(mode), scales = "free_y", ncol = 1) +
+  scale_color_manual(values = mpp::colors$all[c(4, 2, 6, 7)]) +
+  scale_shape_manual(values = c(15, 16, 17, 18)) +
+  labs(x = "Day of year", y = "Number of stages per day", col = "Year", shape = "Year")
+
+
+p1 + p2 + plot_layout(guides = "collect")
+@
+\caption{\label{fig:day-on-day} Average trip leg length and number of trips by mode. Comparison year on year.}
+\end{figure}
+
+A very similar picture is portrayed in Figure~\ref{fig:day-on-day} where we show average stage lengths and average number of stages per day and by mode. The bicycle boom described by various authors \citep[e.g.,][]{Molloy+Etal:2021, Meister+Etal:2022} has its foundation in the peek visible in the year 2020 and the fact that bicycle is the only mode that benefited from restrictive measures. Despite bicycle stage lengths not reaching these very high levels, it is still the case that bicycle usage is slightly higher than during the pandemic. In particular, it is used more frequently. On the other hand, train travel was considerably reduced but is on a steady upward trend ever since. The reduction was primarily caused by fewer travels and not necessarily by shorter travel distances. One explanation could be that annual subscriptions (which reduce the marginal cost of PT travel considerably) got cancelled in times of high uncertainty making the mode less attractive accompanied by hygiene concerns.
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<mpp-overview-by-wa, echo=FALSE, fig=TRUE, width=12, height=10>>=
+limits <- c(-0.75, 0.1)
+
+p1 <-
+  mpp::average_daily_distance$working_arrangement %>%
+  mpp::base_plot(MAX, working_arrangement, colors = mpp::colors$working_arrangement,
+                 x = "Week", y = "Change in average daily distance (%)", color = "Working arrangement") +
+  scale_y_continuous(limits = limits, labels = scales::percent) +
+  mpp:::add_zero_line()
+
+p1_bar <-
+  mpp::average_daily_distance$working_arrangement_abs %>%
+  drop_na(working_arrangement) %>%
+  mutate(dist = dist / 1e3) %>%
+  mpp::phase_comparison_chart(working_arrangement, tv = dist, colors = mpp::colors$all,
+                              order = c("Home office", "Mixture", "Work outside home"),
+                              x = "", y = "Average daily distance (km)", fill = "")
+
+p1 <-
+  p1 %>%
+  mpp:::add_annotations(y = -0.7, col = col_annot) %>%
+  mpp:::add_baseline_comparison(gv = working_arrangement) %>%
+  mpp:::add_end_markers(gv = working_arrangement)
+
+p2 <-
+  mpp::number_of_stages$working_arrangement %>%
+  mpp::base_plot(MAX, working_arrangement, colors = mpp::colors$working_arrangement,
+                 x = "Week", y = "Change in number of stages (%)", color = "Working arrangement") +
+  scale_y_continuous(limits = limits, labels = scales::percent) +
+  mpp:::add_zero_line()
+
+p2 <-
+  p2 %>%
+  mpp:::add_annotations(y = -0.7, col = col_annot) %>%
+  mpp:::add_baseline_comparison(gv = working_arrangement) %>%
+  mpp:::add_end_markers(gv = working_arrangement)
+
+p2_bar <-
+  mpp::number_of_stages$working_arrangement_abs %>%
+  drop_na(working_arrangement) %>%
+  mpp::phase_comparison_chart(working_arrangement, n_stages, colors = colors$all,
+                              order = c("Home office", "Mixture", "Work outside home"),
+                              y = "Average number of stages", fill = "", x = "")
+
+p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2, 3))
+@
+\caption{\label{fig:overview-by-wa} Change in average daily distance and number of stages by working arrangement.}
+\end{figure}
+
+Similarly, when differentiating by working arrangement, the collinearity between daily distances and number of stages is evident. Both distances and number of stages could be reduced most pronounced by \emph{Home office} during the onset of the crisis. While number of stages reached pre-pandemic levels for all working arrangements, daily distances did not for the more home-based peer groups. That is, the home office population was more mobile before the crisis. As elaborated, the working arrangement reflects the state at the time of the survey being conducted (phase 3 or 4). Therefore it could be that part of the home office labelled population either worked in the office during the baseline or that the home office frequency increased during the crisis. However, looking at absolute levels shows that people doing home office during the crisis had a higher average daily distance in the baseline, potentially not because of the work situation but other moderating (socioeconomic) factors. Considering the latest phase, all working arrangements share similar levels. Therefore, one could again conclude, that home office does depress transport demand not because the home office population travels less but because they would have traveled particularly much in absence of the hybrid working arrangement (e.g. due to long commuting distances which they now can avoid).
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<mpp-mode-shares, echo=FALSE, fig=TRUE, width=12, height=10>>=
+limits <- c(-1, 2.5)
+
+p1 <-
+  mpp::mode_frequency_shares$rel %>%
+  mpp::base_plot(MAX, mode, colors = mpp::colors$modes,
+                 x = "Week", y = "Mode shares\n(based on mode frequency)", color = "Mode") +
+  scale_y_continuous(limits = limits, labels = scales::percent) +
+  mpp:::add_zero_line()
+
+p1 <-
+  p1 %>%
+  mpp:::add_annotations(y = 0.6, col = col_annot) %>%
+  mpp:::add_baseline_comparison(gv = mode) %>%
+  mpp:::add_end_markers(gv = mode)
+
+p1_bar <-
+  mpp::mode_frequency_shares$abs %>%
+  mpp::phase_comparison_chart(mode, mode_share_pc, colors = colors$all, y = "Mode shares\n(based on mode frequency)", fill = "", x = "") +
+  scale_y_continuous(labels = scales::percent)
+
+p2 <-
+  mpp::mode_distance_shares$all %>%
+  mpp::base_plot(MAX, mode, colors = mpp::colors$modes,
+                 x = "Week", y = "Mode shares\n(based on distance)", color = "Mode") +
+  scale_y_continuous(limits = limits, labels = scales::percent) +
+  mpp:::add_zero_line()
+
+p2 <-
+  p2 %>%
+  mpp:::add_annotations(y = 1, col = col_annot) %>%
+  mpp:::add_baseline_comparison(gv = mode) %>%
+  mpp:::add_end_markers(gv = mode)
+
+p2_bar <-
+  mpp::mode_distance_shares$all_abs %>%
+  mpp::phase_comparison_chart(mode, mode_share, colors = colors$all, y = "Mode shares\n(based on distance)", fill = "", x = "") +
+  scale_y_continuous(labels = scales::percent)
+
+p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2, 3))
+@
+\caption{\label{fig:mode-shares} Mode shares by distance and mode choice frequency.}
+\end{figure}
+
+Shifting attention to mode shares, we constructed two indicators: Mode share based on how often a particular mode is chosen as main mode (mode frequency) and mode share based on traveled distance. This reflects the two preference dimensions and both the intensive (choice frequency) and extensive (covered distance) margin as well as the relative importance of the different modes. Again, a strong collinearity between the two indicators can be observed. Bicycle could expand its mode share along both dimensions (and beyond purely seasonal trends). Walking and car depict the most stable mode shares with walking showing a pronounced peek in the distance share during phase 1. Interestingly, local public transport has been affected differently: Bus defended its mode share more rigorously whereas tram could not. Again, train steadily recovers from the big shock in phase 1 with a slightly higher recovery in its mode distance share. One explanation might be that people increased the number of short trips, where car and train are less likely to be considered.
+
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}[htbp]
+\centering
+<<mpp-mode-share-indicators, echo=FALSE, fig=TRUE, width=14, height=6>>=
+p2 <-
+  mpp::mode_distance_shares$working_arrangement_abs %>%
+  drop_na() %>%
+  facet_bar_chart(working_arrangement)
+
+p2
+@
+\caption{\label{fig:mode-share-indicators} Mode distance shares by working arrangement.}
+\end{figure}
+
+Figure~\ref{fig:mode-share-indicators} reveals the following insights: First, modal splits do not dramatically differ between the working arrangements. Second, train has lower mode distance shares across all working arrangements, which could be due to ongoing hygiene concerns or a lagging recovery because of cancelled subscriptions which are now as so slowly renewed with decreasing uncertainty. Car increased the mode share only temporarily during the pandemic and the home office population shows a slightly lower car distance share in phase 6 (compared to the other working arrangements). On the other hand, train has a higher relative importance. As the average daily distance (see Figure~\ref{fig:overview-by-wa}) does not differ greatly in the most recent phase, we can conclude that the home office population has a slight preference for train. The walking boom during the onset of the pandemic can be attributed to the home office population.
+
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}[htbp]
+\centering
+<<mpp-hourly-counts, echo=FALSE, fig=TRUE, width=9, height=7>>=
+## only baseline vs. phase_6
+p1 <-
+  mpp::number_of_started_trips$phase_comparison %>%
+  ggplot(aes(x = hour1, y = n_rel, group = interaction(weekday, mode, label), col = label)) +
+  geom_line(alpha = 0.7, size = 1.1) +
+  scale_color_manual(values = mpp::colors$binary) +
+  scale_y_continuous(labels = scales::percent) +
+  # theme_minimal() +
+  labs(x = "Hour", y = "Number of started trips\n(relative to max value)", color = "Covid phase") +
+  facet_grid(rows = vars(mode), cols = vars(weekday))
+
+p2 <-
+  mpp::number_of_started_trips$working_arrangement %>%
+  filter(working_arrangement != "Mixture") %>%
+  ggplot(aes(x = hour1, y = n_rel, group = interaction(mode, working_arrangement), col = working_arrangement)) +
+  geom_line(alpha = 0.7, size = 1.1) +
+  scale_color_manual(values = mpp::colors$working_arrangement) +
+  scale_y_continuous(labels = scales::percent) +
+  # theme_minimal() +
+  labs(x = "Hour", y = "Number of started trips\n(relative to max value)", color = "Working arrangement") +
+  facet_grid(rows = vars(mode))
+
+p1 + p2 + plot_layout(guides = "collect", design = "AAB")
+@
+\caption{\label{fig:hourly-counts} Hourly trip counts relative to most busy hour.}
+\end{figure}
+
+Figure~\ref{fig:hourly-counts} shows the number of trips generated during a particular hour of the day and relative to the hour with the most trips (for each mode separately and differentiating weekdays and weekends as well as working arrangements). The left-hand side compares the data before COVID to the most recent values (after restrictions have been removed, i.e. phase 6) while the right-hand side is based on phase 6 only.
+
+For example looking at row \emph{Train} and column \emph{Weekday}, most trips are generated during the morning and evening peak hours (which is the 100\% reference hour) with the two peaks matching one another. Cycling increased during the day and weekends (but not during commuting hours). Car and train show more or less a parallel downwards shift. For train this shift is more pronounced than for car. The depression is less severe for local PT (bus and tram) than for train. For walk we see again the decrease during commuting peaks but otherwise it is back to normal. Further, people working from home seem not to be that mobile during the day (most modes are almost identical during working hours, with bicycle being the exception). For car and train we see a decrease even during the weekend which either could imply that people reduced activities or stay in closer proximity to home (as local PT does not show this decrease, while bicycle increases...).
+
+The pronounced morning and afternoon peeks of the peer group \emph{Home office} for PT might reflect that if they work from the office space they choose PT, i.e. the home office population does not necessarily switch to car but has simply reduced demand due to reduced commuting. On the other hand, we have seen that people working from home use more regional modes, in particular bicycle. The very similar trip generation of \emph{Home office} compared to \emph{Work outside home} during working hours could again be interpreted, as the home office population not being that mobile during working hours.
+
+The descriptive results are summarized below. The bicycle was the only mode used more intensively during restrictive phases. However, seasonal patterns could overemphasize this correlation. The bicycle boom was a temporary phenomenon which can be attributed to rather high stage lengths during the onset of the pandemic. Still, the bicycle is used more frequently in the normalization phase.
+
+All PT modes (train, tram, bus) were considerably depressed by the pandemic. While train and tram have not yet fully recovered, bus did. Nevertheless, train is on a steady upward trend ever since the initial shock.
+
+Mode frequency shares decreased for car and train. This could be a consequence of people conducting more shorter trips where bus and bicycle have the advantage over car and train.
+
+The impact of home office on activity spaces is ambiguous. During the pandemic, home office was an effective tool to reduce transport demand. In the normalization phase, average daily distances and average number of stages are almost identical among the three working arrangements. We hypothesise that home office depresses transport demand not because of the home office population travelling less but because they would have traveled particularly much in absence of the hybrid working arrangement  (e.g. due to long commuting distances which they now can avoid). Modal splits do not dramatically differ between the working arrangements with a slight preference for train for the home office workforce. Car on the other hand is used less intensively.
+
+\subsection{MMDCEV modeling framework}
+\label{sec:mmdcev}
+
+In this section the econometric framework is introduced. The multiple discrete-continuous extreme value model (MDCEV) was first formulated by \citet{Bhat:2005}. The model reflects on the fact that many consumer situations are characterized by multiple discreteness (a bundle of goods is consumed) of imperfect substitutes. In transportation, people choose both a portfolio of modes (discrete choice) and to what extent each mode is employed (continuous choice). Our formulation lends itself from \citet{Meister+Etal:2022} and considers the two dimensions mode choice (discrete) and choice of weekly distance shares by mode (continuous). The MDCEV models require a budget constraint and mode shares naturally add up to 1 which is the total budget a person can attribute to the available modes. Further, the marginal rate of substitution is constant (if you decrease the mode share of train by 1\% you necessarily have to collectively increase the mode shares of the other modes by 1\%) which abstracts from the cost component, i.e. the budget line has slope 1. Such would not be the case if we would model weekly mileage by mode.
+
+The original model formulation both incorporates a translation parameter gamma (allowing for corner solutions) and a satiation parameter alpha (governing the marginal utility). However, it is well-known \citep[e.g.,]{Bhat:2008} that it is difficult to separate the two effects empirically (as the gamma parameter also has a satiation interpretation). Therefore, the modeler has to choose between three profiles (dropping or fixing one of the two parameters). We have estimated simple models with all the profiles and will from here onward only consider and present the so-called gamma-profile as it yielded the highest model fit.
+
+In the following discussion of the panel MMDCEV model structure, individuals are indexed by $q \in \{1,\dots,Q\}$, weekly choice occasions by $t \in \{1,\dots,T\}$ and $k \in \{1,\dots,K\}$ indexes the travel modes. The vector of travel distance proportions in week $t$ is $x_{qt} = \{x_{qt1},\dots,x_{qtK}\}$ (which sums to 1). Consider the following CES-type of additive utility function
+%
+\begin{equation} \label{eq:utility}
+U_{qt}(x_{qt}) = \sum_{k = 1}^{K} \gamma_k \psi_{qtk} \ln \left( \frac{x_{qtk}}{\gamma_k} + 1 \right).
+\end{equation}
+
+The term $\psi_{qtk}$ refers to the baseline utility and controls the discrete dimension, i.e. the utility that accrues to choosing alternative $k$ in a particular week. As already discussed, $\gamma$ both has a translation interpretation (corner solutions, 0 consumption) and in combination with the logarithmic transformation a satiation interpretation. The marginal utility is decreasing in $\gamma$ which implies that higher values of $\gamma$ stand for higher satiation (i.e. a higher distance mode share). The baseline utilities of the six modes are further given by
+%
+\begin{equation} \label{eq:baseline-utiltiy}
+\psi_{qtk} = \exp(\theta_k + \beta z_{qk} + \mu_q s_{k} + \epsilon_{qtk})
+\end{equation}
+%
+where $\theta_k$ reflects the inter-individual average utility of choosing alternative $k$, $z_qk$ is a vector of observed attributes and $\beta$ the corresponding vector of utility weights. The term $\mu_q s_k$ stands for a random error component where $\mu_q$ is multivariate normally distributed and $s_{k}$ is a column vector of dimension $K$. Each element of $\mu$ has a variance of $\sigma_{k}^2$ and is assumed to be independent of the other elements (i.e. the covariance matrix is diagonal) and hence captures pure inter-individual heterogeneity as a mixed component. $\epsilon_{qtk}$ is idiosyncratic noise and follows a type I extreme value distribution (distributed iid across individuals, modes and choice occasions).
+
+It can be shown that conditional on the random error component, the probability of observing individual $q$ choosing mode $k$ to have a share $x$ in week $t$ has the following solution
+%
+\begin{equation} \label{eq:choice-probability}
+P(x_{qt} | \mu_q) = \left[ \prod_{i=1}^{M} c_{qti} \right]  \left[ \sum_{i=1}^{M} \frac{1}{c_{qti}} \right] \left[ \frac{ \prod_{i=1}^{M} e^{V_{iqt}} }{ ( \sum_{k=1}^{K} e^{V_{qtk}} )^M } \right] (M_{qt} - 1)!
+\end{equation}
+%
+where $M$ is the number of alternatives chosen by individual $q$ at choice occasion $t$. Discrete choice modelers can see the familiar ratio of exponential utilities in \cref{eq:choice-probability}. Further
+%
+\begin{equation}
+c_{qti} = \left( \frac{1}{x_{qti}^{*} + \gamma_i} \right)
+\end{equation}
+%
+for $i = 1,\dots M$ and
+%
+\begin{equation}
+V_{qtk} = \theta_k + \beta z_{qk} + \mu_q s_{k} - \ln \left( \frac{x_{qtk}}{\gamma_k} + 1 \right).
+\end{equation}
+
+The parameters to be estimated are the $\theta_k$ and $\gamma_k$ scalars, the $\beta$ vector as well as the $\sigma_{k}^{2}$ variance elements characterizing the variance matrix of $\mu$. We choose the maximum likelihood inference approach where the likelihood for individual $q$'s optimal distance share investment is given by
+%
+\begin{equation} \label{eq:conditional-likelihood}
+L_{q}(\theta, \psi, \beta | \mu_q) = \prod_{t=1}^{T_q} [ P(x_{qt}^{*}, \theta, \psi, \beta | \mu_q)].
+\end{equation}
+
+The unconditional likelihood can be formulated by marginalizing over the random vector $\mu$
+%
+\begin{equation} \label{eq:likelihood}
+L_{q}(\theta, \psi, \beta , \omega) = \int_{\mu} [ L_{q}(\theta, \psi, \beta | \mu_q) ] d F(\mu | \omega)
+\end{equation}
+%
+where $F$ is the multivariate cumulative normal distribution. The log-likelihood function reads
+%
+\begin{equation} \label{eq:log-likelihood}
+LL(\theta, \psi, \beta , \omega) = \sum_{q} \ln [ L_{q}(\theta, \psi, \beta , \omega) ].
+\end{equation}
+
+We use the \pkg{apollo} package by \citet{Hess+Palma:2019} and generate a Halton sequence of 1`000 inter-individual draws in order to approximate the integral in Equation~\ref{eq:likelihood}. Our model building strategy included testing different profiles, different levels for the discrete variables as well as gradually increasing the model complexity and excluding insignificant variables. This process involved data of the normalization phase only. We further constructed variables reflecting on the mode specific accessibility, a person's living environment (e.g. degree of urbanization) and controlled for weather characteristics. However, we carefully checked for co-linearity and did not consider all the constructed variables (e.g. urbanization and access measures were closely related as well as temperature, humidity and pressure levels).
+
+%% -- Results ------------------------------------------------------------------
+
+%% -- Conclusion ---------------------------------------------------------------

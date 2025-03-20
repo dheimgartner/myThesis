@@ -19,4 +19,11 @@
 \newcommand{\class}[1]{`\code{#1}'}
 \newcommand{\fct}[1]{\code{#1()}}
 
+% doi: taken from jss.cls
+\ifx\csname urlstyle\endcsname\relax
+  \newcommand\@doi[1]{doi:\discretionary{}{}{}#1}\else
+  \newcommand\@doi{doi:\discretionary{}{}{}\begingroup
+\urlstyle{tt}\Url}\fi
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{\@doi{#1}}}}
+
 % End of class file

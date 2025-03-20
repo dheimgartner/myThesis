@@ -22,9 +22,6 @@
 % \addbibresource[label=ownpubs]{ownpubs.bib}
 % \addbibresource{bibliography.bib}
 % \addbibresource{misc.bib}
-% \bibliography{ownpubs.bib}
-% \bibliography{bibliography.bib}
-% \bibliography{misc.bib}
 
 
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}

@@ -42,4 +42,8 @@
   - [ ] `OPSRtools`
 - [x] Adjust bibliography style... maybe Makefile is not needed in the end...
   - See `preamble/general.tex` and `preamble/natbib/` and adjustments in `bibliography.Rnw`
+- [ ] What font are they using?
 - [ ] Make ownpubs in `publications.Rnw` work
+- [ ] Captionsetup
+- [ ] Formatting numbers (not in `$` and big mark `
+- [ ] Why is doi in bibliography not red?
