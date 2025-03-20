@@ -40,5 +40,6 @@
   - [ ] `OPSR`
   - [ ] `TWTE`
   - [ ] `OPSRtools`
-- [ ] Adjust bibliography style... maybe Makefile is not needed in the end...
-  - See `general.tex` how the others did it
+- [x] Adjust bibliography style... maybe Makefile is not needed in the end...
+  - See `preamble/general.tex` and `preamble/natbib/` and adjustments in `bibliography.Rnw`
+- [ ] Make ownpubs in `publications.Rnw` work

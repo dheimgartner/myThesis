@@ -5,7 +5,10 @@
 \chapter*{Publications}
 
 \noindent
-Articles in peer-reviewed journals:
+\begin{leftbar}
+Make ownpubs.bib work or do it manually...
+\end{leftbar}
+% Articles in peer-reviewed journals:
 % \begin{refsection}[ownpubs]
 %   \small%
 %   \nocite{*}
