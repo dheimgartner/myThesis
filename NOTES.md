@@ -40,3 +40,5 @@
   - [ ] `OPSR`
   - [ ] `TWTE`
   - [ ] `OPSRtools`
+- [ ] Adjust bibliography style... maybe Makefile is not needed in the end...
+  - See `general.tex` how the others did it
