@@ -9,7 +9,8 @@ Articles in peer-reviewed journals:
 \begin{refsection}[ownpubs]
   \small%
   \nocite{*}
-  \printbibliography[heading=none,type=article]
+  % \printbibliography[heading=none,type=article]
+  \bibliography{ownpubs}
 \end{refsection}
 
 \noindent
@@ -17,5 +18,5 @@ Conference contributions:
 \begin{refsection}[ownpubs]
   \small%
   \nocite{*}
-  \printbibliography[heading=none,type=inproceedings]
+  % \printbibliography[heading=none,type=inproceedings]
 \end{refsection}
