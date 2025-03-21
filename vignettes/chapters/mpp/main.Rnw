@@ -616,6 +616,18 @@ We estimated the MMDCEV model based on the panel in the baseline and normalizati
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}\cmidrule(lr){12-13}
 \Sexpr{paste0("&", paste(rep(c("Estimate", "Rob. se"), 6), collapse = "&"))}\\
 \midrule
+\endfirsthead
+\multicolumn{13}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+\toprule
+&\multicolumn{2}{c}{Car}&\multicolumn{2}{c}{Bus}&\multicolumn{2}{c}{Train}&\multicolumn{2}{c}{Tram}&\multicolumn{2}{c}{Bicycle}&\multicolumn{2}{c}{Walk}\\
+% \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}\cmidrule(lr){12-13}
+% \Sexpr{paste0("&", paste(rep(c("Estimate", "Rob. se"), 6), collapse = "&"))}\\
+\midrule
+\endhead
+\midrule
+\multicolumn{13}{r}{\emph{Continued on next page}}
+\endfoot
+\endlastfoot
 <<mpp-results, echo=FALSE, results=tex>>=
 modes <- c("ca", "cy", "bu", "tn", "tm", "wa")
 
@@ -694,23 +706,28 @@ mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
 mat_tex <- c("BASELINE\\\\", mat_tex)
 mat_tex <- c(mat_tex[1:19], "NORMALIZATION\\\\", mat_tex[20:length(mat_tex)])
 
-## midrule between phase 1 and 2
-mat_tex[19] <- paste(mat_tex[19], "\\midrule")
+## force break to the next page
+mat_tex[19] <- paste(mat_tex[19], "\\pagebreak")
 
 ## TODO
-## longtable in landscape mode
 ## add signif footnotes from TWTE
 
 writeLines(mat_tex)
 @
 \bottomrule
-\caption{\label{tab:mpp-results} Foo.}
+\multicolumn{13}{l}{Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1;}\\
+\multicolumn{13}{l}{$\dagger$ Significant parameter difference at 5\% level}\\
+\caption{\label{tab:mpp-results} MMDCEV model estimates.}
 \end{longtable}
 \end{landscape}
 \end{center}
 }
 
-Because of a smaller sample size in the normalization period, 95\% confidence bounds are much wider. Therefore, while (considerable) differences between the two phases exist, most of these differences are not significant. It follows that there are no significant preference differences introduced by the pandemic. The remainder of the section should be read with this in mind. The notable exceptions include:  An increased ASC for bus indicating that bus is chosen more frequently relative to car and compared to the baseline. Full-time employees choose the train less frequently which could imply that the pandemic induced a slight shift in commute modes away from train to car. Train's satiation (gamma) on the other hand increased which means that if train is chosen in a given week, its mode share tends to be considerably higher than before the pandemic. The workforce with a mixture work arrangement choose train significantly less frequently than before. Again, reduced commuting activity and a shift in commute mode could explain this. Finally, people with a GA (annual nationwide PT subscription) add a bicycle to their modal mix more frequently than before.
+\begin{leftbar}
+Make sure discussion in text matches with new names from estimates.
+\end{leftbar}
+
+Because of a smaller sample size in the normalization period, 95\% confidence bounds are much wider. Therefore, while (considerable) differences between the two phases exist, most of these differences are not significant. It follows that there are no significant preference differences introduced by the pandemic. The remainder of the section should be read with this in mind. The notable exceptions include:  An increased ASC for bus indicating that bus is chosen more frequently relative to car and compared to the baseline. Full-time employees choose the train less frequently which could imply that the pandemic induced a slight shift in commute modes away from train to car. Train's satiation (Gamma) on the other hand increased which means that if train is chosen in a given week, its mode share tends to be considerably higher than before the pandemic. The workforce with a mixture work arrangement choose train significantly less frequently than before. Again, reduced commuting activity and a shift in commute mode could explain this. Finally, people with a GA (annual nationwide PT subscription) add a bicycle to their modal mix more frequently than before.
 
 Considerable unobserved heterogeneity and panel effects are present at highly significant levels and across all modes except for walk (see sigma coefficient). Mode preferences are potentially governed by a wide array of personal attributes and attitudes which can be captured by the random error component.
 
