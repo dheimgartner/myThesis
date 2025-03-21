@@ -40,6 +40,10 @@ rn_work_outside_home <- function(df) {
 
 %% -- Abstract -----------------------------------------------------------------
 
+\begin{leftbar}
+This is not the text of the published version... Make sure to use \code{mpp/LaTeX}!
+\end{leftbar}
+
 The adjustments of mobility patterns during early stages of the pandemic are well understood. However, various effects are intertwined in these observations and therefore the findings' robustness remains questionable. The MOBIS-Covid data set provides a unique opportunity to put these initial findings in perspective as a large panel has been tracked from before the crisis up until today. Switzerland lifted all its measures counteracting the spread in mid February 2022, reaching a potential new equilibrium in the months that followed. A comprehensive set of descriptive indicators has been constructed for Switzerland in order to disentangle the narrative of the crisis from the perspective of transport demand. Special emphasis has been given to the question of how new hybrid working arrangements influence modal splits (as measured by mode distance shares). The descriptive findings are strengthened by a mixed multiple discrete-continuous extreme value model (MMDCEV). We find a shift in modal splits away from car and train, where in particular bus could expand its mode share most pronounced. While the cycling and walking booms were temporary, the bicycle still shows sightly higher mode distance shares (driven by more rather than longer trips). While there are observable differences between the different working arrangements (home office, mixture and in office), we do not find significant model parameters when allowing for unobserved heterogeneity. This suggests that the working arrangement segments the population along socioeconomic dimensions with different mobility behaviour and mode preferences. Modes are more satiated in the post-pandemic world indicating that people use fewer modes in their weekly modal mix but use them more intensely. However, the model suggests that the pandemic should not be read as a structural break in mode preferences. We will therefore likely see a further normalization in the months that come.
 
 This chapter consists of the following peer-reviewed journal paper:
@@ -103,9 +107,9 @@ Phase & Start & End & Description & Evolution\\
 5 & 2021-09-13 & 2022-02-28 & 4. Wave: Spread of the Omicron variant, home office and certificate requirement & Restriction\\
 6 & 2022-03-01 & 2022-06-29 & Normalization & Relaxation\\
 \bottomrule
-\caption{\label{tab:phases} The evolution of the pandemic in six phases.}
 \end{tabular}
 }%
+\caption{\label{tab:phases} The evolution of the pandemic in six phases.}
 \end{table}
 
 %% -- Related work -------------------------------------------------------------
@@ -593,8 +597,106 @@ where $F$ is the multivariate cumulative normal distribution. The log-likelihood
 LL(\theta, \psi, \beta , \omega) = \sum_{q} \ln [ L_{q}(\theta, \psi, \beta , \omega) ].
 \end{equation}
 
-We use the \pkg{apollo} package by \citet{Hess+Palma:2019} and generate a Halton sequence of 1`000 inter-individual draws in order to approximate the integral in Equation~\ref{eq:likelihood}. Our model building strategy included testing different profiles, different levels for the discrete variables as well as gradually increasing the model complexity and excluding insignificant variables. This process involved data of the normalization phase only. We further constructed variables reflecting on the mode specific accessibility, a person's living environment (e.g. degree of urbanization) and controlled for weather characteristics. However, we carefully checked for co-linearity and did not consider all the constructed variables (e.g. urbanization and access measures were closely related as well as temperature, humidity and pressure levels).
+We use the \pkg{apollo} \proglang{R}-package \citep{Hess+Palma:2019} and generate a Halton sequence of 1`000 inter-individual draws in order to approximate the integral in Equation~\ref{eq:likelihood}. Our model building strategy included testing different profiles, different levels for the discrete variables as well as gradually increasing the model complexity and excluding insignificant variables. This process involved data of the normalization phase only. We further constructed variables reflecting on the mode specific accessibility, a person's living environment (e.g. degree of urbanization) and controlled for weather characteristics. However, we carefully checked for co-linearity and did not consider all the constructed variables (e.g. urbanization and access measures were closely related as well as temperature, humidity and pressure levels).
 
 %% -- Results ------------------------------------------------------------------
+
+\section{Results and discussion}
+\label{sec:results}
+
+We estimated the MMDCEV model based on the panel in the baseline and normalization (phase 6) periods, where separate parameters were estimated except for $\mu_q$ (capturing unobserved heterogeneity, panel effects and thereby introducing correlation between the two periods). We only considered weeks where respondents tracked every day, as our activity chains are hypothesized to repeat weekly and since daily mode share patterns can potentially differ greatly from weekly ones. This left us with a sample of 906 respondents (150 remaining in phase 6), providing collectively 8`711 weekly mode share vectors. The final model has 73 parameters per phase (plus five phase-generic ones) which are presented in Table~\ref{tab:coefficients} where we differentiate the two phases. Simple $t$ tests for the parameter differences between the two time periods were computed. Bold values indicate that the difference is significant at the 5\% level. Car is the reference alternative and coefficients have to be interpreted accordingly. For example, the ASC of bus has an interpretation of the bus' mode share relative to car. In the baseline, this constant is below 0 which indicates that car had a higher share. In the normalization period, it still is below the mode share of car -1.2 but compared to the baseline, mode share diverted from car to bus. The bold value indicates, that this difference is statistically significant.
+
+\begin{table}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrr}
+\toprule
+Phase & Coef. & Car & Bus & Train & Tram & Bicycle & Walk\\
+\midrule
+<<mpp-results, echo=FALSE, results=tex>>=
+modes <- c("ca", "cy", "bu", "tn", "tm", "wa")
+
+base <-
+  mpp::results$base %>%
+  dplyr::filter(coef != "sigma")
+
+dt <- mpp::results$difftest
+
+df <-
+  base %>%
+  mutate(phase = stringr::str_extract(coef, "[0-9]$"),
+         coef = stringr::str_remove(coef, "_[0-9]$"),
+         phase = ifelse(stringr::str_starts(coef, "sig"), "1", phase)) %>%
+  left_join(dt, by = "coef") %>%
+  mutate(across(where(is.numeric), ~ round(.x, digits = 3)),
+         difftest = ifelse(stringr::str_starts(coef, "sig"), 100, difftest),
+         bold = difftest < 0.05) %>%
+  select(-difftest) %>%
+  as.data.frame()
+
+combine.values <- function(estimate, robse, stars, bold, ...) {
+  make.bold <- function(x) {
+    paste0("\\mathbf{", x, "}")
+  }
+  paster <- function(estimate, robse, bold, postfix = NULL, ...) {
+    x <- paste0(format(estimate, ...), " (", format(robse, ...), ")", postfix)
+    x <- ifelse(bold, make.bold(x), x)
+    paste0("$", x, "$")
+  }
+  postfix <- paste0("^{", stars, "}")
+  ifelse(stars == "",
+         paster(estimate, robse, bold, ...),
+         paster(estimate, robse, bold, postfix, ...)
+  )
+}
+
+coefs <- stringr::str_remove_all(df$coef, paste("_", modes, sep = "", collapse = "|"))
+modes <- Reduce(c, stringr::str_extract_all(df$coef, paste(modes, collapse = "|")))
+phase <- df$phase
+estimates <- combine.values(df$estimate, df$robse, df$stars, df$bold)
+df.coefs <- as.data.frame(cbind(phase, coefs, modes, estimates))
+
+## wide
+mat <-
+  df.coefs %>%
+  pivot_wider(names_from = modes, values_from = estimates) %>%
+  as.matrix()
+
+mat <- mat[, c("phase", "coefs", "ca", "bu", "tn", "tm", "cy", "wa")]
+
+## translate coefs
+mat[, "coefs"] <- stringr::str_replace_all(mat[, "coefs"], "_", " ")
+
+## format
+
+## grouped rows
+
+mat[is.na(mat)] <- ""
+mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
+
+## midrule or hline between phase 1 and 2
+
+writeLines(mat_tex)
+@
+\bottomrule
+\end{tabular}
+}%
+\caption{\label{tab:mpp-results} Foo.}
+\end{table}
+
+Because of a smaller sample size in the normalization period, 95\% confidence bounds are much wider. Therefore, while (considerable) differences between the two phases exist, most of these differences are not significant. It follows that there are no significant preference differences introduced by the pandemic. The remainder of the section should be read with this in mind. The notable exceptions include:  An increased ASC for bus indicating that bus is chosen more frequently relative to car and compared to the baseline. Full-time employees choose the train less frequently which could imply that the pandemic induced a slight shift in commute modes away from train to car. Train's satiation (gamma) on the other hand increased which means that if train is chosen in a given week, its mode share tends to be considerably higher than before the pandemic. The workforce with a mixture work arrangement choose train significantly less frequently than before. Again, reduced commuting activity and a shift in commute mode could explain this. Finally, people with a GA (annual nationwide PT subscription) add a bicycle to their modal mix more frequently than before.
+
+Considerable unobserved heterogeneity and panel effects are present at highly significant levels and across all modes except for walk (see sigma coefficient). Mode preferences are potentially governed by a wide array of personal attributes and attitudes which can be captured by the random error component.
+
+As elaborated in Section~\ref{sec:mmdcev} the gamma parameter captures satiation and therefore the continuous mode share dimension. Clearly, the parameter closely matches the observed patterns, where car and train have the highest mode distance shares by a wide margin. Interestingly, train is more satiated than car which does not contradict observed patterns as gamma is conditional on having chosen the mode in a given week. I.e., if train is chosen in a given week it tends to have a considerable mode distance share. Satiation increased across all modes from the baseline to the normalization phase, which can be read as individuals using the same modes more intensively.
+
+Switching to the discrete dimension (where car is the reference alternative) all modes except for walk depict a negative average inter-individual utility (ASC). Interestingly, these differences diminished for all modes in the normalization period, indicating that the mode share of car lost relative to the other modes.
+
+While the PT subscriptions (GA, Halbtax and regional subscriptions) strongly predict PT usage in the baseline, they no longer do in the normalization. Potentially, a lot of the respondents cancelled these subscriptions during the pandemic (and are still labelled as possessing these subscriptions whereas in reality, they do not).
+
+Further, in line with the discussion of Figure~\ref{fig:mode-share-indicators}, there are no significant differences in mode distance shares between the working arrangements (except for a decreasing train mode share for the mixture population, as previously discussed). This is to say, that there either are none or that differences are attributed to other socioeconomic factors or unobserved heterogeneity. In other words, working arrangements could segment the population along socioeconomic variables (such as education levels) which in turn potentially have different mode share preferences. Also, modelling absolute mileage could prove more fruitful when eliciting differences between working arrangements.
+
+In summary, individuals intensified the use of one particular mode as explained by increasing satiation parameters (however, only the difference in train satiation was significant). The car's relative importance decreased with differences in alternative specific constants (ASC) being positive. PT users cancelled their subscriptions during the pandemic. Working arrangements do not predict mode share preferences but could potentially still be an important lever as they could influence mode share preferences via differences in socioeconomic characteristics. Future research should be devoted to understanding absolute differences such as mileage. The pandemic should not be read as a structural break in mode preferences as only a few parameters were found to differ between the two observation periods. This is in stark contrast to the study by \citet{Molloy+Etal:2021} and \citet{Meister+Etal:2022} who found considerable modal shifts induced by the pandemic. The findings from this work suggest that these changes were not made habitual but can be attributed to the unprecedented circumstances and constraints brought by the pandemic.
+
 
 %% -- Conclusion ---------------------------------------------------------------
