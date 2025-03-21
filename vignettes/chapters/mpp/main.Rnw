@@ -2,13 +2,19 @@
 \label{ch:mpp}
 
 \dictum[John Doe]{%
-  Hello world!}%
+Hello world!}%
 \vskip 1em
 
 <<mpp-preliminaries, echo=FALSE, results=hide>>=
 MAX <- as.Date("2022-12-30")
 
+colvec <- c("#46337EFF", "#277F8EFF", "#4AC16DFF")
 col_annot <- "grey40"
+
+add_annotations <- mpp:::add_annotations
+add_zero_line <- mpp:::add_zero_line
+add_end_markers <- mpp:::add_end_markers
+add_baseline_comparison <- mpp:::add_baseline_comparison
 
 my_theme <-
   ggplot2::theme_light() +
@@ -22,6 +28,14 @@ my_theme <-
                  panel.grid.minor.x = element_blank())
 
 ggplot2::theme_set(my_theme)
+
+rn_work_outside_home <- function(df) {
+  df %>%
+    mutate(working_arrangement = factor(
+      if_else(working_arrangement == "Work outside home",
+              "Office", working_arrangement)
+    ))
+}
 @
 
 %% -- Abstract -----------------------------------------------------------------
@@ -60,7 +74,7 @@ The remainder of the text is structured as follows: In Section~\ref{sec:literatu
 Based both on the COVID case numbers and the measures imposed to counteract the spread of the virus, the following six phases can be distinguished. The phases are visualized together with COVID case numbers (rolling 14-day mean) in Figure~\ref{fig:participation-and-casenumbers}. The narrative of the pandemic is presented hereafter and summarized in Table~\ref{tab:phases}, where each phase of expansion (constraining the free movement) is followed by a phase of relaxation.
 
 \begin{enumerate}
-\item Phase (restriction): COVID-19 reached Switzerland in early 2020. The situation deteriorated quickly and by March 20, 2020 over 4`800 people infected. This first phase can thus be characterized by a rapid spread of the virus as well as high uncertainty. On March 16, 2020 the Federal Council declared an extraordinary situation, which allowed it to introduce uniform measures in all cantons. A lockdown was imposed, closing all non-essential businesses, along with schools, recreational facilities and public parks. As a consequence, employers were urged to reorganize the working hours of their employees to avoid rush hour travel. Home office was implemented, wherever possible. The measures were extended until April 26, 2020 after which the Federal Council followed a strategy to gradually emerge from the lockdown in three stages.
+\item Phase (restriction): COVID reached Switzerland in early 2020. The situation deteriorated quickly and by March 20, 2020 over 4`800 people infected. This first phase can thus be characterized by a rapid spread of the virus as well as high uncertainty. On March 16, 2020 the Federal Council declared an extraordinary situation, which allowed it to introduce uniform measures in all cantons. A lockdown was imposed, closing all non-essential businesses, along with schools, recreational facilities and public parks. As a consequence, employers were urged to reorganize the working hours of their employees to avoid rush hour travel. Home office was implemented, wherever possible. The measures were extended until April 26, 2020 after which the Federal Council followed a strategy to gradually emerge from the lockdown in three stages.
 
 \item Phase (relaxation): The gradual easing of the enforced measures ended on June 6, 2020, when all events up to 300 people and spontaneous gatherings for up to 30 people were allowed again. High schools and universities were able to resume, all leisure and entertainment businesses as well as tourist attractions re-opened. Relatively calm summer months followed, suggesting that the spread of the virus might follow seasonal patterns.
 
@@ -99,9 +113,9 @@ Phase & Start & End & Description & Evolution\\
 \section{Related work}
 \label{sec:literature}
 
-In this section we review studies that explore the impact of COVID-19 on mobility patterns with a focus on modal shifts. Whereas changes during the pandemic are well understood, literature that looks beyond the crisis is sparse due to obvious reasons. Nevertheless, some work has been identified that tries to generalize the initial findings to an environment without COVID restrictions.
+In this section we review studies that explore the impact of COVID on mobility patterns with a focus on modal shifts. Whereas changes during the pandemic are well understood, literature that looks beyond the crisis is sparse due to obvious reasons. Nevertheless, some work has been identified that tries to generalize the initial findings to an environment without COVID restrictions.
 
-\citet{Paul+Etal:2022} present a review of the global findings on changes in transportation behavior due to the COVID-19 pandemic. During the pandemic, a reduced usage of public transportation could be observed while reliance on private cars increased. While this is a global pattern, non-motorized vehicle usage and walking prevalence increased mostly in European countries. Trips for some particular purposes have remained high using only a specific mode of transport. Several studies report a decrease in commuting which can be attributed to either job loss or an increase in working from home. Similarly, sociodemographic attributes determine the trip frequency - among others mediated by home office access. Risk perceptions play an important role too.
+\citet{Paul+Etal:2022} present a review of the global findings on changes in transportation behavior due to the COVID pandemic. During the pandemic, a reduced usage of public transportation could be observed while reliance on private cars increased. While this is a global pattern, non-motorized vehicle usage and walking prevalence increased mostly in European countries. Trips for some particular purposes have remained high using only a specific mode of transport. Several studies report a decrease in commuting which can be attributed to either job loss or an increase in working from home. Similarly, sociodemographic attributes determine the trip frequency - among others mediated by home office access. Risk perceptions play an important role too.
 
 \citet{Abdullah+Etal:2020} report that trip purpose, mode choice, distance traveled, and frequency of trips were significantly different before and during the pandemic. Shopping trips were the dominant trip generating purpose. A shift from public transport to private and non-motorized modes could be observed. This can be attributed to people placing a higher priority on health related concerns when choosing a mode during the pandemic.
 
@@ -109,7 +123,7 @@ In this section we review studies that explore the impact of COVID-19 on mobilit
 
 \citet{Meister+Etal:2022} employ a mixed multiple discrete-continuous extreme value model (MMDCEV) to estimate mode distance shares for an urban population. Separate parameters were derived for four distinct segments, from September 2019 until the end of 2020 (still in midst of the crisis). Their findings confirm global trends: A substantial decrease in public transport usage (50\% depression at the end of their sample period), recovered car usage (with a temporary increase of 40\% during the pandemic) and a cycling boom (increase in travel distance up to 150\% and frequency increasing by 40\% during summer). The model sheds insights on a change in user group composition for PT and cycling.
 
-\citet{Currie+Etal:2021} is one of the few studies that pursues the question of whether post-pandemic travel behavior will be different to pre-pandemic travel. The study relies on survey data where respondents were asked to reveal their future expectations. PT ridership will recover but is not expected to reach pre-pandemic levels. The mode share of car will increase and offset reduced congestion due to working from home resulting in a net increase of car usage and higher peak volumes. Although the study was conducted in Melbourne, their results seem to generalize and support the findings by \citet{Shamshiripour+Etal:2020} and \citet{beckSlowlyComingOut2020b}.
+\citet{Currie+Etal:2021} is one of the few studies that pursues the question of whether post-pandemic travel behavior will be different to pre-pandemic travel. The study relies on survey data where respondents were asked to reveal their future expectations. PT ridership will recover but is not expected to reach pre-pandemic levels. The mode share of car will increase and offset reduced congestion due to working from home resulting in a net increase of car usage and higher peak volumes. Although the study was conducted in Melbourne, their results seem to generalize and support the findings by \citet{Shamshiripour+Etal:2020} and \citet{Beck+Etal:2020}.
 
 To summarize, the general narrative reveals a modal shift away from public transport to car and in particular to non-motorized forms of transport. Even though home office might reduce peak volumes, congestion on roads might increase due to a net increase of individualized transport. Sociodemographic peer groups adjust mode usage differently, mainly due to different risk perception (during the pandemic) or home office access. Previous work either extrapolated findings during the pandemic to the post-pandemic world or relied on respondents' expectations.
 
@@ -127,10 +141,14 @@ Put some short blabla here.
 
 Starting in September 2019, a sample of 5`375 Swiss residents were recruited to take part in a mobility pricing field experiment called MOBIS. Using an app, the participants tracked their location and thereby mobility and activity patterns could be identified. They were tracked for 8 weeks in an ambition to investigate their response to a conceptual mobility pricing scheme in a randomized controlled trial. Participation and tracking numbers are depicted in Figure~\ref{fig:participation-and-casenumbers}, together with COVID case numbers and the six phases outlined before.
 
+\begin{leftbar}
+Revise \emph{mpp-participation-and-casenumbers} similar to \url{https://journals.sagepub.com/doi/pdf/10.1177/03611981221089938}
+\end{leftbar}
+
 \setkeys{Gin}{width=0.8\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-participation-and-casenumbers, echo=FALSE, fig=TRUE, width=9, height=7>>=
+<<mpp-participation-and-casenumbers, echo=FALSE, fig=TRUE, width=6.75, height=5.25>>=
 df_part <-
   mppData::mobis_analysis$participants_per_day %>%
   pivot_longer(-day) %>%
@@ -159,14 +177,14 @@ p <-
   ggplot(aes(x = date)) +
   geom_line(aes(y = participants, col = "Total"), alpha = 0.7) +
   geom_line(aes(y = tracking, col = "Tracking"), alpha = 0.7) +
-  geom_line(aes(y = scl * cn), col = mpp::colors$all[2], size = 1.1) +
+  geom_line(aes(y = scl * cn), col = colvec[1], size = 1.1) +
   scale_x_date(date_breaks = "2 months",
                date_labels = "%b-%y") +
   scale_y_continuous(sec.axis = sec_axis(~./scl, name = "Average case numbers")) +
-  scale_colour_manual(values = mpp::colors$all[c(6, 3)]) +
+  scale_colour_manual(values = colvec[c(2, 3)]) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(x = "", y = "Number of participants", col = "Sample") +
-  guides(color = guide_legend(override.aes = list(alpha = 1)))
+  guides(color = guide_legend(override.aes = list(alpha = 1, linewidth = 2)))
 
 df_ph <-
   mpp::covid_phases %>%
@@ -190,8 +208,8 @@ label_pos <- function(df) {
   pos
 }
 
-p_ <- mpp:::add_annotations(p, y = label_pos(df_ph),
-                           text = TRUE, text_size = 2.5, col = col_annot)
+p_ <- add_annotations(p, y = label_pos(df_ph),
+                      text = TRUE, text_size = 2, col = col_annot)
 p_ + theme(panel.grid = element_blank(), panel.grid.minor = element_blank())
 @
 \caption{\label{fig:participation-and-casenumbers} Covid case numbers and timeline.}
@@ -219,7 +237,7 @@ For all the time-series graphs moving averages (with a window size corresponding
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-activity-spaces, echo=FALSE, fig=TRUE, width=12, height=10>>=
+<<mpp-activity-spaces, echo=FALSE, fig=TRUE, width=8.6, height=7.1>>=
 limits <- c(-1, 1.1)
 
 p1_bar <-
@@ -229,22 +247,23 @@ p1_bar <-
 
 p1 <-
   mpp::base_plot(data = mpp::activity_spaces$weekday, MAX = MAX, .col = weekday, colors = mpp::colors$binary,
-                 x = "Week", y = "Activity space change (%)", color = "Day of week") +
+                 x = "Week", y = "Activity space change (%)", color = "") +
   scale_y_continuous(limits = limits, labels = scales::percent) +
-  mpp:::add_zero_line()
+  add_zero_line()
 
 p1 <-
-  mpp:::add_annotations(p1, y = 0.4, col = col_annot) %>%
-  mpp:::add_baseline_comparison(gv = weekday) %>%
-  mpp:::add_end_markers(gv = weekday)
+  add_annotations(p1, y = 0.4, col = col_annot) %>%
+  add_baseline_comparison(gv = weekday) %>%
+  add_end_markers(gv = weekday)
 
 p2 <-
   mpp::activity_spaces$working_arrangement %>%
+  rn_work_outside_home() %>%
   drop_na(working_arrangement) %>%
   mpp::base_plot(MAX, working_arrangement, colors = mpp::colors$working_arrangement,
-                 x = "Week", y = "Activity space change (%)", color = "Working arrangement") +
+                 x = "Week", y = "Activity space change (%)", color = "") +
   scale_y_continuous(limits = limits, labels = scales::percent) +
-  mpp:::add_zero_line()
+  add_zero_line()
 
 p2_bar <-
   mpp::activity_spaces$working_arrangement_abs %>%
@@ -254,9 +273,9 @@ p2_bar <-
                               x = "", y = "Activity space\n95% ellipse area (km2)", fill = "", x = "")
 
 p2 <-
-  mpp:::add_annotations(p2, y = 0.4, col = col_annot) %>%
-  mpp:::add_baseline_comparison(gv = working_arrangement) %>%
-  mpp:::add_end_markers(gv = working_arrangement)
+  add_annotations(p2, y = 0.4, col = col_annot) %>%
+  add_baseline_comparison(gv = working_arrangement) %>%
+  add_end_markers(gv = working_arrangement)
 
 p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2, 3))
 @
@@ -268,21 +287,21 @@ Not surprisingly, activity spaces, as measured by the 95\% CI Ellipse area, were
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-overview, echo=FALSE, fig=TRUE, width=12, height=10>>=
+<<mpp-overview, echo=FALSE, fig=TRUE, width=8.4, height=7>>=
 limits <- c(-1, 1.1)
 
 p1 <-
   mpp::average_daily_distance$total %>%
   mpp::base_plot(MAX, mode, colors = mpp::colors$modes,
-                 x = "Week", y = "Change in average daily distance (%)", color = "Mode") +
+                 x = "Week", y = "Change in average daily distance (%)", color = "") +
   scale_y_continuous(limits = limits, labels = scales::percent) +
-  mpp:::add_zero_line()
+  add_zero_line()
 
 p1 <-
   p1 %>%
-  mpp:::add_annotations(y = 0.25, col = col_annot) %>%
-  mpp:::add_baseline_comparison(gv = mode) %>%
-  mpp:::add_end_markers(gv = mode)
+  add_annotations(y = 0.25, col = col_annot) %>%
+  add_baseline_comparison(gv = mode) %>%
+  add_end_markers(gv = mode)
 
 p1_bar <-
   mpp::average_daily_distance$total_abs %>%
@@ -292,31 +311,31 @@ p1_bar <-
 p2 <-
   mpp::number_of_stages$total %>%
   mpp::base_plot(MAX, mode, colors = mpp::colors$modes,
-                 x = "Week", y = "Change in number of stages (%)", color = "Mode") +
+                 x = "Week", y = "Change in number of stages (%)", color = "") +
   scale_y_continuous(limits = limits, labels = scales::percent) +
-  mpp:::add_zero_line()
+  add_zero_line()
 
 p2 <-
   p2 %>%
-  mpp:::add_annotations(y = 0.25, col = col_annot) %>%
-  mpp:::add_baseline_comparison(gv = mode) %>%
-  mpp:::add_end_markers(gv = mode)
+  add_annotations(y = 0.25, col = col_annot) %>%
+  add_baseline_comparison(gv = mode) %>%
+  add_end_markers(gv = mode)
 
 p2_bar <-
   mpp::number_of_stages$total_abs %>%
   mpp::phase_comparison_chart(mode, n_stages, colors = colors$all, y = "Average number of stages", fill = "", x = "")
 
-p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2, 3))
+p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2.5, 3))
 @
 \caption{\label{fig:overview} Change in average daily distance and number of stages by mode.}
 \end{figure}
 
 In Figure~\ref{fig:overview} the change in average daily distance as well as change in number of stages by mode is depicted. A stage is the movement with one means of transport including possible waiting times, contrasting a trip, which is a sequence of stages from one activity to the next. All the modes react strongly to the evolution of the pandemic with bicycle being the only mode that shows cyclical (correlated with case numbers) patterns and walk being relatively stable. Public transport (PT: bus, train, tram) was considerably hit and has not yet recovered from the shift induced by the pandemic with bus being the exception. Daily distance and number of stages show very similar patterns with similar magnitudes (percentage deviations). Together with Figure~\ref{fig:activity-spaces} it could be argued that individuals tend to stay in closer proximity to their home location and therefore bicycle and bus are comparatively more frequently used (with the personal bicycle being available more freely).
 
-\setkeys{Gin}{width=0.8\textwidth}
+\setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-day-on-day, echo=FALSE, fig=TRUE, width=12, height=15>>=
+<<mpp-day-on-day, echo=FALSE, fig=TRUE, width=8, height=10.2>>=
 p1 <-
   mpp::axa_data$stage_length %>%
   filter(week_start <= MAX) %>%
@@ -352,15 +371,16 @@ A very similar picture is portrayed in Figure~\ref{fig:day-on-day} where we show
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-overview-by-wa, echo=FALSE, fig=TRUE, width=12, height=10>>=
+<<mpp-overview-by-wa, echo=FALSE, fig=TRUE, width=8.4, height=7>>=
 limits <- c(-0.75, 0.1)
 
 p1 <-
   mpp::average_daily_distance$working_arrangement %>%
+  rn_work_outside_home() %>%
   mpp::base_plot(MAX, working_arrangement, colors = mpp::colors$working_arrangement,
-                 x = "Week", y = "Change in average daily distance (%)", color = "Working arrangement") +
+                 x = "Week", y = "Change in average daily distance (%)", color = "") +
   scale_y_continuous(limits = limits, labels = scales::percent) +
-  mpp:::add_zero_line()
+  add_zero_line()
 
 p1_bar <-
   mpp::average_daily_distance$working_arrangement_abs %>%
@@ -372,22 +392,23 @@ p1_bar <-
 
 p1 <-
   p1 %>%
-  mpp:::add_annotations(y = -0.7, col = col_annot) %>%
-  mpp:::add_baseline_comparison(gv = working_arrangement) %>%
-  mpp:::add_end_markers(gv = working_arrangement)
+  add_annotations(y = -0.7, col = col_annot) %>%
+  add_baseline_comparison(gv = working_arrangement) %>%
+  add_end_markers(gv = working_arrangement)
 
 p2 <-
   mpp::number_of_stages$working_arrangement %>%
+  rn_work_outside_home() %>%
   mpp::base_plot(MAX, working_arrangement, colors = mpp::colors$working_arrangement,
-                 x = "Week", y = "Change in number of stages (%)", color = "Working arrangement") +
+                 x = "Week", y = "Change in number of stages (%)", color = "") +
   scale_y_continuous(limits = limits, labels = scales::percent) +
-  mpp:::add_zero_line()
+  add_zero_line()
 
 p2 <-
   p2 %>%
-  mpp:::add_annotations(y = -0.7, col = col_annot) %>%
-  mpp:::add_baseline_comparison(gv = working_arrangement) %>%
-  mpp:::add_end_markers(gv = working_arrangement)
+  add_annotations(y = -0.7, col = col_annot) %>%
+  add_baseline_comparison(gv = working_arrangement) %>%
+  add_end_markers(gv = working_arrangement)
 
 p2_bar <-
   mpp::number_of_stages$working_arrangement_abs %>%
@@ -406,21 +427,21 @@ Similarly, when differentiating by working arrangement, the collinearity between
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-mode-shares, echo=FALSE, fig=TRUE, width=12, height=10>>=
+<<mpp-mode-shares, echo=FALSE, fig=TRUE, width=8.6, height=7.1>>=
 limits <- c(-1, 2.5)
 
 p1 <-
   mpp::mode_frequency_shares$rel %>%
   mpp::base_plot(MAX, mode, colors = mpp::colors$modes,
-                 x = "Week", y = "Mode shares\n(based on mode frequency)", color = "Mode") +
+                 x = "Week", y = "Mode shares\n(based on mode frequency)", color = "") +
   scale_y_continuous(limits = limits, labels = scales::percent) +
-  mpp:::add_zero_line()
+  add_zero_line()
 
 p1 <-
   p1 %>%
-  mpp:::add_annotations(y = 0.6, col = col_annot) %>%
-  mpp:::add_baseline_comparison(gv = mode) %>%
-  mpp:::add_end_markers(gv = mode)
+  add_annotations(y = 0.6, col = col_annot) %>%
+  add_baseline_comparison(gv = mode) %>%
+  add_end_markers(gv = mode)
 
 p1_bar <-
   mpp::mode_frequency_shares$abs %>%
@@ -430,34 +451,35 @@ p1_bar <-
 p2 <-
   mpp::mode_distance_shares$all %>%
   mpp::base_plot(MAX, mode, colors = mpp::colors$modes,
-                 x = "Week", y = "Mode shares\n(based on distance)", color = "Mode") +
+                 x = "Week", y = "Mode shares\n(based on distance)", color = "") +
   scale_y_continuous(limits = limits, labels = scales::percent) +
-  mpp:::add_zero_line()
+  add_zero_line()
 
 p2 <-
   p2 %>%
-  mpp:::add_annotations(y = 1, col = col_annot) %>%
-  mpp:::add_baseline_comparison(gv = mode) %>%
-  mpp:::add_end_markers(gv = mode)
+  add_annotations(y = 1, col = col_annot) %>%
+  add_baseline_comparison(gv = mode) %>%
+  add_end_markers(gv = mode)
 
 p2_bar <-
   mpp::mode_distance_shares$all_abs %>%
   mpp::phase_comparison_chart(mode, mode_share, colors = colors$all, y = "Mode shares\n(based on distance)", fill = "", x = "") +
   scale_y_continuous(labels = scales::percent)
 
-p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2, 3))
+p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2.5, 3))
 @
 \caption{\label{fig:mode-shares} Mode shares by distance and mode choice frequency.}
 \end{figure}
 
 Shifting attention to mode shares, we constructed two indicators: Mode share based on how often a particular mode is chosen as main mode (mode frequency) and mode share based on traveled distance. This reflects the two preference dimensions and both the intensive (choice frequency) and extensive (covered distance) margin as well as the relative importance of the different modes. Again, a strong collinearity between the two indicators can be observed. Bicycle could expand its mode share along both dimensions (and beyond purely seasonal trends). Walking and car depict the most stable mode shares with walking showing a pronounced peek in the distance share during phase 1. Interestingly, local public transport has been affected differently: Bus defended its mode share more rigorously whereas tram could not. Again, train steadily recovers from the big shock in phase 1 with a slightly higher recovery in its mode distance share. One explanation might be that people increased the number of short trips, where car and train are less likely to be considered.
 
-\setkeys{Gin}{width=0.8\textwidth}
+\setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-mode-share-indicators, echo=FALSE, fig=TRUE, width=14, height=6>>=
+<<mpp-mode-share-indicators, echo=FALSE, fig=TRUE, width=9, height=4>>=
 p2 <-
   mpp::mode_distance_shares$working_arrangement_abs %>%
+  rn_work_outside_home() %>%
   drop_na() %>%
   facet_bar_chart(working_arrangement)
 
@@ -468,10 +490,10 @@ p2
 
 Figure~\ref{fig:mode-share-indicators} reveals the following insights: First, modal splits do not dramatically differ between the working arrangements. Second, train has lower mode distance shares across all working arrangements, which could be due to ongoing hygiene concerns or a lagging recovery because of cancelled subscriptions which are now as so slowly renewed with decreasing uncertainty. Car increased the mode share only temporarily during the pandemic and the home office population shows a slightly lower car distance share in phase 6 (compared to the other working arrangements). On the other hand, train has a higher relative importance. As the average daily distance (see Figure~\ref{fig:overview-by-wa}) does not differ greatly in the most recent phase, we can conclude that the home office population has a slight preference for train. The walking boom during the onset of the pandemic can be attributed to the home office population.
 
-\setkeys{Gin}{width=0.8\textwidth}
+\setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-hourly-counts, echo=FALSE, fig=TRUE, width=9, height=7>>=
+<<mpp-hourly-counts, echo=FALSE, fig=TRUE, width=8, height=7>>=
 ## only baseline vs. phase_6
 p1 <-
   mpp::number_of_started_trips$phase_comparison %>%
@@ -480,18 +502,19 @@ p1 <-
   scale_color_manual(values = mpp::colors$binary) +
   scale_y_continuous(labels = scales::percent) +
   # theme_minimal() +
-  labs(x = "Hour", y = "Number of started trips\n(relative to max value)", color = "Covid phase") +
+  labs(x = "Hour", y = "Number of started trips\n(relative to max value)", color = "") +
   facet_grid(rows = vars(mode), cols = vars(weekday))
 
 p2 <-
   mpp::number_of_started_trips$working_arrangement %>%
+  rn_work_outside_home() %>%
   filter(working_arrangement != "Mixture") %>%
   ggplot(aes(x = hour1, y = n_rel, group = interaction(mode, working_arrangement), col = working_arrangement)) +
   geom_line(alpha = 0.7, size = 1.1) +
   scale_color_manual(values = mpp::colors$working_arrangement) +
   scale_y_continuous(labels = scales::percent) +
   # theme_minimal() +
-  labs(x = "Hour", y = "Number of started trips\n(relative to max value)", color = "Working arrangement") +
+  labs(x = "Hour", y = "Number of started trips\n(relative to max value)", color = "") +
   facet_grid(rows = vars(mode))
 
 p1 + p2 + plot_layout(guides = "collect", design = "AAB")
