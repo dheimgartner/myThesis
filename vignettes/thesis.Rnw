@@ -27,6 +27,7 @@
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
 ## mpp
+library("myThesis")
 library("mpp")
 library("mppData")
 library("tidyverse")

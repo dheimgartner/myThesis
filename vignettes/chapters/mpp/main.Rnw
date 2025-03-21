@@ -609,11 +609,12 @@ We estimated the MMDCEV model based on the panel in the baseline and normalizati
 \begin{table}[htbp]
 \centering
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{llrrrrrr}
+\begin{tabular}{l D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3}}
 \toprule
-Phase & Coef. & Car & Bus & Train & Tram & Bicycle & Walk\\
+Foo\\
 \midrule
 <<mpp-results, echo=FALSE, results=tex>>=
+paste0("l ", paste(rep("D{.}{.}{3.3}", 12), collapse = " "))
 modes <- c("ca", "cy", "bu", "tn", "tm", "wa")
 
 base <-
@@ -630,51 +631,66 @@ df <-
   left_join(dt, by = "coef") %>%
   mutate(across(where(is.numeric), ~ round(.x, digits = 3)),
          difftest = ifelse(stringr::str_starts(coef, "sig"), 100, difftest),
-         bold = difftest < 0.05) %>%
+         sig_diff = difftest < 0.05) %>%
   select(-difftest) %>%
   as.data.frame()
 
-combine.values <- function(estimate, robse, stars, bold, ...) {
-  make.bold <- function(x) {
-    paste0("\\mathbf{", x, "}")
-  }
-  paster <- function(estimate, robse, bold, postfix = NULL, ...) {
-    x <- paste0(format(estimate, ...), " (", format(robse, ...), ")", postfix)
-    x <- ifelse(bold, make.bold(x), x)
-    paste0("$", x, "$")
-  }
-  postfix <- paste0("^{", stars, "}")
-  ifelse(stars == "",
-         paster(estimate, robse, bold, ...),
-         paster(estimate, robse, bold, postfix, ...)
-  )
-}
+## split coef into mode and coef
+df <-
+  df %>%
+  mutate(mode = stringr::str_extract_all(coef, paste(modes, collapse = "|")),
+         coef = stringr::str_remove_all(coef, paste("_", modes, sep = "", collapse = "|")))
 
-coefs <- stringr::str_remove_all(df$coef, paste("_", modes, sep = "", collapse = "|"))
-modes <- Reduce(c, stringr::str_extract_all(df$coef, paste(modes, collapse = "|")))
-phase <- df$phase
-estimates <- combine.values(df$estimate, df$robse, df$stars, df$bold)
-df.coefs <- as.data.frame(cbind(phase, coefs, modes, estimates))
+## robse in brackets
+## add stars
+## estimate bold if sig_diff
+df <-
+  df %>%
+  mutate(robse = paste0("(", format(robse), ")"),
+         estimate = format(estimate),
+         estimate = ifelse(stars == "", estimate, paste0(estimate, "^{", stars, "}")),
+         estimate = ifelse(sig_diff, paste0("\\mathbf{", estimate, "}"), estimate),
+         estimate = paste0("$", estimate, "$")) %>%
+  select(-sig_diff, -stars)
 
 ## wide
-mat <-
-  df.coefs %>%
-  pivot_wider(names_from = modes, values_from = estimates) %>%
-  as.matrix()
+dfw <-
+  df %>%
+  pivot_wider(names_from = mode, values_from = c(estimate, robse),
+              names_glue = "{mode}_{.value}")
 
-mat <- mat[, c("phase", "coefs", "ca", "bu", "tn", "tm", "cy", "wa")]
+dfw <-
+  dfw %>%
+  select(phase, coef, matches("^ca"), all_of(sort(names(dfw))))
 
 ## translate coefs
-mat[, "coefs"] <- stringr::str_replace_all(mat[, "coefs"], "_", " ")
+dfw <-
+  dfw %>%
+  left_join(mpp_coef_labels, by = c("coef" = "from")) %>%
+  arrange(phase, order) %>%
+  select(-coef, -order, -phase) %>%
+  rename(coef = to) %>%
+  select(coef, everything())
 
-## format
+mat <- as.matrix(dfw)
+mat[is.na(mat)] <- ""
 
 ## grouped rows
+mat[, "coef"] <- paste0("\\quad ", mat[, "coef"])
 
-mat[is.na(mat)] <- ""
 mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
 
-## midrule or hline between phase 1 and 2
+## add baseline and normalization
+mat_tex <- c("\\emph{BASELINE}\\\\", mat_tex)
+mat_tex <- c(mat_tex[1:19], "\\emph{NORMALIZATION}\\\\", mat_tex[20:length(mat_tex)])
+
+## midrule between phase 1 and 2
+mat_tex[19] <- paste(mat_tex[19], "\\midrule")
+
+## TODO
+## longtable in landscape mode
+## use dcolumn package
+## add signif footnotes from TWTE
 
 writeLines(mat_tex)
 @
