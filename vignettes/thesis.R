@@ -379,7 +379,6 @@ p1 + p2 + plot_layout(guides = "collect", design = "AAB")
 ###################################################
 ### code chunk number 11: mpp-results
 ###################################################
-paste0("l ", paste(rep("D{.}{.}{3.3}", 12), collapse = " "))
 modes <- c("ca", "cy", "bu", "tn", "tm", "wa")
 
 base <-
@@ -403,23 +402,32 @@ df <-
 ## split coef into mode and coef
 df <-
   df %>%
-  mutate(mode = stringr::str_extract_all(coef, paste(modes, collapse = "|")),
+  mutate(mode = Reduce(c, stringr::str_extract_all(coef, paste(modes, collapse = "|"))),
          coef = stringr::str_remove_all(coef, paste("_", modes, sep = "", collapse = "|")))
 
 ## robse in brackets
 ## add stars
 ## estimate bold if sig_diff
-df <-
+## want left aligned -(3.3)
+dff <-
   df %>%
   mutate(robse = paste0("(", format(robse), ")"),
          estimate = format(estimate),
-         estimate = ifelse(stars == "", estimate, paste0(estimate, "^{", stars, "}")),
-         estimate = ifelse(sig_diff, paste0("\\mathbf{", estimate, "}"), estimate)) %>%
-  select(-sig_diff, -stars)
+         estimate = ifelse(stars == "",
+                           estimate,
+                           paste0(estimate, "^{", stars, "}")),
+         estimate = ifelse(str_starts(estimate, "-"),
+                                      estimate,
+                                      paste0("\\phantom{-}", estimate)),
+         estimate = ifelse(sig_diff,
+                           paste0(estimate, "\\dagger"),
+                           estimate),
+         estimate = paste0("$", estimate, "$")) %>%
+  select(-stars, -sig_diff)
 
 ## wide
 dfw <-
-  df %>%
+  dff %>%
   pivot_wider(names_from = mode, values_from = c(estimate, robse),
               names_glue = "{mode}_{.value}")
 
@@ -445,15 +453,14 @@ mat[, "coef"] <- paste0("\\quad ", mat[, "coef"])
 mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
 
 ## add baseline and normalization
-mat_tex <- c("\\emph{BASELINE}\\\\", mat_tex)
-mat_tex <- c(mat_tex[1:19], "\\emph{NORMALIZATION}\\\\", mat_tex[20:length(mat_tex)])
+mat_tex <- c("BASELINE\\\\", mat_tex)
+mat_tex <- c(mat_tex[1:19], "NORMALIZATION\\\\", mat_tex[20:length(mat_tex)])
 
 ## midrule between phase 1 and 2
 mat_tex[19] <- paste(mat_tex[19], "\\midrule")
 
 ## TODO
 ## longtable in landscape mode
-## use dcolumn package
 ## add signif footnotes from TWTE
 
 writeLines(mat_tex)

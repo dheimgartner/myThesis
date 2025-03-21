@@ -609,12 +609,13 @@ We estimated the MMDCEV model based on the panel in the baseline and normalizati
 \begin{table}[htbp]
 \centering
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{l D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3} D{.}{.}{3.3}}
+\begin{tabular}{\Sexpr{paste0("l", paste(rep("l", 12), collapse = ""))}}
 \toprule
-Foo\\
+&\multicolumn{2}{c}{Car}&\multicolumn{2}{c}{Bus}&\multicolumn{2}{c}{Train}&\multicolumn{2}{c}{Tram}&\multicolumn{2}{c}{Bicycle}&\multicolumn{2}{c}{Walk}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}\cmidrule(lr){12-13}
+\Sexpr{paste0("&", paste(rep(c("Estimate", "Rob. se"), 6), collapse = "&"))}\\
 \midrule
 <<mpp-results, echo=FALSE, results=tex>>=
-paste0("l ", paste(rep("D{.}{.}{3.3}", 12), collapse = " "))
 modes <- c("ca", "cy", "bu", "tn", "tm", "wa")
 
 base <-
@@ -638,24 +639,32 @@ df <-
 ## split coef into mode and coef
 df <-
   df %>%
-  mutate(mode = stringr::str_extract_all(coef, paste(modes, collapse = "|")),
+  mutate(mode = Reduce(c, stringr::str_extract_all(coef, paste(modes, collapse = "|"))),
          coef = stringr::str_remove_all(coef, paste("_", modes, sep = "", collapse = "|")))
 
 ## robse in brackets
 ## add stars
 ## estimate bold if sig_diff
-df <-
+## want left aligned -(3.3)
+dff <-
   df %>%
   mutate(robse = paste0("(", format(robse), ")"),
          estimate = format(estimate),
-         estimate = ifelse(stars == "", estimate, paste0(estimate, "^{", stars, "}")),
-         estimate = ifelse(sig_diff, paste0("\\mathbf{", estimate, "}"), estimate),
+         estimate = ifelse(stars == "",
+                           estimate,
+                           paste0(estimate, "^{", stars, "}")),
+         estimate = ifelse(str_starts(estimate, "-"),
+                                      estimate,
+                                      paste0("\\phantom{-}", estimate)),
+         estimate = ifelse(sig_diff,
+                           paste0(estimate, "\\dagger"),
+                           estimate),
          estimate = paste0("$", estimate, "$")) %>%
-  select(-sig_diff, -stars)
+  select(-stars, -sig_diff)
 
 ## wide
 dfw <-
-  df %>%
+  dff %>%
   pivot_wider(names_from = mode, values_from = c(estimate, robse),
               names_glue = "{mode}_{.value}")
 
@@ -681,15 +690,14 @@ mat[, "coef"] <- paste0("\\quad ", mat[, "coef"])
 mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
 
 ## add baseline and normalization
-mat_tex <- c("\\emph{BASELINE}\\\\", mat_tex)
-mat_tex <- c(mat_tex[1:19], "\\emph{NORMALIZATION}\\\\", mat_tex[20:length(mat_tex)])
+mat_tex <- c("BASELINE\\\\", mat_tex)
+mat_tex <- c(mat_tex[1:19], "NORMALIZATION\\\\", mat_tex[20:length(mat_tex)])
 
 ## midrule between phase 1 and 2
 mat_tex[19] <- paste(mat_tex[19], "\\midrule")
 
 ## TODO
 ## longtable in landscape mode
-## use dcolumn package
 ## add signif footnotes from TWTE
 
 writeLines(mat_tex)
