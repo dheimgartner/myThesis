@@ -1,12 +1,22 @@
-\begin{table}
-\centering
-\resizebox{\linewidth}{!}{%
-\begin{tabular}{llrrr}
+{\setlength{\tabcolsep}{4pt}  % adjust column padding
+\begin{center}
+\small
+\begin{longtable}{llrrr}
 \toprule
-\multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{3}{c}{\%} \\
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{3}{c}{\%}\\
 \cmidrule(l{3pt}r{3pt}){3-5}
 Variable & Value & MTMC21 & Pre-study & Main study\\
 \midrule
+\endfirsthead
+\multicolumn{5}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+\toprule
+Variable & Value & MTMC21 & Pre-study & Main study\\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\emph{Continued on next page}}
+\endfoot
+\endlastfoot
 & 18-35 & 29.4 & 17.1 & 27.9\\
 & 36-50 & 36.1 & 25.7 & 40.9\\
 & 51-65 & 30.9 & 56.6 & 30.5\\
@@ -51,7 +61,7 @@ Variable & Value & MTMC21 & Pre-study & Main study\\
 & Regional season ticket & 11.6 & 8.0 & 17.3\\
 \multirow[t]{-4}{*}{\raggedright\arraybackslash Season Tickets} & None of above & 42.8 & 21.9 & 21.6\\
 \bottomrule
-\end{tabular}%
-}
 \caption{\label{tab:mzmv-marginals} Descriptive statistics: MTMC21 versus pre-study and main samples.}
-\end{table}
+\end{longtable}
+\end{center}
+}

@@ -531,7 +531,7 @@ We use the \pkg{apollo} \proglang{R}-package \citep{Hess+Palma:2019} and generat
 
 We estimated the MMDCEV model based on the panel in the baseline and normalization (phase 6) periods, where separate parameters were estimated except for $\mu_q$ (capturing unobserved heterogeneity, panel effects and thereby introducing correlation between the two periods). We only considered weeks where respondents tracked every day, as our activity chains are hypothesized to repeat weekly and since daily mode share patterns can potentially differ greatly from weekly ones. This left us with a sample of 906 respondents (150 remaining in phase 6), providing collectively 8`711 weekly mode share vectors. The final model has 73 parameters per phase (plus five phase-generic ones) which are presented in Table~\ref{tab:mpp-results} where we differentiate the two phases. Simple $t$ tests for the parameter differences between the two time periods were computed. Values postfixed with a dagger ($\dagger$) indicate that the difference is significant at the 5\% level. Car is the reference alternative and coefficients have to be interpreted accordingly. For example, the ASC of bus has an interpretation of the bus' mode share relative to car. In the baseline, this constant is below 0 which indicates that car had a higher share. In the normalization period, it still is below the mode share of car (-1.2) but compared to the baseline, mode share diverted from car to bus. The dagger ($\dagger$) indicates, that this difference is statistically significant.
 
-{\setlength{\tabcolsep}{2pt}  % remove column padding
+{\setlength{\tabcolsep}{2pt}  % adjust column padding
 \begin{center}
 \begin{landscape}
 \footnotesize
