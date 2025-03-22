@@ -262,7 +262,7 @@ We now turn to telework frequency shares before, during, and after the pandemic 
 
 While a majority (83.72\%) of those with teleworkable jobs work from home, employer constraints are still prevalent (table \emph{(11)}, row \emph{Budget}). To assess the extent of these constraints, refer to table \emph{(51)}, which cross-tabulates \emph{Budget} and \emph{Free-choice}. The upper triangular matrix indicates the share of employees who desire more frequent telework but are constrained. For instance, the first row, second column shows 6.23\% who wish to telework one day but are not allowed to. Totaling 26.47\% across the upper triangular matrix, highlights significant binding constraints. Understanding employer perspectives is crucial for interpreting telework frequencies.
 
-% \input{chapters/datapap/wfh_table_weighted_combined}
+\input{chapters/datapap/tables/wfh_table_weighted_combined}
 
 \cref{fig:wfh-weekday-distribution} illustrates current telework distribution across weekdays for full-time and part-time employees. Mondays and Fridays are preferred telework days: Full-time employed favor Fridays, while part-time employed favor Mondays (potentially not working at all on Fridays). A preference for Mondays and Fridays can be observed among full-time employed teleworking at least three days a week.
 
