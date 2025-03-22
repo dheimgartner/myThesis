@@ -182,7 +182,7 @@ cantonal_distribution$plot
 \caption{\label{fig:cantonal-distribution} Distribution of invited participants, survey completion, and response rates across cantons. Zurich is excluded from the color scale in the first two panels to highlight variation among other cantons.}
 \end{figure}
 
-% \input{chapters/datapap/tables/mzmv_marginals}
+\input{chapters/datapap/tables/mzmv_marginals}
 
 \Cref{tab:mzmv-marginals} presents marginal distributions of shared variables for the MTMC21 sample, the pre-study, and the main study populations. The main study sample closely mirrors the MTMC21 sample with some exceptions, likely attributable to Zurich's oversampling. Overrepresentation is noted among high-income households and PT season-ticket holders. Regarding ownership of mobility tools, comparability of marginals is limited due to differing survey questions: MTMC21 assessed access to tools while ours inquired about ownership and regular usage. Marginal distributions across reported NOGA sectors diverge notably, reflecting Zurich's status as a financial and ICT hub. Disparities in \emph{Telework} distributions are expected, influenced by the ongoing COVID-19 pandemic during the MTMC21 and pre-study survey periods, detailed further in \cref{sec:descriptive-findings}.
 
