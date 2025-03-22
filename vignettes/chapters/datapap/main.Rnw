@@ -1,0 +1,12 @@
+\chapter{Foo}
+\label{ch:datapap}
+
+\dictum[John Doe]{%
+Hello world!}%
+\vskip 1em
+
+\todo{%
+\begin{itemize}
+\item Maybe remove response rate analysis section as it is quite redundant
+\end{itemize}
+}

@@ -32,8 +32,8 @@
 - [x] Think about main thesis structure (order of the papers)
 - [ ] Port papers one by one
   - Only one file per paper (don't split up into multiple sources)
-  - Author contributions section => Do I need some signature/confirmation from the co-authors?
-  - [ ] `mpp`: no vignettes folder
+  - [ ] Author contributions section => Do I need some signature/confirmation from the co-authors?
+  - [x] `mpp`: no vignettes folder
   - [ ] `datapap`: no vignette built
   - [ ] `responseRateAnalysis`
   - [ ] `trb24`: no vignettes folder

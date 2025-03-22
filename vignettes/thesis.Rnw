@@ -37,6 +37,8 @@ library("patchwork")
 library("apollo")
 library("kableExtra")
 
+## datapap
+
 ## maybe adjust width here...
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
         digits = 3)
@@ -81,11 +83,11 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 \def\dir{chapters/introduction}
 \include{\dir/main}
 
-\cleardoublepage%
-\SweaveInput{chapters/mpp/main}
-
 % \cleardoublepage%
-% \SweaveInput{}
+% \SweaveInput{chapters/mpp/main}
+
+\cleardoublepage%
+\SweaveInput{chapters/datapap/main}
 
 \appendix
 \cleardoublepage%
