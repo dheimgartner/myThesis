@@ -1,0 +1,103 @@
+{\setlength{\tabcolsep}{2pt}
+\begin{table}[htbp]
+\resizebox{\textwidth}{!}{%
+\begin{threeparttable}
+\begin{tabular}{@{}lllp{6cm}@{}}
+\toprule
+Attribute &
+Level &
+Reference &
+Remark \\ \midrule
+CAR &
+&
+&
+\\
+\hspace{1em}Type &
+\begin{tabular}[t]{@{}l@{}}Small car\\      Medium to large car\\      Minivan or van\\      SUV\\      Luxury or sports car\end{tabular} &
+&
+\\
+\hspace{1em}Fuel &
+\begin{tabular}[t]{@{}l@{}}Gasoline\\      Diesel\\      Electric\\      Hybrid\\      Plug-in hybrid\end{tabular} &
+&
+\\
+\hspace{1em}Fixed   cost &
+\begin{tabular}[t]{@{}l@{}}0.7 (-30\%)\\      1\\      1.3 (+30\%)\end{tabular} &
+Inferred from archetype* &
+Fixed costs include   amortization, garaging costs, insurance, and taxes. The price of the car is   reflected in the fixed cost (amortization). \\
+\hspace{1em}Variable   cost &
+\begin{tabular}[t]{@{}l@{}}0.7 (-30\%)\\      1\\      1.3 (+30\%)\end{tabular} &
+Inferred from archetype* &
+Per kilometer cost, including   depreciation of the car's value, fuel or energy costs, tire costs and   maintenance. \\ \midrule
+PUBLIC TRANSPORT &
+&
+&
+\\
+\hspace{1em}Type &
+\begin{tabular}[t]{@{}l@{}}National season ticket   (GA)\\      Regional season ticket\\      Half-fare\end{tabular} &
+&
+\\
+\hspace{1em}Class &
+\begin{tabular}[t]{@{}l@{}}First\\      Second\end{tabular} &
+&
+Cost multiplier of 1.7 for first   class \\
+\hspace{1em}Fixed   cost &
+\begin{tabular}[t]{@{}l@{}}0.7 (-30\%)\\      1\\      1.3 (+30\%)\end{tabular} &
+\begin{tabular}[t]{@{}l@{}}3860 CHF/year (GA)\\      782 CHF/year (Regional)\\      185 CHF/year (Half-fare)\end{tabular} &
+\\
+\hspace{1em}Additional   zone &
+\begin{tabular}[t]{@{}l@{}}0.7 (-30\%)\\      1\\      1.3 (+30\%)\end{tabular} &
+40 CHF for additional zone &
+Only for regional season ticket \\ \midrule
+BICYCLE &
+&
+&
+\\
+\hspace{1em}Type &
+\begin{tabular}[t]{@{}l@{}}Regular bike\\      E-bike (up to 25 km/h)\\      E-bike (up to 45 km/h)\end{tabular} &
+&
+\\
+\hspace{1em}Fixed   cost &
+\begin{tabular}[t]{@{}l@{}}0.7 (-30\%)\\      1\\      1.3 (+30\%)\end{tabular} &
+\begin{tabular}[t]{@{}l@{}}200 CHF/year (regular)\\      600 CHF/year (25 km/h)\\      100 CHF/year (45 km/h)\end{tabular} &
+Fixed costs include   amortization, maintenance, and insurance. The price of the bicycle is   reflected in the fixed cost (amortization). \\ \midrule
+CAR SHARING &
+&
+&
+\\
+\hspace{1em}Free-floating &
+\begin{tabular}[t]{@{}l@{}}Yes\\      No\end{tabular} &
+&
+Whether or not the car sharing   is station-based or free-floating. \\
+\hspace{1em}Membership   fee &
+\begin{tabular}[t]{@{}l@{}}10 CHF/month\\      15 CHF/month\\      20 CHF/month\end{tabular} &
+&
+\\
+\hspace{1em}Time   tariff &
+\begin{tabular}[t]{@{}l@{}}2 CHF/h\\      3 CHF/h\\      4 CHF/h\end{tabular} &
+&
+\\
+\hspace{1em}Km   tariff &
+\begin{tabular}[t]{@{}l@{}}0.8 CHF/km\\      1 CHF/km\\      1.2 CHF/km\end{tabular} &
+&
+\\ \midrule
+SCENARIO VARIABLES &
+&
+&
+\\
+\hspace{1em}Work   from home &
+0-5+ days &
+Individual-specific &
+Either the current WFH   frequency, the maximum feasible frequency (as asked in the introductory   survey), the free-choice, or the observed choices in the SP. \\
+\hspace{1em}Work   from anywhere &
+\begin{tabular}[t]{@{}l@{}}Allowed\\      Not allowed\end{tabular} &
+&
+\\ \bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\item \textit{Note:} *An archetype has the average car specifics for a certain car and fuel type combination.
+\end{tablenotes}
+\end{threeparttable}%
+}
+\caption{\label{tab:mto-attributes-levels} Attributes and levels of the MTO-SP experiment.}
+\end{table}
+}

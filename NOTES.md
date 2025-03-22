@@ -9,8 +9,9 @@
 
 ## Checklist port
 
-- [ ] Include libraries in `thesis.Rnw`
+- [x] Include R libraries in `thesis.Rnw`
 - [ ] Namespace code chunks
+- [x] Use `\emph{}` instead of `\textit{}`
 - [ ] Port latex packages and commands to designated files
 - [ ] Check number format (not in `$` and with bigmark)
 - [ ] Port bibliography
