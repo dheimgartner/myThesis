@@ -7,6 +7,17 @@
 
 - The chapter titles do not necessarily have to be the paper titles
 
+## PROCEED HERE
+
+work in datapap folder (don't break paper vignette there, i.e., add)
+  in particular regression table and adjustments of colors
+  while you are at it, check out bootstrap stuff again (avoid bs if not necessary)
+
+(response rate analysis as 2nd chapter)
+
+decide if response rate analysis section can be dropped
+=> adjust in text (intro and conclusion)
+
 ## Checklist port
 
 - [x] Include R libraries in `thesis.Rnw`
@@ -47,8 +58,8 @@
   - Only one file per paper (don't split up into multiple sources)
   - [ ] Author contributions section => Do I need some signature/confirmation from the co-authors?
   - [x] `mpp`: no vignettes folder
-  - [ ] `datapap`: no vignette built
   - [ ] `responseRateAnalysis`
+  - [ ] `datapap`: no vignette built
   - [ ] `trb24`: no vignettes folder
   - [ ] `OPSR`
   - [ ] `TWTE`

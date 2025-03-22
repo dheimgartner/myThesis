@@ -15,3 +15,11 @@ kbl(head(iris), format = "latex") %>%
 ## kableExtra linespace
 library(kableExtra)
 kbl(head(iris), format = "latex", booktabs = TRUE)
+
+
+
+## datapap ordered probit table
+library(datapap)
+library(tidyverse)
+bootstrap$texreg
+bootstrap$input
