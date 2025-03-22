@@ -5,6 +5,13 @@
 Hello world!}%
 \vskip 1em
 
+\todo{%
+\begin{itemize}
+\item For author contributions statement see also thesis by Reck
+\item Namespace labels
+\end{itemize}
+}
+
 <<mpp-preliminaries, echo=FALSE, results=hide>>=
 MAX <- as.Date("2022-12-30")
 
@@ -39,25 +46,15 @@ rn_work_outside_home <- function(df) {
 
 %% -- Abstract -----------------------------------------------------------------
 
-\begin{leftbar}
-This is not the text of the published version... Make sure to use \code{mpp/LaTeX}!
-\end{leftbar}
-
 The MOBIS-Covid data provides a unique opportunity to put mobility adjustments observed during the crisis in perspective. A large panel has been tracked from before the crisis up until the end of 2022. Starting with 1`370 participants and observing a gradual drop-off, around 250 kept tracking throughout the whole study period of over 2 years. Switzerland lifted its measures counteracting the virus spread in mid-February 2022, reaching a potential new equilibrium in the months after. Descriptive indicators have been constructed for Switzerland in order to disentangle the narrative of the crisis from the perspective of transport demand. The descriptive findings are supplemented by a mixed multiple discrete-continuous extreme value model (MMDCEV). We find a shift in modal splits away from car and train, where in particular bus could expand its mode share. While the cycling and walking booms were temporary, the bicycle still shows slightly higher mode distance shares. There are observable differences between the working arrangements (home office, mixture and in-office), however, we do not find evidence that preferences differ substantially. This suggests that the working arrangement segments the population along socioeconomic dimensions with different mobility behaviors and mode preferences. Modes are more satiated in the post-pandemic world, hinting that people use fewer modes in their weekly modal mix but use them more intensely. However, the model suggests that the pandemic should not be read as a structural break in mode preferences. We will therefore likely see further convergence to the pre-pandemic equilibrium.
 
-This chapter consists of the following peer-reviewed journal paper:
-
-The contributions for this paper are as follows:
-
-\begin{leftbar}
-\begin{itemize}
-\item See also thesis by Reck...
-\item Conform to the contributions as mentioned in the paper!
-\item Maybe add \emph{The following adjusmtents were made to the published text...} or similar.
-\item Namespace labels.
-\item Renamed Work outside office to office in plots. Make sure it is consistent in text.
-\end{itemize}
-\end{leftbar}
+\begin{longtable}{p{4cm}p{6.8cm}}
+\emph{This chapter consists of the following peer-reviewed journal paper} & Heimgartner D. and K. W. Axhausen (2023) Modal Splits Before, During, and After the Pandemic in Switzerland, \emph{Transportation Research Record}, \textbf{2678} (7), 1084--1099.\\
+\addlinespace
+\emph{Author contributions} & Study conception and design: D. Heimgartner, K. W. Axhausen; data collection: D. Heimgartner; analysis and interpretation of results: D. Heimgartner; draft manuscript preparation: D. Heimgartner, K. W. Axhausen. All authors reviewed the results and approved the final version of the manuscript.\\
+\addlinespace
+\emph{The following changes were made} & Figure~\ref{fig:participation-and-casenumbers} and Table~\ref{tab:mpp-results} were improved for readability; \emph{Work-outside-home} was relabeled to \emph{Office} both in the figure legends and text; A short introductory text after Section~\ref{sec:method} was added.\\
+\end{longtable}
 
 %% -- Introduction -------------------------------------------------------------
 
@@ -66,7 +63,7 @@ The contributions for this paper are as follows:
 
 The COVID Pandemic hit our system from various angles: First and foremost, it was a health crisis with risk asymmetries between different groups in society. It was a considerable shock to our economies with high uncertainty and supply chains breaking down. Firms have proven to be very flexible, adopting working from home, keeping productivity at high levels. Last but not least, the initial solidarity seemed to fade with the duration of the crisis and political polarization peaked with the vaccine roll-out. Not surprisingly, almost all of these dimensions played into our mobility behavior in one way or the other, either directly (e.g., because of health concerns) or indirectly (e.g., by reducing commuting activities through working from home).
 
-Several studies have been trying to describe the evolution of transport demand during early stages of the crisis and by different means such as tracking studies or questionnaires. But of course, all the effects outlined above, were intertwined and a clear attribution was difficult. Therefore, the question of whether or not these patterns persist in the post-pandemic world could not be answered.
+Several studies have been trying to describe the evolution of transport demand during early stages of the crisis and by different means such as tracking studies or questionnaires. But of course, all the effects outlined above, were intertwined and a clear attribution was difficult. Therefore, it has not been possible to answer the question of whether or not these patterns have persisted in the post-pandemic world.
 
 The MOBIS-Covid study \citep{Molloy+Etal:2022} provides a unique opportunity to look at the persistence of these effects. A Swiss panel with comparably rich socioeconomic information has been tracked from before the crisis until today. In Switzerland, all restrictions and measures to contain the spread were lifted on February 17, 2022, and we potentially converged to a new equilibrium in the months that followed. Therefore, we have revisited the MOBIS-Covid data and tried to comment on how sustainable initial findings have proven to be and translate to recent times. For this purpose, a comprehensive set of descriptive indicators has been constructed in order to disentangle the narrative of the crisis. Special emphasis is given to the question of how new hybrid working arrangements (i.e., home office) drive modal splits (as measured by mode distance shares). The descriptive findings are strengthened by a mixed multiple discrete-continuous extreme value model (MMDCEV) where we model both the discrete and continuous dimension of weekly mode distance shares and compare the pre-pandemic to the arguably post-pandemic world.
 
@@ -134,9 +131,7 @@ To summarize, the general narrative reveals a modal shift away from public trans
 \section{Method}
 \label{sec:method}
 
-\begin{leftbar}
-Put some short blabla here.
-\end{leftbar}
+In the following, we first introduce the data and conduct comprehensive descriptive analysis for various mobility indicators before elaborating on the MMDCEV modeling framework.
 
 \subsection{Data}
 \label{sec:data}
@@ -146,7 +141,7 @@ Starting in September 2019, a sample of 5`375 Swiss residents were recruited to 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-case-numbers, echo=FALSE, fig=TRUE, width=8, height=5>>=
+<<mpp-case-numbers, echo=FALSE, fig=TRUE, width=7.5, height=5>>=
 scl <- myThesis::mpp_plot_cn$scl
 myThesis::mpp_plot_cn$p
 @
@@ -155,11 +150,7 @@ myThesis::mpp_plot_cn$p
 
 The 3`680 participants who completed the MOBIS study, were asked to reactivate the app in an effort to understand mobility behavior during the pandemic. Around 1`600 volunteered to do so building the panel of the MOBIS-Covid19 study that underlies this report.
 
-\begin{leftbar}
-Use MTMC mobility and transport micro census instead of MZ
-\end{leftbar}
-
-People were only eligible to participate in the MOBIS study if they used a car at least 2 days a week. This skewed our sample towards car drivers. However, comparing the sample to the last national travel diary Mikrozensus (MZ) 2015, the MOBIS-Covid19 sample was found to be broadly representative of the Swiss population \citep{Molloy+Etal:2021}.
+People were only eligible to participate in the MOBIS study if they used a car at least 2 days a week. This skewed our sample towards car drivers. However, comparing the sample to the last mobility and transport micro census 2015, the MOBIS-Covid19 sample was found to be broadly representative of the Swiss population \citep{Molloy+Etal:2021}.
 
 Since January 2021 we observe a gradual drop-out of participants as no further recruitment efforts have been made. Nevertheless, around 250 people are still using the app as of today. This raises the concern of a potential self-selection bias. To make statistics comparable over the full time horizon a re-weighting scheme is applied, comparing the characteristics of the remaining individuals against the original 22`000 participants who filled out the introductory survey. Weights are based on age, gender, income, education, mobility tool ownership and accessibility and are calculated for each person-week.
 
@@ -538,7 +529,7 @@ We use the \pkg{apollo} \proglang{R}-package \citep{Hess+Palma:2019} and generat
 \section{Results and discussion}
 \label{sec:results}
 
-We estimated the MMDCEV model based on the panel in the baseline and normalization (phase 6) periods, where separate parameters were estimated except for $\mu_q$ (capturing unobserved heterogeneity, panel effects and thereby introducing correlation between the two periods). We only considered weeks where respondents tracked every day, as our activity chains are hypothesized to repeat weekly and since daily mode share patterns can potentially differ greatly from weekly ones. This left us with a sample of 906 respondents (150 remaining in phase 6), providing collectively 8`711 weekly mode share vectors. The final model has 73 parameters per phase (plus five phase-generic ones) which are presented in Table~\ref{tab:mpp-results} where we differentiate the two phases. Simple $t$ tests for the parameter differences between the two time periods were computed. Values postfixed with $\dagger$ indicate that the difference is significant at the 5\% level. Car is the reference alternative and coefficients have to be interpreted accordingly. For example, the ASC of bus has an interpretation of the bus' mode share relative to car. In the baseline, this constant is below 0 which indicates that car had a higher share. In the normalization period, it still is below the mode share of car (-1.2) but compared to the baseline, mode share diverted from car to bus. The bold value indicates, that this difference is statistically significant.
+We estimated the MMDCEV model based on the panel in the baseline and normalization (phase 6) periods, where separate parameters were estimated except for $\mu_q$ (capturing unobserved heterogeneity, panel effects and thereby introducing correlation between the two periods). We only considered weeks where respondents tracked every day, as our activity chains are hypothesized to repeat weekly and since daily mode share patterns can potentially differ greatly from weekly ones. This left us with a sample of 906 respondents (150 remaining in phase 6), providing collectively 8`711 weekly mode share vectors. The final model has 73 parameters per phase (plus five phase-generic ones) which are presented in Table~\ref{tab:mpp-results} where we differentiate the two phases. Simple $t$ tests for the parameter differences between the two time periods were computed. Values postfixed with a dagger ($\dagger$) indicate that the difference is significant at the 5\% level. Car is the reference alternative and coefficients have to be interpreted accordingly. For example, the ASC of bus has an interpretation of the bus' mode share relative to car. In the baseline, this constant is below 0 which indicates that car had a higher share. In the normalization period, it still is below the mode share of car (-1.2) but compared to the baseline, mode share diverted from car to bus. The dagger ($\dagger$) indicates, that this difference is statistically significant.
 
 {\setlength{\tabcolsep}{2pt}  % remove column padding
 \begin{center}
@@ -653,10 +644,6 @@ writeLines(mat_tex)
 \end{landscape}
 \end{center}
 }
-
-\begin{leftbar}
-Make sure discussion in text matches with new names from estimates.
-\end{leftbar}
 
 Because of a smaller sample size in the normalization period, 95\% confidence bounds are much wider. Therefore, while (considerable) differences between the two phases exist, most of these differences are not significant. It follows that there are no significant preference differences introduced by the pandemic. The remainder of the section should be read with this in mind. The notable exceptions include:  An increased ASC for bus indicating that bus is chosen more frequently relative to car and compared to the baseline. Full-time employees choose the train less frequently which could imply that the pandemic induced a slight shift in commute modes away from train to car. Train's satiation (Gamma) on the other hand increased which means that if train is chosen in a given week, its mode share tends to be considerably higher than before the pandemic. The workforce with a mixture work arrangement choose train significantly less frequently than before. Again, reduced commuting activity and a shift in commute mode could explain this. Finally, people with a GA (annual nationwide PT subscription) add a bicycle to their modal mix more frequently than before.
 

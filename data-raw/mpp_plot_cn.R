@@ -7,7 +7,7 @@ library(mppData)
 library(tidyverse)
 
 MAX <- as.Date("2022-12-30")
-colvec <- c("darkorange2", "lightblue")
+colvec <- mpp::colors$all[c(4, 7)]
 
 my_theme <-
   ggplot2::theme_light() +
@@ -57,8 +57,7 @@ p <-
                      expand = expansion(mult = c(0, .1)),
                      limits = c(0, 1700)) +
   scale_colour_manual(values = colvec[c(2, 1)]) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = c(0.165, 0.92)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(x = "", y = "Number of participants", col = NULL) +
   guides(color = guide_legend(override.aes = list(alpha = 1, linewidth = 2)))
 p
@@ -81,7 +80,7 @@ y <- c(100,
 labels <- c(
   'bold("Feb 28") * " First wave: outbreak of the COVID pandemic"',
   'bold("April 27") * " Calm summer months"',
-  'atop(bold("Oct 19") * " Second wave: Home office recommendation", "followed by requirement")',
+  'atop(bold("Oct 19") * " Second wave: Home office", "recommendation followed by requirement")',
   'bold("March 1") * " Shallow third wave: Calm summer months"',
   'atop(bold("Sep 13") * " Fourth wave: Omicron variante,", "Home office and certificate requirement")',
   'bold("March 1") * " Normalization"'

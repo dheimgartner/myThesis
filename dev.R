@@ -9,3 +9,9 @@ paste0(x_, stars)
 library(kableExtra)
 kbl(head(iris), format = "latex") %>%
   kableExtra::footnote("foo")
+
+
+
+## kableExtra linespace
+library(kableExtra)
+kbl(head(iris), format = "latex", booktabs = TRUE)
