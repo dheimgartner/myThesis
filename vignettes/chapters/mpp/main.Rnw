@@ -8,7 +8,6 @@ Hello world!}%
 <<mpp-preliminaries, echo=FALSE, results=hide>>=
 MAX <- as.Date("2022-12-30")
 
-colvec <- c("#46337EFF", "#277F8EFF", "#4AC16DFF")
 col_annot <- "grey40"
 
 add_annotations <- mpp:::add_annotations
@@ -56,6 +55,7 @@ The contributions for this paper are as follows:
 \item Conform to the contributions as mentioned in the paper!
 \item Maybe add \emph{The following adjusmtents were made to the published text...} or similar.
 \item Namespace labels.
+\item Renamed Work outside office to office in plots. Make sure it is consistent in text.
 \end{itemize}
 \end{leftbar}
 
@@ -145,76 +145,12 @@ Put some short blabla here.
 
 Starting in September 2019, a sample of 5`375 Swiss residents were recruited to take part in a mobility pricing field experiment called MOBIS. Using an app, the participants tracked their location and thereby mobility and activity patterns could be identified. They were tracked for 8 weeks in an ambition to investigate their response to a conceptual mobility pricing scheme in a randomized controlled trial. Participation and tracking numbers are depicted in Figure~\ref{fig:participation-and-casenumbers}, together with COVID case numbers and the six phases outlined before.
 
-\begin{leftbar}
-Revise \emph{mpp-participation-and-casenumbers} similar to \url{https://journals.sagepub.com/doi/pdf/10.1177/03611981221089938}
-\end{leftbar}
-
-\setkeys{Gin}{width=0.8\textwidth}
+\setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-participation-and-casenumbers, echo=FALSE, fig=TRUE, width=6.75, height=5.25>>=
-df_part <-
-  mppData::mobis_analysis$participants_per_day %>%
-  pivot_longer(-day) %>%
-  mutate(sample = factor(name, labels = c("participants", "tracking"))) %>%
-  filter(day <= MAX) %>%
-  select(-name, date = day) %>%
-  pivot_wider(names_from = sample, values_from = value)
-
-df_cn <-
-  mpp::covid_numbers %>%
-  filter(georegion == "CH") %>%
-  select(date = datum, case_numbers = entries) %>%
-  arrange(date) %>%
-  mutate(case_numbers_rol = zoo::rollmean(case_numbers, k = 14, fill = NA)) %>%
-  drop_na() %>%
-  select(date, cn = case_numbers_rol)
-
-df_tog <-
-  df_part %>%
-  left_join(df_cn, by = "date")
-
-scl <- max(df_tog$participants, na.rm = TRUE) / max(df_tog$cn, na.rm = TRUE)
-
-p <-
-  df_tog %>%
-  ggplot(aes(x = date)) +
-  geom_line(aes(y = participants, col = "Total"), alpha = 0.7) +
-  geom_line(aes(y = tracking, col = "Tracking"), alpha = 0.7) +
-  geom_line(aes(y = scl * cn), col = colvec[1], size = 1.1) +
-  scale_x_date(date_breaks = "2 months",
-               date_labels = "%b-%y") +
-  scale_y_continuous(sec.axis = sec_axis(~./scl, name = "Average case numbers")) +
-  scale_colour_manual(values = colvec[c(2, 3)]) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  labs(x = "", y = "Number of participants", col = "Sample") +
-  guides(color = guide_legend(override.aes = list(alpha = 1, linewidth = 2)))
-
-df_ph <-
-  mpp::covid_phases %>%
-  left_join(df_cn, by = c("lower" = "date")) %>%
-  mutate(cn = ifelse(is.na(cn), 0, scl * cn))
-
-label_pos <- function(df) {
-  x <- df$label
-  y <- df$cn
-  pos <- sapply(seq_along(x), function(i) {
-    xi <- x[i]
-    yi <- y[i]
-    if (xi == "Phase 2") {
-      return(yi + scl * 12e3)
-    } else if (xi == "Phase 6") {
-      return(yi + scl * 7e3)
-    } else {
-      return(yi + scl * 3.5e3)
-    }
-  })
-  pos
-}
-
-p_ <- add_annotations(p, y = label_pos(df_ph),
-                      text = TRUE, text_size = 2, col = col_annot)
-p_ + theme(panel.grid = element_blank(), panel.grid.minor = element_blank())
+<<mpp-case-numbers, echo=FALSE, fig=TRUE, width=8, height=5>>=
+scl <- myThesis::mpp_plot_cn$scl
+myThesis::mpp_plot_cn$p
 @
 \caption{\label{fig:participation-and-casenumbers} Covid case numbers and timeline.}
 \end{figure}
@@ -229,7 +165,7 @@ People were only eligible to participate in the MOBIS study if they used a car a
 
 Since January 2021 we observe a gradual drop-out of participants as no further recruitment efforts have been made. Nevertheless, around 250 people are still using the app as of today. This raises the concern of a potential self-selection bias. In order to make statistics comparable over the full time horizon a re-weighting scheme is applied, comparing the characteristics of the remaining individuals against the original 22`000 participants which filled out the introductory survey. Weights are based on age, gender, income, education, mobility tool ownership and accessibility and are calculated for each person-week.
 
-The socioeconomic characteristics were collected in several surveys during various stages of the study. While some of the questions were included in several survey instruments, it is important to know that for most of the variables, we do not have longitudinal information. That is, only one particular point in time is reflected and some of the attributes might have changed over time. For example, the working arrangement variable \{Home office, Mixture, Work outside home\} is based on two work related surveys, fielded in April 2021 (Phase 3) and October 2021 (Phase 4), where respondents were asked how many days a week they work from home or in office respectively. Therefore it most certainly happened that some of the people were labelled home working in Phase 3 or 4 but switched back to in office without us noticing. Nevertheless, the working arrangement variable can be seen as a proxy.
+The socioeconomic characteristics were collected in several surveys during various stages of the study. While some of the questions were included in several survey instruments, it is important to know that for most of the variables, we do not have longitudinal information. That is, only one particular point in time is reflected and some of the attributes might have changed over time. For example, the working arrangement variable \{Home office, Mixture, Office\} is based on two work related surveys, fielded in April 2021 (Phase 3) and October 2021 (Phase 4), where respondents were asked how many days a week they work from home or in office respectively. Therefore it most certainly happened that some of the people were labelled home working in Phase 3 or 4 but switched back to in office without us noticing. Nevertheless, the working arrangement variable can be seen as a proxy.
 
 \subsection{Descriptive analysis of mobility patterns}
 \label{sec:descriptive-analysis}
@@ -286,7 +222,7 @@ p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2, 3))
 \caption{\label{fig:activity-spaces} Change in activity spaces.}
 \end{figure}
 
-Not surprisingly, activity spaces, as measured by the 95\% CI Ellipse area, were considerably depressed during the pandemic and are strongly governed by imposed COVID restrictions (Figure~\ref{fig:activity-spaces}). Seasonal patterns might exaggerate the effects of the pandemic with prevalence being higher during winter months where activity spaces usually are smaller. However, recent levels have not yet reached pre-pandemic ones. The home office population reduced activity spaces more pronounced at the onset of the crisis but had slightly larger activity spaces compared to the work outside home peers in the calm summer months (phase 4). However, in the normalization phase, the activity spaces of the in office population is again largest. Therefore it is not fully clear, whether home office depresses activity spaces in normal times. Further, considerable pre-pandemic differences in the levels exist: The participants working partly remote and partly in office had much larger activity ellipses in the baseline. Again, it is pivotal to understand, that these people were not necessarily working in a mixture working arrangement before the crisis, but did so at the time of the survey. Nevertheless, it highlights, that the working arrangement segments the population and impacts transport demand via depressing activity spaces of particularly mobile groups (with large activity spaces).
+Not surprisingly, activity spaces, as measured by the 95\% CI Ellipse area, were considerably depressed during the pandemic and are strongly governed by imposed COVID restrictions (Figure~\ref{fig:activity-spaces}). Seasonal patterns might exaggerate the effects of the pandemic with prevalence being higher during winter months where activity spaces usually are smaller. However, recent levels have not yet reached pre-pandemic ones. The home office population reduced activity spaces more pronounced at the onset of the crisis but had slightly larger activity spaces compared to the office peers in the calm summer months (phase 4). However, in the normalization phase, the activity spaces of the in office population is again largest. Therefore it is not fully clear, whether home office depresses activity spaces in normal times. Further, considerable pre-pandemic differences in the levels exist: The participants working partly remote and partly in office had much larger activity ellipses in the baseline. Again, it is pivotal to understand, that these people were not necessarily working in a mixture working arrangement before the crisis, but did so at the time of the survey. Nevertheless, it highlights, that the working arrangement segments the population and impacts transport demand via depressing activity spaces of particularly mobile groups (with large activity spaces).
 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
@@ -530,7 +466,7 @@ Figure~\ref{fig:hourly-counts} shows the number of trips generated during a part
 
 For example looking at row \emph{Train} and column \emph{Weekday}, most trips are generated during the morning and evening peak hours (which is the 100\% reference hour) with the two peaks matching one another. Cycling increased during the day and weekends (but not during commuting hours). Car and train show more or less a parallel downwards shift. For train this shift is more pronounced than for car. The depression is less severe for local PT (bus and tram) than for train. For walk we see again the decrease during commuting peaks but otherwise it is back to normal. Further, people working from home seem not to be that mobile during the day (most modes are almost identical during working hours, with bicycle being the exception). For car and train we see a decrease even during the weekend which either could imply that people reduced activities or stay in closer proximity to home (as local PT does not show this decrease, while bicycle increases...).
 
-The pronounced morning and afternoon peeks of the peer group \emph{Home office} for PT might reflect that if they work from the office space they choose PT, i.e. the home office population does not necessarily switch to car but has simply reduced demand due to reduced commuting. On the other hand, we have seen that people working from home use more regional modes, in particular bicycle. The very similar trip generation of \emph{Home office} compared to \emph{Work outside home} during working hours could again be interpreted, as the home office population not being that mobile during working hours.
+The pronounced morning and afternoon peeks of the peer group \emph{Home office} for PT might reflect that if they work from the office space they choose PT, i.e. the home office population does not necessarily switch to car but has simply reduced demand due to reduced commuting. On the other hand, we have seen that people working from home use more regional modes, in particular bicycle. The very similar trip generation of \emph{Home office} compared to \emph{Office} during working hours could again be interpreted, as the home office population not being that mobile during working hours.
 
 The descriptive results are summarized below. The bicycle was the only mode used more intensively during restrictive phases. However, seasonal patterns could overemphasize this correlation. The bicycle boom was a temporary phenomenon which can be attributed to rather high stage lengths during the onset of the pandemic. Still, the bicycle is used more frequently in the normalization phase.
 
