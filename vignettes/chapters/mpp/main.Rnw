@@ -645,9 +645,6 @@ mat_tex <- c(mat_tex[1:19], "NORMALIZATION\\\\", mat_tex[20:length(mat_tex)])
 ## force break to the next page
 mat_tex[19] <- paste(mat_tex[19], "\\pagebreak")
 
-## TODO
-## add signif footnotes from TWTE
-
 writeLines(mat_tex)
 @
 \bottomrule
@@ -677,5 +674,21 @@ Further, in line with the discussion of Figure~\ref{fig:mode-share-indicators}, 
 
 In summary, individuals intensified the use of one particular mode as explained by increasing satiation parameters (however, only the difference in train satiation was significant). The car's relative importance decreased with differences in alternative specific constants (ASC) being positive. PT users cancelled their subscriptions during the pandemic. Working arrangements do not predict mode share preferences but could potentially still be an important lever as they could influence mode share preferences via differences in socioeconomic characteristics. Future research should be devoted to understanding absolute differences such as mileage. The pandemic should not be read as a structural break in mode preferences as only a few parameters were found to differ between the two observation periods. This is in stark contrast to the study by \citet{Molloy+Etal:2021} and \citet{Meister+Etal:2022} who found considerable modal shifts induced by the pandemic. The findings from this work suggest that these changes were not made habitual but can be attributed to the unprecedented circumstances and constraints brought by the pandemic.
 
-
 %% -- Conclusion ---------------------------------------------------------------
+
+\section{Conclusion and outlook}
+\label{sec:conclusion}
+
+This paper described the evolution of various mobility patterns before during and after the pandemic. The ambition was to understand modal splits and the impact of home office on transport demand beyond the COVID pandemic.
+
+The key insights from our analysis are as follows: Both the bicycle and walking boom were temporary phenomena. In the case of bicycle, exceptionally large stage lengths during the first phase explain the boom whereas for walk, the home office population showed a pronounced peak during the first lockdown.
+
+All PT modes were strongly depressed during the pandemic and car could temporarily expand its mode share. However, this was not a sustainable development but has normalized again. Bus could expand mode distance share and train still shows a strong upward trend across working arrangements. With decreasing uncertainty and infection risk, further recovery of PT modes can be expected.
+
+Mode frequency shares rebounded more strongly than distance shares. This could be explained by diminished commuting activity and shorter trips. Both factors could explain the attribution of mode share to bus and bicycle as these modes are more likely to be chosen on shorter stages.
+
+It remains unclear to what extent and along which channels hybrid work arrangements impact transport demand. While home office was an effective tool for reducing transport demand during the crisis (and with enforced lockdowns) it is questionable whether these findings translate to normal times. Hybrid work arrangements segment the population along sociodemographic attributes and these segments have different mobility patterns. The MDCEV model strengthens this hypothesis in so far as no significant preference differences can be attributed to the work arrangement attributes when controlling for sociodemographic factors (except for the mixture work and a negative coefficient for train). Hence, modeling approaches that suggest no causal effect of home office on the variable of interest should keep in mind, that the effect could be mediated over different user compositions.
+
+While transport behavior was commented to be very different during the crisis, the pandemic should not be read as a structural break in mode preferences. This is probably also the most relevant policy implication of this paper: Changes observed during the pandemic (reduced peak traffic volumes, shifts to non-motorized forms of transport and avoidance of PT) were not made habitual. Therefore pre-pandemic challenges translate to the post-pandemic era.
+
+The presented analysis could be strengthened by estimating a panel MMDCEV on all stages simultaneously, similar to \citet{Meister+Etal:2022}. The evolution of parameters throughout the pandemic could yield interesting insights. Further, more comprehensive post-estimation should be conducted, shifting focus on variable leverage and sensitivity rather than significance (e.g., by computing marginal probability effects). Satiation parameters could be modeled as a function of socioeconomic attributes, shedding light on different satiation profiles. Further, it is essential to develop a better understanding of the home office population to estimate the impact of new hybrid work arrangements on transport demand and beyond relative mode shares. Lastly, model building and selection are said to be an art. The field could benefit from aligning its understanding of when it is justifiable to exclude non-significant variables as well as how to comment on the (absolute) quality of a model.
