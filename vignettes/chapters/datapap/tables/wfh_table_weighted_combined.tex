@@ -1,11 +1,7 @@
-% Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
-% \usepackage[table,xcdraw]{xcolor}
-% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
-\begin{table}
-\resizebox{\textwidth}{!}{%
-\begin{threeparttable}
-\begin{tabular}{lllllllllllllll}
+{\setlength{\tabcolsep}{2pt}
+\begin{center}
+\scriptsize
+\begin{longtable}{lllllllllllllll}
 \toprule
 \textit{\textbf{Frequency}} &
    &
@@ -1073,11 +1069,8 @@
   \textit{} &
   \textit{} \\
   \bottomrule
-\end{tabular}%
-\begin{tablenotes}[flushleft]
-    \item \textit{Note:} *Population where telework is feasible (Can == Yes), \textbf{Budget:} Max. number of days allowed to telework, \textbf{Current:} Telework frequency as of survey date (June - August 2023), \textbf{Feasible:} Max. number of teleworking days feasible given job situation, \textbf{Free-choice:} Free-choice telework frequency (given job situation), \textbf{Lockdown:} Telework frequency during COVID-related lockdowns, \textbf{Pre-COVID:} Telework frequency before the COVID-pandemic, \textbf{Can:} Job is teleworkable, \textbf{May:} Employer allows teleworking, \textbf{Want:} Respondent wants to telework, \textbf{Do:} Respondent teleworks.
-\end{tablenotes}
-\end{threeparttable}%
-}
+\multicolumn{15}{l}{Foo}\\
 \caption{\label{tab:wfh-table-weighted-combined} Telework distributions and contingency tables.}
-\end{table}
+\end{longtable}
+\end{center}
+}
