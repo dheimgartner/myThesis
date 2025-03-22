@@ -26,8 +26,9 @@
 
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
-## mpp
 library("myThesis")
+
+## mpp
 library("mpp")
 library("mppData")
 library("tidyverse")
@@ -38,6 +39,7 @@ library("apollo")
 library("kableExtra")
 
 ## datapap
+library("datapap")
 
 ## maybe adjust width here...
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,

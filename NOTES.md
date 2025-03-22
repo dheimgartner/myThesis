@@ -2,9 +2,21 @@
 
 >github organization phd-thesis-heimgartner
 
-- [ ] keep the repos in sync...
+- [ ] Keep the repos in sync...
+- [ ] See `QUOTES.md` for ideas at beginning of chatper
 
-- The chapter titles do not necessarily have to be the paper titles.
+- The chapter titles do not necessarily have to be the paper titles
+
+## Checklist port
+
+- [ ] Include libraries in `thesis.Rnw`
+- [ ] Namespace code chunks
+- [ ] Port latex packages and commands to designated files
+- [ ] Check number format (not in `$` and with bigmark)
+- [ ] Port bibliography
+- [ ] Namespace labels
+- [ ] Organize `\todo{}`s at top
+- [ ] Publication, contributions and changes table
 
 ## TODO
 
