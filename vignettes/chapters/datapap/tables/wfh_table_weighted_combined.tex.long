@@ -1,9 +1,18 @@
-\begin{table}
 \begin{center}
-\setlength\extrarowheight{0pt}{%
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lllllllllllllll}
+\begin{landscape}
+\scriptsize
+\begin{longtable}{lllllllllllllll}
 \toprule
+\endfirsthead
+\multicolumn{15}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+\toprule
+& & 0 & 1 & 2 & 3 & 4 & 5+ & Sum & & & & No & Yes & Sum\\
+\midrule
+\endhead
+\midrule
+\multicolumn{15}{r}{\emph{Continued on next page}}
+\endfoot
+\endlastfoot
 FREQUENCY &
    &
    &
@@ -1070,10 +1079,8 @@ Free-choice &
     &
     \\
   \bottomrule
-\multicolumn{15}{p{22cm}}{*Population where telework is feasible (Can == Yes), \emph{Budget:} Max. number of days allowed to telework, \emph{Current:} Telework frequency as of survey date (June - August 2023), \emph{Feasible:} Max. number of teleworking days feasible given job situation, \emph{Free-choice:} Free-choice telework frequency (given job situation), \emph{Lockdown:} Telework frequency during COVID-related lockdowns, \emph{Pre-COVID:} Telework frequency before the COVID-pandemic, \emph{Can:} Job is teleworkable, \emph{May:} Employer allows teleworking, \emph{Want:} Respondent wants to telework, \emph{Do:} Respondent teleworks.}\\
-\end{tabular}
-}%
-}%
+\multicolumn{15}{p{17cm}}{*Population where telework is feasible (Can == Yes), \emph{Budget:} Max. number of days allowed to telework, \emph{Current:} Telework frequency as of survey date (June - August 2023), \emph{Feasible:} Max. number of teleworking days feasible given job situation, \emph{Free-choice:} Free-choice telework frequency (given job situation), \emph{Lockdown:} Telework frequency during COVID-related lockdowns, \emph{Pre-COVID:} Telework frequency before the COVID-pandemic, \emph{Can:} Job is teleworkable, \emph{May:} Employer allows teleworking, \emph{Want:} Respondent wants to telework, \emph{Do:} Respondent teleworks.}\\
 \caption{\label{tab:wfh-table-weighted-combined} Telework distributions and contingency tables.}
+\end{longtable}
+\end{landscape}
 \end{center}
-\end{table}

@@ -7,12 +7,7 @@ Hello world!}%
 
 \todo{%
 \begin{itemize}
-\item Maybe remove response rate analysis section as it is quite redundant
-\item Don't mention bootstrap stuff
 \item Should I include appendix stuff?
-\item Revise tables
-\item Maybe adjust colors (don't use colors if not necessary)
-\item Consistent footnotes (size and sig legend)
 \item Rewrite algorithm as ordered list...
 \item Something weird is going on in Table~\ref{tab:mzmv-marginals}
 \end{itemize}
@@ -136,7 +131,7 @@ Desk sharing & Yes\newline No & Restructuring of the office space.\\
 
 \begin{figure}[htbp]
 \centering
-\fbox{\includegraphics[width=0.8\textwidth]{chapters/datapap/figures/wfh_choice_task}}
+\fbox{\includegraphics[width=0.6\textwidth]{chapters/datapap/figures/wfh_choice_task}}
 \caption{\label{fig:wfh-choice-task} Example of a choice task for the work from home stated preference experiment.}
 \end{figure}
 
@@ -151,7 +146,7 @@ Given the impracticality of directly comparing 32 alternatives (known as the "cu
 
 \begin{figure}[htbp]
 \centering
-\fbox{\includegraphics[width=0.8\textwidth]{chapters/datapap/figures/mto_choice_task}}
+\fbox{\includegraphics[width=0.6\textwidth]{chapters/datapap/figures/mto_choice_task}}
 \caption{\label{fig:mto-choice-task} Example of an individualized choice task for the mobility tool ownership stated preference experiment.}
 \end{figure}
 
@@ -170,7 +165,7 @@ The generation of the random design is conceptualized in Algorithm \ref{alg:rand
 \section{Response behavior}
 \label{sec:response-behavior}
 
-This section examines the demographic composition of survey participants, discusses the relationship between response burden \citep{axhausen2015predicting} and response rates, and explores the variability in choices observed in the two SP experiments.
+This section examines the demographic composition of survey participants, relates the surveys' response burdens to other studies conducted at the institute (see Chapter~\ref{ch:responseRateAnalysis}), and explores the variability in choices observed in the two SP experiments.
 
 As previously mentioned, the survey instrument in \emph{Stage I} targeted the entire working population, while SP experiments focused exclusively on those eligible for telework. The distribution across cantons, completion rates, and response rates for \emph{Stage I} are depicted in \cref{fig:cantonal-distribution}. To emphasize variability among cantons, Zurich, which was oversampled, is excluded from the linear color scale of the first two panels. The remaining German-speaking cantons are included, with invited participants proportionally reflecting their respective populations. Response rates vary across cantons, ranging from 14.29\% (Glarus) to 34.10\% (Lucerne).
 
@@ -255,35 +250,16 @@ Variable & Value & MTMC21 & Pre-study & Main study\\
 
 Despite successful sampling, a re-weighting scheme was implemented to enhance sample representativeness. Using iterative proportional fitting, weights were adjusted based on specified variables, excluding \emph{Telework} and \emph{Mobility Tools} due to aforementioned limited comparability. These weights were applied to aggregate statistics whenever findings were generalized to the entire population, employing the \pkg{anesrake} package \citep{anesrake} for weight determination.
 
-Building on \citet{axhausen2019predicting}, we estimated a linear regression model relating response burden scores to log-transformed response rates
-%
-\begin{equation}
-\log \left( \frac{y_i}{100 - y_i} \right) = \beta_0 + \beta_1 \frac{x_i}{1000} + \varepsilon_i
-\label{eq:response_burden}
-\end{equation}
-%
-where $y_i$ denotes the response rate (in percent), $x_i$ represents the ex-ante response burden score, and $\varepsilon_i$ is a normally distributed clustered error term. Observations were weighted by the square root of the sample size. The model was estimated for the entire sample and separately for recruitment by incentive status (\emph{Pre-study:} No recruitment, no incentive; \emph{Stage I (all):} No recruitment, no incentive; \emph{Stage II and III:} Recruitment and incentive).
-
-\begin{landscape}
-<<echo=FALSE, results=tex>>=
-cat(response_rate_analysis$table_both)
-@
-\end{landscape}
-
-In comparison to the previous publication \citep{schmid2019predicting}, 14 additional surveys contributed by members of the \emph{Institute of Transport Planning and Systems} (IVT) at ETH Zurich were included. Updated model estimates with clustered standard errors beside the estimates based on the last publication sample are reported in \cref{tab:response-rate-analysis-both}. A new group (no recruitment but with incentive payments) is now part of the sample, however the effect of the response burden is not significant because of limited sample size. Due to the logistic transformation, parameters reflect changes in log-odds with marginal increases in response burden scores. The exponential $\exp(\beta_1)$ represents a marginal change in odds ratio (i.e., participation vs. non-participation). The back-transformed relationship between response burden and response rates is visualized in \cref{fig:response-rate-analysis}, alongside 95\% confidence intervals. Commenting on the estimates, the effect of response burden is generally more negative than previously expected. The strongest effect can be found for the recruited subsample without incentive payment (\emph{Yes, no}), where the odds of participating decrease by $(\exp(\beta_1/1000)-1)*100 = -0.298$, if the response burden score increases by 100 points (i.e., roughly 1/3). Whereas previously, the pooled effect of an increase in the response burden of 100 points was reported to be 6\% it now is 10\% decrease in the odds.
-
-\setkeys{Gin}{width=0.8\textwidth}
+\setkeys{Gin}{width=0.7\textwidth}
 \begin{figure}[htbp]
 \centering
 <<echo=FALSE, fig=TRUE, width=5.5, height=5.25>>=
 response_rate_analysis$p
 @
-\caption{\label{fig:response-rate-analysis} Updated relationship between response burden score and response rates.}
+\caption{\label{fig:response-rate-analysis} Relationship between response burden score and response rates. The surveys of this study are enlarged.}
 \end{figure}
 
-Response rates closely approximate ex-ante predictions, with the exception of the \emph{pre-study}, falling below the 95\% confidence bound. A potential explanation could be fatigue among respondents sourced via an address dealer, possibly due to frequent solicitations. Addresses for the main study were sourced from the Federal Statistical Office's official sampling frame, with careful measures to avoid repeated sampling. Additionally, initial participation was likely influenced by potential incentives offered upon completion of all three survey stages.
-
-Recruitment shifts the curve, while incentives flatten it. Notably, the domain above a response burden score of 2`000 is sparsely populated, and the few observations strongly influence the curve's shape. However, surveys beyond 2`000 points appear overly burdensome for respondents, sustaining high response rates only through recruitment efforts combined with incentive payments, intensive care of the respondents and general interest in the topic of these intense studies.
+Figure~\ref{fig-response-rate-analysis} shows the relationship between response burden and response rates, alongside 95\% confidence intervals. The surveys of this study have enlarged symbols. Response rates closely approximate ex-ante predictions, with the exception of the \emph{pre-study}, falling below the 95\% confidence bound. A potential explanation could be fatigue among respondents sourced via an address dealer, possibly due to frequent solicitations. Addresses for the main study were sourced from the Federal Statistical Office's official sampling frame, with careful measures to avoid repeated sampling. Additionally, initial participation was likely influenced by potential incentives offered upon completion of all three survey stages.
 
 The variability in telework choices within the SP experiment is illustrated in \cref{fig:wfh-choice-variation}. Frequencies of telework choices reflect typical experimental work arrangement conditions but may not generalize universally. Choices of two to three teleworking days per week dominate, each accounting for over 30\% of choices. Moreover, aggregate SP telework supply closely matches free-choice telework supply ($\Delta -0.22$ days/week), with stated frequencies differing only marginally from free-choice frequencies in most instances. This suggests that the average pre-selected telework arrangement offers limited incentives for deviation beyond the marginal day.
 
@@ -301,7 +277,7 @@ Given respondents first selected preferred telework arrangements before specifyi
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, width=8>>=
+<<echo=FALSE, fig=TRUE, width=8, height=6.5>>=
 wfh_attribute_level_balance$p
 @
 \caption{\label{fig:wfh-attribute-level-balance} Relation between attribute levels and aggregate telework supply (blue lines, left y-axis) and attribute level balance (orange lines, right y-axis).}
@@ -375,21 +351,75 @@ mto_wfh_variation$p
 
 To assess the telework treatment effects, we conducted simple probit regressions, regressing telework frequency on mobility tool ownership. Due to observed non-linearities, separate coefficients were estimated for each telework frequency. Further distinctions were made between E-bikes and regular bikes, as well as between national and regional PT season tickets (ST). Results including estimates and standard errors are presented in \cref{tab:bootstrap}. Bootstrapped ownership shares derived from these probit models, along with their corresponding 95\% confidence intervals (accounting for uncertainty in parameter estimates), are illustrated in \cref{fig:bootstrap}.
 
-\begin{landscape}
+{\setlength{\tabcolsep}{1pt}  % adjust column padding
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lD{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}}
+\toprule
+& \multicolumn{1}{c}{Bike} & \multicolumn{1}{c}{Car} & \multicolumn{1}{c}{Car sharing} & \multicolumn{1}{c}{E-bike} & \multicolumn{1}{c}{National ST} & \multicolumn{1}{c}{Half-fare} & \multicolumn{1}{c}{Regional ST}\\
+\midrule
 <<echo=FALSE, results=tex>>=
-cat(bootstrap$texreg)
+# paste(rep("D{.}{.}{-1}", 7), collapse = "")
+mat <- datapap::bootstrap$matreg
+## dcolumn does not like $
+mat <- apply(mat, c(1, 2), function(x) gsub("\\$", "", x))
+
+mat[mat == "wfh1"] <- "1 d/week"
+mat[mat == "wfh2"] <- "2 d/week"
+mat[mat == "wfh3"] <- "3 d/week"
+mat[mat == "wfh4"] <- "4 d/week"
+mat[mat == "wfh5"] <- "5 d/week"
+
+mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
+mat_tex[12] <- paste(mat_tex[12], "\\midrule")
+writeLines(mat_tex)
 @
-\end{landscape}
+\bottomrule
+\multicolumn{8}{l}{\Sexpr{signif_codes()};}\\
+\multicolumn{8}{l}{ST = Season ticket}\\
+\end{tabular}
+}%
+\caption{\label{tab:bootstrap} Simple probit models regressing telework frequency (as an indicator) on mobility tool ownership.}
+\end{table}
+}
 
 Consistent with earlier observations, the overall trends remain unchanged (as expected). Notably, significant telework treatment effects were observed only for frequencies of four days per week or more, particularly impacting PT subscriptions (half-fare card, national, and regional season tickets). These effects are evident as individuals at higher telework frequencies opt to cancel their season tickets in favor of the half-fare card. Conversely, no significant substitution effect was observed for car ownership, though it may play a role for (E-)bikes at lower telework frequencies. Contrary, there is some indication that car as the other main commuting mode looses some ownership share while not as pronounced as for PT subscriptions and with the before mentioned reversal for fully remote workers.
 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, height=6, width=13>>=
-bootstrap$p
+<<echo=FALSE, fig=TRUE, height=8, width=8>>=
+plot.it <- function() {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  dat <- bootstrap$mat.bs
+  par(mfrow = c(3, 3))
+
+  plt <- function(x, main, col, col.zero) {
+    mean_line <- apply(x, 2, mean)
+    ml0 <- mean_line[1]
+    mean_line <- mean_line - ml0
+    mat <- t(x)
+    mat <- mat - ml0
+    matplot(x = 0:5, mat, type = "l", lty = 1, col = scales::alpha(col, alpha = 0.075),
+            xlab = "Telework frequency (d/week)",
+            ylab = "Ownership share (normalized)",
+            main = main)
+    grid()
+    lines(x = 0:5, y = mean_line, col = col, lwd = 2)
+    abline(h = 0, col = col.zero)
+  }
+
+  main <- c("Regular bike", "Car", "Car sharing", "E-bike", "National ST", "Half-fare", "Regional ST")
+  for (i in seq_along(dat)) {
+    plt(dat[[i]], main[i], my_colors$colvec[3], "darkgrey")
+  }
+}
+
+plot.it()
 @
-\caption{\label{fig:bootstrap} Bootstrapped ownership shares based on probit models linking telework frequency to ownership choices (\cref{tab:bootstrap}). $95\%$ confidence intervals reflect parameter estimation uncertainties. ST denotes season ticket.}
+\caption{\label{fig:bootstrap} Bootstrapped ownership shares based on probit models linking telework frequency to ownership choices (based on the models presented in Table~\ref{tab:bootstrap}). ST denotes season ticket.}
 \end{figure}
 
 \section{Conclusion}

@@ -9,21 +9,15 @@
 
 ## PROCEED HERE
 
-work in datapap folder (don't break paper vignette there, i.e., add)
-  in particular regression table and adjustments of colors
-  while you are at it, check out bootstrap stuff again (avoid bs if not necessary)
-
-(response rate analysis as 2nd chapter)
-
-decide if response rate analysis section can be dropped
-=> adjust in text (intro and conclusion)
+port citation stuff
+clean text formatting (be parsimonious with emph and stuff)
 
 ## Checklist port
 
 - [x] Include R libraries in `thesis.Rnw`
 - [ ] Namespace code chunks
 - [x] Use `\emph{}` instead of `\textit{}`
-- [ ] Port latex packages and commands to designated files
+- [x] Port latex packages and commands to designated files
 - [ ] Check number format (not in `$` and with bigmark)
 - [ ] Port bibliography
 - [ ] Namespace labels
@@ -47,7 +41,7 @@ decide if response rate analysis section can be dropped
 - [x] Add these packages to `_CRAN` (make sure you are on the correct branch...) and install
   - [x] `mpp`: no vignettes folder
   - [x] `mppData`: data package
-  - [x] `datapap`: no vignette built
+  - [x] `datapap`
   - [x] `responseRateAnalysis`
   - [x] `trb24`: no vignettes folder
   - [x] `OPSR`

@@ -637,7 +637,7 @@ mat_tex[19] <- paste(mat_tex[19], "\\pagebreak")
 writeLines(mat_tex)
 @
 \bottomrule
-\multicolumn{13}{l}{Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1;}\\
+\multicolumn{13}{l}{\Sexpr{signif_codes()};}\\
 \multicolumn{13}{l}{$\dagger$ Significant parameter difference at 5\% level}\\
 \caption{\label{tab:mpp-results} MMDCEV model estimates.}
 \end{longtable}
