@@ -154,35 +154,10 @@ While conceptually simpler, this design emphasizes the availability trade-off an
 
 The attributes and assumed reference values are detailed in \cref{tab:mto-attributes-levels}. The cost implications of owning and using a car were meticulously considered to provide a comparable basis for trade-offs with other mobility tools. Fixed costs, depreciation, taxes, insurance, and other expenses were factored into the analysis, with data sourced from the \citet{tcs} website for various vehicle classes and fuel types. See also the \pkg{tcsscraper} \proglang{Python} package available at \url{https://github.com/dheimgartner/tcsscraper} providing an API to retrieve many variables for the current Swiss car fleet.
 
-% \begin{center}
-% \begin{landscape}
-% \footnotesize
-% \begin{longtable}{@{}lllp{6cm}@{}}
-% \toprule
-% Attribute & Level & Reference & Remark\\
-% \midrule
-% \endfirsthead
-% \multicolumn{4}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
-% \toprule
-% Attribute & Level & Reference & Remark\\
-% \midrule
-% \endhead
-% \midrule
-% \multicolumn{4}{r}{\emph{Continued on next page}}
-% \endfoot
-% \endlastfoot
-% \input{chapters/datapap/tables/mto_attributes_levels}\\
-% \bottomrule
-% \multicolumn{4}{l}{*An archetype has the average car specifics for a certain car and fuel type combination}\\
-% \caption{\label{tab:mto-attributes-levels} Attributes and levels of the MTO-SP experiment.}
-% \end{longtable}
-% \end{landscape}
-% \end{center}
-
 {\setlength{\tabcolsep}{2pt}  % adjust column padding
 \begin{center}
 \scriptsize
-\begin{longtable}{@{}lllp{6cm}@{}}
+\begin{longtable}{@{}lllp{3.5cm}@{}}
 \toprule
 Attribute & Level & Reference & Remark\\
 \midrule
@@ -198,7 +173,7 @@ Attribute & Level & Reference & Remark\\
 \endlastfoot
 \input{chapters/datapap/tables/mto_attributes_levels}\\
 \bottomrule
-\multicolumn{4}{l}{*An archetype has the average car specifics for a certain car and fuel type combination}\\
+\multicolumn{4}{l}{*An archetype has the average car specifics for a certain car and fuel type combination; ST = Season ticket}\\
 \caption{\label{tab:mto-attributes-levels} Attributes and levels of the MTO-SP experiment.}
 \end{longtable}
 \end{center}
