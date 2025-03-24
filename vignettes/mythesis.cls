@@ -26,4 +26,10 @@
 \urlstyle{tt}\Url}\fi
 \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{\@doi{#1}}}}
 
+% some math stuff from jss.cls
+\newcommand{\E}{\mathsf{E}}
+\newcommand{\VAR}{\mathsf{VAR}}
+\newcommand{\COV}{\mathsf{COV}}
+\newcommand{\Prob}{\mathsf{P}}
+
 % End of class file
