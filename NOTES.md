@@ -14,12 +14,12 @@
 - [x] Include R libraries in `thesis.Rnw`
 - [x] Namespace code chunks
 - [x] Use `\emph{}` instead of `\textit{}`
-- [x] Port latex packages and commands to designated files
+- [ ] Port latex packages and commands to designated files
 - [x] Check number format (not in `$` and with bigmark)
-- [x] Port bibliography
+- [ ] Port bibliography
 - [ ] Namespace labels
-- [x] Organize `\todo{}`s at top
-- [x] Publication, contributions and changes table
+- [ ] Organize `\todo{}`s at top
+- [ ] Publication, contributions and changes table
 
 ## TODO
 
