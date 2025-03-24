@@ -12,7 +12,8 @@ Hello world!}%
 }
 
 <<rra-preliminaries, echo=FALSE, results=hide>>=
-## TODO
+my_colors <- c("aquamarine3", "darkorange", "blue4", "darkgrey")
+cat_cols <- c("RxI", "RxNI", "NRxI", "NRxNI")
 @
 
 %% -- Abstract -----------------------------------------------------------------

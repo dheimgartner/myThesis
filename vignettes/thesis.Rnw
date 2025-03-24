@@ -94,7 +94,7 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 % \SweaveInput{chapters/mpp/main}
 
 \cleardoublepage%
-\SweaveInput{chapters/responseRateAnalysis/main}
+\SweaveInput{chapters/rra/main}
 
 % \cleardoublepage%
 % \SweaveInput{chapters/datapap/main}

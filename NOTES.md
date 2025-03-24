@@ -9,6 +9,8 @@
 
 ## PROCEED HERE
 
+Maybe redefine Sinput and Soutput and stuff (see Sweave manual and jss.cls)
+
 ## Checklist port
 
 - [x] Include R libraries in `thesis.Rnw`
@@ -61,8 +63,9 @@
 - [ ] Make ownpubs in `publications.Rnw` work
 - [~] Captionsetup => I like it below
 - [ ] Formatting numbers (not in `$` and big mark `
-- [ ] Why is doi in bibliography not red?
-- [ ] Light blue references/links as Thoscha
+- [ ] See hyperlink setup and colors in https://github.com/dheimgartner/paperPackage/blob/main/inst/templates/JSS/jss.cls
+- [ ] Why is doi in bibliography not red? (see point above)
+- [ ] Light blue references/links as Thoscha (see point above)
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
 - [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
 
