@@ -154,7 +154,30 @@ While conceptually simpler, this design emphasizes the availability trade-off an
 
 The attributes and assumed reference values are detailed in \cref{tab:mto-attributes-levels}. The cost implications of owning and using a car were meticulously considered to provide a comparable basis for trade-offs with other mobility tools. Fixed costs, depreciation, taxes, insurance, and other expenses were factored into the analysis, with data sourced from the \citet{tcs} website for various vehicle classes and fuel types. See also the \pkg{tcsscraper} \proglang{Python} package available at \url{https://github.com/dheimgartner/tcsscraper} providing an API to retrieve many variables for the current Swiss car fleet.
 
-\input{chapters/datapap/tables/mto_attributes_levels}
+\begin{center}
+\begin{landscape}
+\footnotesize
+\begin{longtable}{@{}lllp{6cm}@{}}
+\toprule
+Attribute & Level & Reference & Remark\\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+\toprule
+Attribute & Level & Reference & Remark\\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\emph{Continued on next page}}
+\endfoot
+\endlastfoot
+\input{chapters/datapap/tables/mto_attributes_levels}\\
+\bottomrule
+\multicolumn{4}{l}{*An archetype has the average car specifics for a certain car and fuel type combination}\\
+\caption{\label{tab:mto-attributes-levels} Attributes and levels of the MTO-SP experiment.}
+\end{longtable}
+\end{landscape}
+\end{center}
 
 The generation of the random design is conceptualized in Algorithm \ref{alg:random-design}.
 
@@ -266,8 +289,59 @@ The variability in telework choices within the SP experiment is illustrated in \
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, height=4.25, width=8>>=
-wfh_choice_variation$p
+<<echo=FALSE, fig=TRUE, height=5, width=9.75>>=
+p1 <- function(offset = 100) {
+  dat <- wfh_choice_variation$input1
+  ml <- weighted.mean(dat$f, dat$n)
+  x. <- barplot(share ~ f, data = dat, ylim = c(0, 40), space = 0.1,
+                border = "white",
+                main = "Choice variation",
+                xlab = "Teleworking days", ylab = "Share (%)")
+  grid()
+  # box()
+  ## 0.7 == 0
+  offset <- diff(range(x.)) / offset
+  top <- 5
+  col <- datapap::my_colors$colvec[1]
+  x <- ml + x.[1]
+  rect(xleft = x - offset, ybottom = 0.1, xright = x + offset, ytop = top,
+       col = col, border = col)
+  text(x, y = top, labels = round(ml, 2), adj = c(0.5, -0.5), font = 2)
+  ## N
+  labels <- trimws(format(dat$n, big.mark = "'"))
+  text(x., y = dat$share, labels = labels, adj = c(0.5, -0.5))
+}
+
+p2 <- function(offset = 100) {
+  dat <- wfh_choice_variation$input2
+  ml <- weighted.mean(dat$diff, dat$n)
+  x. <- barplot(share ~ diff, data = dat, ylim = c(0, 50), space = 0.1,
+                border = "white",
+                main = "Choice variation",
+                xlab = "Chosen minus free-choice frequency (d/week)", ylab = "Share (%)")
+  grid()
+  # box()
+  ## 5.5 == 0
+  offset <- diff(range(x.)) / offset
+  top <- 6.25
+  col <- datapap::my_colors$colvec[1]
+  x <- ml + x.[6]
+  rect(xleft = x - offset, ybottom = 0.1, xright = x + offset, ytop = top,
+       col = col, border = col)
+  text(x, y = top, labels = round(ml, 2), adj = c(0.5, -0.5), font = 2)
+  ## N
+  labels <- trimws(format(dat$n, big.mark = "'"))
+  text(x., y = dat$share, labels = labels, adj = c(0.5, -0.5))
+}
+
+plot.it <- function(...) {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfrow = c(1, 2), ...)
+  p1(); p2()
+}
+
+plot.it()
 @
 \caption{\label{fig:wfh-choice-variation} Variation in telework choices and deviation from the free-choice scenario.}
 \end{figure}
@@ -307,7 +381,21 @@ We now turn to telework frequency shares before, during, and after the pandemic 
 
 While a majority (83.72\%) of those with teleworkable jobs work from home, employer constraints are still prevalent (table \emph{(11)}, row \emph{Budget}). To assess the extent of these constraints, refer to table \emph{(51)}, which cross-tabulates \emph{Budget} and \emph{Free-choice}. The upper triangular matrix indicates the share of employees who desire more frequent telework but are constrained. For instance, the first row, second column shows 6.23\% who wish to telework one day but are not allowed to. Totaling 26.47\% across the upper triangular matrix, highlights significant binding constraints. Understanding employer perspectives is crucial for interpreting telework frequencies.
 
-\input{chapters/datapap/tables/wfh_table_weighted_combined}
+\begin{table}
+\begin{center}
+\setlength\extrarowheight{0pt}{%
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllllllllllllll}
+\toprule
+\input{chapters/datapap/tables/wfh_table_weighted_combined}\\
+\bottomrule
+\multicolumn{15}{p{22cm}}{*Population where telework is feasible (Can == Yes), \emph{Budget:} Max. number of days allowed to telework, \emph{Current:} Telework frequency as of survey date (June - August 2023), \emph{Feasible:} Max. number of teleworking days feasible given job situation, \emph{Free-choice:} Free-choice telework frequency (given job situation), \emph{Lockdown:} Telework frequency during COVID-related lockdowns, \emph{Pre-COVID:} Telework frequency before the COVID-pandemic, \emph{Can:} Job is teleworkable, \emph{May:} Employer allows teleworking, \emph{Want:} Respondent wants to telework, \emph{Do:} Respondent teleworks.}\\
+\end{tabular}
+}%
+}%
+\caption{\label{tab:wfh-table-weighted-combined} Telework distributions and contingency tables.}
+\end{center}
+\end{table}
 
 \cref{fig:wfh-weekday-distribution} illustrates current telework distribution across weekdays for full-time and part-time employees. Mondays and Fridays are preferred telework days: Full-time employed favor Fridays, while part-time employed favor Mondays (potentially not working at all on Fridays). A preference for Mondays and Fridays can be observed among full-time employed teleworking at least three days a week.
 

@@ -25,17 +25,64 @@ bootstrap$texreg
 bootstrap$input
 
 
-## nice colors
-colvec <- c(1, 2, 3)
 
-x <- seq(1, 100, by = 0.1)
-n <- length(x)
-y1 <- log(x) + 0.3 * rnorm(n)
-y2 <- log(x) + 0.3 * rnorm(n)
-y3 <- log(x) + 0.3 * rnorm(n)
+## colors
+demo("colors")
 
-plot(NULL, xlim = c(0, 100), ylim = c(0, max(y1, y2, y3)), type = "n",
-     xlab = "x", ylab = "y")
-points(x, y1, col = colvec[1], lwd = 2)
-points(x, y2, col = colvec[2], lwd = 2)
-points(x, y3, col = colvec[3], lwd = 2)
+
+
+## choice variation plot
+library(datapap)
+p1 <- function(offset = 100) {
+  dat <- wfh_choice_variation$input1
+  ml <- weighted.mean(dat$f, dat$n)
+  x. <- barplot(share ~ f, data = dat, ylim = c(0, 40), space = 0.1,
+                border = "white",
+                main = "Choice variation",
+                xlab = "Teleworking days", ylab = "Share (%)")
+  grid()
+  # box()
+  ## 0.7 == 0
+  offset <- diff(range(x.)) / offset
+  top <- 5
+  col <- datapap::my_colors$colvec[1]
+  x <- ml + x.[1]
+  rect(xleft = x - offset, ybottom = 0.1, xright = x + offset, ytop = top,
+       col = col, border = col)
+  text(x, y = top, labels = round(ml, 2), adj = c(0.5, -0.5), font = 2)
+  ## N
+  labels <- trimws(format(dat$n, big.mark = "'"))
+  text(x., y = dat$share, labels = labels, adj = c(0.5, -0.5))
+}
+p1()
+
+p2 <- function(offset = 100) {
+  dat <- wfh_choice_variation$input2
+  ml <- weighted.mean(dat$diff, dat$n)
+  x. <- barplot(share ~ diff, data = dat, ylim = c(0, 50), space = 0.1,
+                border = "white",
+                main = "Choice variation",
+                xlab = "Chosen minus free-choice frequency (d/week)", ylab = "Share (%)")
+  grid()
+  # box()
+  ## 5.5 == 0
+  offset <- diff(range(x.)) / offset
+  top <- 6.25
+  col <- datapap::my_colors$colvec[1]
+  x <- ml + x.[6]
+  rect(xleft = x - offset, ybottom = 0.1, xright = x + offset, ytop = top,
+       col = col, border = col)
+  text(x, y = top, labels = round(ml, 2), adj = c(0.5, -0.5), font = 2)
+  ## N
+  labels <- trimws(format(dat$n, big.mark = "'"))
+  text(x., y = dat$share, labels = labels, adj = c(0.5, -0.5))
+}
+p2()
+
+plot.it <- function(...) {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfrow = c(1, 2), ...)
+  p1(); p2()
+}
+plot.it()
