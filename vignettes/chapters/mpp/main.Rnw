@@ -48,13 +48,23 @@ rn_work_outside_home <- function(df) {
 
 The MOBIS-Covid data provides a unique opportunity to put mobility adjustments observed during the crisis in perspective. A large panel has been tracked from before the crisis up until the end of 2022. Starting with 1`370 participants and observing a gradual drop-off, around 250 kept tracking throughout the whole study period of over 2 years. Switzerland lifted its measures counteracting the virus spread in mid-February 2022, reaching a potential new equilibrium in the months after. Descriptive indicators have been constructed for Switzerland in order to disentangle the narrative of the crisis from the perspective of transport demand. The descriptive findings are supplemented by a mixed multiple discrete-continuous extreme value model (MMDCEV). We find a shift in modal splits away from car and train, where in particular bus could expand its mode share. While the cycling and walking booms were temporary, the bicycle still shows slightly higher mode distance shares. There are observable differences between the working arrangements (home office, mixture and in-office), however, we do not find evidence that preferences differ substantially. This suggests that the working arrangement segments the population along socioeconomic dimensions with different mobility behaviors and mode preferences. Modes are more satiated in the post-pandemic world, hinting that people use fewer modes in their weekly modal mix but use them more intensely. However, the model suggests that the pandemic should not be read as a structural break in mode preferences. We will therefore likely see further convergence to the pre-pandemic equilibrium.
 
-\begin{longtable}{p{4cm}p{6.8cm}}
-\emph{This chapter consists of the following peer-reviewed journal paper} & Heimgartner D. and K. W. Axhausen (2023) Modal Splits Before, During, and After the Pandemic in Switzerland, \emph{Transportation Research Record}, \textbf{2678} (7), 1084--1099.\\
-\addlinespace
-\emph{Author contributions} & Study conception and design: D. Heimgartner, K. W. Axhausen; data collection: D. Heimgartner; analysis and interpretation of results: D. Heimgartner; draft manuscript preparation: D. Heimgartner, K. W. Axhausen. All authors reviewed the results and approved the final version of the manuscript.\\
-\addlinespace
-\emph{The following changes were made} & Figure~\ref{fig:participation-and-casenumbers} and Table~\ref{tab:mpp-results} were improved for readability; \emph{Work-outside-home} was relabeled to \emph{Office} both in the figure legends and text; A short introductory text after Section~\ref{sec:method} was added.\\
-\end{longtable}
+\begin{ChapterInfoTable}
+\ChapterInfoEntry{%
+This chapter is based on the following paper
+}{%
+Heimgartner D. and K. W. Axhausen (2023) Modal Splits Before, During, and After the Pandemic in Switzerland, \emph{Transportation Research Record}, \textbf{2678} (7), 1084--1099.
+}%
+\ChapterInfoEntry{
+Author contributions
+}{%
+Study conception and design: D. Heimgartner, K. W. Axhausen; data collection: D. Heimgartner; analysis and interpretation of results: D. Heimgartner; draft manuscript preparation: D. Heimgartner, K. W. Axhausen. All authors reviewed the results and approved the final version of the manuscript.
+}%
+\ChapterInfoEntry{
+The following changes were made
+}{%
+Figure~\ref{fig:participation-and-casenumbers} and Table~\ref{tab:mpp-results} were improved for readability; \emph{Work-outside-home} was relabeled to \emph{Office} both in the figure legends and text; A short introductory text after Section~\ref{sec:method} was added.
+}%
+\end{ChapterInfoTable}
 
 %% -- Introduction -------------------------------------------------------------
 

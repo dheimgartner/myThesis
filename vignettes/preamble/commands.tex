@@ -7,6 +7,20 @@
 \normalmarginpar
 }
 
+%% for underlying paper, contributions and changes
+\newenvironment{ChapterInfoTable}
+{
+\begin{longtable}{p{3.5cm}p{7.3cm}}
+}
+{
+\end{longtable}
+}
+
+\newcommand{\ChapterInfoEntry}[2]{
+\small{\emph{#1}} & #2 \\
+\addlinespace
+}
+
 %% -- opsr ---------------------------------------------------------------------
 \newcommand{\jth}{\ensuremath{j^{\mathrm{th}}\,}}  % jth will never follow by punctuation
 \newcommand{\Xb}{\boldsymbol{X_j}\boldsymbol{\beta_j}}

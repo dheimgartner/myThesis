@@ -9,8 +9,6 @@
 
 ## PROCEED HERE
 
-table with contributions and revisions and stuff
-
 ## Checklist port
 
 - [x] Include R libraries in `thesis.Rnw`
