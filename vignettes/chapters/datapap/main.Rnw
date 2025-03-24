@@ -11,6 +11,7 @@ Hello world!}%
 \item 95\% confidence bounds to Figure~\ref{fig:bootstrap}
 \item There is sometimes weird formatting going on at the linebreak in Table~\ref{tab:mzmv-marginals}
 \item Namespace labels
+\item Apply \code{my\_theme} (but needs to be done in \pkg{datapap}...)
 \end{itemize}
 }
 

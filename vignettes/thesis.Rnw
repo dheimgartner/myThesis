@@ -44,6 +44,8 @@ library("responseRateAnalysis")
 ## datapap
 library("datapap")
 
+ggplot2::theme_set(myThesis::my_theme())
+
 ## maybe adjust width here...
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
         digits = 3)
@@ -88,14 +90,14 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 \def\dir{chapters/introduction}
 \include{\dir/main}
 
-\cleardoublepage%
-\SweaveInput{chapters/mpp/main}
+% \cleardoublepage%
+% \SweaveInput{chapters/mpp/main}
 
 \cleardoublepage%
 \SweaveInput{chapters/responseRateAnalysis/main}
 
-\cleardoublepage%
-\SweaveInput{chapters/datapap/main}
+% \cleardoublepage%
+% \SweaveInput{chapters/datapap/main}
 
 \appendix
 \cleardoublepage%

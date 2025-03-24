@@ -1,4 +1,5 @@
-my_theme <- function (...) {
+#' @export
+my_theme <- function(...) {
   my_theme <- theme(
     plot.title = element_text(face = "bold",
                               hjust = 0,
@@ -7,7 +8,10 @@ my_theme <- function (...) {
     panel.background = element_rect(fill = "white", color = "black", linewidth = 0.9),
     legend.position = "bottom",
     legend.key = element_blank(),
-    panel.grid = element_blank(),
+    panel.grid.major = element_line(color = "lightgray", linetype = "dotted",
+                                    linewidth = 0.2),
+    panel.grid.minor = element_blank(),
+    # panel.grid = element_blank(),
     strip.background = element_blank(),
     axis.ticks.length = unit(0.15, "cm"),
     axis.text.x = element_text(color = "black", margin = margin(4, 0, 0, 0)),
@@ -18,6 +22,7 @@ my_theme <- function (...) {
   my_theme
 }
 
+#' @export
 expander <- function(ex = c(0, 0), ey = c(0, 1)) {
   list(
     scale_x_continuous(expand = ex),
@@ -25,9 +30,9 @@ expander <- function(ex = c(0, 0), ey = c(0, 1)) {
   )
 }
 
-
-add_grid <- function (color = "grey", linetype = "dotted", linewidth = 0.2,
-                      ...) {
+#' @export
+add_grid <- function(color = "lightgrey", linetype = "dotted", linewidth = 0.2,
+                     ...) {
   grid <- theme(panel.grid.major = element_line(color = color,
                                                 linewidth = linewidth, linetype = linetype, ...), )
   grid

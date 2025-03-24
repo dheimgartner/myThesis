@@ -22,19 +22,6 @@ add_zero_line <- mpp:::add_zero_line
 add_end_markers <- mpp:::add_end_markers
 add_baseline_comparison <- mpp:::add_baseline_comparison
 
-my_theme <-
-  ggplot2::theme_light() +
-  ggplot2::theme(legend.position = "bottom",
-                 panel.border = element_rect(fill = NA, colour = "black",
-                                             linewidth = rel(1.2)),
-                 axis.ticks = element_line(colour = "black", linewidth = rel(1)),
-                 strip.background = element_rect(fill = "white"),
-                 strip.text = element_text(colour = "black"),
-                 panel.grid.major.x = element_blank(),
-                 panel.grid.minor.x = element_blank())
-
-ggplot2::theme_set(my_theme)
-
 rn_work_outside_home <- function(df) {
   df %>%
     mutate(working_arrangement = factor(
