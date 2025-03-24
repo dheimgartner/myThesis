@@ -50,11 +50,11 @@
   - [ ] Author contributions section => Do I need some signature/confirmation from the co-authors?
   - [x] `mpp`: no vignettes folder
   - [ ] `responseRateAnalysis`
-  - [ ] `datapap`: no vignette built
+  - [x] `datapap`: no vignette built
   - [ ] `trb24`: no vignettes folder
   - [ ] `OPSR`
   - [ ] `TWTE`
-  - [ ] `OPSRtools`
+  - [ ] `OPSRtools` (maybe before `TWTE`?)
 - [x] Adjust bibliography style... maybe Makefile is not needed in the end...
   - See `preamble/general.tex` and `preamble/natbib/` and adjustments in `bibliography.Rnw`
 - [x] What font are they using? => hermann zapf's palatino and eulermath

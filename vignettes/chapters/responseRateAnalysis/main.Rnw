@@ -1,0 +1,18 @@
+\chapter{Predicting response rates once again}
+\label{ch:responseRateAnalysis}
+
+\dictum[John Doe]{%
+Hello world!}%
+\vskip 1em
+
+\todo{%
+\begin{itemize}
+\item Foo
+\end{itemize}
+}
+
+<<responseRateAnalysis-preliminaries, echo=FALSE, results=hide>>=
+## TODO
+@
+
+%% -- Abstract -----------------------------------------------------------------
