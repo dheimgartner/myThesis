@@ -9,6 +9,8 @@
 
 ## PROCEED HERE
 
+Maybe use Sinput Soutput from codeformatting branch...
+
 ## Checklist port
 
 - [x] Include R libraries in `thesis.Rnw`
