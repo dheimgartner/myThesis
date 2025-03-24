@@ -9,8 +9,6 @@
 
 ## PROCEED HERE
 
-Maybe redefine Sinput and Soutput and stuff to make it somewhat smaller (see Sweave manual and jss.cls)
-
 ## Checklist port
 
 - [x] Include R libraries in `thesis.Rnw`

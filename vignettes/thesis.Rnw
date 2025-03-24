@@ -23,7 +23,7 @@
 % \addbibresource{bibliography.bib}
 % \addbibresource{misc.bib}
 
-
+%% If you define your own Sinput and Soutput => put below % \usepackage{Sweave}
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
 library("myThesis")
