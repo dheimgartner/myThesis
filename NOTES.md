@@ -10,6 +10,7 @@
 ## PROCEED HERE
 
 port citation stuff
+ref sections, figures, etc.
 clean text formatting (be parsimonious with emph and stuff)
 
 ## Checklist port

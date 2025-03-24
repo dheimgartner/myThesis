@@ -22,15 +22,15 @@ The Swiss New Normal is defined by a substantial increase in telework adoption f
 \section{Introduction and motivation}
 \label{sec:introduction-and-motivation}
 
-The revolution in information and communication technologies (ICTs) enabled remote work, sparking interest in the relationship between telework, transport demand, energy, and climate impacts \citep{salomon1986telecommunications, hook2020systematic}. Alongside economic and digital transformations, the service industry's growth has also contributed to the steady increase in telework. However, the COVID-19 pandemic dramatically accelerated this trend, quadrupling the home office share in a few quarters \citep{barrero2023evolution}. It remains uncertain how pre-pandemic findings translate to the post-pandemic ``new normal''. For instance, \citet{asmussen2023modeling} suggests a reduction in the heterogeneity of telework adoption and frequency, with fewer sociodemographic and work-related variables influencing these factors. Additionally, the literature shows significant variation in home office potential and adoption across countries, cities, and economic sectors \citep[see][]{dingel2020many, groen2018managing, cetrulo2020privilege}, complicating the generalization of findings.
+The revolution in information and communication technologies (ICTs) enabled remote work, sparking interest in the relationship between telework, transport demand, energy, and climate impacts \citep{Salomon:1986, Hook+Etal:2020}. Alongside economic and digital transformations, the service industry's growth has also contributed to the steady increase in telework. However, the COVID-19 pandemic dramatically accelerated this trend, quadrupling the home office share in a few quarters \citep{Barrero+Etal:2023}. It remains uncertain how pre-pandemic findings translate to the post-pandemic ``new normal''. For instance, \citet{Asmussen+Etal:2023} suggests a reduction in the heterogeneity of telework adoption and frequency, with fewer sociodemographic and work-related variables influencing these factors. Additionally, the literature shows significant variation in home office potential and adoption across countries, cities, and economic sectors \citep[see][]{Dingel+Neiman:2020, Groen+Etal:2018, Cetrulo+Etal:2020}, complicating the generalization of findings.
 
-Before the pandemic, working from home was rare and often stigmatized, seen as detrimental to career advancement, which discouraged workers from expressing their desire to telework \citep{brewer2000distributed}. Indeed, \citet{mokhtarian1996two} found that telework was a \emph{preferred impossible} option for many workers. The pandemic, however, helped break this stigma and relaxed some constraints, making telework a \emph{preferred possible} scenario for many.
+Before the pandemic, working from home was rare and often stigmatized, seen as detrimental to career advancement, which discouraged workers from expressing their desire to telework \citep{Brewer+Hensher:2020}. Indeed, \citet{Mokhtarian+Salomon:1996} found that telework was a \emph{preferred impossible} option for many workers. The pandemic, however, helped break this stigma and relaxed some constraints, making telework a \emph{preferred possible} scenario for many.
 
-Hybrid work policies can benefit employees and employers by responding to employee demands, reducing labor costs, expanding the labor pool, lowering office space expenditures, and complying with environmental mandates \citep[see][]{nilles1988traffic, olson1989work, bernardino}. Therefore, it should be acknowledged that observed telework frequencies are the outcome of a negotiation process between employers and employees (i.e., the classical demand and supply side on labor markets).
+Hybrid work policies can benefit employees and employers by responding to employee demands, reducing labor costs, expanding the labor pool, lowering office space expenditures, and complying with environmental mandates \citep[see][]{Nilles:1988, Olson:1989, Bernardino:1995}. Therefore, it should be acknowledged that observed telework frequencies are the outcome of a negotiation process between employers and employees (i.e., the classical demand and supply side on labor markets).
 
 Despite significant interest in telework research, data sources tailored to understanding its complexities are rare and often limited to national or regional census data, which provide sparse telework-related information. These existing data sources struggle to disentangle the reasons behind an individual's telework habits, such as personal preferences, job-related factors, and employer constraints. Our data collection aims to fill this gap for Switzerland, providing a rich dataset to support various telework-related research questions. Thus, the primary motivation for this paper is to detail the survey methods and collected data also to facilitate data sharing with interested researchers.
 
-The choice to telework depends not only on individual characteristics and attitudes but also on work arrangement characteristics. Despite the recognized need for this, little work has explored telework adoption and frequency choices under different work arrangements. \citet{bernardino1993stated} investigated choices involving telecommuting frequency, schedule flexibility, salary, available equipment, and cost responsibilities, concluding that incurring costs is more acceptable than a salary decrease. Furthermore, an asymmetry exists between salary increases and decreases, where a decrease hinders adoption more than an increase encourages it, consistent with prospect theory \citealp{kahneman2013prospect}. In contrast, \citet{sullivan1993choice} focused exclusively on cost implications without examining other factors like schedule flexibility. \citet{appel2022attract} studied workplace location preferences, finding that workplace attractiveness can influence telework decisions, with factors such as crowdedness and noise being significant. This paper expands on this research by implementing a work arrangement stated preference (SP) experiment, where participants select their preferred work arrangement and intended telework frequency, based on attributes and levels defined through a pre-study.
+The choice to telework depends not only on individual characteristics and attitudes but also on work arrangement characteristics. Despite the recognized need for this, little work has explored telework adoption and frequency choices under different work arrangements. \citet{Bernardino+Etal:1993} investigated choices involving telecommuting frequency, schedule flexibility, salary, available equipment, and cost responsibilities, concluding that incurring costs is more acceptable than a salary decrease. Furthermore, an asymmetry exists between salary increases and decreases, where a decrease hinders adoption more than an increase encourages it, consistent with prospect theory \citep{Kahneman+Tversky:1979}. In contrast, \citet{Sullivan+Etal:1993} focused exclusively on cost implications without examining other factors like schedule flexibility. \citet{Appel+Etal:2022} studied workplace location preferences, finding that workplace attractiveness can influence telework decisions, with factors such as crowdedness and noise being significant. This paper expands on this research by implementing a work arrangement stated preference (SP) experiment, where participants select their preferred work arrangement and intended telework frequency, based on attributes and levels defined through a pre-study.
 
 Literature on the energy and climate impacts of teleworking highlights the importance of indirect channels that might offset reduced commuting, including changes in non-work travel and home energy consumption \citep{hook2020systematic}. Significant lifestyle changes might bring about higher-order effects \citep{horner2016known} such as relocation \citep{de2018working} or re-evaluation of mobility tool ownership. In Switzerland, public transport (PT) is a primary commuting mode, with subscriptions like the national season ticket (GA) being popular. Previous studies suggest that in countries where PT is common, teleworking has less impact on energy use compared to countries dominated by private car use \citep{mokhtarian2009if, van2014worthwhile}. However, reduced PT commutes might lead individuals to reconsider PT subscriptions and potentially shift to less sustainable modes such as cars. Mobility tool ownership significantly influences mode choice \citep{schmid2023simultaneous} and thus the transport equilibrium. Telework could make car ownership more attractive by enabling greater use of the household car by other members on home office days \citep{hook2020systematic}. \citet{wang2023teleworking} calls for further exploration of the relationship between telework and vehicle ownership. This paper addresses this by investigating the higher-order effect of telework on mobility tool ownership, using a second SP experiment to examine the relationship between work from home (WFH) frequency and mobility tool ownership (car, car sharing, bike, E-bike, and various PT subscriptions).
 
@@ -154,9 +154,34 @@ While conceptually simpler, this design emphasizes the availability trade-off an
 
 The attributes and assumed reference values are detailed in \cref{tab:mto-attributes-levels}. The cost implications of owning and using a car were meticulously considered to provide a comparable basis for trade-offs with other mobility tools. Fixed costs, depreciation, taxes, insurance, and other expenses were factored into the analysis, with data sourced from the \citet{tcs} website for various vehicle classes and fuel types. See also the \pkg{tcsscraper} \proglang{Python} package available at \url{https://github.com/dheimgartner/tcsscraper} providing an API to retrieve many variables for the current Swiss car fleet.
 
+% \begin{center}
+% \begin{landscape}
+% \footnotesize
+% \begin{longtable}{@{}lllp{6cm}@{}}
+% \toprule
+% Attribute & Level & Reference & Remark\\
+% \midrule
+% \endfirsthead
+% \multicolumn{4}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+% \toprule
+% Attribute & Level & Reference & Remark\\
+% \midrule
+% \endhead
+% \midrule
+% \multicolumn{4}{r}{\emph{Continued on next page}}
+% \endfoot
+% \endlastfoot
+% \input{chapters/datapap/tables/mto_attributes_levels}\\
+% \bottomrule
+% \multicolumn{4}{l}{*An archetype has the average car specifics for a certain car and fuel type combination}\\
+% \caption{\label{tab:mto-attributes-levels} Attributes and levels of the MTO-SP experiment.}
+% \end{longtable}
+% \end{landscape}
+% \end{center}
+
+{\setlength{\tabcolsep}{2pt}  % adjust column padding
 \begin{center}
-\begin{landscape}
-\footnotesize
+\scriptsize
 \begin{longtable}{@{}lllp{6cm}@{}}
 \toprule
 Attribute & Level & Reference & Remark\\
@@ -176,8 +201,8 @@ Attribute & Level & Reference & Remark\\
 \multicolumn{4}{l}{*An archetype has the average car specifics for a certain car and fuel type combination}\\
 \caption{\label{tab:mto-attributes-levels} Attributes and levels of the MTO-SP experiment.}
 \end{longtable}
-\end{landscape}
 \end{center}
+}
 
 The generation of the random design is conceptualized in Algorithm \ref{alg:random-design}.
 
@@ -317,7 +342,7 @@ p2 <- function(offset = 100) {
   ml <- weighted.mean(dat$diff, dat$n)
   x. <- barplot(share ~ diff, data = dat, ylim = c(0, 50), space = 0.1,
                 border = "white",
-                main = "Choice variation",
+                main = "Choice deviation",
                 xlab = "Chosen minus free-choice frequency (d/week)", ylab = "Share (%)")
   grid()
   # box()
