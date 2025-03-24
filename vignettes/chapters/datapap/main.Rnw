@@ -10,6 +10,7 @@ Hello world!}%
 \item Maybe adjust colors...
 \item 95\% confidence bounds to Figure~\ref{fig:bootstrap}
 \item There is sometimes weird formatting going on at the linebreak in Table~\ref{tab:mzmv-marginals}
+\item Namespace labels
 \end{itemize}
 }
 
@@ -26,7 +27,7 @@ Heimgartner D. and K. W. Axhausen (2024) Multimodality in the Swiss New Normal: 
 \ChapterInfoEntry{
 Author contributions
 }{%
-Tbc
+Study conception and design: all authors; survey design: all authors; data collection: D. Heimgartner; analysis and interpretation of results: D. Heimgartner; original draft; D. Heimgartner; writing, reviewing and editing: all authors. All authors reviewed and approved the final manuscript.
 }%
 \ChapterInfoEntry{
 The following changes were made
@@ -237,7 +238,7 @@ As previously mentioned, the survey instrument in stage I targeted the entire wo
 \setkeys{Gin}{width=0.8\textwidth}
 \begin{figure}
 \centering
-<<echo=FALSE, fig=TRUE, height=7>>=
+<<datapap-cant-dist, echo=FALSE, fig=TRUE, width=5, height=7>>=
 cantonal_distribution$plot
 @
 \caption{\label{fig:cantonal-distribution} Distribution of invited participants, survey completion, and response rates across cantons. Zurich is excluded from the color scale in the first two panels to highlight variation among other cantons.}
@@ -315,10 +316,10 @@ Table~\ref{tab:mzmv-marginals} presents marginal distributions of shared variabl
 
 Despite successful sampling, a re-weighting scheme was implemented to enhance sample representativeness. Using iterative proportional fitting, weights were adjusted based on specified variables, excluding telework and mobility tool ownership due to aforementioned limited comparability. These weights were applied to aggregate statistics whenever findings were generalized to the entire population, employing the \pkg{anesrake} \proglang{R}-package \citep{Pasek:2018} for weight determination.
 
-\setkeys{Gin}{width=0.7\textwidth}
+\setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, width=5.5, height=5.25>>=
+<<datapap-rra, echo=FALSE, fig=TRUE, width=4.5, height=4.25>>=
 response_rate_analysis$p
 @
 \caption{\label{fig:response-rate-analysis} Relationship between response burden score and response rates. The surveys of this study are enlarged.}
@@ -331,7 +332,7 @@ The variability in telework choices within the SP experiment is illustrated in F
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, height=5, width=9.75>>=
+<<datapap-wfh-var, echo=FALSE, fig=TRUE, height=5, width=9.75>>=
 p1 <- function(offset = 100) {
   dat <- wfh_choice_variation$input1
   ml <- weighted.mean(dat$f, dat$n)
@@ -393,7 +394,7 @@ Given respondents first selected preferred telework arrangements before specifyi
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, width=8, height=6.5>>=
+<<datapap-wfh-attr, echo=FALSE, fig=TRUE, width=8, height=6.5>>=
 wfh_attribute_level_balance$p
 @
 \caption{\label{fig:wfh-attribute-level-balance} Relation between attribute levels and aggregate telework supply (blue lines, left y-axis) and attribute level balance (orange lines, right y-axis).}
@@ -404,7 +405,7 @@ Figure~\ref{fig:mto-choice-variation} illustrates discrepancies between real-wor
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, width=4, height=3.75>>=
+<<datapap-mto-var=FALSE, fig=TRUE, width=4, height=3.75>>=
 mto_choice_variation$p
 @
 \caption{\label{fig:mto-choice-variation} Comparison of real-world mobility tool ownership shares and SP choice shares.}
@@ -444,7 +445,7 @@ Figure~\ref{fig:wfh-weekday-distribution} illustrates current telework distribut
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, width=7.4, height=5.75>>=
+<<datapap-weekday-dist, echo=FALSE, fig=TRUE, width=7.4, height=5.75>>=
 wfh_weekday_distribution$p
 @
 \caption{\label{fig:wfh-weekday-distribution} Distribution of telework shares across weekdays by number of teleworking days, for teleworking population only. Differentiating between full-time and part-time employed.}
@@ -455,7 +456,7 @@ Simulations based on telework access and frequency distributions project potenti
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, height=4.5, width=8>>=
+<<datapap-share-sim, echo=FALSE, fig=TRUE, height=4.5, width=8>>=
 wfh_share_simulation$p_
 @
 \caption{\label{fig:wfh-share-simulation-leeway} Evolution of telework frequency shares, before, during and after the pandemic (panel a), and potential leeway for teleworking shares on weekdays (panel b). Workforce population only.}
@@ -468,7 +469,7 @@ Therefore, clearer trends emerge from stated preference data where telework trea
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, height=5.75, width=14>>=
+<<datapap-mto-wfh-var, echo=FALSE, fig=TRUE, height=5.75, width=14>>=
 mto_wfh_variation$p
 @
 \caption{\label{fig:mto-wfh-variation} Comparison of mobility tool ownership shares by telework status and frequency. Panel a and b reflect ownership as of the survey period (June-August 2023), panel c is based on stated preference choices.}
@@ -489,7 +490,7 @@ To assess the telework treatment effects, we conducted simple probit regressions
 \toprule
 & \multicolumn{1}{c}{Bike} & \multicolumn{1}{c}{Car} & \multicolumn{1}{c}{Car sharing} & \multicolumn{1}{c}{E-bike} & \multicolumn{1}{c}{National ST} & \multicolumn{1}{c}{Half-fare} & \multicolumn{1}{c}{Regional ST}\\
 \midrule
-<<echo=FALSE, results=tex>>=
+<<datapap-bs-tab, echo=FALSE, results=tex>>=
 # paste(rep("D{.}{.}{-1}", 7), collapse = "")
 mat <- datapap::bootstrap$matreg
 ## dcolumn does not like $
@@ -519,7 +520,7 @@ Consistent with earlier observations, the overall trends remain unchanged (as ex
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<echo=FALSE, fig=TRUE, height=8, width=8>>=
+<<datapap-bs-fig, echo=FALSE, fig=TRUE, height=8, width=8>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))

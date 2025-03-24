@@ -57,7 +57,7 @@ Heimgartner D. and K. W. Axhausen (2023) Modal Splits Before, During, and After 
 \ChapterInfoEntry{
 Author contributions
 }{%
-Study conception and design: D. Heimgartner, K. W. Axhausen; data collection: D. Heimgartner; analysis and interpretation of results: D. Heimgartner; draft manuscript preparation: D. Heimgartner, K. W. Axhausen. All authors reviewed the results and approved the final version of the manuscript.
+Study conception and design: all authors; data collection: D. Heimgartner; analysis and interpretation of results: D. Heimgartner; draft manuscript preparation: all authors. All authors reviewed the results and approved the final version of the manuscript.
 }%
 \ChapterInfoEntry{
 The following changes were made

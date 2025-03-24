@@ -12,14 +12,14 @@
 ## Checklist port
 
 - [x] Include R libraries in `thesis.Rnw`
-- [ ] Namespace code chunks
+- [x] Namespace code chunks
 - [x] Use `\emph{}` instead of `\textit{}`
 - [x] Port latex packages and commands to designated files
-- [ ] Check number format (not in `$` and with bigmark)
-- [ ] Port bibliography
+- [x] Check number format (not in `$` and with bigmark)
+- [x] Port bibliography
 - [ ] Namespace labels
-- [ ] Organize `\todo{}`s at top
-- [ ] Publication, contributions and changes table
+- [x] Organize `\todo{}`s at top
+- [x] Publication, contributions and changes table
 
 ## TODO
 
@@ -62,7 +62,19 @@
 - [~] Captionsetup => I like it below
 - [ ] Formatting numbers (not in `$` and big mark `
 - [ ] Why is doi in bibliography not red?
-- [ ] light blue references/links as Thoscha
+- [ ] Light blue references/links as Thoscha
+- [ ] longtable in `\ChapterInfoTable` adds to table index...
 
+## Author contributions
+
+Statement: all authors or author 1, author 2; next statement: authors
+
+|Study conception and design
+Design and implementation of surveys
+Data processing
+|Analysis and interpretation of results
+|Original draft
+|Writing, reviewing and editing
+|All authors reviewed and approved the final manuscript
 
 
