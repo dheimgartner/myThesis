@@ -9,9 +9,8 @@
 
 ## PROCEED HERE
 
-port citation stuff
-ref sections, figures, etc.
 clean text formatting (be parsimonious with emph and stuff)
+table with contributions and revisions and stuff
 
 ## Checklist port
 
@@ -67,3 +66,6 @@ clean text formatting (be parsimonious with emph and stuff)
 - [ ] Formatting numbers (not in `$` and big mark `
 - [ ] Why is doi in bibliography not red?
 - [ ] light blue references/links as Thoscha
+
+
+

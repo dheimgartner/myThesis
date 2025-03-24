@@ -1,0 +1,17 @@
+The generation of the random design can be conceptualized as follows
+%
+\begin{enumerate}
+\item Generate the full factorial design resulting in over 11 million possible attribute level combinations.
+\item Apply preference constraints:
+\begin{itemize}
+\item If \emph{PT type} $\neq$ \emph{regional subsription} then set the attribute \emph{PT zones} to blank.
+\item If \emph{PT type} = \emph{Half-fare} then set the attribute \emph{Class} to blank.
+\end{itemize}
+\item Replace effect codes: Substitute reference values and apply the imposed cost structure (see Table~\ref{tab:mto-attributes-levels}). E.g., if \emph{PT class} = \emph{first} then multiply \emph{PT fixed cost} by 1.7.
+\item Random draw: For each participant
+\begin{itemize}
+\item If the participant does not have a driving license then eliminate the car and car sharing alternative.
+\item Take a random draw from the revised factorial design.
+\item Take a random draw from the individual-specific WFH choice set.
+\end{itemize}
+\end{enumerate}
