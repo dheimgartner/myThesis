@@ -9,7 +9,6 @@
 
 ## PROCEED HERE
 
-clean text formatting (be parsimonious with emph and stuff)
 table with contributions and revisions and stuff
 
 ## Checklist port
