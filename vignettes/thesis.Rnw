@@ -38,6 +38,9 @@ library("patchwork")
 library("apollo")
 library("kableExtra")
 
+## responseRateAnalysis
+library("responseRateAnalysis")
+
 ## datapap
 library("datapap")
 
@@ -85,14 +88,14 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 \def\dir{chapters/introduction}
 \include{\dir/main}
 
-% \cleardoublepage%
-% \SweaveInput{chapters/mpp/main}
+\cleardoublepage%
+\SweaveInput{chapters/mpp/main}
 
 \cleardoublepage%
 \SweaveInput{chapters/responseRateAnalysis/main}
 
-% \cleardoublepage%
-% \SweaveInput{chapters/datapap/main}
+\cleardoublepage%
+\SweaveInput{chapters/datapap/main}
 
 \appendix
 \cleardoublepage%

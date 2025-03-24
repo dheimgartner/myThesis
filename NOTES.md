@@ -64,6 +64,7 @@
 - [ ] Why is doi in bibliography not red?
 - [ ] Light blue references/links as Thoscha
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
+- [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
 
 ## Author contributions
 
