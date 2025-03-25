@@ -23,7 +23,6 @@
 % \addbibresource{bibliography.bib}
 % \addbibresource{misc.bib}
 
-%% If you define your own Sinput and Soutput => put below % \usepackage{Sweave}
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
 <<preliminaries, echo=FALSE, results=hide>>=
 library("myThesis")
@@ -45,6 +44,8 @@ library("responseRateAnalysis")
 library("datapap")
 
 ggplot2::theme_set(myThesis::my_theme())
+
+options(knitr.kable.NA = "")
 
 ## maybe adjust width here...
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
