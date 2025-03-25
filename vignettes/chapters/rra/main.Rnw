@@ -7,7 +7,7 @@ Hello world!}%
 
 \todo{%
 \begin{itemize}
-\item Full data sample (of Appendix is omitted); Basic workflow is simplified
+\item Namespace labels
 \end{itemize}
 }
 
@@ -20,12 +20,30 @@ cat_cols <- c("RxI", "RxNI", "NRxI", "NRxNI")
 
 We investigate the relation between a survey's response burden and response rate, differentiating recruitment efforts and incentives paid. The results indicate that the effect of response burden is more negative than previously expected. Recruitment shifts the response curve upwards, while incentives flatten it. Surveys beyond 2`000 points appear overly burdensome, sustaining high response rates only through recruitment coupled with incentives. Without incentives, the level effect of recruitment quickly vanishes. Contrary to previous findings, we cannot identify a negative time-trend. The data, functions and workflow underlying this analysis are organized as an \proglang{R}-package to foster a collective effort towards understanding response rates.
 
+\begin{ChapterInfoTable}
+\ChapterInfoEntry{%
+This chapter is based on the following paper
+}{%
+Heimgartner D. and K. W. Axhausen (2024) Predicting Response Rates Once Again, \emph{Transport Findings}.
+}%
+\ChapterInfoEntry{
+Author contributions
+}{%
+Study conception and design: all authors; data processing: D. Heimgartner; analysis and interpretation of the results: D. Heimgartner; original draft: D. Heimgartner; writing, reviewing and editing: all authors. All authors reviewed and approved the final manuscript.
+}%
+\ChapterInfoEntry{
+The following changes were made
+}{%
+The table containing the full data sample (originally in the Appendix) was omitted; The text elaborating on the basic workflow on Page~\pageref{p:workflow} was revised.
+}%
+\end{ChapterInfoTable}
+
 %% -- Questions ----------------------------------------------------------------
 
 \section{Questions}
 \label{sec:rra-questions}
 
-Counting \emph{response burden scores} \citep{schmid2019predicting} is not a very popular task at the Institute for Transport Planning and Systems (IVT, ETH Zurich). One or the other former PhD student got away without reporting them. However, the collective effort over the years yielded a unique dataset allowing us to understand response rates as a function of recruitment efforts and incentives. Other research institutes might therefore be encouraged to also contribute. This paper briefly elaborates the methodology once again and introduces the \pkg{responseRateAnalysis}~\proglang{R}-package (\url{https://github.com/dheimgartner/responseRateAnalysis}) with its helper functions to easily replicate the results. Since the last update \citep{axhausen2019predicting} a handful of students left not until the final response burden score of their surveys was counted. Thanks to them, we feel that the time is right to update response rates results once again.
+Counting \emph{response burden scores} \citep{Schmid+Axhausen:2019} is not a very popular task at the Institute for Transport Planning and Systems (IVT, ETH Zurich). One or the other former PhD student got away without reporting them. However, the collective effort over the years yielded a unique dataset allowing us to understand response rates as a function of recruitment efforts and incentives. Other research institutes might therefore be encouraged to also contribute. This paper briefly elaborates the methodology once again and introduces the \pkg{responseRateAnalysis}~\proglang{R}-package (\url{https://github.com/dheimgartner/responseRateAnalysis}) with its helper functions to easily replicate the results. Since the last update \citep{Axhausen+Schmid:2019} a handful of students left not until the final response burden score of their surveys was counted. Thanks to them, we feel that the time is right to update response rates results once again.
 
 The main purpose of this paper is to replicate the analysis, update the estimates based on the enlarged sample and to make the analysis easily replicable: The \proglang{R}-package can be installed as explained below but we hope that other research groups rather clone the repository and contribute with their scored survey instruments according to the guidelines outlined on GitHub so that we or they can predict response rates from time to time again.
 
@@ -56,7 +74,7 @@ tex <-
 tex
 @
 
-In comparison to the previous publication \citep{schmid2019predicting}, 14 additional surveys have been scored and categorized by IVT members. \emph{Recruitment} means that the respondents were contacted prior to the survey and they agreed to participate. \emph{Incentives} mean any form of stimulus to motivate respondents to participate (usually a monetary payment upon completion of the survey). Unfortunately, the form and level of the incentive have not been recorded. A new category (no recruitment but with incentive payments) can now be distinguished. However, only five studies fall in this category. The current state of the database is attached to the package \code{response\_rates}, documented (\code{?response\_rates}) and can be loaded by
+In comparison to the previous publication \citep{Schmid+Axhausen:2019}, 14 additional surveys have been scored and categorized by IVT members. \emph{Recruitment} means that the respondents were contacted prior to the survey and they agreed to participate. \emph{Incentives} mean any form of stimulus to motivate respondents to participate (usually a monetary payment upon completion of the survey). Unfortunately, the form and level of the incentive have not been recorded. A new category (no recruitment but with incentive payments) can now be distinguished. However, only five studies fall in this category. The current state of the database is attached to the package \code{response\_rates}, documented (\code{?response\_rates}) and can be loaded by
 %
 <<rra-data>>=
 data("response_rates", package = "responseRateAnalysis")
@@ -91,7 +109,7 @@ plot.it()
 \caption{\label{fig:response-burden-scores} Distribution of the response burden scores for \emph{recruitment x incentive} categories. \emph{RxI} stands for recruited, with incentives, \emph{N} negates.}
 \end{figure}
 
-Building on \citet{axhausen2019predicting}, we estimate a logistic regression model relating response burden scores to log-transformed response rates
+Building on \citet{Axhausen+Schmid:2019}, we estimate a logistic regression model relating response burden scores to log-transformed response rates
 %
 \begin{equation} \label{eq:response-burden}
 \log \left( \frac{y_i}{100 - y_i} \right) = \beta_0 + \beta_1 \frac{x_i}{1000} + \varepsilon_i
@@ -106,12 +124,13 @@ If a survey instrument's response burden score increases by 100 points, the odds
 \end{equation}
 
 The basic workflow is as follows
+\label{p:workflow}
 %
 \begin{enumerate}
 \item \fct{default\_data} loads and prepares the \code{response\_rates} data for estimation. It selects the input variables, computes the weights, rescales the response burden score and log transforms the response rate.
 \item Fit a linear regression model with \fct{lm}.
-\item Add clustered standard errors with \fct{add\_clustered()} which uses the \pkg{clubSandwich} \citep{clubsandwich} and \pkg{lmtest} package \citep{lmtest} under the hood to correct standard errors and related statistics.
-\item The functions from the \pkg{texreg} \citep{texreg} package (e.g., \fct{screenreg} or \fct{texreg}) work together with the class \class{clustered} \class{lm} (as returned by \fct{add\_clustered}) and produce regression tables (such as the ones reported here).
+\item Add clustered standard errors with \fct{add\_clustered()} which uses the \pkg{clubSandwich} \citep{Pustejovsky:2024} and \pkg{lmtest} package \citep{Zeileis+Hothorn:2002} under the hood to correct standard errors and related statistics.
+\item The functions from the \pkg{texreg} \citep{Leifeld:2013} package (e.g., \fct{screenreg} or \fct{texreg}) work together with the class \class{clustered} \class{lm} (as returned by \fct{add\_clustered}) and produce regression tables (such as the ones reported here).
 \end{enumerate}
 
 The following code conducts the analysis for the full sample (i.e., same slope but different intercepts for the \emph{recruitment x incentive} categories)
@@ -204,13 +223,13 @@ tex <- gsub("scriptsize", "normalsize", tex)
 \section{Findings}
 \label{sec:rra-findings}
 
+For the newly added group (no recruitment but with incentive payments, \emph{NRxI}) the effect of the response burden is not significant, as expected because of limited sample size. Due to the logistic transformation, parameters reflect changes in log-odds when the RBS marginally increases. The effect of response burden is generally more negative than previously expected. The strongest effect can be found for the recruited subsample without incentive payment (\emph{RxNI}), where the odds of participating decrease by -0.297 (i.e., roughly 30\%) according to Equation~\ref{eq:log-odds-decrease} if the RBS increases by 100 points. The other comparisons are listed in Table~\ref{tab:pc-odds}.
+
 \begin{landscape}
 <<rra-comparison-tex, echo=FALSE, results=tex>>=
 tex
 @
 \end{landscape}
-
-For the newly added group (no recruitment but with incentive payments, \emph{NRxI}) the effect of the response burden is not significant, as expected because of limited sample size. Due to the logistic transformation, parameters reflect changes in log-odds when the RBS marginally increases. The effect of response burden is generally more negative than previously expected. The strongest effect can be found for the recruited subsample without incentive payment (\emph{RxNI}), where the odds of participating decrease by -0.297 (i.e., roughly 30\%) according to Equation~\ref{eq:log-odds-decrease} if the RBS increases by 100 points. The other comparisons are listed in Table~\ref{tab:pc-odds}.
 
 <<rra-odds, echo=FALSE>>=
 f <- function(b) {
@@ -363,14 +382,14 @@ p_ny <- plot_by_category(df, df_last, survey_data, cat = "NRxI", shape = 16, col
 
 (p | (p_yy / p_ny) | (p_yn / p_nn)) + patchwork::plot_layout(widths = c(2.5, 1, 1))
 @
-\caption{\label{fig:response_curves} Response rate curves (response rates as a function of the response burden). The left-hand panel compares the curves for each \emph{recruitment x incentive} category based on the four separately estimated models (\emph{RxI} stands for recruited, with incentives, \emph{N} negates). The right-hand (smaller) panels compare the response rate curves to the ones based on the data of the previous publication (pink lines). New data points (since the last publication) are enlarged.}
+\caption{\label{fig:response-curves} Response rate curves (response rates as a function of the response burden). The left-hand panel compares the curves for each \emph{recruitment x incentive} category based on the four separately estimated models (\emph{RxI} stands for recruited, with incentives, \emph{N} negates). The right-hand (smaller) panels compare the response rate curves to the ones based on the data of the previous publication (pink lines). New data points (since the last publication) are enlarged.}
 \end{figure}
 
 The back-transformed relationship between response burden and response rates (response rate curve) is visualized in Figure~\ref{fig:response-curves}, along their confidence intervals (i.e., the shaded area reflects the uncertainty of the curve estimates and is not a prediction interval). Recruitment shifts the curve, while incentives flatten it. Notably, the domain above a response burden score of 2`000 is sparsely populated, and the few observations potentially strongly influence the curve's shape (however, according to \emph{Cook's distance} no influential outliers are present in our data). The results indicate that surveys beyond 2`000 points appear overly burdensome for respondents, sustaining high response rates only through recruitment efforts combined with incentive payments, intensive care of the respondents and general interest of the respondents in the topic of these intense studies.
 
 Generally, the 14 new data points do not dramatically change the overall shape of the curves (Figure~\ref{fig:response-curves}, RHS), but the curves are slightly steeper as explained based on the parameter estimates. \emph{RxI} is almost identical (only two new data points were added). For \emph{NRxNI} the confidence bounds increased because two of the five added surveys have unprecedented high response rates. For the category \emph{RxNI} the function has gained support for higher response burdens which substantially steepened the curve and reduced its uncertainty. In particular, we now have higher confidence that the curve quickly joins the other response curves on the domain above 1`500 response burden points. I.e., recruitment without incentive payments only matters for surveys with low response burden (but can make a big difference there).
 
-Similar to \citet{schmid2019predicting}, we can add a linear time-trend with the year 2004 (when the survey scoring effort started) serving as the base. The following code shows the trivial addition of the time-trend to the pooled model.
+Similar to \citet{Schmid+Axhausen:2019}, we can add a linear time-trend with the year 2004 (when the survey scoring effort started) serving as the base. The following code shows the trivial addition of the time-trend to the pooled model.
 %
 <<rra-mt, results=hide>>=
 dat$year <- dat$year - 2004
@@ -379,7 +398,7 @@ fit_t <- lm(y ~ 0 + x + RxI + RxNI + NRxI + NRxNI + year,
 mt <- add_clustered(fit_t, cluster = dat$survey_id, type = "CR2")
 @
 
-We repeat the steps for the individual categories and synthesise the results in Table~\ref{tab:time-trend}. In contrast to \citet{schmid2019predicting} we do not find a negative time-trend and therefore do not support the hypothesis of a general fatigue and less willingness to participate in our surveys.
+We repeat the steps for the individual categories and synthesise the results in Table~\ref{tab:time-trend}. In contrast to \citet{Schmid+Axhausen:2019} we do not find a negative time-trend and therefore do not support the hypothesis of a general fatigue and less willingness to participate in our surveys.
 
 <<rra-time-trend, echo=FALSE, results=hide>>=
 estimator <- function(dat, subset) {
@@ -425,7 +444,7 @@ tex <- texreg::texreg(m_both,
                       caption.above = TRUE,
                       custom.header = list("No time-trend" = 1:5, "With time-trend" = 6:10),
                       caption = "Logistic regression results: Adding a linear time-trend",
-                      label = "tab:time_trend",
+                      label = "tab:time-trend",
                       custom.note = custom.note,
                       scalebox = 0.75,
                       float.pos = "htbp")

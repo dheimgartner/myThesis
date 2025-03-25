@@ -9,20 +9,18 @@
 
 ## PROCEED HERE
 
-Maybe use Sinput Soutput from codeformatting branch... => But it still doesn't look too good => I think stick to the default!
-
 ## Checklist port
 
 - [x] Include R libraries in `thesis.Rnw`
 - [x] Namespace code chunks
 - [x] Use `\emph{}` instead of `\textit{}`
-- [ ] Port latex packages and commands to designated files
+- [x] Port latex packages and commands to designated files
 - [x] Check number format (not in `$` and with bigmark)
-- [ ] Refs (e.g., `\Section~\ref{label}`)
-- [ ] Port bibliography
+- [x] Refs (e.g., `\Section~\ref{label}`)
+- [x] Port bibliography
 - [ ] Namespace labels
-- [ ] Organize `\todo{}`s at top
-- [ ] Publication, contributions and changes table
+- [x] Organize `\todo{}`s at top
+- [x] Publication, contributions and changes table
 
 ## TODO
 
