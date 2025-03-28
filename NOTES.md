@@ -11,16 +11,16 @@
 
 ## Checklist port
 
-- [x] Include R libraries in `thesis.Rnw`
-- [x] Namespace code chunks
-- [x] Use `\emph{}` instead of `\textit{}`
-- [x] Port latex packages and commands to designated files
-- [x] Check number format (not in `$` and with bigmark)
-- [x] Refs (e.g., `\Section~\ref{label}`)
-- [x] Port bibliography
+- [ ] Include R libraries in `thesis.Rnw`
+- [ ] Namespace code chunks
+- [ ] Use `\emph{}` instead of `\textit{}`
+- [ ] Port latex packages and commands to designated files
+- [ ] Check number format (not in `$` and with bigmark)
+- [ ] Refs (e.g., `\Section~\ref{label}`)
+- [ ] Port bibliography
 - [ ] Namespace labels
-- [x] Organize `\todo{}`s at top
-- [x] Publication, contributions and changes table
+- [ ] Organize `\todo{}`s at top
+- [ ] Publication, contributions and changes table
 
 ## TODO
 
@@ -41,7 +41,7 @@
   - [x] `mppData`: data package
   - [x] `datapap`
   - [x] `responseRateAnalysis`
-  - [x] `trb24`: no vignettes folder
+  - [x] `trb24`
   - [x] `OPSR`
   - [x] `TWTE`
   - [x] `OPSRtools`
@@ -50,7 +50,7 @@
   - Only one file per paper (don't split up into multiple sources)
   - [ ] Author contributions section => Do I need some signature/confirmation from the co-authors?
   - [x] `mpp`: no vignettes folder
-  - [ ] `responseRateAnalysis`
+  - [x] `responseRateAnalysis`
   - [x] `datapap`: no vignette built
   - [ ] `trb24`: no vignettes folder
   - [ ] `OPSR`
@@ -67,6 +67,7 @@
 - [ ] Light blue references/links as Thoscha (see point above)
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
 - [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
+- [ ] Include R manuals in appendix => see `R/utils-manual.R` as starting point
 
 ## Author contributions
 
