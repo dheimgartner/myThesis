@@ -43,6 +43,11 @@ library("responseRateAnalysis")
 ## datapap
 library("datapap")
 
+## trb24
+library("trb24")
+library("ordinal")
+library("mixl")
+
 ggplot2::theme_set(myThesis::my_theme())
 
 options(knitr.kable.NA = "")

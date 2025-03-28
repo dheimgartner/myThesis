@@ -10,3 +10,284 @@ Hello world!}%
 \item Namespace labels
 \end{itemize}
 }
+
+%% -- Abstract -----------------------------------------------------------------
+
+While the home office frequency choice is well researched, applicable work arrangement attributes are usually not known and therefore omitted. The goal of our work is to elicit the attractiveness of different hybrid work policies as well as their implications for home office frequencies. We hypothesize that in the absence of any incentive schemes or constraints, employees would choose their stated free choice frequency (baseline preference) and any deviation from it has to be attributed to the work arrangement. Multinomial logit (work arrangement choice) and ordinal logistic regression (frequency choice) models are employed, leveraging stated preference data uniquely collected for this purpose. We find that salary adjustments provide the biggest lever both in terms of attractiveness of the arrangement and its elasticity effect on telework supplied. We find that deviation from the baseline is very hard to achieve with our proposed incentives. This indicates that baseline preferences are substantial and the marginal home office day is valued highly.
+
+\begin{ChapterInfoTable}
+\ChapterInfoEntry{%
+This chapter is based on the following paper
+}{%
+foo.
+}%
+\ChapterInfoEntry{
+Author contributions
+}{%
+foo.
+}%
+\ChapterInfoEntry{
+The following changes were made
+}{%
+foo.
+}%
+\end{ChapterInfoTable}
+
+%% -- Introduction -------------------------------------------------------------
+
+\section{Introduction} \label{sec:trb24-introduction}
+
+Chapter~\ref{ch:datapap} portrayed the telework landscape in Switzerland, where we have noted, that employees would like to telework more often than current. We now ask, whether work arrangement characteristics could be part of the explanation, (dis-) incentivizing employees back to the office.
+
+The goal of our work is to elicit the attractiveness of different hybrid work policies as well as their implications for telework frequencies. We hypothesize that in the absence of any incentive schemes, employees would choose their stated free choice frequency (referred to as the baseline preference) and any deviation from it has to be attributed to the work arrangement. We then reflect on whether or not the implied sensitivities are large enough to explain the discrepancy between the status quo (1.65 days/week) and the free choice (2.31 days/week).
+
+The question is investigated based on the stated preference (SP) data, collected as outlined in Section~\ref{foo}. We employ multinomial logistic regression (MNL) to elicit the attractiveness of the proposed policies and an ordered logistic regression (OL) with random error components to estimate the impact of the chosen attributes on the telework frequency. Marginal probability effects and elasticities are then computed to scrutinize whether or not the effect strength is large enough to explain the aforementioned discrepancy.
+
+%% -- Methods ------------------------------------------------------------------
+
+\section{Methods} \label{sec:trb24-methods}
+
+In this section we present the modeling methodology for the discrete work arrangement choice and the impact of the work arrangement on the telework frequency (modeled as the deviation from the baseline preference). The first model is a multinomial logit discrete choice model (MNL) whereas the subsequent choice is modeled through an ordinal logistic regression (OL) with random error components.
+
+We now describe the two modeling frameworks separately, starting with the MNL: Let's recall that each decision maker $n$ was asked to choose between two unlabelled work arrangements $j$ in choice scenario $t$. The decision maker maximizes utility of the form $U_{njt} = V_{njt} + \varepsilon_{njt}$, where $V_{njt}$ is the observed part of utility and $\varepsilon_{njt}$ represents unobserved factors which follow a Gumbel (type I extreme value) distribution. The modeler assumes that $V_{njt}$ can be expressed as $\bx{njt}$, where $x_{njt}$ is a vector of observed variables relating to alternative $j$. It can be shown that the probability of observing decision maker $n$ choosing alternative $j$ (i.e., $V_{njt} > V_{nj't}, \forall j \neq j'$) in choice occasion $t$ is \citep[][Chapter~3]{Train:2009}
+%
+\begin{equation}
+P_{njt} = \frac{\exp(\bx{njt})}{\sum_{j}\exp(\bx{njt})}.
+\end{equation}
+
+The resulting likelihood can be written as
+%
+\begin{equation}
+L(\beta) = \prod_n^N \prod_j^J \prod_t^{T_n} (P_{njt})^{y_{njt}}
+\end{equation}
+%
+where $N$ is the total sample of decision makers, $T_n$ the individual-specific total number of choice tasks and $J$ the number of alternatives (in our case two). $y_{njt} = 1$ if person $n$ chooses $j$ and zero otherwise. However, computationally it is beneficial to remove the product operators by taking logs
+%
+\begin{equation}
+\ell(\beta) = \sum_n^N \sum_j^J \sum_t^{T_n} y_{njt} \log(P_{njt})
+\end{equation}
+%
+The model is estimated in \proglang{R} \citep{R}, using the \pkg{mixl} package \citep{Molloy:2021}.
+
+Let us introduce the ordinal logistic regression (proportional odds) model \citep[see e.g.,][Chapter~7]{Train:2009}: The latent variable is incompletely measured and takes the functional form $y_{nt}^* = \bx{nt} + \mu_n + \varepsilon_{nt}$, where $\varepsilon_{nt}$ is an error term assumed to follow a standard logistic distribution. $y_{nt}^*$ is the latent propensity to deviate from the baseline (free choice telework frequency). $\mu_{n} \sim \mathcal{N}(0, \sigma)$ is an individual-specific random error component accounting for unobserved heterogeneity across individuals in their baseline telework frequency preferences \citep[for random error components and mixed models, see, e.g.,][Chapter~6]{Train:2009}. As $y_{nt}^*$ increases and passes some unknown but estimable thresholds ($\tau_0 \dots \tau_{10}$), we move up from one ordinal outcome to the next higher. I.e., we observe the choice $y_{nt}=k$ according to
+%
+\begin{equation}
+y_{nt} =
+\begin{cases}
+-5 & \text{if } -\infty < y_{nt}^* \leq \tau_0 \\
+-4 & \text{if } \tau_0 < y_{nt}^* \leq \tau_1 \\
+\vdots\\
+5 & \text{if } \tau_{10} < y_{nt}^* \leq +\infty
+\end{cases}
+\end{equation}
+
+This yields the following probability
+%
+\begin{equation}
+\begin{aligned}
+P_{nkt} &= P(y_{nt} = k \mid x_{nt}, \mu_n) = P(\tau_{k-1} < y_{nt}^* \leq \tau_{k}) \\
+&= P(\tau_{k-1} < \bx{nt} + \mu_n + \varepsilon_{nt} \leq \tau_{k}) \\
+&= \frac{1}{1 + \exp(\tau_k - \bx{nt} - \mu_n)} - \frac{1}{1 + \exp(\tau_{k-1} - \bx{nt} - \mu_n)}
+\end{aligned}
+\end{equation}
+
+The likelihood (``integrating out'' the error component) can be written as
+%
+\begin{equation}
+L(\beta, \tau) = \int \prod_n^N \prod_k^K \prod_t^{T_n} ( P_{nkt} )^{y_{nkt}} f(\mu_n) \,d\mu_n
+\end{equation}
+%
+where $y_{nkt} = 1$ if $y_{nt}=k$ was observed and zero otherwise. $f(\mu_n)$ is the PDF of a normal distribution with mean 0 and variance $\sigma^2$.
+
+The model is estimated using the \pkg{ordinal} \proglang{R}-package \citep{Christensen:2023}.
+
+%% -- Results ------------------------------------------------------------------
+
+\section{Results and discussion} \label{sec:trb24-results}
+
+We now discuss the modeling results, discussing the work arrangement MNL and telework frequency OL separately.
+
+\subsection{Work arrangement choice}
+
+The estimation results of the MNL model are presented in Table~\ref{tab:mnl-estimates}. In addition to the conventional metrics and goodness of fit indicators, marginal probability effects (MPE) were computed. The MPE is the change in choice probability, attributed to a single variable and in comparison to its reference level. The reference levels are noted in brackets. For example, if two work arrangements are exactly the same, except that the first features a salary increase of 10\% (per hour teleworked), while the second a deduction of 10\%, then the probability that the first is chosen is 33.4 percentage points higher.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lD{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}}
+\toprule
+& \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{Std. Error} & \multicolumn{1}{c}{MPE} \\
+\midrule
+<<tab-mnl, echo=FALSE, results=tex>>=
+coef_table <- trb24::myThesis$mnl$coef_table
+
+## stars
+coef_table$stars <- Heimisc::stars(as.numeric(coef_table[, "Pr(>|z|)"]))
+
+## format (round)
+mat <- as.matrix(coef_table)
+mat[, 3:6] <- format(round(as.numeric(mat[, 3:6]), 3))
+mat[mat == "    NA"] <- ""
+
+## add stars
+mat[, "Estimate"] <- ifelse(
+  mat[, "stars"] == "",
+  mat[, "Estimate"],
+  paste0(mat[, "Estimate"], "^{", mat[, "stars"], "}")
+)
+
+## update coefs with \\quad
+mat[, "Coef."] <- paste0("\\quad ", mat[, "Coef."])
+mat[1, "Coef."] <- "ASC"
+
+## tex
+mat <- mat[, c("Coef.", "Estimate", "Std. Error", "MPE")]
+mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
+
+## add reference
+add_ref <- function(after, ref) {
+  mat_tex[after] <- paste(mat_tex[after], ref, "\\\\")
+  mat_tex
+}
+
+mat_tex <- add_ref(1, "Co-ordination (None)")
+mat_tex <- add_ref(3, "Core hours (None)")
+mat_tex <- add_ref(4, "Help/training (No)")
+mat_tex <- add_ref(5, "Salary adj. (-10\\%)")
+mat_tex <- add_ref(7, "Add. cost (No part.)")
+mat_tex <- add_ref(9, "Hardware contrib. (None)")
+mat_tex <- add_ref(11, "Work from anywhere (No)")
+mat_tex <- add_ref(12, "Desk sharing (No)")
+
+## add gofs below midrule
+gofs <- trb24::myThesis$mnl$gofs
+gofs <- lapply(gofs, round, digits = 3)
+
+mat_gofs <- as.matrix(data.frame(
+  key = c("N obs.",
+    "N params.",
+    "LL (start)",
+    "LL (final)",
+    "McFadden $R^2$"),
+  value = c(gofs$nObs,
+    gofs$nParams,
+    gofs$initLL,
+    gofs$finalLL,
+    gofs$rho2zero)
+))
+
+gofs_tex <- paste0(apply(mat_gofs, 1, paste, collapse = " & "), "\\\\")
+mat_tex <- c(mat_tex, gofs_tex)
+mat_tex[13] <- paste(mat_tex[13], "\\midrule")
+writeLines(mat_tex)
+@
+\bottomrule
+\multicolumn{4}{l}{\Sexpr{signif_codes()}}\\
+\multicolumn{4}{l}{MPE = Marginal probability effect;}\\
+\end{tabular}
+\caption{\label{tab:mnl-estimates} MNL estimation results.}
+\end{center}
+\end{table}
+
+Overall, the results are intuitive with the expected signs. All attributes were found to be significant except for \emph{Core hours} and \emph{Desk sharing}. Having to work during regular working hours on home office days does not impact the choice. This is surprising because one of the benefits of telework is greater flexibility. The attribute, as presented, would imply that employees have to reside at their designated workstation during business hours.
+
+Commenting on the effect size (marginal probability effects) the \emph{Salary adjustments} play the most substantial role followed by \emph{Work from anywhere} and \emph{Hardware contribution}. Work from anywhere is roughly equivalent to the 10\% salary increase (compared to the current hourly wage rate). The remaining attributes all have similar (positive or negative) smaller magnitudes.
+
+The utility weights traced out and their behavioral consequences seem to contradict standard economic theory: There are three monetary attributes (\emph{Salary adjustments, Additional cost} and \emph{Hardware contribution}) all implying a utility equivalent of a marginal monetary unit (Swiss franc in our case). However, the marginal Swiss franc (CHF) seems to be valued differently depending on the reason it was received. Average income is 7`514 CHF, average monthly additional costs 523 CHF and necessary annual home office infrastructure investments 2`186 CHF (these numbers were collected in the survey). For example, 100\% participation of additional costs easily compensates hardware investments. Nevertheless, estimates and implied MPE widely differ. There might be an argument on the grounds of what employees deem fair (or unfair), necessary (or unnecessary) as monetary compensation for expenses linked to telework. Similarly, decreasing the salary yields a stronger negative effect than increasing it by the same percentage amount.
+
+Last, coordinating office presence on Mondays and Fridays reduces the attractiveness of the work arrangement. This is in line with the current distribution of the home office days over the week, where we observe a higher teleworking share on these days.
+
+\subsection{Telework frequency choice}
+
+The estimation results of the OL model are presented in Table~\ref{tab:ol-estimates}. Elasticities (expressed in number of days deviating from the baseline) are shown in the last column: For example, the elasticity corresponding to a salary increase by 10\% (compared to the reference of a 10\% salary reduction) reads 0.04 d/week. Overall, the computed elasticities are very small, suggesting that the proposed attributes have little lever to (dis-) incentivize deviations from the baseline preference.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lD{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}}
+\toprule
+& \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{Std. Error} & \multicolumn{1}{c}{Elast.} \\
+\midrule
+<<tab-ol, echo=FALSE, results=tex>>=
+coef_table <- trb24::myThesis$ol$coef_table
+
+## stars
+coef_table$stars <- Heimisc::stars(as.numeric(coef_table[, "Pr(>|z|)"]))
+
+## format (round)
+mat <- as.matrix(coef_table)
+mat[, 3:6] <- format(round(as.numeric(mat[, 3:6]), 3))
+mat[mat == "     NA"] <- ""
+
+## add stars
+mat[, "Estimate"] <- ifelse(
+  mat[, "stars"] == "",
+  mat[, "Estimate"],
+  paste0(mat[, "Estimate"], "^{", mat[, "stars"], "}")
+)
+
+mat_struc <- mat[1:9, ]
+mat <- mat[10:nrow(mat), ]
+
+## update coefs with \\quad
+mat[, "Coef."] <- paste0("\\quad ", mat[, "Coef."])
+
+## tex
+mat <- rbind(mat, mat_struc)
+mat <- mat[, c("Coef.", "Estimate", "Std. Error", "MPE")]
+mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
+
+## add sigma
+sigma <- trb24::myThesis$ol$sigma
+sigma["estim"] <- format(round(as.numeric(sigma["Estimate"]), 3), nsmall = 3)
+sigma["stderr"] <- format(round(as.numeric(sigma["Std. Error"]), 3), nsmall = 3)
+mat_tex <- c(paste0("$\\sigma$ & ", sigma["estim"], "^{", sigma["Stars"], "} & ", sigma["stderr"], "\\\\"), mat_tex)
+
+## add reference
+mat_tex <- add_ref(1, "Co-ordination (None)")
+mat_tex <- add_ref(3, "Core hours (None)")
+mat_tex <- add_ref(4, "Help/training (No)")
+mat_tex <- add_ref(5, "Salary adj. (-10\\%)")
+mat_tex <- add_ref(7, "Add. cost (No part.)")
+mat_tex <- add_ref(9, "Hardware contrib. (None)")
+mat_tex <- add_ref(11, "Work from anywhere (No)")
+mat_tex <- add_ref(12, "Desk sharing (No)")
+
+## add gofs below midrule
+gofs <- trb24::myThesis$ol$gofs
+gofs <- lapply(gofs, round, digits = 3)
+
+mat_gofs <- as.matrix(data.frame(
+  key = c("N obs.",
+    "N params.",
+    "LL (start)",
+    "LL (final)",
+    "McFadden $R^2$ (zero)",
+    "McFadden $R^2$ (intercept)"),
+  value = c(gofs$nObs,
+    gofs$nParams,
+    gofs$initLL,
+    gofs$finalLL,
+    gofs$rho2zero,
+    gofs$rho2ms)
+))
+
+gofs_tex <- paste0(apply(mat_gofs, 1, paste, collapse = " & "), "\\\\")
+mat_tex <- c(mat_tex, gofs_tex)
+mat_tex[13] <- paste(mat_tex[13], "\\midrule")
+mat_tex[22] <- paste(mat_tex[22], "\\midrule")
+writeLines(mat_tex)
+@
+\bottomrule
+\multicolumn{4}{l}{\Sexpr{signif_codes()}}\\
+\multicolumn{4}{l}{Elast. = Elasticity (d/week)};\\
+\end{tabular}
+\caption{\label{tab:ol-estimates} OL estimation results.}
+\end{center}
+\end{table}
+
+The estimated standard deviation (parameter) corresponding to the random error component ($\sigma$) is significant and quite substantial (see also the threshold estimates, ranging from -15.6 to 19.7 on the latent scale). This suggests that there are other (unobserved) factors nudging teleworkers to deviate from their baseline. Similarly, the baseline preference could be ``imprecisely'' measured or could have changed since the measurement.
+
+%% -- Conclusion ---------------------------------------------------------------
+
+\section{Conclusion} \label{sec:trb24-conclusion}
+
+We find that deviation from the baseline is very hard to achieve with our proposed (dis-) incentives. This indicates that baseline preferences are substantial and that the marginal home office day is valued highly. Enticing teleworkers back to the office would need to offset these utility losses. It is easy to imagine, that foregone commuting during rush hours and the associated time being freed is larger than, for example, the 10\% salary deduction (e.g., a full work day of 8 hours at 30 CHF/h yields 240 CHF/d and the deduction would imply minus 24 CHF). In light of the analysis it is not surprising, that employers set a maximum number of allowed teleworking days and simply demand employees back to office. Employers do so on the basis of feared productivity losses (e.g., through limited exchange and flow of ideas). However, it is questionable whether, first, such fears are justified and second, whether potential productivity increases offset the employees' utility losses. Meanwhile, telework could be associated with potential welfare gains at the broader societal level with diminished vehicle miles driven and associated foregone negative externalities. While the negotiation on labor markets balance employer and employees preferences, the welfare gains are likely not part of the equations, leading to overall suboptimal levels of telework.
