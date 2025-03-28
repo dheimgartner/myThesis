@@ -17,19 +17,19 @@ While the home office frequency choice is well researched, applicable work arran
 
 \begin{ChapterInfoTable}
 \ChapterInfoEntry{%
-This chapter is based on the following paper
+This chapter is loosely based on the following paper
 }{%
-foo.
+Heimgartner D. and K. W. Axhausen (2024) Hybrid Work Arrangement Choices and Its Implications for Home Office Frequencies, paper presented at the \emph{103rd Annual Meeting of the Transport Research Board (TRB 2024), Washington, D.C.}
 }%
 \ChapterInfoEntry{
 Author contributions
 }{%
-foo.
+Study conception and design: all authors; analysis and interpretation of results: D. Heimgartner; original draft: D. Heimgartner; writing, reviewing and editing: all authors. All authors reviewed and approved the final manuscript.
 }%
 \ChapterInfoEntry{
 The following changes were made
 }{%
-foo.
+Most of the original text became part of the paper under review, underlying Chapter~\ref{ch:datapap} and is not repeated here. The original analysis modeled the telework frequency and used the baseline preference as explanatory variable. Here, we model the deviation from the baseline directly. Further, the random error component was added. While the qualitative conclusions did not change, modeling results did, with elasticities being even smaller. The methods section and the discussion of the results was adjusted accordingly.
 }%
 \end{ChapterInfoTable}
 
@@ -200,12 +200,21 @@ Last, coordinating office presence on Mondays and Fridays reduces the attractive
 
 The estimation results of the OL model are presented in Table~\ref{tab:ol-estimates}. Elasticities (expressed in number of days deviating from the baseline) are shown in the last column: For example, the elasticity corresponding to a salary increase by 10\% (compared to the reference of a 10\% salary reduction) reads 0.04 d/week. Overall, the computed elasticities are very small, suggesting that the proposed attributes have little lever to (dis-) incentivize deviations from the baseline preference.
 
-\begin{table}[htbp]
 \begin{center}
-\begin{tabular}{lD{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}}
+\begin{longtable}{lD{.}{.}{-1}D{.}{.}{-1}D{.}{.}{-1}}
 \toprule
 & \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{Std. Error} & \multicolumn{1}{c}{Elast.} \\
 \midrule
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+\toprule
+& \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{Std. Error} & \multicolumn{1}{c}{Elast.} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\emph{Continued on next page}}
+\endfoot
+\endlastfoot
 <<tab-ol, echo=FALSE, results=tex>>=
 coef_table <- trb24::myThesis$ol$coef_table
 
@@ -225,6 +234,12 @@ mat[, "Estimate"] <- ifelse(
 )
 
 mat_struc <- mat[1:9, ]
+
+## align thresholds
+mat_struc[, "Coef."] <- ifelse(stringr::str_starts(mat_struc[, "Coef."], "-"),
+                               mat_struc[, "Coef."],
+                               paste0("\\phantom{-}", mat_struc[, "Coef."]))
+
 mat <- mat[10:nrow(mat), ]
 
 ## update coefs with \\quad
@@ -279,10 +294,9 @@ writeLines(mat_tex)
 \bottomrule
 \multicolumn{4}{l}{\Sexpr{signif_codes()}}\\
 \multicolumn{4}{l}{Elast. = Elasticity (d/week)};\\
-\end{tabular}
 \caption{\label{tab:ol-estimates} OL estimation results.}
+\end{longtable}
 \end{center}
-\end{table}
 
 The estimated standard deviation (parameter) corresponding to the random error component ($\sigma$) is significant and quite substantial (see also the threshold estimates, ranging from -15.6 to 19.7 on the latent scale). This suggests that there are other (unobserved) factors nudging teleworkers to deviate from their baseline. Similarly, the baseline preference could be ``imprecisely'' measured or could have changed since the measurement.
 
@@ -290,4 +304,4 @@ The estimated standard deviation (parameter) corresponding to the random error c
 
 \section{Conclusion} \label{sec:trb24-conclusion}
 
-We find that deviation from the baseline is very hard to achieve with our proposed (dis-) incentives. This indicates that baseline preferences are substantial and that the marginal home office day is valued highly. Enticing teleworkers back to the office would need to offset these utility losses. It is easy to imagine, that foregone commuting during rush hours and the associated time being freed is larger than, for example, the 10\% salary deduction (e.g., a full work day of 8 hours at 30 CHF/h yields 240 CHF/d and the deduction would imply minus 24 CHF). In light of the analysis it is not surprising, that employers set a maximum number of allowed teleworking days and simply demand employees back to office. Employers do so on the basis of feared productivity losses (e.g., through limited exchange and flow of ideas). However, it is questionable whether, first, such fears are justified and second, whether potential productivity increases offset the employees' utility losses. Meanwhile, telework could be associated with potential welfare gains at the broader societal level with diminished vehicle miles driven and associated foregone negative externalities. While the negotiation on labor markets balance employer and employees preferences, the welfare gains are likely not part of the equations, leading to overall suboptimal levels of telework.
+We find that deviation from the baseline is very hard to achieve with our proposed (dis-) incentives. This indicates that baseline preferences are strong and that the marginal home office day is valued highly. Enticing teleworkers back to the office would need to offset these utility losses. It is easy to imagine, that foregone commuting during rush hours and the associated time being freed is larger than, for example, the 10\% salary deduction (e.g., a full work day of 8 hours at 30 CHF/h yields 240 CHF/d and the deduction would imply minus 24 CHF). In light of the analysis, it is not surprising, that employers set a maximum number of allowed teleworking days and simply demand employees back to office. Employers do so because of they fear productivity losses (e.g., through limited exchange and flow of ideas). However, it is questionable whether, first, such fears are justified and, second, whether potential productivity increases offset the employees' utility losses. Meanwhile, telework could be associated with potential welfare gains at the broader societal level with diminished vehicle miles driven and associated foregone negative externalities. While the negotiation on labor markets balance employers' and employees' preferences, the welfare gains are likely not part of the equations, leading to overall suboptimal levels of telework.
