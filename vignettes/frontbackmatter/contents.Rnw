@@ -76,7 +76,9 @@
       OPSR & ordinal probit switching regression \\
       TE & treatment effect \\
       ATE & average treatment effect \\
-      MTMC & mobility and transport microcensus
+      MTMC & mobility and transport microcensus \\
+      MNL & multinomial logit \\
+      OL & ordinal logit \\
       %\bottomrule
     \end{tabularx}
 
