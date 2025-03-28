@@ -94,11 +94,14 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 % \cleardoublepage%
 % \SweaveInput{chapters/mpp/main}
 
-\cleardoublepage%
-\SweaveInput{chapters/rra/main}
+% \cleardoublepage%
+% \SweaveInput{chapters/rra/main}
 
 % \cleardoublepage%
 % \SweaveInput{chapters/datapap/main}
+
+\cleardoublepage%
+\SweaveInput{chapters/trb24/main}
 
 \appendix
 \cleardoublepage%

@@ -1,0 +1,12 @@
+\chapter{On the valuation of telework baseline preferences}
+\label{ch:trb24}
+
+\dictum[John Doe]{%
+Hello world!}%
+\vskip 1em
+
+\todo{%
+\begin{itemize}
+\item Namespace labels
+\end{itemize}
+}
