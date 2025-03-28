@@ -11,7 +11,7 @@
 
 ## Checklist port
 
-- [x] Include R libraries in `thesis.Rnw`
+- [ ] Include R libraries in `thesis.Rnw`
 - [ ] Namespace code chunks
 - [ ] Use `\emph{}` instead of `\textit{}`
 - [ ] Port latex packages and commands to designated files
@@ -69,6 +69,7 @@
 - [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
 - [ ] Include R manuals in appendix => see `R/utils-manual.R` as starting point
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
+- [ ] Don't use `\pkg{}` in chapter headings...
 
 ## Author contributions
 

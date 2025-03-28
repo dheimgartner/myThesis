@@ -48,6 +48,9 @@ library("trb24")
 library("ordinal")
 library("mixl")
 
+## OPSR
+library("OPSR")
+
 ## OPSRtools
 library("OPSRtools")
 
