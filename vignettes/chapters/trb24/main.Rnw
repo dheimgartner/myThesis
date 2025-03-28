@@ -117,7 +117,7 @@ The estimation results of the MNL model are presented in Table~\ref{tab:mnl-esti
 \toprule
 & \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{Std. Error} & \multicolumn{1}{c}{MPE} \\
 \midrule
-<<tab-mnl, echo=FALSE, results=tex>>=
+<<trb24-tab-mnl, echo=FALSE, results=tex>>=
 coef_table <- trb24::myThesis$mnl$coef_table
 
 ## stars
@@ -215,7 +215,7 @@ The estimation results of the OL model are presented in Table~\ref{tab:ol-estima
 \multicolumn{4}{r}{\emph{Continued on next page}}
 \endfoot
 \endlastfoot
-<<tab-ol, echo=FALSE, results=tex>>=
+<<trb24-tab-ol, echo=FALSE, results=tex>>=
 coef_table <- trb24::myThesis$ol$coef_table
 
 ## stars

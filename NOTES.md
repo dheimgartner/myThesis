@@ -3,7 +3,7 @@
 >github organization phd-thesis-heimgartner
 
 - [ ] Keep the repos in sync...
-- [ ] See `QUOTES.md` for ideas at beginning of chatper
+- [ ] See `QUOTES.md` for ideas at beginning of chapter
 
 - The chapter titles do not necessarily have to be the paper titles
 
@@ -11,7 +11,7 @@
 
 ## Checklist port
 
-- [ ] Include R libraries in `thesis.Rnw`
+- [x] Include R libraries in `thesis.Rnw`
 - [ ] Namespace code chunks
 - [ ] Use `\emph{}` instead of `\textit{}`
 - [ ] Port latex packages and commands to designated files
@@ -52,7 +52,7 @@
   - [x] `mpp`: no vignettes folder
   - [x] `responseRateAnalysis`
   - [x] `datapap`: no vignette built
-  - [ ] `trb24`: no vignettes folder
+  - [x] `trb24`: no vignettes folder
   - [ ] `OPSR`
   - [ ] `TWTE`
   - [ ] `OPSRtools` (maybe before `TWTE`?)
@@ -68,6 +68,7 @@
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
 - [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
 - [ ] Include R manuals in appendix => see `R/utils-manual.R` as starting point
+- [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
 
 ## Author contributions
 

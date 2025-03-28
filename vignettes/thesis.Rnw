@@ -48,6 +48,9 @@ library("trb24")
 library("ordinal")
 library("mixl")
 
+## OPSRtools
+library("OPSRtools")
+
 ggplot2::theme_set(myThesis::my_theme())
 
 options(knitr.kable.NA = "")
@@ -105,8 +108,11 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 % \cleardoublepage%
 % \SweaveInput{chapters/datapap/main}
 
+% \cleardoublepage%
+% \SweaveInput{chapters/trb24/main}
+
 \cleardoublepage%
-\SweaveInput{chapters/trb24/main}
+\SweaveInput{chapters/opsr-tools/main}
 
 \appendix
 \cleardoublepage%
