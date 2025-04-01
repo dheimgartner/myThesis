@@ -20,8 +20,8 @@
 - [x] Refs (e.g., `\Section~\ref{label}`)
 - [x] Port bibliography
 - [ ] Namespace labels
-- [ ] Organize `\todo{}`s at top
-- [ ] Publication, contributions and changes table
+- [x] Organize `\todo{}`s at top
+- [x] Publication, contributions and changes table
 
 ## TODO
 

@@ -8,6 +8,7 @@ All models are wrong --- some models are wronger!}%
 \todo{%
 \begin{itemize}
 \item Check refs to chapter \pkg{OPSR}'s to method section
+\item Maybe use longtable for Table~\ref{tab:model-km-fit} (and try to increase fontsize, e.g., by decreasing tabcolsep...)
 \item Namespace labels
 \end{itemize}
 }
@@ -27,6 +28,24 @@ varwidth <- FALSE
 %% -- Abstract -----------------------------------------------------------------
 
 The net effects of telework on transport demand are debated. We operationalize transport demand with weekly kilometers traveled and estimate treatment effects by employing ordered probit switching regression (OPSR), using the TimeUse+ tracking data. OPSR accounts for selection bias which may arise if unobserved factors simultaneously influence the treatment adoption (telework in our case) and the outcome. Our findings strengthen the narrative that telework reduces traveled distance and that small rebound effects can never offset forgone commutes by a wide margin. We estimate, that the travel reduction accounts to -16\% comparing the current telework situation to the no telework reference. Unit treatment effects roughly correspond to the two-way commute distance. Our estimated treatment effects imply that travel reduction is much larger than simple group comparison would suggest. Further, we show that not accounting for self-selection potentially underestimates the true treatment effects quite substantially.
+
+\begin{ChapterInfoTable}
+\ChapterInfoEntry{%
+This chapter is based on the following paper
+}{%
+Heimgartner D. and K. W. Axhausen (2025) All Models are Wrong, Some Models are Wronger: On the Importance of Accounting for Self-Selection when Estimating Telework Treatment Effects, \emph{Transportation Research Part B: Methodological}, submitted.
+}%
+\ChapterInfoEntry{
+Author contributions
+}{%
+Study conception and design: all authors; analysis and interpretation of results: D. Heimgartner; original draft: D. Heimgartner; writing, reviewing and editing: all authors. All authors reviewed and approved the final manuscript.
+}%
+\ChapterInfoEntry{
+The following changes were made
+}{%
+Most of the method section was already presented in Chapter~\ref{ch:opsr} and was not repeated here for brevity.
+}%
+\end{ChapterInfoTable}
 
 %% -- Introduction -------------------------------------------------------------
 

@@ -6,7 +6,8 @@
 \section{Model comparison} \label{app:model-comparison}
 
 {\setlength{\tabcolsep}{1pt}  % remove column padding
-\renewcommand{\arraystretch}{1}  % default row height
+\renewcommand{\arraystretch}{0.8}  % default row height
+\footnotesize
 \begin{center}
 \begin{ThreePartTable}
 \begin{TableNotes}[flushleft]
