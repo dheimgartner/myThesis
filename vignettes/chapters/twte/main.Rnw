@@ -7,6 +7,7 @@ All models are wrong --- some models are wronger!}%
 
 \todo{%
 \begin{itemize}
+\item Methods section omitted (link to chapter \pkg{OPSR})
 \item Namespace labels
 \end{itemize}
 }
@@ -1241,23 +1242,6 @@ and all packages used are available from the Comprehensive
 Some post-estimation routines developed as part of this work will become available in the \pkg{OPSRtools} package in the near future.
 
 The authors reorganized, cleaned and collated the TimeUse+ data in the \pkg{TUplus}~\Sexpr{packageVersion("TUplus")} \proglang{R}-package. Both the original data and the package can be shared for research purposes. Please contact the corresponing author.
-
-
-\section*{Acknowledgments}
-
-The TimeUse+ study was funded by the Swiss National Science Foundation (SNSF) (Grant Number 189001).
-
-
-%% -- Bibliography -------------------------------------------------------------
-%% - References need to be provided in a .bib BibTeX database.
-%% - All references should be made with \cite, \citet, \citep, \citealp etc.
-%%   (and never hard-coded). See the FAQ for details.
-%% - JSS-specific markup (\proglang, \pkg, \code) should be used in the .bib.
-%% - Titles in the .bib should be in title case.
-%% - DOIs should be included where available.
-
-\bibliography{refs}
-
 
 %% -- Appendix (if any) --------------------------------------------------------
 %% - After the bibliography with page break.
