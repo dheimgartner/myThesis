@@ -131,8 +131,7 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 
 \appendix
 \cleardoublepage%
-\def\dir{chapters/appendix}
-\include{\dir/main}
+\SweaveInput{chapters/appendix/main}
 
 \cleardoublepage%
 \SweaveInput{frontbackmatter/bibliography}
