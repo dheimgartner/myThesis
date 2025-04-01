@@ -106,8 +106,10 @@ We use the TimeUse+ dataset \citep{Winkler+Meister+Axhausen:2024}, a smartphone-
 
 As evident from Table~\ref{tab:tableone} (column Unweighted), the TimeUse+ sample is biased towards car owners, higher educated individuals and public transport (PT) season ticket owners. To correct for the selective attrition during the survey and tracking study, we use case weights obtained by iterative proportional fitting using the \pkg{anesrake} \proglang{R}-package \citep{Pasek:2018}. Marginals from the mobility and transport microcensus 2021 \citep[MTMC21,][]{MTMC:2021} were targeted, excluding telework related variables which were potentially still influenced by the pandemic when the MTMC21 was fielded. The weighted sample matches the census data very well, importantly, now also for car and PT season ticket ownership which are known to influence mobility behavior. The weights are not used in the descriptive analysis but are used in estimation and post-estimation to more validly generalize the results to the Swiss employed population.
 
+\setlength\extrarowheight{2pt}{%
 \begin{table}[htbp]
 \centering
+\resizebox{\textwidth}{!}{%
 <<twte-tableone, echo=FALSE, results=tex>>=
 tab1 <- TWTE::tableone
 idx_indent <- grep("^\\s", row.names(tab1))
@@ -119,9 +121,11 @@ tab1_tex <- kableExtra::kable(tab1, booktabs = TRUE, format = "latex",
   kableExtra::add_indent(positions = idx_indent)
 tab1_tex
 @
+}%
 \caption{Sample comparison: TimeUse+ to the mobility and transport microcensus 2021.}
 \label{tab:tableone}
 \end{table}
+}
 
 For the aggregate (weekly) analysis, we require individuals to have at least five (not necessarily consecutive) valid tracking days which reduces the sample to \Sexpr{n_individuals_agg} individuals. We then aggregate the different daily indicators (e.g., time spent on certain activities, kilometers traveled, number of trips, etc.) for a typical five-day work week.
 
@@ -186,6 +190,7 @@ for (i in 1:nrow(tab2)) {
 
 The socio-economic characteristics of the three teleworker groups are compared in Table~\ref{tab:tabletwo}. The means and standard deviations of the start month hint that the three groups are evenly represented over the course of the study and hence seasonality effects might influence mobility behaviour similarly across the three groups. Teleworkers (TWers) compared to NTWers tend to be national PT season ticket owners, more highly educated, dog owners, frequent online shoppers but less frequent grocery shoppers, higher income, have children below the age of twelve (especially the NUTWers), managers or professionals, married, house or apartment owners and live in a more urban environment. Compared to NUTWers, UTWers tend to additionally have permanent work contracts but do not work in shifts. During the pandemic, the Swiss government enforced the duty to telework whenever possible. The telework frequency reported during such mandatory lockdowns is labeled teleworkability here and is expected to capture the (exogenous) telework suitability of a person's job.
 
+\setlength\extrarowheight{1pt}{%
 \begin{table}[htbp]
 \centering
 <<twte-tabletwo, echo=FALSE, results=tex>>=
@@ -202,9 +207,11 @@ tab2_tex <- kableExtra::kable(tab2, booktabs = TRUE, format = "latex",
   kableExtra::pack_rows("ISCO (n, %)", idx_pack[1], idx_pack[length(idx_pack)], bold = FALSE)
 tab2_tex
 @
+}%
 \caption{Sample comparison by telework status (weighted).}
 \label{tab:tabletwo}
 \end{table}
+}%
 
 %% -- Methods ------------------------------------------------------------------
 
