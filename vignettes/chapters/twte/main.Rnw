@@ -1,4 +1,4 @@
-\chapter{On the importance of accounting for self-selection when estimating telework treatment effects}
+\chapter{Analysis}
 \label{ch:twte}
 
 \dictum{%
@@ -22,3 +22,1349 @@ legend.args <- list(x = "topright", legend = c("NTW", "NUTW", "UTW"), pch = 0:2,
                     col = colvec,  pt.lwd = 3, bty = "n")
 varwidth <- FALSE
 @
+
+%% -- Abstract -----------------------------------------------------------------
+
+The net effects of telework on transport demand are debated. We operationalize transport demand with weekly kilometers traveled and estimate treatment effects by employing ordered probit switching regression (OPSR), using the TimeUse+ tracking data. OPSR accounts for selection bias which may arise if unobserved factors simultaneously influence the treatment adoption (telework in our case) and the outcome. Our findings strengthen the narrative that telework reduces traveled distance and that small rebound effects can never offset forgone commutes by a wide margin. We estimate, that the travel reduction accounts to -16\% comparing the current telework situation to the no telework reference. Unit treatment effects roughly correspond to the two-way commute distance. Our estimated treatment effects imply that travel reduction is much larger than simple group comparison would suggest. Further, we show that not accounting for self-selection potentially underestimates the true treatment effects quite substantially.
+
+%% -- Introduction -------------------------------------------------------------
+
+\section{Introduction} \label{sec:intro}
+
+Researchers have long been interested in the relation between telework and transport demand (see \citealt{Salomon:1986, Nilles:1988, Mokhtarian:1991} for early work). The obvious connection there, is, one less trip from the home to the office and (drumrolls) back. However, intricate potential adjustment channels such as induced travel due to increased time-flexibility or relocation and the acceptance for longer commutes open the door for counter-intuitive, yet interesting findings. Maybe not surprising, findings on telework's net benefits are mixed \citep{Hook+Etal:2020}. \citet{Wang+Mokhtarian:2024} even claim that scholarly work of the past decade leans to support evidence that telework induces more travel.
+
+As intricate as the possible causal connections between telework and travel may be, as difficult it is to capture all of them in an integrated modeling framework. It is therefore easy to criticize simplifying assumptions (which could rule out some of the potential causal links). However, some simplifying assumptions are more necessary than others. Throughout econometric work the exogeneity of variables can easily be questioned - in the end ``everything is endogenous''. But in the telework literature, it is quite surprising, that a large body of literature is trying to model telework adoption and telework frequency, while the other body of literature uses the frequency as exogenous variable to explain travel behavior... We argue, that telework can be understood as a self-selected treatment and hence requires causal inference methods in spirit of Heckman: Selection bias may arise if unobserved factors influencing the treatment adoption also influence the outcome. ``All models are wrong (that's why the $\varepsilon$ is there) - some models are wronger.''\footnote{Yes, ``wronger'' seems to be grammatically correct.}
+
+But before diving into a world of intricate error structures, we conduct descriptive analysis, showing various mobility indicators by telework status. We use the TimeUse+ dataset \citep{Winkler+Meister+Axhausen:2024}, a smartphone-based diary, recording travel, time use, and expenditure data and distinguish between two analytical perspectives: the disaggregate view and the aggregate view. The disaggregate view examines differences at the daily level by telework location, i.e., comparing telework days, hybrid (mixed) days, and office-based workdays. In contrast, the aggregate view focuses on broader group-level differences, comparing non-teleworkers, occasional teleworkers, and regular teleworkers. The disaggregate view is a very isolated view, falling short of unraveling overarching dependency patterns such as the implications of working from home over multiple days in a row, while the aggregate view is more of a medium-term view, incorporating adjustments once telework is more (or less) habitual.
+
+With these two perspectives in mind, we tackle the following research questions: In how far do activity and mobility patterns differ between teleworkers and non-teleworkers on a particular day? In how far do current non-teleworkers, non-usual teleworkers and usual teleworkers differ in these activity and mobility patterns both on a daily basis as well as over a full workweek? The econometric part is then concerned with measuring the impact of telework on transport demand. Here, we operationalize transport demand by weekly kilometers traveled and formulate the following hypothesis: Telework treatment effects differ between the non-teleworkers, non-usual teleworkers and usual teleworkers (i.e., they have different factual and counterfactual weekly kilometers traveled). Telework reduces kilometers traveled, i.e., the foregone commute is not fully offset.
+
+This paper can be seen as the third of a trilogy: The original paper by \citet{Wang+Mokhtarian:2024} recognizes methodological shortcomings in the telework-related program evaluation literature, proposes and employs the ordered probit endogenous switching regression (OPSR) model to correct for self-selection into a telework ``regime'' and estimates resulting treatment effects for weekly vehicle miles driven. \citet{Heimgartner+Wang:2025} introduce the \pkg{OPSR} \proglang{R}-package and make the method widely available. This paper employs the method in the Swiss context and uses the aforementioned TimeUse+ dataset - based on tracked (rather than stated) telework episodes and travel metrics.
+
+The remainder of the text is structured as follows: Section~\ref{sec:literature} reviews the literature. In Section~\ref{sec:data} we describe the TimeUse+ dataset. Section~\ref{sec:methods} introduces the methods used, in particular the ordered probit switching regression model. In Section~\ref{sec:results} we present the results, first descriptively for the disaggregate view, second for the aggregate view and third the model-implied results with an emphasize on treatment effects rather than behavioral implications of modeling parameters. Section~\ref{sec:summary} concludes.
+
+
+%% -- Literature ---------------------------------------------------------------
+
+\section{Literature review} \label{sec:literature}
+
+This study builds on three key literature streams: Modeling telework frequency, its impact on transport demand and systemic consequences, and program evaluation for estimating treatment effects.
+
+\subsection{Modeling telework frequency}
+
+Early studies focused primarily on telework adoption, with interest gradually shifting to understand telework frequency. Common approaches include multinomial logit, ordered logit, and probit models, understanding frequency as count \citep{Singh+Etal:2013} or as an ordinal scale \citep{Shabanpour+Etal:2018}. Treatment of zero telework frequencies varies: Some include it within one process \citep{Beck+Etal:2020}, while others model adoption separately \citep{Pouri+Bhat:2003} or even propose multiple (conditional) processes that manifest in a final frequency outcome \citep[e.g.][who differentiate option, choice/adoption and frequency]{Singh+Etal:2013}.
+
+Employer-employee interactions remain understudied. Many studies use job attributes as proxies for employer constraints \citep{Asmussen+Etal:2024}. \citet{Heimgartner+Axhausen:2023*} investigate in how far preference and feasibility/employer constraints can be disentangled in an endogenous choice set formation approach while \citet{Mokhtarian+Salmon:1996} suggest directly incorporating such constraints into utility specifications.
+
+\subsection{Systemic consequences of telework}
+
+Research has long examined telework's impact on travel demand \citep[for early work, see][]{Salomon:1986, Nilles:1988, Mokhtarian:1991}. Early studies emphasized telecommuting's substitution effect \citep{Pouri+Bhat:2003}, but net effects remain contested: Telework reduces commuting yet may induce additional travel due to increased flexibility, altered travel chains, or greater household vehicle use. Long-term effects include potential residential relocation and higher tolerance for longer commutes as found by \citet{Ravalet+Rerat:2019} and \citet{DeVos+Etal:2018}.
+
+Maybe not surprisingly, findings on telework's impact on travel are mixed. Some studies show reduced personal kilometers traveled \citep{Ellder:2020}, while others find increased trip distances, durations, and frequencies \citep{Zhu:2012}. \citet{Chakrabarti:2018} report higher vehicle miles driven (VMD) for teleworkers, with occasional teleworkers traveling more than frequent ones. \citet{Su+Etal:2021} observe more complex travel schedules among teleworkers. A systematic review underscores these uncertainties in telework's net effects on travel and energy use \citep{Hook+Etal:2020}. As summarised in the literature review by \citet{Wang+Mokhtarian:2024}, scholarly work of the past decade leans to support evidence that telework induces more travel.
+
+\subsection{Program evaluation and selection bias}
+
+Program evaluation estimates treatment effects by comparing ``treated'' to ``untreated'' groups. While experimental settings allow randomization, observational studies face selection bias when unobserved factors influence both treatment and outcomes \citep{Heckman:1979}. This casts doubt on whether the previously discussed group-comparisons (between teleworkers and non-teleworkers) are even relevant to investigate net effects.
+
+Various methods address selection bias: Difference-in-differences is used for longitudinal data, while cross-sectional approaches include instrumental variables, propensity score matching, regression discontinuity, and endogenous switching regression (ESR) models. ESR accounts for both selection on observables and unobservables in spirit of Heckman \citep{Wang+Mokhtarian:2024}.
+
+\citet{Heckman:1979} introduces a probit selection equation alongside a continuous outcome equation. A key extension is switching regression, which estimates separate outcome processes for different groups (introduced as the Roy model in \citealt{Cameron+Trivedi:2005}, or the Tobit 5 model in \citealt{Amemiya:1985}). Conditional mixed-process models generalize this framework for various outcome types \citep{Roodman:2011}.
+
+This study applies an ordered probit switching regression (OPSR) model, which handles ordered treatments and continuous outcomes \citep{Chiburis+Lokshin:2007}. The \pkg{OPSR} \proglang{R}-package \citep{Heimgartner+Wang:2025} makes modeling both fast and easy.
+
+The paper most relevant for this study is the one by \citet{Wang+Mokhtarian:2024} as it proposes to employ OPSR to evaluate the telework program with regard to its implications for transport behavior. They use stated-preference data (unlike this study, but as most other work) and investigate the impact of telework on weekly VMD. They find that adopting teleworking at a high frequency level or increasing telework frequency from low to high levels (i.e., 3+ days/week) always leads to a reduction in VMD on average.
+
+Three key insights emerge: First, various models address telework frequency, with debates on employer constraints' role and how to embody them in the model. Second, telework's net impact on transport demand remains contested, with second-order effects potentially offsetting benefits such as reduced travel or energy consumption. Third, telework can be understood as a self-selected treatment and hence requires causal inference methods. OPSR is a promising approach for addressing these complexities, though fully integrated models may better capture long-term effects like relocation.
+
+
+%% -- Data ---------------------------------------------------------------------
+
+\section{Data} \label{sec:data}
+
+<<sample-specs, echo=FALSE>>=
+n_individuals <- length(unique(TWTE::sample$uid))
+n_individuals_agg <- length(unique(TWTE::data_model$uid))
+n_person_days <- nrow(distinct(TWTE::sample))
+work_thresh <- attributes(TWTE::sample)$work_min / 60
+travel_thresh <- round(attributes(TWTE::sample)$whisker_travel / 1000)
+tab <- table(data_analytic$survey$wfh)
+n_ntw <- tab["NTW"]
+n_nutw <- tab["NUTW"]
+n_utw <- tab["UTW"]
+get_freq <- function(x) {
+  x. <- TWTE::tabletwo[grepl("Telework frequency", row.names(TWTE::tabletwo)), x]
+  as.numeric(unlist(strsplit(x., " "))[1])
+}
+freq_nutw <- get_freq("NUTW")
+freq_utw <- get_freq("UTW")
+start_date <- min(TWTE::sample$date)
+end_date <- max(TWTE::sample$date)
+@
+
+We use the TimeUse+ dataset \citep{Winkler+Meister+Axhausen:2024}, a smartphone-based diary, recording travel, time use, and expenditure data fielded between \Sexpr{start_date} and \Sexpr{end_date}. Our analytical sample comprises employed individuals and the observational unit is a valid person work day for the disaggregate (daily) analysis. A valid day has at least 20 hours of activity or travel information and the daily work duration needs to be \Sexpr{work_thresh} hours or beyond. Days with ``unusual'' travel activity (total distance travelled beyond the upper whisker at \Sexpr{travel_thresh} km) are discarded. The activity durations and travel times were then rescaled to arrive at aligned 24 hour diaries. This left us with \Sexpr{n_individuals} individuals and \Sexpr{format(n_person_days, big.mark = "`")} person days. The study period covered summer, autumn and winter months with most days being recorded during autumn. We control for seasonality in our model.
+
+As evident from Table~\ref{tab:tableone} (column Unweighted), the TimeUse+ sample is biased towards car owners, higher educated individuals and public transport (PT) season ticket owners. To correct for the selective attrition during the survey and tracking study, we use case weights obtained by iterative proportional fitting using the \pkg{anesrake} \proglang{R}-package \citep{Pasek:2018}. Marginals from the mobility and transport microcensus 2021 \citep[MTMC21,][]{MTMC:2021} were targeted, excluding telework related variables which were potentially still influenced by the pandemic when the MTMC21 was fielded. The weighted sample matches the census data very well, importantly, now also for car and PT season ticket ownership which are known to influence mobility behavior. The weights are not used in the descriptive analysis but are used in estimation and post-estimation to more validly generalize the results to the Swiss employed population.
+
+\begin{table}[htbp]
+\centering
+<<tableone, echo=FALSE, results=tex>>=
+tab1 <- TWTE::tableone
+idx_indent <- grep("^\\s", row.names(tab1))
+
+tab1_tex <- kableExtra::kable(tab1, booktabs = TRUE, format = "latex",
+                              align = "rrr", linesep = "",
+                              table.envir = NULL, escape = FALSE) %>%
+  kableExtra::add_header_above(c(" " = 2, "TimeUse+" = 2)) %>%
+  kableExtra::add_indent(positions = idx_indent)
+tab1_tex
+@
+\caption{Sample comparison: TimeUse+ to the mobility and transport microcensus 2021.}
+\label{tab:tableone}
+\end{table}
+
+For the aggregate (weekly) analysis, we require individuals to have at least five (not necessarily consecutive) valid tracking days which reduces the sample to \Sexpr{n_individuals_agg} individuals. We then aggregate the different daily indicators (e.g., time spent on certain activities, kilometers traveled, number of trips, etc.) for a typical five-day work week.
+
+The telework status is based on tracked work activities (both on home office and mixture days) and three regimes are differentiated: Non-teleworkers (NTWers; N=\Sexpr{n_ntw}), Non-usual teleworkers (NUTWers; $<$3 days/week; N=\Sexpr{n_nutw}) and Usual teleworkers (UTWers; 3$+$ days/week; N=\Sexpr{n_utw}). Throughout the text we use ``TWing'' to refer to the state and ``TWers'' to refer to the group (e.g., ``Would UTWers switch to NTWing`` implies that the current group of usual teleworkers would switch to a state of no teleworking). Weighted summary statistics for the three regimes are shown in Table~\ref{tab:table-wfh}. NUTWers work on average \Sexpr{freq_nutw} days/week from home, while UTWers telework on average \Sexpr{freq_utw} days/week. Part-time work is more common among NUTWers (compared to UTWers). However, the full-time equivalent weekly hours worked are very similar across the three groups.
+
+\begin{table}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+<<table-wfh, echo=FALSE, results=tex>>=
+tab <- TWTE::table_wfh
+tab_tex <- kableExtra::kable(tab, booktabs = TRUE, format = "latex",
+                             align = "rrr", linesep = "",
+                             table.envir = NULL, escape = FALSE) %>%
+  kableExtra::add_header_above(c(" " = 1, "Telework status" = 3)) %>%
+  kableExtra::footnote(general = "*Normalized for workload; $\\\\dagger$Days worked both from home and the office",
+                       footnote_as_chunk = TRUE,
+                       general_title = "",
+                       escape = FALSE)
+tab_tex
+@
+}%
+\caption{Work-related summary statistics (mean, sd) by telework status (weighted).}
+\label{tab:table-wfh}
+\end{table}
+
+Respondents were asked to state their typical weekly telework frequency (days/week) which we compare to the tracking-implied inferred frequency in Figure~\ref{fig:tw-comparison}. We observe that the stated weekly frequencies do not fully align with observed behavior in particular for individuals stating that they are more frequent teleworkers. This hints that telework is used opportunistically and varies from one week to the other.
+
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}[htbp]
+\centering
+<<tw-comparison, echo=FALSE, fig=TRUE, height=5.3, width=5.3>>=
+wfh_survey <-
+  TUplus::participants %>%
+  select(uid, wfh_n_days) %>%
+  mutate(wfh_n_days = ifelse(is.na(wfh_n_days), 0, wfh_n_days))
+
+check <-
+  TWTE::data_analytic$survey %>%
+  left_join(wfh_survey, by = "uid") %>%
+  select(survey = wfh_n_days, tracked = wfh_days) %>%
+  mutate(survey = factor(pmin(survey, 5)),
+         tracked = factor(pmin(round(tracked), 5)))
+
+tab <- table(check)
+tab2 <- round(100 * prop.table(tab, margin = 1), 1)
+image(1:nrow(tab2), 1:ncol(tab2), as.matrix(tab2), axes = FALSE,
+      col = gray.colors(12, rev = TRUE),
+      xlab = "Telework frequency survey reported (d/week)",
+      ylab = "Telework frequency tracked (d/week)")
+
+axis(1, at = 1:nrow(tab2), labels = rownames(tab2))
+axis(2, at = 1:ncol(tab2), labels = colnames(tab2))
+
+for (i in 1:nrow(tab2)) {
+  for (j in 1:ncol(tab2)) {
+    text(i, j, tab2[i, j], col = "black", cex = 0.8)
+  }
+}
+@
+\caption{\label{fig:tw-comparison} Comparing survey-reported telework frequencies to tracking-observed ones.}
+\end{figure}
+
+The socio-economic characteristics of the three teleworker groups are compared in Table~\ref{tab:tabletwo}. The means and standard deviations of the start month hint that the three groups are evenly represented over the course of the study and hence seasonality effects might influence mobility behaviour similarly across the three groups. Teleworkers (TWers) compared to NTWers tend to be national PT season ticket owners, more highly educated, dog owners, frequent online shoppers but less frequent grocery shoppers, higher income, have children below the age of twelve (especially the NUTWers), managers or professionals, married, house or apartment owners and live in a more urban environment. Compared to NUTWers, UTWers tend to additionally have permanent work contracts but do not work in shifts. During the pandemic, the Swiss government enforced the duty to telework whenever possible. The telework frequency reported during such mandatory lockdowns is labeled teleworkability here and is expected to capture the (exogenous) telework suitability of a person's job.
+
+\begin{table}[htbp]
+\centering
+<<tabletwo, echo=FALSE, results=tex>>=
+tab2 <- TWTE::tabletwo
+idx_indent <- grep("^\\s", row.names(tab2))
+idx_pack <- grep("^ISCO", row.names(tab2))
+row.names(tab2) <- stringr::str_remove_all(row.names(tab2), "ISCO")
+
+tab2_tex <- kableExtra::kable(tab2, booktabs = TRUE, format = "latex",
+                              align = "rrr", linesep = "", table.envir = NULL,
+                              escape = FALSE) %>%
+  kableExtra::add_header_above(c(" " = 1, "Telework status" = 3)) %>%
+  kableExtra::add_indent(positions = idx_indent) %>%
+  kableExtra::pack_rows("ISCO (n, %)", idx_pack[1], idx_pack[length(idx_pack)], bold = FALSE)
+tab2_tex
+@
+\caption{Sample comparison by telework status (weighted).}
+\label{tab:tabletwo}
+\end{table}
+
+%% -- Methods ------------------------------------------------------------------
+
+\section{Methods} \label{sec:methods}
+
+\subsection{Analysing state sequences}
+
+The 24 hours of time-use can be seen as categorical activity-trip sequence data. We differentiate between seven activity types (chores/errands, leisure, self-care, sleep, travel, work and other) and discretize the day into 10 minute intervals which defines our state sequence.
+
+The primary goal of sequence analysis is then to extract simplified information from the state sequence. We use Shannon's entropy as a measure of the diversity of states. Letting $p_i$ denote the proportion of cases in state $i$ at the considered position, the transversal entropy is defined as \citep{Gabadinho+Etal:2011}
+%
+\begin{equation} \label{eq:transversal-entropy}
+h(p_1, \dots, p_a) = -\sum_{i=1}^{a} p_i \log(p_i)
+\end{equation}
+%
+where $a$ is the size of the alphabet, i.e., the number of unique states. The entropy is 0 when all cases are in the same state and maximal when we have a uniform distribution over the states.
+
+Similarly, the longitudinal Shannon entropy (for each sequence individually) is \citep{Gabadinho+Etal:2011}
+%
+\begin{equation} \label{eq:longitudinal-entropy}
+h(\pi_1, \dots, \pi_a) = -\sum_{i=1}^{a}\pi_i \log(\pi_i)
+\end{equation}
+%
+where $\pi_i$ is the proportion of occurrences of the $i$th state in the sequence.
+
+As proposed by \citet{Song+Etal:2021} a cluster analyisis of the activity-trip sequences or investigating sequence differences by telework status could be interesting. However, due to the high combinatorial nature of a full day of activity episodes, we found that the within cluster similarities were very low and thus it is difficult to find general patterns. Also, (as in any cluster analysis) dissimilarity measures should be carefully evaluated and compared. As this was not the main emphasize of our paper, clustering was not further pursued as part of the analysis (for an example of activity sequence analysis in the telework context see \citealt{Su+Etal:2021}).
+
+We use the \pkg{TraMineR} \proglang{R}-package \citep{Gabadinho+Etal:2011} to analyse the state sequences, i.e., for the index plots (Figure~\ref{fig:full-index-plot}), entropy and population share computations (Figure~\ref{fig:entropies-and-shares}).
+
+\subsection{Ordered probit switching regression}
+
+In the following, we outline the ordered probit switching regression model as well as list all the key formulas enabling the computation of treatment effects. Section~\ref{sec:the-model} and Section~\ref{sec:the-conditional-expectation} are (slightly) modified versions of \citet{Heimgartner+Wang:2025}.
+
+\subsubsection{The model} \label{sec:the-model}
+
+As alluded, OPSR is a two-step model: One process governs the ordinal outcome and separate processes (for each ordinal outcome) govern the continuous outcomes. The ordinal outcome can also be thought of as a regime or treatment. In the subsequent exposition, we will refer to the two processes as \emph{selection} and \emph{outcome} process.
+
+We borrow the notation from \cite{Wang+Mokhtarian:2024} where also all the derivations are detailed. For a similar exhibition, \citet{Chiburis+Lokshin:2007} can be consulted. Individual subscripts are suppressed throughout, for simplicity.
+
+Let $\mathcal{Z}$ be a latent propensity governing the selection outcome
+%
+\begin{equation} \label{eq:selection}
+\mathcal{Z} = \Wg + \epsilon,
+\end{equation}
+%
+where $\boldsymbol{W}$ represents the vector of attributes of an individual, $\boldsymbol{\gamma}$ is the corresponding vector of parameters and $\epsilon \sim \mathcal{N}(0, 1)$ a normally distributed error term.
+
+As $\mathcal{Z}$ increases and passes some unknown but estimable thresholds, we move up from one ordinal treatment to the next higher level
+%
+\begin{equation} \label{eq:thresholds}
+Z = j \quad \mathrm{if}\ \kappa_{j-1} < \mathcal{Z} \le \kappa_j,
+\end{equation}
+%
+where $Z$ is the observed ordinal selection variable, $j = 1, \dots, J$ indexes the ordinal levels of $Z$, and $\kappa_j$ are the thresholds (with $\kappa_0 = -\infty$ and $\kappa_J = \infty$). Hence, there are $J-1$ thresholds to be estimated. The probability that an individual self-selects into treatment group $j$ is
+%
+\begin{equation} \label{eq:prob-selection}
+\begin{aligned}
+\Prob[Z = j] &= \Prob[\kappa_{j-1} < \mathcal{Z} \le \kappa_j] \\
+&= \Prob[\kappa_{j-1} - \Wg < \epsilon \le \kappa_j - \Wg] \\
+&= \Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg).
+\end{aligned}
+\end{equation}
+%
+where $\Phi(\cdot)$ is the cumulative distribution function of the standard normal distribution.
+
+The outcome model for the \jth treatment group is expressed as
+%
+\begin{equation} \label{eq:outcome}
+y_j = \Xb + \eta_j,
+\end{equation}
+%
+where $y_j$ is the observed continuous outcome, $\boldsymbol{X_j}$ the vector of observed explanatory variables associated with the \jth outcome model, $\boldsymbol{\beta_j}$ is the vector of associated parameters, and $\eta_j \sim \mathcal{N}(0, \sigma_j^2)$ is a normally distributed error term. At this point it should be noted that $\boldsymbol{X_j}$ and $\boldsymbol{W}$ may share some explanatory variables but not all, due to identification problems otherwise \citep{Chiburis+Lokshin:2007}.
+
+The key assumption of OPSR is now that the errors of the selection and outcome models are jointly multivariate normally distributed
+%
+\begin{equation} \label{eq:multi-norm}
+\begin{pmatrix}
+\epsilon \\
+\eta_1 \\
+\vdots \\
+\eta_j \\
+\vdots \\
+\eta_J
+\end{pmatrix}
+\sim \mathcal{N}\left(
+\begin{pmatrix}
+0 \\
+0 \\
+\vdots \\
+0 \\
+\vdots \\
+0
+\end{pmatrix},
+\begin{pmatrix}
+1 & \rho_1 \sigma_1 & \cdots & \rho_j \sigma_j & \cdots & \rho_J \sigma_J \\
+\rho_1 \sigma_1 & \sigma_2^2 \\
+\vdots &  & \ddots \\
+\rho_j \sigma_j & & & \sigma_j^2 \\
+\vdots & & & & \ddots \\
+\rho_J \sigma_J & & & & & \sigma_J^2
+\end{pmatrix}
+\right),
+\end{equation}
+%
+where $\rho_j$ represents the correlation between the errors of the selection model ($\epsilon$) and the \jth outcome model ($\eta_j$). If the covariance matrix should be diagonal (i.e., no error correlation), no selection-bias exists and the selection and outcome models can be estimated separately.
+
+As shown in \cite{Wang+Mokhtarian:2024}, the log-likelihood of observing all individuals self-selecting into treatment $j$ and choosing continuous outcome $y_j$ can be expressed as
+%
+\begin{multline} \label{eq:log-lik}
+\ell(\theta \mid \boldsymbol{W}, \boldsymbol{X_j}) = \sum_{j = 1}^{J} \sum_{\{j\}}
+\left\{
+\ln\left[
+\frac{1}{\sigma_j} \phi\left(\frac{y_j - \Xb}{\sigma_j}\right)
+\right] \quad + \right. \\
+\left. \ln\left[
+\Phi\left(
+\frac{\sigma_j (\kappa_j - \Wg) - \rho_j(y_j - \Xb)}{\sigma_j\sqrt{1 - \rho_j^2}}
+\right) -
+\Phi\left(
+\frac{\sigma_j (\kappa_{j-1} - \Wg) - \rho_j(y_j - \Xb)}{\sigma_j\sqrt{1 - \rho_j^2}}
+\right)
+\right]
+\right\}
+\end{multline}
+%
+where $\sum_{\{j\}}$ means the summation of all the cases belonging to the \jth selection outcome, $\phi(\cdot)$ and $\Phi(\cdot)$ are the density and cumulative distribution function of the standard normal distribution.
+
+\subsubsection{The conditional expectation} \label{sec:the-conditional-expectation}
+
+The conditional expectation can be expressed as
+%
+\begin{equation} \label{eq:cond-exp}
+\begin{aligned}
+\E[y_j \mid Z = j] &= \Xb + \E[\eta_j \mid \kappa_{j-1} - \Wg < \epsilon \le \kappa_j - \Wg] \\
+&= \Xb - \rho_j\sigma_j \frac{\phi(\kappa_j - \Wg) - \phi(\kappa_{j-1} - \Wg)}{\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)},
+\end{aligned}
+\end{equation}
+%
+where the fraction is the ordered probit switching regression model counterpart to the inverse Mills ratio (IMR) term of a binary switching regression model. We immediately see, that regressing $\boldsymbol{X_j}$ on $y_j$ leads to an omitted variable bias if $\rho_j \neq 0$ which is the root cause of the selection bias. However, the IMR can be pre-computed based on an ordered probit model and then included in the second stage regression, which describes the Heckman correction \citep{Heckman:1979}. Please note, that since the Heckman two-step procedure includes an estimate in the second step regression, the resulting OLS standard errors and heteroskedasticity-robust standard errors are incorrect \citep{Greene:2002}.
+
+To obtain unbiased treatment effects, we must further evaluate the ``counterfactual outcome'', which reflects the expected outcome under a counterfactual treatment (i.e., for $j' \neq j$)
+%
+\begin{equation} \label{eq:counterfact-exp}
+\begin{aligned}
+\E[y_{j'} \mid Z = j] &= \Xbd + \E[\eta_{j'} \mid \kappa_{j-1} - \Wg < \epsilon \le \kappa_j - \Wg] \\
+&= \Xbd - \rho_{j'}\sigma_{j'} \frac{\phi(\kappa_j - \Wg) - \phi(\kappa_{j-1} - \Wg)}{\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)}.
+\end{aligned}
+\end{equation}
+%
+Let's assume that $y_j = \ln(Y_j + 1)$ in the previous equations. I.e., the continuous outcome was log-transformed as is usual in regression analysis. We have to note, that in such cases the Equations~\ref{eq:cond-exp}-\ref{eq:counterfact-exp} provide the conditional expectation of the log-transformed outcome. Therefore we need to back-transform $Y_j = \exp(y_j) - 1$ which yields
+%
+\begin{equation} \label{eq:log-cond-exp}
+\E[Y_j \mid Z = j] =
+\exp\left(\Xb + \frac{\sigma_j^2}{2}\right)
+\left[
+\frac{\Phi(\kappa_j - \Wg - \rho_j\sigma_j) - \Phi(\kappa_{j-1} - \Wg - \rho_j\sigma_j)}
+{\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)}
+\right] - 1
+\end{equation}
+%
+for the factual case, and
+%
+\begin{equation} \label{eq:log-counterfact-exp}
+\E[Y_{j'} \mid Z = j] =
+\exp\left(\Xbd + \frac{\sigma_{j'}^2}{2}\right)
+\left[
+\frac{\Phi(\kappa_j - \Wg - \rho_{j'}\sigma_{j'}) - \Phi(\kappa_{j-1} - \Wg - \rho_{j'}\sigma_{j'})}
+{\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)}
+\right] - 1
+\end{equation}
+%
+for the counterfactual case \citep{Wang+Mokhtarian:2024}.
+
+The OPSR methodology is implemented in the \pkg{OPSR} \proglang{R}-package \citep{Heimgartner+Wang:2025} and is available from the Comprehensive \proglang{R} Archive Network (CRAN) at \url{https://CRAN.R-project.org/package=OPSR}.
+
+\subsubsection{A word on the sensitivity with respect to ``rho''}  \label{sec:a-word-on-rho}
+
+It immediately follows that the derivative of Equation~\ref{eq:cond-exp} with respect to $\rho_j$ is the IMR scaled by the standard deviation $\sigma_j$.  The sensitivity of the conditional expectation with respect to $\rho_j$ depends on the IMR. Further, Equation~\ref{eq:cond-exp} consists of two parts: $\Xb$ and $\rho_j \sigma_j$IMR (the Heckman correction). In how far the conditional expectation is influenced by ``rho'' therefore depends on the relative size of the two parts. If $\Xb$ is relatively small compared to $\sigma_j$IMR, then $\rho_j$ plays a relatively more important role for the conditional expectation and thus the treatment effects (depending on the influence on the counterfactual conditional expectation). Furthermore, not accounting for error correlation (dropping the Heckman correction) could lead to very different beta estimates and thereby treatment effects.
+
+
+%% -- Results ------------------------------------------------------------------
+
+\section{Results} \label{sec:results}
+
+In what follows, we first investigate daily time-use and mobility patterns (disaggregate view) by telework location (i.e., either home, mixture or office). We also report in how far NTWers, NUTWers and UTWers differ with regard to these daily patterns. Subsequently, the descriptive analysis is repeated for weekly time-use and mobility indicators (aggregate view) by telework status (NTWers, NUTWers and UTWers). As should be clear, this group comparison has by now means a causal interpretation. Finally, the OPSR method is employed to estimate telework treatment effects and the preceding descriptive analysis allows us to interpret them.
+
+\subsection{Disaggregate analysis by telework location}
+
+<<hidden-weekday-shares, echo=FALSE, results=hide>>=
+dat <-
+  TWTE::work %>%
+  left_join(mutate(TWTE::sample, in_sample = TRUE), by = c("uid", "activity_date" = "date")) %>%
+  filter(in_sample) %>%
+  select(uid, date = activity_date, weekday, is_mixture_day, work_location)
+
+dat <-
+  dat %>%
+  count(weekday, work_location) %>%
+  group_by(weekday) %>%
+  mutate(tot = sum(n)) %>%
+  ungroup() %>%
+  mutate(share = n / tot) %>%
+  filter(work_location == "home")
+
+min_weekday_share <- round(100 * min(dat$share), 2)
+max_weekday_share <- round(100 * max(dat$share), 2)
+@
+%
+To put the following findings into perspective, the share of TWers working fully remote over the weekdays varies between \Sexpr{min_weekday_share}\% and \Sexpr{max_weekday_share}\% which is slightly lower than found in \citet{Heimgartner+Axhausen:2024}. The share is quite stable with Mondays being the most popular day to telework.
+
+\subsubsection{Activity sequences}
+
+Figure~\ref{fig:full-index-plot} presents full index plots of activity sequences highlighting work and travel states by telework location. The visualization illustrates how work activities for office workers (bottom row) are concentrated during regular business hours, structuring the overall activity sequences and confining travel to typical peak periods in the morning, midday, and afternoon. This structured pattern gradually diminishes from office workers to mixture workers and further dissolves among teleworkers (top row), reflecting the increasing flexibility in work schedules and mobility.
+%
+<<hidden-activity-sequences, echo=FALSE, results=hide>>=
+as <-
+  TWTE::activity_sequences %>%
+  left_join(TWTE:::tw_status(), by = c("uid", "date")) %>%
+  select(uid, date, wfh, tw = tw_location, everything())
+
+w <-
+  as %>%
+  left_join(weights$weights, by = "uid") %>%
+  pull(weight)
+
+create_as_bin <- function(as, weight, cat, lab, cpal = NULL) {
+  as_ <-
+    as %>%
+    select(-uid, -date, -wfh, -tw)
+  as_[as_ != cat] <- paste0("non-", cat)
+  as <-
+    as %>%
+    select(uid, date, wfh, tw) %>%
+    cbind(as_)
+
+  act.seq <- seqdef(as, 5:148, xtstep = 6, cpal = cpal, labels = lab,
+                    weights = weight)
+
+  act.seq
+}
+
+act.lab <- c("Chores/Errands", "Leisure", "Other", "Self-care", "Sleep",
+             "Travel", "Work")
+act.seq <- seqdef(as, 5:148, xtstep = 6, labels = act.lab,
+                  weights = NULL)  # no weights
+alphabet(act.seq)  # ensure that order of alphabet aligns with labels!
+asw <- create_as_bin(as, NULL, "working", c("Non-work", "Work"))
+ast <- create_as_bin(as, NULL, "travel", c("Non-travel", "Travel"))
+
+get_freq_mat <- function(act.seq, indices, fun = seqstatd) {
+  data <- by(act.seq, indices, fun)
+  sapply(data, function(x) x$Frequencies[2, ])
+}
+
+mat_freq_w <- get_freq_mat(asw, as$tw)
+mat_freq_t <- get_freq_mat(ast, as$tw)
+
+get_index_data <- function(act.seq, indices) {
+  by(act.seq, indices, function(x) x)
+}
+
+idx_dat <- get_index_data(act.seq, as$tw)
+idx_dat_w <- get_index_data(asw, as$tw)
+idx_dat_t <- get_index_data(ast, as$tw)
+@
+%
+<<full-index-plot, echo=FALSE>>=
+plot_idx <- function(idx_dat, labs = list(), main = NULL, cpal = NULL, cs = 1, xl = 2.5, ...) {
+  n <- length(idx_dat)
+  if (!is.null(main)) {
+    plot.new()
+    mtext(text = main, side = 3, line = 1, cex = cs * par("cex"), ...)
+    par(new = TRUE)
+  }
+  for (i in 1:n) {
+    seqIplot(idx_dat[[i]], with.legend = FALSE, ylab = labs[i], yaxis = FALSE, xaxis = i == n,
+             cpal = cpal, yaxs = "i")
+    box()
+  }
+  mtext("Hour of the day", side = 1, line = xl, cex = cs * par("cex"))
+}
+
+plot.it <- function() {
+  file <- "../vignettes/full_index_plot.png"
+  png(file, height = 11, width = 11, units = "in", res = 2 * 144)
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfcol = c(3, 2), mar = c(1, 2, 1, 1), oma = c(3, 2, 2, 2),  #c(5.1, 4.1, 4.1, 2.1)
+      cex = 1.25)  # !
+  plot_idx(idx_dat_w, labs = c("Home", "Mixture", "Office"), cpal = c("grey20", colvec[2]), main = "Work")
+  par(mar = c(1, 1, 1, 1))
+  plot_idx(idx_dat_t, cpal = c("grey20", colvec[3]), main = "Travel")
+  dev.off()
+  file
+}
+
+file <- plot.it()
+@
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{\Sexpr{file}}
+\caption{\label{fig:full-index-plot} Activity sequences highlighting work and travel states by telework location.}
+\end{figure}
+
+The ``diversity of states'' as measured by the longitudinal entropy (Figure~\ref{fig:entropies-and-shares}) is slightly lower for TWers. As a reminder, the entropy is 0 when all cases are in the same state and is maximal when the same proportion of cases is observed in each state. On the other hand, the transversal entropy is bounded above by home TWers, while for mixture and office workers pronounced swings between low and high entropy can be observed. Again, this indicates that office work and conventional business hours ``align'' activity sequences across individuals. Panel 3 highlights that around 20\% of TWers prefer to work during unusual hours. Similarly, mixture workers shift some work to late hours or work over-time during off business hours. The last panel emphasizes that the three rush hour peaks still exist and are the most popular hours to travel (in a relative sense). Teleworkers' mobility seems to be depressed throughout the day but especially during the morning rush hours. Mixture workers are particularly mobile during lunch time (potentially commuting during these hours).
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<entropies-and-shares, echo=FALSE, fig=TRUE, height=7.5, width=7.9>>=
+plot_mat <- function(mat, colvec, ylab, by = 4, legend.position = "topleft") {
+  matplot(mat, type = "l", lty = 1, lwd = 2, xlab = "Hour of the day", ylab = ylab,
+          col = colvec, axes = FALSE)
+  at <- seq(1, nrow(mat), by = by)
+  axis(1, at = at, labels = row.names(mat)[at])
+  axis(2)
+  box()
+  legend(legend.position, legend = c("home", "mixture", "office"), bty = "n",
+         lty = 1, lwd = 2, col = colvec)
+}
+
+## entropy
+get_entropies <- function(as, indices, fun = seqstatd) {
+  data <- by(as, indices, fun)
+  ent <- sapply(data, function(x) x$Entropy)
+  as.matrix(ent)
+}
+
+## transversal
+ent_trans <- get_entropies(act.seq, as$tw)
+
+## longitudinal
+ent_long <- data.frame(
+  seqient(act.seq),
+  tw = as$tw,
+  wfh = as$wfh
+)
+
+la <- legend.args
+la$x <- "bottomleft"
+
+plot.it <- function() {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfrow = c(2, 2))
+  TWTE:::boxplotm(Entropy ~ tw + wfh, data = ent_long,
+                  point.args = point.args,
+                  legend.args = la,
+                  xlab = "Telework location",
+                  ylab = "Entropy",
+                  main = "",
+                  notch = TRUE,
+                  outcol = outcol,
+                  varwidth = varwidth)
+  TWTE:::label_panel(1, "Longitudinal entropy")
+  plot_mat(ent_trans, colvec, ylab = "Entropy", legend.position = "bottomright")
+  TWTE:::label_panel(2, "Transversal entropy")
+  plot_mat(mat_freq_w, colvec, ylab = "Share")
+  TWTE:::label_panel(3, "Population share working")
+  plot_mat(mat_freq_t, colvec, ylab = "Share")
+  TWTE:::label_panel(4, "Population share traveling")
+}
+
+plot.it()
+@
+\caption{\label{fig:entropies-and-shares} Longitudinal and transversal etropy, population share working and traveling throughout the day by telework location.}
+\end{figure}
+
+\subsubsection{Time-use}
+
+Figure~\ref{fig:disaggregate-time-use} shows the time spent on the seven distinguished time-use categories by telework location. Median values are further separated by telework status. Further, a notch is drawn in each side of the boxes. If the notches of two plots do not overlap, this is ``strong evidence'' that the two median values differ \citep[][p. 62]{Chambers+Etal:1983}. Hours worked (panel 6) seem to be lower for TWers (especially NUTWers). However, as already alluded, part-time work is more common among NUTWers. Together with the evidence from Table~\ref{tab:table-wfh} that the full-time equivalent hours worked are almost identical across the three groups, we conclude that NUTWers working part-time spread the workload over the available days (even the ``non-work'' days). The only noticeable other difference is that TWers spend less time traveling. Notably UTWers show a considerable gap (of around one hour) on travel spent when teleworking versus when commuting to the office. As we will see, UTWers tend to have longer commutes and use the train as a commuting mode. The substitution patterns (for the travel time savings) are not that obvious: The distributions for TWers are comparably larger than for mixture and office workers, indicating that substitution patterns could be diverse. The only two categories showing higher median values are leisure and sleeping. We conclude that time allocation is fairly similar across telework location and telework status, with travel being the obvious exception, especially for UTWers.
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<disaggregate-time-use, echo=FALSE, fig=TRUE, height=9, width=6.5>>=
+plot.it <- function() {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfrow = c(3, 2))
+
+  data <- data_analytic$daily_indicators$time_cat
+  data <- TWTE:::drop_other(data, "category")
+  cats <- sort(unique(data$category))
+
+  for (i in seq_along(cats)) {
+    dat <- subset(data, subset = category == cats[i])
+    cat_ <- TWTE:::firstup(stringr::str_replace_all(cats[i], "_", " "))
+    TWTE:::boxplotm(duration_adjusted / 60 ~ tw_location + wfh, dat,
+                    point.args = point.args,
+                    legend.args = legend.args,
+                    xlab = "Telework location",
+                    ylab = "Duration (h)",
+                    main = "",
+                    notch = TRUE,
+                    outcol = outcol,
+                    outline = FALSE,
+                    varwidth = varwidth)
+    TWTE:::label_panel(i, cat_)
+  }
+}
+
+plot.it()
+@
+\caption{\label{fig:disaggregate-time-use} Time-use indicators by telework location (disaggregate view). Separate median values by telework status.}
+\end{figure}
+
+\subsubsection{Mobility}
+
+Figure~\ref{fig:disaggregate-mobility-indicators} shows mobility indicators by telework location. Again, median respectively mean values are further distinguished by telework status. Panel 1 indicates that the previous discussion on travel times carries over to traveled distance. Panel 2 shows that telework depresses traveled distance in particular for motorized individual transport (mit) and train. Meanwhile, TWers (in particular UTWers) tend to be train commuters on regular office workdays. Fully remote TWers make fewer trips across all modes and the full trip count distribution is shifted to the left roughly by two trips. We investigated this shift further and found that it is purely driven by main commuting modes (mit and train) with two fewer trips by train and two to six fewer trips by car (trip distributions by modes are not shown here). Similarly, bike also shows this decrease of two trips, indicating its use as a commuting mode while little compensating leisure travel by TWers exists. Similarly mode shares for TWers are substantially smaller for mit and train, while walk almost makes up 40\%. The last panel shows the number of generated trips by hour of the day and normalized for number of tracking study participants by telework location. The evening rush hour is the busiest hour and telework only marginally contributes to flattening that peak. Contrary, the morning and midday peak hours generate fewer trips for TWers. Here, one has to keep in mind, that between \Sexpr{min_weekday_share}\% and \Sexpr{min_weekday_share}\% of the workforce teleworks on any given day. Additionally, teleworkers tend to live in an urban environment. Therefore the flattening of the peak hours on main commuting axes might not be noticeable.
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<disaggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=9.5, width=6.5>>=
+plot.it <- function() {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfrow = c(3, 2))
+
+  p <- list()
+  main <- c("Distance", "Distance by mode", "Number of trips", "Number of trips by mode",
+            "Mode shares", "Hourly counts (normalized)")
+
+  ## distance boxplot
+  p$plot.1 <- function() {
+    la <- legend.args
+    la$x <- "topleft"
+    TWTE:::boxplotm(vmd / 1e3 ~ tw_location + wfh, data = data_analytic$daily_indicators$vmd,
+                    point.args = point.args,
+                    legend.args = la,
+                    xlab = "Telework location",
+                    ylab = "Distance traveled (km)",
+                    notch = TRUE,
+                    main = "",
+                    outcol = outcol,
+                    varwidth = varwidth)
+  }
+
+  ## mean distance by mode barplot
+  p$plot.2 <- function() {
+    data <- data_analytic$daily_indicators$vmd_m
+    data <- TWTE:::drop_other(data, "stage_mode")
+
+    ## sort
+    data_o <-
+      data %>%
+      mutate(stage_mode = stringr::str_replace_all(stage_mode, "_", " "),
+             stage_mode = mpt2mit(stage_mode),
+             stage_mode = factor(stage_mode, levels = c("mit", "train", "walk", "bike", "local pt"), ordered = TRUE))
+
+    legend.args <- list(
+      x = "topright",
+      legend = c("home", "mixture", "office",
+                 "NTW", "NUTW", "UTW"),
+      pch = c(15, 15, 15, 0, 1, 2),
+      pt.cex = c(2, 2, 2, 1, 1, 1),
+      pt.lwd = c(1, 1, 1, 3, 3, 3),
+      col = c(barcolvec, colvec[1:3]),
+      ncol = 2,
+      bty = "n"
+    )
+
+    TWTE:::barplotm(vmd / 1e3 ~ stage_mode + tw_location + wfh, data = data_o,
+                    col.point = colvec[1:3],
+                    col.bar <- barcolvec,
+                    border = NA,
+                    point.args = list(lwd = 3),
+                    xlab = "Mode", ylab = "Mean distance traveled (km)",
+                    legend.args = legend.args,
+                    main = "")
+    box()
+  }
+
+  ## number of trips boxplot
+  p$plot.3 <- function() {
+    la <- legend.args
+    la$x<- "topleft"
+    TWTE:::boxplotm(log(n_trips + 1) ~ tw_location + wfh, data = data_analytic$daily_indicators$n_trips,
+                    point.args = point.args,
+                    legend.args = la,
+                    xlab = "Telework location",
+                    ylab = "Log number of trips (log(n + 1))",
+                    main = "",
+                    notch = TRUE,
+                    outcol = outcol,
+                    varwidth = varwidth)
+  }
+
+  ## mean number of trips barplot
+  p$plot.4 <- function() {
+    data <- data_analytic$daily_indicators$n_trips_m
+    data <- TWTE:::drop_other(data, "trip_main_mode")
+
+    ## sort
+    data_o <-
+      data %>%
+      mutate(trip_main_mode = stringr::str_replace_all(trip_main_mode, "_", " "),
+             trip_main_mode = mpt2mit(trip_main_mode),
+             trip_main_mode = factor(trip_main_mode, levels = c("mit", "walk", "bike", "train", "local pt"), ordered = TRUE))
+
+    legend.args <- list(
+      x = "topright",
+      legend = c("home", "mixture", "office",
+                 "NTW", "NUTW", "UTW"),
+      pch = c(15, 15, 15, 0, 1, 2),
+      pt.cex = c(2, 2, 2, 1, 1, 1),
+      pt.lwd = c(1, 1, 1, 3, 3, 3),
+      col = c(barcolvec, colvec[1:3]),
+      ncol = 2,
+      bty = "n"
+    )
+
+    TWTE:::barplotm(n_trips ~ trip_main_mode + tw_location + wfh, data = data_o,
+                    col.point = colvec[1:3],
+                    col.bar <- barcolvec,
+                    border = NA,
+                    point.args = list(lwd = 3),
+                    xlab = "Mode", ylab = "Mean number of trips",
+                    legend.args = legend.args,
+                    main = "")
+    box()
+  }
+
+  ## mode shares
+  p$plot.5 <- function() {
+    data <- data_analytic$daily_indicators$mode_share
+    data <- TWTE:::drop_other(data, "stage_mode")
+
+    ## sort
+    data_o <-
+      data %>%
+      mutate(stage_mode = stringr::str_replace_all(stage_mode, "_", " "),
+             stage_mode = mpt2mit(stage_mode),
+             stage_mode = factor(stage_mode, levels = c("mit", "walk", "bike", "train", "local pt"), ordered = TRUE))
+
+    legend.args <- list(
+      x = "topright",
+      legend = c("home", "mixture", "office",
+                 "NTW", "NUTW", "UTW"),
+      pch = c(15, 15, 15, 0, 1, 2),
+      pt.cex = c(2, 2, 2, 1, 1, 1),
+      pt.lwd = c(1, 1, 1, 3, 3, 3),
+      col = c(barcolvec, colvec[1:3]),
+      ncol = 2,
+      bty = "n"
+    )
+
+    TWTE:::barplotm(mode_share ~ stage_mode + tw_location + wfh, data = data_o,
+                    col.point = colvec[1:3],
+                    col.bar <- barcolvec,
+                    border = NA,
+                    point.args = list(lwd = 3),
+                    xlab = "Mode", ylab = "Mode share",
+                    legend.args = legend.args,
+                    main = "")
+    box()
+  }
+
+  ## distribution over the day matplot
+  p$plot.6 <- function() {
+    to_matrix <- function(hc, mode) {
+      dat <- subset(hc, trip_main_mode == mode)
+      template <- data.frame(hour_start = 0:23, n_rel_ = 0)
+      vec_list <- lapply(unique(dat$tw_location), function(x) {
+        dat. <- subset(dat, tw_location == as.character(x))
+        dat. <- subset(dat., select = c("hour_start", "n_rel"))
+        dat. <-
+          dat. %>%
+          right_join(template, by = "hour_start") %>%
+          mutate(n_rel = ifelse(is.na(n_rel), n_rel_, n_rel)) %>%
+          select(hour_start, n_rel) %>%
+          arrange(hour_start) %>%
+          pull(n_rel)
+      })
+      as.matrix(as.data.frame(vec_list))
+    }
+
+    data <- data_analytic$daily_indicators$hourly_counts
+
+    tot <-
+      data %>%
+      group_by(hour_start) %>%
+      summarise(n_trips_w = sum(n_trips_w)) %>%
+      ungroup()
+    tot$tw_location <- "tot"
+
+    data <-
+      data %>%
+      bind_rows(tot) %>%
+      arrange(hour_start, tw_location) %>%
+      mutate(n_rel = n_trips_w / max(n_trips_w)) %>%
+      tidyr::drop_na()
+
+    data$trip_main_mode <- "tot"
+    mat <- to_matrix(data, "tot")
+    col <- c(colvec[1:3], "#7a6e85")
+    matplot(mat, type = "l", main = "",
+            xlab = "Hour of the day", ylab = "Number of started trips (rel. to busiest hour)",
+            col = col,
+            lty = 1,
+            lwd = c(2, 2, 2, 4))
+    legend("topleft", legend = c("home", "mixture", "office", "total"),
+           col = col, lty = 1, lwd = 2, bty = "n")
+  }
+
+  sapply(seq_along(p), function(i) {
+    p[[i]]()
+    TWTE:::label_panel(i, main[i])
+  })
+  invisible(1)
+}
+
+plot.it()
+@
+\caption{\label{fig:disaggregate-mobility-indicators} Mobility indicators by telework location (disaggregate view). Separate median (for the boxplots) or mean values (for the barplots) by telework status.}
+\end{figure}
+
+\subsection{Aggregate analysis by telework status}
+
+\subsubsection{Time-use}
+
+Figure~\ref{fig:aggregate-time-use} shows that in a typical full-time equivalent workweek, time-allocation seems to be fairly similar across the teleworker groups. As already observed in Table~\ref{tab:tabletwo} UTWers are less frequent grocery shoppers which could explain the less time spent on chores and errands which are likely integrated into commuting trips of less frequent TWers. The somewhat higher leisure and self-care time consumption of NUTWers can potentially be attributed to more prevalent part-time work and is less prevalent among UTWers. Meanwhile there seems to be a linear increasing trend in sleep and decreasing trend in travel indicating that part of the foregone commutes is simply substituted with more sleep. The difference in total hours worked was already discussed in Table~\ref{tab:table-wfh} and is together with the observations at the disaggregate level a manifest of the higher workload (rather than work-ethics).
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<aggregate-time-use, echo=FALSE, fig=TRUE, height=9, width=6.5>>=
+plot.it <- function() {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfrow = c(3, 2))
+
+  data <- data_analytic$weekly_indicators$time_cat
+  data <- TWTE:::drop_other(data, "category")
+  cats <- sort(unique(data$category))
+
+  for (i in seq_along(cats)) {
+    dat <- subset(data, subset = category == cats[i])
+    cat_ <- TWTE:::firstup(stringr::str_replace_all(cats[i], "_", " "))
+    boxplot(duration_adjusted / 60 ~ wfh, dat,
+            col = "white",
+            xlab = "Telework status",
+            ylab = "Duration (h)",
+            main = "",
+            notch = TRUE,
+            outcol = outcol,
+            outline = FALSE,
+            varwidth = varwidth)
+    TWTE:::label_panel(i, cat_)
+  }
+}
+
+plot.it()
+@
+\caption{\label{fig:aggregate-time-use} Weekly time-use indicators by telework status (aggregate view).}
+\end{figure}
+
+\subsubsection{Mobility}
+
+Figure~\ref{fig:aggregate-mobility-indicators} indicates that UTWers travel less distance and make fewer trips across all modes except for walk but in particular for mit. Despite UTWers being particularly inclined to use the train on regular office workdays, the foregone train travel on home office days is not fully compensated. However, mode (distance) shares are not that different across the groups with TWers having slightly higher train shares and lower mit shares compared to non-TWers. Meanwhile UTWers prefer walk to bike. Panel 6 shows that UTWers have slightly further commutes which explains the longer distances traveled on regular office days. However, the direction of potential causality is not clear here: In spirit of \citet{Ravalet+Rerat:2019} and \citet{DeVos+Etal:2018} it could be argued that TWers indeed accept longer commutes (and relocated) while longer commutes could simply incentivize more telework in the first place. In general, the insights seem to be consistent with the disaggregate analysis and patterns observed on home office days (more strongly) translate to patterns observed for UTWers.
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<aggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=9.5, width=6.5>>=
+plot.it <- function() {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfrow = c(3, 2))
+
+  p <- list()
+  main <- c("Distance", "Distance by mode", "Number of trips", "Number of trips by mode",
+            "Mode shares", "Commute distance")
+
+  ## distance boxplot
+  p$plot.1 <- function() {
+    boxplot(vmd / 1e3 ~ wfh, data = data_analytic$weekly_indicators$vmd,
+            col = "white",
+            xlab = "Telework status",
+            ylab = "Distance traveled (km)",
+            main = "",
+            notch = TRUE,
+            outcol = outcol,
+            varwidth = varwidth)
+  }
+
+  ## mean distance by mode barplot
+  p$plot.2 <- function() {
+    data <- data_analytic$weekly_indicators$vmd_m
+    data <- TWTE:::drop_other(data, "stage_mode")
+
+    ## sort
+    data_o <-
+      data %>%
+      mutate(stage_mode = stringr::str_replace_all(stage_mode, "_", " "),
+             stage_mode = mpt2mit(stage_mode),
+             stage_mode = factor(stage_mode, levels = c("mit", "train", "walk", "bike", "local pt"), ordered = TRUE))
+
+    input <- aggregate(vmd ~ stage_mode + wfh, data = data_o, FUN = mean)
+
+    barplot(vmd / 1e3 ~ wfh + stage_mode, data = input,
+            beside = TRUE,
+            col = barcolvec,
+            border = NA,
+            ylim = c(0, 150),
+            xlab = "Mode", ylab = "Mean distance traveled (km)",
+            main = "")
+    box()
+    legend(
+      x = "topright",
+      legend = c("NTW", "NUTW", "UTW"),
+      pch = c(15, 15, 15),
+      pt.cex = c(2, 2, 2),
+      col = barcolvec,
+      bty = "n"
+    )
+  }
+
+  ## number of trips boxplot
+  p$plot.3 <- function() {
+    boxplot(log(n_trips + 1) ~ wfh, data = data_analytic$weekly_indicators$n_trips,
+            col = "white",
+            xlab = "Telework status",
+            ylab = "Log number of trips (log(n + 1))",
+            notch = TRUE,
+            main = "",
+            outcol = outcol,
+            varwidth = varwidth)
+  }
+
+  ## mean number of trips barplot
+  p$plot.4 <- function() {
+    data <- data_analytic$weekly_indicators$n_trips_m
+    data <- TWTE:::drop_other(data, "trip_main_mode")
+
+    ## sort
+    data_o <-
+      data %>%
+      mutate(trip_main_mode = stringr::str_replace_all(trip_main_mode, "_", " "),
+             trip_main_mode = mpt2mit(trip_main_mode),
+             trip_main_mode = factor(trip_main_mode, levels = c("mit", "walk", "bike", "train", "local pt"), ordered = TRUE))
+
+    input <- aggregate(n_trips ~ trip_main_mode + wfh, data = data_o, FUN = mean)
+
+    barplot(n_trips ~ wfh + trip_main_mode, data = input, beside = TRUE,
+            col = barcolvec,
+            border = NA,
+            ylim = c(0, 13),
+            xlab = "Mode", ylab = "Mean number of trips",
+            main = "")
+    box()
+
+    legend(
+      x = "topright",
+      legend = c("NTW", "NUTW", "UTW"),
+      pch = c(15, 15, 15),
+      pt.cex = c(2, 2, 2),
+      col = barcolvec,
+      bty = "n"
+    )
+  }
+
+  ## mode shares
+  p$plot.5 <- function() {
+    data <- data_analytic$weekly_indicators$mode_share
+    data <- TWTE:::drop_other(data, "stage_mode")
+
+    ## sort
+    data_o <-
+      data %>%
+      mutate(stage_mode = stringr::str_replace_all(stage_mode, "_", " "),
+             stage_mode = mpt2mit(stage_mode),
+             stage_mode = factor(stage_mode, levels = c("mit", "train", "walk", "bike", "local pt"), ordered = TRUE))
+
+    input <- aggregate(mode_share ~ stage_mode + wfh, data = data_o, FUN = mean)
+
+    barplot(mode_share ~ wfh + stage_mode, data = input, beside = TRUE,
+            col = barcolvec,
+            border = NA,
+            ylim = c(0, 0.6),
+            xlab = "Mode", ylab = "Mode share",
+            main = "")
+    box()
+
+    legend(
+      x = "topright",
+      legend = c("NTW", "NUTW", "UTW"),
+      pch = c(15, 15, 15),
+      pt.cex = c(2, 2, 2),
+      col = barcolvec,
+      bty = "n"
+    )
+  }
+
+  ## commute distance by wfh boxplot
+  p$plot.6 <- function() {
+    boxplot(commute / 1e3 ~ wfh, data = data_analytic$survey,
+            col = "white",
+            xlab = "Telework status",
+            ylab = "Commute distance (km)",
+            main = "",
+            notch = TRUE,
+            outcol = outcol,
+            varwidth = varwidth)
+  }
+
+  sapply(seq_along(p), function(i) {
+    p[[i]]()
+    TWTE:::label_panel(i, main[i])
+  })
+  invisible(1)
+}
+
+plot.it()
+@
+\caption{\label{fig:aggregate-mobility-indicators} Weekly mobility indicators by telework status (aggregate view).}
+\end{figure}
+
+\subsubsection{Intermediate summary}
+
+In summary, telework seems to influence time scheduling rather than time allocation since the usual structure regular business hours provide is less respected when teleworking. This leads to less aligned activity patterns and thus higher transversal entropy throughout the day of TWers. TWers make significantly fewer trips and cover significantly less distance. The most affected modes are the main commuting modes, e.g., mpt and train. However, TWers tend to have PT subscriptions and use PT when commuting, leading to overall very similar mode shares over a full workweek. The descriptive analysis portrays a picture of reduced transport demand - more flexible time scheduling and foregone commutes being the main implications of telework. TWers tend to have longer commutes and therefore potentially have a stronger incentive to telework while at the same time have a higher potential to decrease distance traveled. Meanwhile mixture workers have very similar activity and mobility patterns to regular office workers with a somewhat flattened morning peak hour (as the commute is delayed to later hours, most likely the midday peak).
+
+\subsection{Telework treatment effects}
+
+This section presents the results based on the OPSR methodology with an emphasize on treatment effects rather than individual model parameters and their behavioral implications. We first estimated the full specified model and then 9 further models, dropping insignificant coefficients at the 90\% level down to the 10\% level. The model with the lowest AIC was then further reduced for the outcome process of the UTWers in order to avoid overfitting. Since the data is rather sparse (especially for the UTWers) the bias-variance trade-off was carefully evaluated, using k-fold cross-validation (with $k=10$) and out-of-sample log-likelihood as our loss. We find that the likelihood ratio test would always favor the full model, while cross-validation selects sparser models. The computation of treatment effects is based on ``counterfactual'' predictions and therefore hinges upon the prediction accuracy.
+
+<<hidden-r2, echo=FALSE, results=hide>>=
+dat <- TWTE::data_model
+weights <- dat$weight
+s.fit <- summary(TWTE::model_km$fit)
+gof <- s.fit$GOFcomponents
+el <- gof$LLprobitEl
+ms <- gof$LLprobitMs
+r2.1 <- gof$R2[["o1"]]
+r2.2 <- gof$R2[["o2"]]
+r2.3 <- gof$R2[["o3"]]
+@
+
+The final model is compared to other benchmark models (the null, full and AIC-preferred model) in Table~\ref{tab:model-km-comparison} in Appendix~\ref{app:model-comparison} along with conventional goodness of fit indicators. The likelihood-based pseudo $R^2$ indicates mediocre fit for the selection process (pseudo-$R^2$ equally-likely = \Sexpr{round(el, 2)}; pseudo-$R^2$ market-share = \Sexpr{round(ms, 2)}), while $R^2$ values for the continuous outcomes indicate good fit for NTWers ($R^2$ = \Sexpr{round(r2.1, 2)}) and NUTWers ($R^2$ = \Sexpr{round(r2.2, 2)}) and mediocre fit for UTWers ($R^2$ = \Sexpr{round(r2.3, 2)}). This can partly be attributed to the importance of the commuting distance which was included as an explanatory variable (and naturally plays an important role for the first two groups while less so for the UTWers). Parameter estimates are stable when excluding insignificant terms (i.e., they are similar in magnitude and have the same signs).
+
+Table~\ref{tab:model-km-fit} presents the estimates of the final model. In particular, there is significant error correlation (for ``Rho 2'') and the Wald $\chi^2$~test (with the null being all Rho coefficients are zero) is clearly rejected. Further, distinct processes seem to govern the final outcome (log weekly km) with different variables remaining in the final process specifications. This hints that accounting for error correlation (and estimating the full covariance matrix) is necessary while also treating the TWer groups as distinct segments with their separately estimated parameters. However, if variables enter more than one continuous process specification (e.g., household size) and at least one of the parameters is found significant, then the direction of effect is shared across the three groups (hinting that the processes follow at least some common pattern).
+
+The selection process (ordered probit model for the telework frequency) is a labor market outcome and governed by both employers' and employees' preferences as well as feasibility constraints. Telework allowance and teleworkability (as measured by the TW frequency during COVID-related lockdowns) significantly influence TW adoption with socio-demographic attributes only providing limited information (at least the ones available in our data).
+
+{\renewcommand{\arraystretch}{0.8}%
+\begin{table}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{threeparttable}
+\begin{tabular}{lllll}
+\toprule
+& \multicolumn{1}{c}{Selection} & \multicolumn{1}{c}{NTW (\Sexpr{n_ntw})} & \multicolumn{1}{c}{NUTW (\Sexpr{n_nutw})} & \multicolumn{1}{c}{UTW (\Sexpr{n_utw})} \\
+\midrule
+<<model-km-fit, echo=FALSE, results=tex>>=
+mat <- TWTE::model_km$mat_fit
+
+## add structural to selection
+structural <- mat[,2]
+selection <- mat[,3]
+cmb <- ifelse(selection == "",
+              structural,
+              selection)
+mat <- mat[,-2]
+mat[,2] <- cmb
+
+## align -
+for (j in 2:5) {
+  x <- mat[,j]
+  mat[,j] <- ifelse(stringr::str_starts(x, "\\$[0-9]"), paste0("$\\phantom{-}$", x), x)
+}
+
+## remove redundant gofs
+mat[52:61, 3:5] <- ""
+
+mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
+
+## add \midrule above structural and gof
+mat_tex[c(42, 51)] <- paste(mat_tex[c(42, 51)], "\\midrule")
+writeLines(mat_tex)
+@
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\item Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+\end{tablenotes}
+\end{threeparttable}
+}%
+\caption{\label{tab:model-km-fit} Model estimates.}
+\end{table}
+}%
+
+The key value proposition of using a model (at least in this paper) is to investigate counterfactual outcomes (i.e., outcomes that are never observed in real life but could manifest if conditions change). Figure~\ref{fig:model-km-pairs} presents all potential counterfactual outcomes of telework adoption and differentiates among the three TW groups. The diagonal depicts distributions of weekly kilometers driven in any given TW scenario and separate by the current (factual) TW status. The weighted median values are shown as red numbers. I.e., the first panel shows the weekly kilometers driven in a world without telework (non-teleworking, NTWing). Such a scenario is factual for the current NTWers but counterfactual for the other two groups. The distributions indicate that current NTWers travel less than current NUTWers than UTWers. The lower triangular panels compare the model-implied (predicted) weekly kilometers traveled of two scenarios and again separate by TW status. The red line indicates the 45-degree line of equal travel while the red squares depict the weighted median values (corresponding to the ones reported in the diagonal panels). The upper triangular panels show weighted average treatment effects (ATE). For example, the lowest leftmost panel compares NTWing (x-axis) to UTWing (y-axis). Almost all points lie below the red line indicating that almost all individuals would reduce distance traveled when switching from NTWing to NUTWing. Overall, this reduction accounts to 115 km foregone travel per individual and week when switching from NTWing to UTWing (most upper and rightmost panel reporting the ATE).
+
+In all scenarios the current UTWers always travel more than current NUTWers that travel more than current NTWers. ATE are always negative with very similar treatment effects (TE) when switching from NTWing to NUTWing and NUTWing to UTWing. Only few individuals would increase weekly kilometers traveled (when TWing more) under any given scenario combination.
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<model-km-pairs, echo=FALSE, fig=TRUE, height=7.5, width=7.5>>=
+dirty_pairs(TWTE::model_km$ate, labels.diag = c("NTWing", "NUTWing", "UTWing"),
+            labels.reg = c("NTWers", "NUTWers", "UTWers"),
+            col = colvec, cex = 1.75, cex.labels = 2, font.labels = 2,
+            add.rug = TRUE, lwd.dens = 2.5, lty.diag = 4, xlim = c(0, 850),
+            ylim = c(0, 850), alpha = 0.5)
+@
+\caption{\label{fig:model-km-pairs} Pairs plot: Comparison of conditional expectations (weekly km traveled) by telework status in the lower panel. Corresponding distributions on the diagonal. Average treatment effects in the upper panel.}
+\end{figure}
+
+The ATE are presented along group-specific treatment effects in Table~\ref{tab:model-km-ate}. Beyond the previous insights, treatment effects indicate that NTWers reduce travel in particular when switching from NTWing to NUTWing, while UTWers show a stronger treatment effect when switching from NUTWing to UTWing (compared to NTWing to NUTWing). Meanwhile, NUTWers show very similar treatment effects in the two scenarios. All TE and ATE are significant at the 0.1\% level as confirmed by a pairwise weighted t-test.
+
+<<hidden-ce, echo=FALSE, results=hide>>=
+ce <- TWTE::model_km$ate$ce.mean
+ce13 <- round(ce[1, 3])
+ce11 <- round(ce[1, 1])
+@
+
+The upper half of Table~\ref{tab:model-km-ate} also implies that treatment effects are much stronger than what simple group comparison would suggest: The counterfactual weekly kilometers traveled by UTWers under the NTWing scenario (\Sexpr{ce13} km) are substantially larger than the factual weekly kilometers traveled by the current NTWers (\Sexpr{ce11} km). In that sense it is right to state that telework reduces the mobility of a particularly mobile group (as speculated in \citealt{Heimgartner+Axhausen:2023}).
+
+\begin{table}[htbp]
+\centering
+<<model-km-ate, echo=FALSE, results=tex>>=
+TWTE::model_km$table_ate
+@
+\caption{Estimated factual and counterfactual mean weekly kilometers traveled and treatment effects.}
+\label{tab:model-km-ate}
+\end{table}
+
+Unit treatment effects (UTE) are computed by dividing the TE from Table~\ref{tab:model-km-ate} by the difference in telework frequency. They are reported in Table~\ref{tab:model-km-ute} along the average two-way commute distance by TW status, which allows us to comment on compensating travel beyond foregone commute. In the disaggregate view of the descriptive analysis we compared teleworking days to office and mixture days while in the aggregate view we investigated group differences. But of course, there was an inherent connection between the two, namely that UTWers have (by definition) more such individual home office days than NUTWers than NTWers. Unit treatment effects allow us to standardize group differences by rescaling the effect to a marginal treatment (per home office day).
+
+For all three groups, UTE almost exactly correspond to the foregone two-way commute when going from NTWing to UTWing. The aforementioned non-linearities in the strength of treatment effects translates to UTE: In other words, for NTWers and NUTWers some compensating travel (beyond foregone commutes) exist in the second half of TW adoption (NUTWing to UTWing), while for UTWers some compensating travel exists on the first half (NTWing to NUTWing). We speculate that UTWers living in a more urban environment initially don't adjust non-work related travel patterns but only do so, once the new center of trip generatation becomes their home more permanently.
+
+\begin{table}[htbp]
+\centering
+<<model-km-ute, echo=FALSE, results=tex>>=
+TWTE::model_km$table_ute
+@
+\caption{Unit treatment effects kilometers traveled.}
+\label{tab:model-km-ute}
+\end{table}
+
+Finally, we can estimate forgone travel activity by predicting weekly kilometers traveled in a world without telework and then compare the numbers to the status quo. The weighted travel reduction accounts to \Sexpr{round(TWTE::model_km$km_saved_ref_notw)}\% relative to the no telework reference. This number is very similar to the findings by \citet{Heimgartner+Etal:2024} and \citet{Sallard:2024} for the Zurich population using a simulation approach. They also find that mode shares are relatively stable across the telework and non-telework population which we confirmed in the descriptive analysis.
+
+Our findings also align with \citet{Wang+Mokhtarian:2024} who report that treatment effects are always negative (with the exception of the current UTWers switching from NTWing to NUTWing, which we don't confirm), travel reduction corresponds roughly to the foregone commute and the asymmetry between adjustments of the NTWers (who more strongly reduce travel when adopting some telework) and UTWers (who do so more pronounced when switching from NUTWing to UTWing).
+
+\subsubsection{Not accounting for selection on unobservables}
+
+As already alluded, we find significant error correlation implying that selection on unobservables exists which leads to selection bias if not accounted for. As we will illustrate now, this also compromises treatment effects. We derive a new model (labeled ``Rho = 0'' below) from the one discussed above (labeled ``OPSR'' below) by setting the ``Rho'' coefficients to 0. I.e., this is the same as separately estimating an ordered probit model and three linear regression models (while using our final model specification).
+
+The implications for treatment effects and average treatment effects are presented in Table~\ref{tab:no-cor}: While not accounting for selection on unobservables still predicts negative TE and ATE, they are generally underestimated quite substantially.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llrrrr}
+\toprule
+& & \multicolumn{3}{c}{Telework status} \\
+\cmidrule{3-5}
+& \multicolumn{1}{c}{Treatment} & NTWers & NUTWers & UTWers & ATE \\
+\midrule
+<<tab-no-cor, echo=FALSE, results=tex>>=
+dat <- TWTE::data_model
+weights <- dat$weight
+fit <- TWTE::model_km$fit
+ate <- TWTE::model_km$ate
+
+start <- coef(fit)
+fixed <- c("rho1", "rho2", "rho3")
+start[fixed] <- 0
+
+fit.nocor <- opsr(fit$formula, dat, weights = weights, start = start,
+                  fixed = fixed, printLevel = 0)
+
+ate.nocor <- TWTE:::opsr_ate(fit.nocor, type = "unlog-response")
+
+s.ate <- summary(ate)
+ate <- s.ate$ate
+te <- s.ate$te
+s.ate.nocor <- summary(ate.nocor)
+ate.nocor <- s.ate.nocor$ate
+te.nocor <- s.ate.nocor$te
+
+te.diff <- te - te.nocor
+ate.diff <- ate - ate.nocor
+
+te.perc <- -te.diff / te * 100
+ate.perc <- -ate.diff / ate * 100
+
+mat <- cbind(te, ate)
+mat.nocor <- cbind(te.nocor, ate.nocor)
+mat.diff <- cbind(te.diff, ate.diff)
+mat.perc <- cbind(te.perc, ate.perc)
+mat <- rbind(mat, mat.nocor, mat.diff, mat.perc)
+matf <- format(round(mat, 3))
+from <- rep(c("NTWing", "NTWing", "NUTWing"), 4)
+to <- rep(c("NUTWing", "UTWing", "UTWing"), 4)
+from_to <- paste0(from, "$\\rightarrow$",to)
+foo <- c("OPSR", "", "", "Rho = 0", "", "", "$\\Delta$", "", "", "\\%", "", "")
+mat2 <- cbind(foo, from_to, matf)
+dimnames(mat2) <- NULL
+
+mat_tex <- paste0(apply(mat2, 1, paste, collapse = " & "), "\\\\")
+add_linespace <- function(mat, row) {
+  mat[row] <- paste(mat[row], "\\addlinespace")
+  mat
+}
+mat_tex <- add_linespace(mat_tex, 3)
+mat_tex <- add_linespace(mat_tex, 6)
+mat_tex <- add_linespace(mat_tex, 9)
+writeLines(mat_tex)
+@
+\bottomrule
+\end{tabular}
+\caption{\label{tab:no-cor} Implications for treatment effects if selection on unobservables is not accounted for.}
+\end{table}
+
+
+%% -- Summary/conclusions/discussion -------------------------------------------
+
+\section{Summary and discussion} \label{sec:summary}
+
+Overall, our findings strengthen the narrative that telework reduces traveled distance and that small rebound effects can not offset foregone commutes by a wide margin. We estimate, that the weighted travel reduction accounts to -16\% comparing the current telework situation to the no telework reference. We find that unit treatment effects roughly correspond to the two-way commute distance. NTWers and NUTWers show stronger effects when adopting some telework from initially NTWing compared to switching from NUTWing to UTWing, while UTWers show exactly the inverse pattern. Our estimated treatment effects suggest that travel reduction is much larger than simple group comparison would suggest. This is because the counterfactual weekly kilometers traveled by TWers in a no telework scenario are substantially larger than the factual weekly kilometers traveled by the current NTWers (selection on observables). Beyond that, we show that not accounting for error correlation (selection on unobservables) potentially underestimates the true treatment effects quite substantially (while still confirming that telework reduces overall travel activity). Our results are in line with studies either employing the same method or using a similar study context. They are intuitive yet less appealing than the story of second order effects completely offsetting any foregone commute. The descriptive analysis portrays a similar picture with depressed transport demand - more flexible time scheduling and travel time savings being the main implications of telework while overall time allocation is very similar between the three distinguished groups. We know that all models are wrong, but hope that our modeling results are less wrong thanks to accounting for self-selection when estimating telework treatment effects.
+
+
+%% -- Optional special unnumbered sections -------------------------------------
+
+\section*{Computational details}
+
+The results in this paper were obtained using
+\proglang{R}~\Sexpr{paste(R.Version()[6:7], collapse = ".")} \citep{R} with the packages \pkg{OPSR}~\Sexpr{packageVersion("OPSR")} \citep{Heimgartner+Wang:2025} and \pkg{TraMineR}~\Sexpr{packageVersion("TraMineR")} \citep{Gabadinho+Etal:2011}. \pkg{tableone}~\Sexpr{packageVersion("tableone")} \citep{Yoshida+Bartel:2022}, \pkg{knitr}~\Sexpr{packageVersion("knitr")} \citep{Yihui:2024} and \pkg{kableExtra}~\Sexpr{packageVersion("kableExtra")} \citep{Zhu:2024} were helpful to generate and format some of the tables. \proglang{R} itself
+and all packages used are available from the Comprehensive
+\proglang{R} Archive Network (CRAN) at
+\url{https://CRAN.R-project.org/}.
+
+Some post-estimation routines developed as part of this work will become available in the \pkg{OPSRtools} package in the near future.
+
+The authors reorganized, cleaned and collated the TimeUse+ data in the \pkg{TUplus}~\Sexpr{packageVersion("TUplus")} \proglang{R}-package. Both the original data and the package can be shared for research purposes. Please contact the corresponing author.
+
+
+\section*{Acknowledgments}
+
+The TimeUse+ study was funded by the Swiss National Science Foundation (SNSF) (Grant Number 189001).
+
+
+%% -- Bibliography -------------------------------------------------------------
+%% - References need to be provided in a .bib BibTeX database.
+%% - All references should be made with \cite, \citet, \citep, \citealp etc.
+%%   (and never hard-coded). See the FAQ for details.
+%% - JSS-specific markup (\proglang, \pkg, \code) should be used in the .bib.
+%% - Titles in the .bib should be in title case.
+%% - DOIs should be included where available.
+
+\bibliography{refs}
+
+
+%% -- Appendix (if any) --------------------------------------------------------
+%% - After the bibliography with page break.
+%% - With proper section titles and _not_ just "Appendix".
+
+\newpage
+
+\begin{appendix}
+
+\section{Model comparison} \label{app:model-comparison}
+
+{\setlength{\tabcolsep}{1pt}  % remove column padding
+\renewcommand{\arraystretch}{1}  % default row height
+\begin{center}
+\begin{ThreePartTable}
+\begin{TableNotes}[flushleft]
+\item Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1;
+\item s = structural components;
+\item o1 = outcome 1 (NTW);
+\item o2 = outcome 2 (NUTW);
+\item o3 = outcome 3 (UTW)
+\end{TableNotes}
+\begin{longtable}{lllll}
+\toprule
+& \multicolumn{1}{c}{Null model} & \multicolumn{1}{c}{Full model} & \multicolumn{1}{c}{Model AIC} & \multicolumn{1}{c}{Final model} \\
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+\midrule
+& \multicolumn{1}{c}{Null model} & \multicolumn{1}{c}{Full model} & \multicolumn{1}{c}{Model AIC} & \multicolumn{1}{c}{Final model} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\emph{Continued on next page}}
+\endfoot
+\bottomrule
+\insertTableNotes \\
+\caption{\label{tab:model-km-comparison} Model comparison.}
+\endlastfoot
+<<model-km-comparison, echo=FALSE, results=tex>>=
+mat <- TWTE::model_km$mat_comparison
+## align -
+for (j in 2:5) {
+  x <- mat[,j]
+  mat[,j] <- ifelse(stringr::str_starts(x, "\\$[0-9]"), paste0("$\\phantom{-}$", x), x)
+}
+mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
+mat_tex[164] <- paste(mat_tex[164], "\\midrule")
+writeLines(mat_tex)
+@
+\end{longtable}
+\end{ThreePartTable}
+\end{center}
+}
+
+\section{Heckman correction} \label{app:heckman-correction}
+
+Following the discussion in Section~\ref{sec:a-word-on-rho} and the implications for treatment effects if selection on unobservables is not accounted for (Table~\ref{tab:no-cor}), we plot the Heckman correction term against the linear predictor in Figure~\ref{fig:heckman-correction}. However, we have to remember, that this ``decomposition'' is based on the conditional expectation (Equation~\ref{eq:cond-exp}) and thus the log-transformed weekly kilometers driven in our application. Reading off the implications for treatment effects is therefore not directly possible. Furthermore, differences in predictions might also stem from different $\beta$ estimates.
+
+\setkeys{Gin}{width=\textwidth}
+\begin{figure}[htbp]
+\centering
+<<heckman-correction, echo=FALSE, fig=TRUE, height=7.5, width=7>>=
+dat <- TWTE::data_model
+weights <- dat$weight
+fit <- TWTE::model_km$fit
+
+heckman_ij <- function(i, j) {
+  imr <- predict(fit, type = "mills", group = i, counterfact = j)
+  rho_j <- coef(fit)[[paste0("rho", j)]]
+  sigma_j <- coef(fit)[[paste0("sigma", j)]]
+  rho_j * sigma_j * imr
+}
+
+xb_ij <- function(i, j) {
+  xb <- predict(fit, type = "Xb", group = i, counterfact = j)
+  xb
+}
+
+plot.it <- function() {
+  op <- par(no.readonly = TRUE)
+  on.exit(par(op))
+  par(mfrow = c(3, 3))
+
+  group <- c("NTWers", "NUTWers", "UTWers")
+  counterfact <- c("NTWing", "NUTWing", "UTWing")
+
+  for (i in 1:3) {
+    for (j in 1:3) {
+      h <- heckman_ij(i, j)
+      x <- xb_ij(i, j)
+      plot(h, x, xlim = c(-0.5, 0.5), ylim = c(3, 7),
+           col = scales::alpha("black", 0.3), pch = 19,
+           xlab = expression(rho[j]*sigma[j]*IMR), ylab = expression(X*beta),
+           main = paste(group[i], counterfact[j]))
+      mh <- mean(h, na.rm = TRUE)
+      mx <- mean(x, na.rm = TRUE)
+      abline(v = mh, col = "red", lty = 2, lwd = 2)
+      abline(h = mx, col = "red", lty = 2, lwd = 2)
+      legend("bottomright", legend = round(mh / mx, 3), text.col = "red", bty = "n")
+    }
+  }
+}
+
+plot.it()
+@
+\caption{\label{fig:heckman-correction} Plotting the Heckman correction term against the linear predictor. The ratio of the two mean values is printed in red. Scales are shared across the facets.}
+\end{figure}
+
+\end{appendix}
