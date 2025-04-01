@@ -1,0 +1,24 @@
+\chapter{On the importance of accounting for self-selection when estimating telework treatment effects}
+\label{ch:twte}
+
+\dictum{%
+All models are wrong --- some models are wronger!}%
+\vskip 1em
+
+\todo{%
+\begin{itemize}
+\item Namespace labels
+\end{itemize}
+}
+
+<<twte-preliminaries, echo=FALSE, results=hide>>=
+colvec <- c("#4c5760","#ff8811","#48a9a6")
+barcolvec <- colorRampPalette(c("white", "grey70"))
+outcol <- scales::alpha("black", 0.1)
+barcolvec <- barcolvec(5)[3:5]
+
+point.args <- list(col = colvec, lwd = 3)
+legend.args <- list(x = "topright", legend = c("NTW", "NUTW", "UTW"), pch = 0:2,
+                    col = colvec,  pt.lwd = 3, bty = "n")
+varwidth <- FALSE
+@

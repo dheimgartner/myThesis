@@ -51,6 +51,15 @@ library("mixl")
 ## OPSR
 library("OPSR")
 
+## TWTE
+library("TWTE")
+library("TUplus")
+library("tableone")
+library("survey")
+library("TraMineR")
+library("Formula")
+library("maxLik")
+
 ## OPSRtools
 library("OPSRtools")
 
@@ -115,7 +124,10 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 % \SweaveInput{chapters/trb24/main}
 
 \cleardoublepage%
-\SweaveInput{chapters/opsr-tools/main}
+\SweaveInput{chapters/twte/main}
+
+% \cleardoublepage%
+% \SweaveInput{chapters/opsr-tools/main}
 
 \appendix
 \cleardoublepage%

@@ -11,6 +11,7 @@
 
 ## Checklist port
 
+- [ ] Make sure latest package version is installed...
 - [ ] Include R libraries in `thesis.Rnw`
 - [ ] Namespace code chunks
 - [ ] Use `\emph{}` instead of `\textit{}`
