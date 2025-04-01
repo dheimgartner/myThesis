@@ -82,7 +82,7 @@ Three key insights emerge: First, various models address telework frequency, wit
 
 \section{Data} \label{sec:data}
 
-<<sample-specs, echo=FALSE>>=
+<<twte-sample-specs, echo=FALSE>>=
 n_individuals <- length(unique(TWTE::sample$uid))
 n_individuals_agg <- length(unique(TWTE::data_model$uid))
 n_person_days <- nrow(distinct(TWTE::sample))
@@ -108,7 +108,7 @@ As evident from Table~\ref{tab:tableone} (column Unweighted), the TimeUse+ sampl
 
 \begin{table}[htbp]
 \centering
-<<tableone, echo=FALSE, results=tex>>=
+<<twte-tableone, echo=FALSE, results=tex>>=
 tab1 <- TWTE::tableone
 idx_indent <- grep("^\\s", row.names(tab1))
 
@@ -130,7 +130,7 @@ The telework status is based on tracked work activities (both on home office and
 \begin{table}[htbp]
 \centering
 \resizebox{\textwidth}{!}{%
-<<table-wfh, echo=FALSE, results=tex>>=
+<<twte-table-wfh, echo=FALSE, results=tex>>=
 tab <- TWTE::table_wfh
 tab_tex <- kableExtra::kable(tab, booktabs = TRUE, format = "latex",
                              align = "rrr", linesep = "",
@@ -152,7 +152,7 @@ Respondents were asked to state their typical weekly telework frequency (days/we
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}[htbp]
 \centering
-<<tw-comparison, echo=FALSE, fig=TRUE, height=4.8, width=4.8>>=
+<<twte-tw-comparison, echo=FALSE, fig=TRUE, height=4.8, width=4.8>>=
 wfh_survey <-
   TUplus::participants %>%
   select(uid, wfh_n_days) %>%
@@ -188,7 +188,7 @@ The socio-economic characteristics of the three teleworker groups are compared i
 
 \begin{table}[htbp]
 \centering
-<<tabletwo, echo=FALSE, results=tex>>=
+<<twte-tabletwo, echo=FALSE, results=tex>>=
 tab2 <- TWTE::tabletwo
 idx_indent <- grep("^\\s", row.names(tab2))
 idx_pack <- grep("^ISCO", row.names(tab2))
@@ -251,7 +251,7 @@ In what follows, we first investigate daily time-use and mobility patterns (disa
 
 \subsection{Disaggregate analysis by telework location}
 
-<<hidden-weekday-shares, echo=FALSE, results=hide>>=
+<<twte-hidden-weekday-shares, echo=FALSE, results=hide>>=
 dat <-
   TWTE::work %>%
   left_join(mutate(TWTE::sample, in_sample = TRUE), by = c("uid", "activity_date" = "date")) %>%
@@ -277,7 +277,7 @@ To put the following findings into perspective, the share of TWers working fully
 
 Figure~\ref{fig:full-index-plot} presents full index plots of activity sequences highlighting work and travel states by telework location. The visualization illustrates how work activities for office workers (bottom row) are concentrated during regular business hours, structuring the overall activity sequences and confining travel to typical peak periods in the morning, midday, and afternoon. This structured pattern gradually diminishes from office workers to mixture workers and further dissolves among teleworkers (top row), reflecting the increasing flexibility in work schedules and mobility.
 %
-<<hidden-activity-sequences, echo=FALSE, results=hide>>=
+<<twte-hidden-activity-sequences, echo=FALSE, results=hide>>=
 as <-
   TWTE::activity_sequences %>%
   left_join(TWTE:::tw_status(), by = c("uid", "date")) %>%
@@ -329,7 +329,7 @@ idx_dat_w <- get_index_data(asw, as$tw)
 idx_dat_t <- get_index_data(ast, as$tw)
 @
 %
-<<full-index-plot, echo=FALSE>>=
+<<twte-full-index-plot, echo=FALSE>>=
 plot_idx <- function(idx_dat, labs = list(), main = NULL, cpal = NULL, cs = 1, xl = 2.5, ...) {
   n <- length(idx_dat)
   if (!is.null(main)) {
@@ -373,7 +373,7 @@ The ``diversity of states'' as measured by the longitudinal entropy (Figure~\ref
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<entropies-and-shares, echo=FALSE, fig=TRUE, height=6.75, width=7.1>>=
+<<twte-entropies-and-shares, echo=FALSE, fig=TRUE, height=6.75, width=7.1>>=
 plot_mat <- function(mat, colvec, ylab, by = 4, legend.position = "topleft") {
   matplot(mat, type = "l", lty = 1, lwd = 2, xlab = "Hour of the day", ylab = ylab,
           col = colvec, axes = FALSE)
@@ -439,7 +439,7 @@ Figure~\ref{fig:disaggregate-time-use} shows the time spent on the seven disting
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<disaggregate-time-use, echo=FALSE, fig=TRUE, height=8.1, width=5.9>>=
+<<twte-disaggregate-time-use, echo=FALSE, fig=TRUE, height=8.1, width=5.9>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -478,7 +478,7 @@ Figure~\ref{fig:disaggregate-mobility-indicators} shows mobility indicators by t
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<disaggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=8.6, width=5.9>>=
+<<twte-disaggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=8.6, width=5.9>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -691,7 +691,7 @@ Figure~\ref{fig:aggregate-time-use} shows that in a typical full-time equivalent
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<aggregate-time-use, echo=FALSE, fig=TRUE, height=8.1, width=5.9>>=
+<<twte-aggregate-time-use, echo=FALSE, fig=TRUE, height=8.1, width=5.9>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -729,7 +729,7 @@ Figure~\ref{fig:aggregate-mobility-indicators} indicates that UTWers travel less
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<aggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=8.6, width=5.9>>=
+<<twte-aggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=8.6, width=5.9>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -891,7 +891,7 @@ In summary, telework seems to influence time scheduling rather than time allocat
 
 This section presents the results based on the OPSR methodology with an emphasize on treatment effects rather than individual model parameters and their behavioral implications. We first estimated the full specified model and then 9 further models, dropping insignificant coefficients at the 90\% level down to the 10\% level. The model with the lowest AIC was then further reduced for the outcome process of the UTWers in order to avoid overfitting. Since the data is rather sparse (especially for the UTWers) the bias-variance trade-off was carefully evaluated, using k-fold cross-validation (with $k=10$) and out-of-sample log-likelihood as our loss. We find that the likelihood ratio test would always favor the full model, while cross-validation selects sparser models. The computation of treatment effects is based on ``counterfactual'' predictions and therefore hinges upon the prediction accuracy.
 
-<<hidden-r2, echo=FALSE, results=hide>>=
+<<twte-hidden-r2, echo=FALSE, results=hide>>=
 dat <- TWTE::data_model
 weights <- dat$weight
 s.fit <- summary(TWTE::model_km$fit)
@@ -918,7 +918,7 @@ The selection process (ordered probit model for the telework frequency) is a lab
 \toprule
 & \multicolumn{1}{c}{Selection} & \multicolumn{1}{c}{NTW (\Sexpr{n_ntw})} & \multicolumn{1}{c}{NUTW (\Sexpr{n_nutw})} & \multicolumn{1}{c}{UTW (\Sexpr{n_utw})} \\
 \midrule
-<<model-km-fit, echo=FALSE, results=tex>>=
+<<twte-model-km-fit, echo=FALSE, results=tex>>=
 mat <- TWTE::model_km$mat_fit
 
 ## add structural to selection
@@ -963,7 +963,7 @@ In all scenarios the current UTWers always travel more than current NUTWers that
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<model-km-pairs, echo=FALSE, fig=TRUE, height=6.75, width=6.75>>=
+<<twte-model-km-pairs, echo=FALSE, fig=TRUE, height=6.75, width=6.75>>=
 dirty_pairs(TWTE::model_km$ate, labels.diag = c("NTWing", "NUTWing", "UTWing"),
             labels.reg = c("NTWers", "NUTWers", "UTWers"),
             col = colvec, cex = 1.75, cex.labels = 2, font.labels = 2,
@@ -975,7 +975,7 @@ dirty_pairs(TWTE::model_km$ate, labels.diag = c("NTWing", "NUTWing", "UTWing"),
 
 The ATE are presented along group-specific treatment effects in Table~\ref{tab:model-km-ate}. Beyond the previous insights, treatment effects indicate that NTWers reduce travel in particular when switching from NTWing to NUTWing, while UTWers show a stronger treatment effect when switching from NUTWing to UTWing (compared to NTWing to NUTWing). Meanwhile, NUTWers show very similar treatment effects in the two scenarios. All TE and ATE are significant at the 0.1\% level as confirmed by a pairwise weighted t-test.
 
-<<hidden-ce, echo=FALSE, results=hide>>=
+<<twte-hidden-ce, echo=FALSE, results=hide>>=
 ce <- TWTE::model_km$ate$ce.mean
 ce13 <- round(ce[1, 3])
 ce11 <- round(ce[1, 1])
@@ -985,7 +985,7 @@ The upper half of Table~\ref{tab:model-km-ate} also implies that treatment effec
 
 \begin{table}[htbp]
 \centering
-<<model-km-ate, echo=FALSE, results=tex>>=
+<<twte-model-km-ate, echo=FALSE, results=tex>>=
 TWTE::model_km$table_ate
 @
 \caption{Estimated factual and counterfactual mean weekly kilometers traveled and treatment effects.}
@@ -998,7 +998,7 @@ For all three groups, UTE almost exactly correspond to the foregone two-way comm
 
 \begin{table}[htbp]
 \centering
-<<model-km-ute, echo=FALSE, results=tex>>=
+<<twte-model-km-ute, echo=FALSE, results=tex>>=
 TWTE::model_km$table_ute
 @
 \caption{Unit treatment effects kilometers traveled.}
@@ -1023,7 +1023,7 @@ The implications for treatment effects and average treatment effects are present
 \cmidrule{3-5}
 & \multicolumn{1}{c}{Treatment} & NTWers & NUTWers & UTWers & ATE \\
 \midrule
-<<tab-no-cor, echo=FALSE, results=tex>>=
+<<twte-tab-no-cor, echo=FALSE, results=tex>>=
 dat <- TWTE::data_model
 weights <- dat$weight
 fit <- TWTE::model_km$fit

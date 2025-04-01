@@ -33,7 +33,7 @@
 \insertTableNotes \\
 \caption{\label{tab:model-km-comparison} Model comparison.}
 \endlastfoot
-<<model-km-comparison, echo=FALSE, results=tex>>=
+<<app-model-km-comparison, echo=FALSE, results=tex>>=
 mat <- TWTE::model_km$mat_comparison
 ## align -
 for (j in 2:5) {
@@ -56,7 +56,7 @@ Following the discussion in Section~\ref{sec:a-word-on-rho} and the implications
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<heckman-correction, echo=FALSE, fig=TRUE, height=7.5, width=7>>=
+<<app-heckman-correction, echo=FALSE, fig=TRUE, height=7.5, width=7>>=
 dat <- TWTE::data_model
 weights <- dat$weight
 fit <- TWTE::model_km$fit
