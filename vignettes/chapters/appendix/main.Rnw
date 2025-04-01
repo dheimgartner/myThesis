@@ -102,3 +102,11 @@ plot.it()
 @
 \caption{\label{fig:heckman-correction} Plotting the Heckman correction term against the linear predictor. The ratio of the two mean values is printed in red. Scales are shared across the facets.}
 \end{figure}
+
+%% -- Computational details ----------------------------------------------------
+
+\section{Computational details}
+
+\begin{leftbar}
+Copy paste from computational details section in papers and \pkg{apollo}
+\end{leftbar}

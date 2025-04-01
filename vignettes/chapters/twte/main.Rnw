@@ -7,7 +7,7 @@ All models are wrong --- some models are wronger!}%
 
 \todo{%
 \begin{itemize}
-\item Methods section omitted (link to chapter \pkg{OPSR})
+\item Check refs to chapter \pkg{OPSR}'s to method section
 \item Namespace labels
 \end{itemize}
 }
@@ -152,7 +152,7 @@ Respondents were asked to state their typical weekly telework frequency (days/we
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}[htbp]
 \centering
-<<tw-comparison, echo=FALSE, fig=TRUE, height=5.3, width=5.3>>=
+<<tw-comparison, echo=FALSE, fig=TRUE, height=4.8, width=4.8>>=
 wfh_survey <-
   TUplus::participants %>%
   select(uid, wfh_n_days) %>%
@@ -347,7 +347,7 @@ plot_idx <- function(idx_dat, labs = list(), main = NULL, cpal = NULL, cs = 1, x
 
 plot.it <- function() {
   file <- "../vignettes/full_index_plot.png"
-  png(file, height = 11, width = 11, units = "in", res = 2 * 144)
+  png(file, height = 10, width = 10, units = "in", res = 2 * 144)
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
   par(mfcol = c(3, 2), mar = c(1, 2, 1, 1), oma = c(3, 2, 2, 2),  #c(5.1, 4.1, 4.1, 2.1)
@@ -373,7 +373,7 @@ The ``diversity of states'' as measured by the longitudinal entropy (Figure~\ref
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<entropies-and-shares, echo=FALSE, fig=TRUE, height=7.5, width=7.9>>=
+<<entropies-and-shares, echo=FALSE, fig=TRUE, height=6.75, width=7.1>>=
 plot_mat <- function(mat, colvec, ylab, by = 4, legend.position = "topleft") {
   matplot(mat, type = "l", lty = 1, lwd = 2, xlab = "Hour of the day", ylab = ylab,
           col = colvec, axes = FALSE)
@@ -403,7 +403,7 @@ ent_long <- data.frame(
 )
 
 la <- legend.args
-la$x <- "bottomleft"
+la$x <- "bottomright"
 
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
@@ -439,7 +439,7 @@ Figure~\ref{fig:disaggregate-time-use} shows the time spent on the seven disting
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<disaggregate-time-use, echo=FALSE, fig=TRUE, height=9, width=6.5>>=
+<<disaggregate-time-use, echo=FALSE, fig=TRUE, height=8.1, width=5.9>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -478,7 +478,7 @@ Figure~\ref{fig:disaggregate-mobility-indicators} shows mobility indicators by t
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<disaggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=9.5, width=6.5>>=
+<<disaggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=8.6, width=5.9>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -691,7 +691,7 @@ Figure~\ref{fig:aggregate-time-use} shows that in a typical full-time equivalent
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<aggregate-time-use, echo=FALSE, fig=TRUE, height=9, width=6.5>>=
+<<aggregate-time-use, echo=FALSE, fig=TRUE, height=8.1, width=5.9>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -729,7 +729,7 @@ Figure~\ref{fig:aggregate-mobility-indicators} indicates that UTWers travel less
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<aggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=9.5, width=6.5>>=
+<<aggregate-mobility-indicators, echo=FALSE, fig=TRUE, height=8.6, width=5.9>>=
 plot.it <- function() {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -963,7 +963,7 @@ In all scenarios the current UTWers always travel more than current NUTWers that
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<model-km-pairs, echo=FALSE, fig=TRUE, height=7.5, width=7.5>>=
+<<model-km-pairs, echo=FALSE, fig=TRUE, height=6.75, width=6.75>>=
 dirty_pairs(TWTE::model_km$ate, labels.diag = c("NTWing", "NUTWing", "UTWing"),
             labels.reg = c("NTWers", "NUTWers", "UTWers"),
             col = colvec, cex = 1.75, cex.labels = 2, font.labels = 2,
@@ -1085,18 +1085,3 @@ writeLines(mat_tex)
 \section{Summary and discussion} \label{sec:summary}
 
 Overall, our findings strengthen the narrative that telework reduces traveled distance and that small rebound effects can not offset foregone commutes by a wide margin. We estimate, that the weighted travel reduction accounts to -16\% comparing the current telework situation to the no telework reference. We find that unit treatment effects roughly correspond to the two-way commute distance. NTWers and NUTWers show stronger effects when adopting some telework from initially NTWing compared to switching from NUTWing to UTWing, while UTWers show exactly the inverse pattern. Our estimated treatment effects suggest that travel reduction is much larger than simple group comparison would suggest. This is because the counterfactual weekly kilometers traveled by TWers in a no telework scenario are substantially larger than the factual weekly kilometers traveled by the current NTWers (selection on observables). Beyond that, we show that not accounting for error correlation (selection on unobservables) potentially underestimates the true treatment effects quite substantially (while still confirming that telework reduces overall travel activity). Our results are in line with studies either employing the same method or using a similar study context. They are intuitive yet less appealing than the story of second order effects completely offsetting any foregone commute. The descriptive analysis portrays a similar picture with depressed transport demand - more flexible time scheduling and travel time savings being the main implications of telework while overall time allocation is very similar between the three distinguished groups. We know that all models are wrong, but hope that our modeling results are less wrong thanks to accounting for self-selection when estimating telework treatment effects.
-
-
-%% -- Optional special unnumbered sections -------------------------------------
-
-\section*{Computational details}
-
-The results in this paper were obtained using
-\proglang{R}~\Sexpr{paste(R.Version()[6:7], collapse = ".")} \citep{R} with the packages \pkg{OPSR}~\Sexpr{packageVersion("OPSR")} \citep{Heimgartner+Wang:2025} and \pkg{TraMineR}~\Sexpr{packageVersion("TraMineR")} \citep{Gabadinho+Etal:2011}. \pkg{tableone}~\Sexpr{packageVersion("tableone")} \citep{Yoshida+Bartel:2022}, \pkg{knitr}~\Sexpr{packageVersion("knitr")} \citep{Yihui:2024} and \pkg{kableExtra}~\Sexpr{packageVersion("kableExtra")} \citep{Zhu:2024} were helpful to generate and format some of the tables. \proglang{R} itself
-and all packages used are available from the Comprehensive
-\proglang{R} Archive Network (CRAN) at
-\url{https://CRAN.R-project.org/}.
-
-Some post-estimation routines developed as part of this work will become available in the \pkg{OPSRtools} package in the near future.
-
-The authors reorganized, cleaned and collated the TimeUse+ data in the \pkg{TUplus}~\Sexpr{packageVersion("TUplus")} \proglang{R}-package. Both the original data and the package can be shared for research purposes. Please contact the corresponing author.
