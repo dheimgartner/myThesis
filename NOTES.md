@@ -62,6 +62,8 @@
 - [x] What font are they using? => hermann zapf's palatino and eulermath
 - [ ] Make ownpubs in `publications.Rnw` work
 - [~] Captionsetup => I like it below
+- [ ] Use `{\renewcommand{\arraystretch}{1.5}...}` instead of `\setlength\extrarowheight{2pt}` (which does not scope!)
+  - Or enclose whole table stuff in `{...}` which should scope setlength stuff locally
 - [ ] Formatting numbers (not in `$` and big mark `
 - [ ] See hyperlink setup and colors in https://github.com/dheimgartner/paperPackage/blob/main/inst/templates/JSS/jss.cls
 - [ ] Why is doi in bibliography not red? (see point above)

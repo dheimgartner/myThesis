@@ -106,7 +106,7 @@ We use the TimeUse+ dataset \citep{Winkler+Meister+Axhausen:2024}, a smartphone-
 
 As evident from Table~\ref{tab:tableone} (column Unweighted), the TimeUse+ sample is biased towards car owners, higher educated individuals and public transport (PT) season ticket owners. To correct for the selective attrition during the survey and tracking study, we use case weights obtained by iterative proportional fitting using the \pkg{anesrake} \proglang{R}-package \citep{Pasek:2018}. Marginals from the mobility and transport microcensus 2021 \citep[MTMC21,][]{MTMC:2021} were targeted, excluding telework related variables which were potentially still influenced by the pandemic when the MTMC21 was fielded. The weighted sample matches the census data very well, importantly, now also for car and PT season ticket ownership which are known to influence mobility behavior. The weights are not used in the descriptive analysis but are used in estimation and post-estimation to more validly generalize the results to the Swiss employed population.
 
-\setlength\extrarowheight{2pt}{%
+{\renewcommand{\arraystretch}{0.8}%
 \begin{table}[htbp]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -190,25 +190,11 @@ for (i in 1:nrow(tab2)) {
 
 The socio-economic characteristics of the three teleworker groups are compared in Table~\ref{tab:tabletwo}. The means and standard deviations of the start month hint that the three groups are evenly represented over the course of the study and hence seasonality effects might influence mobility behaviour similarly across the three groups. Teleworkers (TWers) compared to NTWers tend to be national PT season ticket owners, more highly educated, dog owners, frequent online shoppers but less frequent grocery shoppers, higher income, have children below the age of twelve (especially the NUTWers), managers or professionals, married, house or apartment owners and live in a more urban environment. Compared to NUTWers, UTWers tend to additionally have permanent work contracts but do not work in shifts. During the pandemic, the Swiss government enforced the duty to telework whenever possible. The telework frequency reported during such mandatory lockdowns is labeled teleworkability here and is expected to capture the (exogenous) telework suitability of a person's job.
 
-{\setlength{\tabcolsep}{2pt}  % adjust column padding
-\begin{center}
-% \small
-\begin{longtable}{lrrr}
-\toprule
-\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Telework status} \\
-\cmidrule(l{3pt}r{3pt}){2-4}
-  & NTW & NUTW & UTW \\
-\midrule
-\endfirsthead
-\multicolumn{4}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
-\toprule
-  & NTW & NUTW & UTW \\
-\midrule
-\endhead
-\midrule
-\multicolumn{4}{r}{\emph{Continued on next page}}
-\endfoot
-\endlastfoot
+{\renewcommand{\arraystretch}{0.7}%
+\begin{table}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\scriptsize
 <<twte-tabletwo, echo=FALSE, results=tex>>=
 tab2 <- TWTE::tabletwo
 idx_indent <- grep("^\\s", row.names(tab2))
@@ -221,14 +207,13 @@ tab2_tex <- kableExtra::kable(tab2, booktabs = TRUE, format = "latex",
   kableExtra::add_header_above(c(" " = 1, "Telework status" = 3)) %>%
   kableExtra::add_indent(positions = idx_indent) %>%
   kableExtra::pack_rows("ISCO (n, %)", idx_pack[1], idx_pack[length(idx_pack)], bold = FALSE)
-remove_table_env(tab2_tex)
+tab2_tex
 @
-\bottomrule
+}%
 \caption{Sample comparison by telework status (weighted).}
 \label{tab:tabletwo}
-\end{longtable}
-\end{center}
-}
+\end{table}
+}%
 
 
 %% -- Methods ------------------------------------------------------------------
@@ -934,7 +919,8 @@ Table~\ref{tab:model-km-fit} presents the estimates of the final model. In parti
 
 The selection process (ordered probit model for the telework frequency) is a labor market outcome and governed by both employers' and employees' preferences as well as feasibility constraints. Telework allowance and teleworkability (as measured by the TW frequency during COVID-related lockdowns) significantly influence TW adoption with socio-demographic attributes only providing limited information (at least the ones available in our data).
 
-{\renewcommand{\arraystretch}{0.8}%
+{\renewcommand{\arraystretch}{0.6}%
+\setlength{\tabcolsep}{3pt}
 \begin{table}[htbp]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -945,6 +931,10 @@ The selection process (ordered probit model for the telework frequency) is a lab
 \midrule
 <<twte-model-km-fit, echo=FALSE, results=tex>>=
 mat <- TWTE::model_km$mat_fit
+
+## remove "Structural" and \\quad
+mat <- mat[c(1:42, 44:nrow(mat)), ]
+mat[c(43:50), 1] <- stringr::str_remove_all(mat[c(43:50), 1], "\\\\quad ")
 
 ## add structural to selection
 structural <- mat[,2]
@@ -962,12 +952,12 @@ for (j in 2:5) {
 }
 
 ## remove redundant gofs
-mat[52:61, 3:5] <- ""
+mat[51:60, 3:5] <- ""
 
 mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
 
 ## add \midrule above structural and gof
-mat_tex[c(42, 51)] <- paste(mat_tex[c(42, 51)], "\\midrule")
+mat_tex[c(42, 50)] <- paste(mat_tex[c(42, 50)], "\\midrule")
 writeLines(mat_tex)
 @
 \bottomrule
@@ -1010,9 +1000,11 @@ The upper half of Table~\ref{tab:model-km-ate} also implies that treatment effec
 
 \begin{table}[htbp]
 \centering
+\resizebox{\textwidth}{!}{%
 <<twte-model-km-ate, echo=FALSE, results=tex>>=
 TWTE::model_km$table_ate
 @
+}%
 \caption{Estimated factual and counterfactual mean weekly kilometers traveled and treatment effects.}
 \label{tab:model-km-ate}
 \end{table}
@@ -1042,6 +1034,7 @@ The implications for treatment effects and average treatment effects are present
 
 \begin{table}[htbp]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{llrrrr}
 \toprule
 & & \multicolumn{3}{c}{Telework status} \\
@@ -1101,6 +1094,7 @@ writeLines(mat_tex)
 @
 \bottomrule
 \end{tabular}
+}%
 \caption{\label{tab:no-cor} Implications for treatment effects if selection on unobservables is not accounted for.}
 \end{table}
 
