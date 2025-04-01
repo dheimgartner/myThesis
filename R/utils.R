@@ -10,3 +10,12 @@ descr <- function(p, x, y, text, col = "black", size, ...) {
     annotate("text", x = x, y = y,
              label = text, angle = 90, size = size, ...)
 }
+
+#' @export
+remove_table_env <- function(x) {
+  x_char <- as.character(x)
+  match <- stringr::str_match(x_char, "(?s)\\\\midrule\\s*(.*?)\\s*\\\\bottomrule")
+  content <- match[, 2]
+  attributes(content) <- attributes(x)
+  content
+}

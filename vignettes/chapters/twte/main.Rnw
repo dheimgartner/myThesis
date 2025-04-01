@@ -190,9 +190,25 @@ for (i in 1:nrow(tab2)) {
 
 The socio-economic characteristics of the three teleworker groups are compared in Table~\ref{tab:tabletwo}. The means and standard deviations of the start month hint that the three groups are evenly represented over the course of the study and hence seasonality effects might influence mobility behaviour similarly across the three groups. Teleworkers (TWers) compared to NTWers tend to be national PT season ticket owners, more highly educated, dog owners, frequent online shoppers but less frequent grocery shoppers, higher income, have children below the age of twelve (especially the NUTWers), managers or professionals, married, house or apartment owners and live in a more urban environment. Compared to NUTWers, UTWers tend to additionally have permanent work contracts but do not work in shifts. During the pandemic, the Swiss government enforced the duty to telework whenever possible. The telework frequency reported during such mandatory lockdowns is labeled teleworkability here and is expected to capture the (exogenous) telework suitability of a person's job.
 
-\setlength\extrarowheight{1pt}{%
-\begin{table}[htbp]
-\centering
+{\setlength{\tabcolsep}{2pt}  % adjust column padding
+\begin{center}
+% \small
+\begin{longtable}{lrrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Telework status} \\
+\cmidrule(l{3pt}r{3pt}){2-4}
+  & NTW & NUTW & UTW \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable\ -- \emph{Continued from previous page}}\\
+\toprule
+  & NTW & NUTW & UTW \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\emph{Continued on next page}}
+\endfoot
+\endlastfoot
 <<twte-tabletwo, echo=FALSE, results=tex>>=
 tab2 <- TWTE::tabletwo
 idx_indent <- grep("^\\s", row.names(tab2))
@@ -205,13 +221,15 @@ tab2_tex <- kableExtra::kable(tab2, booktabs = TRUE, format = "latex",
   kableExtra::add_header_above(c(" " = 1, "Telework status" = 3)) %>%
   kableExtra::add_indent(positions = idx_indent) %>%
   kableExtra::pack_rows("ISCO (n, %)", idx_pack[1], idx_pack[length(idx_pack)], bold = FALSE)
-tab2_tex
+remove_table_env(tab2_tex)
 @
-}%
+\bottomrule
 \caption{Sample comparison by telework status (weighted).}
 \label{tab:tabletwo}
-\end{table}
-}%
+\end{longtable}
+\end{center}
+}
+
 
 %% -- Methods ------------------------------------------------------------------
 
