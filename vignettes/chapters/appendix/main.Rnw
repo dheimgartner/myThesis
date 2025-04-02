@@ -5,6 +5,8 @@
 
 \section{Model comparison} \label{app:model-comparison}
 
+The final model from Section~\ref{sec:twte-telework-treatment-effects} is compared to other benchmark models (the null, full and AIC-preferred model) along with conventional goodness of fit indicators.
+
 {\setlength{\tabcolsep}{1pt}  % remove column padding
 \renewcommand{\arraystretch}{0.8}  % default row height
 \footnotesize
@@ -49,60 +51,6 @@ writeLines(mat_tex)
 \end{ThreePartTable}
 \end{center}
 }
-
-\section{Heckman correction} \label{app:heckman-correction}
-
-Following the discussion in Section~\ref{sec:a-word-on-rho} and the implications for treatment effects if selection on unobservables is not accounted for (Table~\ref{tab:no-cor}), we plot the Heckman correction term against the linear predictor in Figure~\ref{fig:heckman-correction}. However, we have to remember, that this ``decomposition'' is based on the conditional expectation (Equation~\ref{eq:cond-exp}) and thus the log-transformed weekly kilometers driven in our application. Reading off the implications for treatment effects is therefore not directly possible. Furthermore, differences in predictions might also stem from different $\beta$ estimates.
-
-\setkeys{Gin}{width=\textwidth}
-\begin{figure}[htbp]
-\centering
-<<app-heckman-correction, echo=FALSE, fig=TRUE, height=7.5, width=7>>=
-dat <- TWTE::data_model
-weights <- dat$weight
-fit <- TWTE::model_km$fit
-
-heckman_ij <- function(i, j) {
-  imr <- predict(fit, type = "mills", group = i, counterfact = j)
-  rho_j <- coef(fit)[[paste0("rho", j)]]
-  sigma_j <- coef(fit)[[paste0("sigma", j)]]
-  rho_j * sigma_j * imr
-}
-
-xb_ij <- function(i, j) {
-  xb <- predict(fit, type = "Xb", group = i, counterfact = j)
-  xb
-}
-
-plot.it <- function() {
-  op <- par(no.readonly = TRUE)
-  on.exit(par(op))
-  par(mfrow = c(3, 3))
-
-  group <- c("NTWers", "NUTWers", "UTWers")
-  counterfact <- c("NTWing", "NUTWing", "UTWing")
-
-  for (i in 1:3) {
-    for (j in 1:3) {
-      h <- heckman_ij(i, j)
-      x <- xb_ij(i, j)
-      plot(h, x, xlim = c(-0.5, 0.5), ylim = c(3, 7),
-           col = scales::alpha("black", 0.3), pch = 19,
-           xlab = expression(rho[j]*sigma[j]*IMR), ylab = expression(X*beta),
-           main = paste(group[i], counterfact[j]))
-      mh <- mean(h, na.rm = TRUE)
-      mx <- mean(x, na.rm = TRUE)
-      abline(v = mh, col = "red", lty = 2, lwd = 2)
-      abline(h = mx, col = "red", lty = 2, lwd = 2)
-      legend("bottomright", legend = round(mh / mx, 3), text.col = "red", bty = "n")
-    }
-  }
-}
-
-plot.it()
-@
-\caption{\label{fig:heckman-correction} Plotting the Heckman correction term against the linear predictor. The ratio of the two mean values is printed in red. Scales are shared across the facets.}
-\end{figure}
 
 %% -- Computational details ----------------------------------------------------
 

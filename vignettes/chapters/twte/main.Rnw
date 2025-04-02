@@ -9,8 +9,6 @@ All models are wrong --- some models are wronger!}%
 \begin{itemize}
 \item Check refs to chapter \pkg{OPSR}'s to method section
 \item Maybe use longtable for Table~\ref{tab:model-km-fit} (and try to increase fontsize, e.g., by decreasing tabcolsep...)
-\item Omit Heckman correction in Appendix, don't reference in text and mention in ChapterInfoTable
-\item Small text in Appendix elaborating on what the comparison table is...
 \item Namespace labels
 \end{itemize}
 }
@@ -45,7 +43,7 @@ Study conception and design: all authors; analysis and interpretation of results
 \ChapterInfoEntry{
 The following changes were made
 }{%
-Most of the method section was already presented in Chapter~\ref{ch:opsr} and was not repeated here for brevity.
+Most of the method section was already presented in Chapter~\ref{ch:opsr} and was not repeated here for brevity. The Heckman-correction plot (originally in the appendix of the paper) was omitted as a similar plot is shown in Chapter~\ref{ch:opsr-tools}.
 }%
 \end{ChapterInfoTable}
 
@@ -918,7 +916,7 @@ plot.it()
 
 In summary, telework seems to influence time scheduling rather than time allocation since the usual structure regular business hours provide is less respected when teleworking. This leads to less aligned activity patterns and thus higher transversal entropy throughout the day of TWers. TWers make significantly fewer trips and cover significantly less distance. The most affected modes are the main commuting modes, e.g., mpt and train. However, TWers tend to have PT subscriptions and use PT when commuting, leading to overall very similar mode shares over a full workweek. The descriptive analysis portrays a picture of reduced transport demand - more flexible time scheduling and foregone commutes being the main implications of telework. TWers tend to have longer commutes and therefore potentially have a stronger incentive to telework while at the same time have a higher potential to decrease distance traveled. Meanwhile mixture workers have very similar activity and mobility patterns to regular office workers with a somewhat flattened morning peak hour (as the commute is delayed to later hours, most likely the midday peak).
 
-\subsection{Telework treatment effects}
+\subsection{Telework treatment effects} \label{sec:twte-telework-treatment-effects}
 
 This section presents the results based on the OPSR methodology with an emphasize on treatment effects rather than individual model parameters and their behavioral implications. We first estimated the full specified model and then 9 further models, dropping insignificant coefficients at the 90\% level down to the 10\% level. The model with the lowest AIC was then further reduced for the outcome process of the UTWers in order to avoid overfitting. Since the data is rather sparse (especially for the UTWers) the bias-variance trade-off was carefully evaluated, using k-fold cross-validation (with $k=10$) and out-of-sample log-likelihood as our loss. We find that the likelihood ratio test would always favor the full model, while cross-validation selects sparser models. The computation of treatment effects is based on ``counterfactual'' predictions and therefore hinges upon the prediction accuracy.
 
