@@ -37,8 +37,8 @@
 \RequirePackage{graphicx}
 
 % Sweave(-like)
-\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontsize=\normalsize,fontshape=sl}
-\DefineVerbatimEnvironment{Soutput}{Verbatim}{fontsize=\normalsize}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontsize=\small,fontshape=sl}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{fontsize=\small}
 \DefineVerbatimEnvironment{Scode}{Verbatim}{fontshape=sl}
 \newenvironment{Schunk}{}{}
 \DefineVerbatimEnvironment{Code}{Verbatim}{}

@@ -7,7 +7,6 @@ Hello world!}%
 
 \todo{%
 \begin{itemize}
-\item Make Sinput Soutput smaller
 \item Namespace labels
 \end{itemize}
 }
@@ -52,7 +51,7 @@ The remainder of this paper is organized as follows. In Section~\ref{sec:illustr
 
 \section{Illustrations} \label{sec:illustrations}
 
-Let us revisit the full model from \citet{Heimgartner+Axhausen:2025}, modeling telework adoption and weekly kilometers traveled. Telework adoption was differentiated into three ordered segments: no telework (NTW), non-usual telework (NUTW, <3 days/week) and usual telework (UTW, 3+ days/week). The data, based on the TimeUse+ study \citep{Winkler+Meister+Axhausen:2024}, is attached, documented (\code{?timeuse}) and can be loaded by
+Let us revisit the full model from Chapter~\ref{ch:twte}, modeling telework adoption and weekly kilometers traveled. Telework adoption was differentiated into three ordered segments: no telework (NTW), non-usual telework (NUTW, <3 days/week) and usual telework (UTW, 3+ days/week). The data, based on the TimeUse+ study \citep{Winkler+Meister+Axhausen:2024}, is attached, documented (\code{?timeuse}) and can be loaded by
 %
 <<opsr-tools-data>>=
 data("timeuse", package = "OPSRtools")
@@ -161,13 +160,14 @@ plot.it <- function(...) {
   par(...)
   what <- c("ll_mean", "ll_p_mean", "r2")
   main <- c("Total", "Selection", "Outcome")
-  ylab <- c("OOS log-likelihood full model", "OOS log-likelihood selection model",
+  ylab <- c("OOS log-likelihood full model",
+            "OOS log-likelihood selection model",
             expression(paste("OOS ", R^2, "")))
   for (i in seq_along(what)) {
     kfplot(list(kfold_10, kfold_aic, kfold), i = what[i], col = colvec,
            main = main[i], ylab= ylab[i], xlab = "", las = 2)
-    legend("bottomleft", legend = c("fit_10", "fit_aic", "fit"), fill = colvec,
-           title = "Model", title.font = 2, bty = "n")
+    legend("bottomleft", legend = c("fit_10", "fit_aic", "fit"),
+           fill = colvec, title = "Model", title.font = 2, bty = "n")
   }
 }
 plot.it()
@@ -398,7 +398,7 @@ writeLines(mat_tex)
 
 This evidence suggests, that it is not actually the direct influence of the error correlation via the Heckman correction term but the indirect influence via the $\beta$ coefficients that leverages the predictions and thus treatment effect computations. And if we only have few explanatory variables, then the error correlation might have a bigger influence on these estimates. Under certain conditions, OPSR models might become poorly identified, suggesting extreme selection bias.
 
-Identification issues of Heckman-type selection models have received considerable attention in the literature \citep[e.g.,][][Puhani:2000], investigating conditions under which model estimation becomes challenging. In Monte Carlo simulation studies, the performance of LIML and FIML estimators are then usually compared. The main condition discussed is weak exclusion-restrictions (weak instruments; leading to colinearity between the IMR and $\boldsymbol{X}$) as elaborated in \citet{Chiburis+Lokshin:2007}. \citet{Huismans+etal:2022} discuss maximum likelihood estimation and parameter identification (for a Heckman-selection model with ordered outcomes) and state that in mixture models, the likelihood function may have multiple local maximums and large flat regions and suggest testing different starting values (in our case, both \fit{10} and \fit{aic} converge to the same optimum if we set starting values to 0, -1 for ``kappa1'', 1 for ``kappa2'' and 1 for the ``sigmas''). Since the IMR is technically a regressor, we speculate, that the limited variability (as observed in Figure~\ref{fig:heckman-correction}, in particular for UTWing, column 3) could also yield poor identification.
+Identification issues of Heckman-type selection models have received considerable attention in the literature \citep[e.g.,][]{Puhani:2000}, investigating conditions under which model estimation becomes challenging. In Monte Carlo simulation studies, the performance of LIML and FIML estimators are then usually compared. The main condition discussed is weak exclusion-restrictions (weak instruments; leading to colinearity between the IMR and $\boldsymbol{X}$) as elaborated in \citet{Chiburis+Lokshin:2007}. \citet{Huismans+etal:2022} discuss maximum likelihood estimation and parameter identification (for a Heckman-selection model with ordered outcomes) and state that in mixture models, the likelihood function may have multiple local maximums and large flat regions and suggest testing different starting values (in our case, both \fit{10} and \fit{aic} converge to the same optimum if we set starting values to 0, -1 for ``kappa1'', 1 for ``kappa2'' and 1 for the ``sigmas''). Since the IMR is technically a regressor, we speculate, that the limited variability (as observed in Figure~\ref{fig:heckman-correction}, in particular for UTWing, column 3) could also yield poor identification.
 
 %% -- Summary ------------------------------------------------------------------
 
