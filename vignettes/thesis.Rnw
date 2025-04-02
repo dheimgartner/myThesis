@@ -73,6 +73,8 @@ library("OPSRtools")
 
 ggplot2::theme_set(myThesis::my_theme())
 
+set.seed(0)
+
 options(knitr.kable.NA = "")
 
 ## maybe adjust width here...
@@ -119,17 +121,17 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 \def\dir{chapters/introduction}
 \include{\dir/main}
 
-% \cleardoublepage%
-% \SweaveInput{chapters/mpp/main}
+\cleardoublepage%
+\SweaveInput{chapters/mpp/main}
 
-% \cleardoublepage%
-% \SweaveInput{chapters/rra/main}
+\cleardoublepage%
+\SweaveInput{chapters/rra/main}
 
-% \cleardoublepage%
-% \SweaveInput{chapters/datapap/main}
+\cleardoublepage%
+\SweaveInput{chapters/datapap/main}
 
-% \cleardoublepage%
-% \SweaveInput{chapters/trb24/main}
+\cleardoublepage%
+\SweaveInput{chapters/trb24/main}
 
 \cleardoublepage%
 \SweaveInput{chapters/opsr/main}

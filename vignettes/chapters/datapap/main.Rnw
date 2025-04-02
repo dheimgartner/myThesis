@@ -151,10 +151,10 @@ On the following pages, you are asked to choose between different \textbf{work a
 \end{center}
 
 \begin{enumerate}
-    \item Two work arrangements are presented (A and B), which differ along eight dimensions.
-    \item You are asked to choose your preferred arrangement.
-    \item As a last step, you are asked to reveal how many days you would work from home given your selected arrangement.
-    \item The above choice (see Figure~\ref{fig:wfh-choice-task}) would imply that you would prefer work arrangement A over B and would like to work from home on 3 days a week given the conditions in arrangement A.
+\item Two work arrangements are presented (A and B), which differ along eight dimensions.
+\item You are asked to choose your preferred arrangement.
+\item As a last step, you are asked to reveal how many days you would work from home given your selected arrangement.
+\item The above choice (see Figure~\ref{fig:wfh-choice-task}) would imply that you would prefer work arrangement A over B and would like to work from home on 3 days a week given the conditions in arrangement A.
 \end{enumerate}
 \end{leftbar}
 
@@ -425,6 +425,7 @@ We now turn to telework frequency shares before, during, and after the pandemic 
 
 While a majority (83.72\%) of those with teleworkable jobs work from home, employer constraints are still prevalent (table (11), row \emph{Budget}). To assess the extent of these constraints, refer to table (51), which cross-tabulates \emph{Budget} and \emph{Free-choice}. The upper triangular matrix indicates the share of employees who desire more frequent telework but are constrained. For instance, the first row, second column shows 6.23\% who wish to telework one day but are not allowed to. Totaling 26.47\% across the upper triangular matrix, highlights significant binding constraints. Understanding employer perspectives is crucial for interpreting telework frequencies.
 
+{%
 \begin{table}
 \begin{center}
 \setlength\extrarowheight{0pt}{%
@@ -440,6 +441,7 @@ While a majority (83.72\%) of those with teleworkable jobs work from home, emplo
 \caption{\label{tab:wfh-table-weighted-combined} Telework distributions and contingency tables.}
 \end{center}
 \end{table}
+}%
 
 Figure~\ref{fig:wfh-weekday-distribution} illustrates current telework distribution across weekdays for full-time and part-time employees. Mondays and Fridays are preferred telework days: Full-time employed favor Fridays, while part-time employed favor Mondays (potentially not working at all on Fridays). A preference for Mondays and Fridays can be observed among full-time employed teleworking at least three days a week.
 
