@@ -46,13 +46,13 @@ The remainder of this paper is organized as follows. In Section~\ref{sec:illustr
 
 Let us revisit the full model from \citet{Heimgartner+Axhausen:2025}, modeling telework adoption and weekly kilometers traveled. Telework adoption was differentiated into three ordered segments: no telework (NTW), non-usual telework (NUTW, <3 days/week) and usual telework (UTW, 3+ days/week). The data, based on the TimeUse+ study \citep{Winkler+Meister+Axhausen:2024}, is attached, documented (\code{?timeuse}) and can be loaded by
 %
-<<data>>=
+<<opsr-tools-data>>=
 data("timeuse", package = "OPSRtools")
 @
 %
 Using \pkg{OPSR}'s functionality, the model can be estimated by (the formula \code{f} is hidden here for brevity but can be found on Page~\pageref{p:f} under \emph{Initial model})
 %
-<<hidden-formula, echo=FALSE>>=
+<<opsr-tools-hidden-formula, echo=FALSE>>=
 f <- wfh | log_weekly_km ~ wfh_allowed + teleworkability + start_tracking +
   log_commute_km + age + dogs + driverlicense + educ_higher + fixed_workplace +
   grocery_shopper + hh_income + hh_size + isco_clerical + isco_craft +
@@ -76,13 +76,13 @@ f <- wfh | log_weekly_km ~ wfh_allowed + teleworkability + start_tracking +
   res_loc + sex_male + swiss + vacation + workload + young_kids
 @
 %
-<<full-model, results=hide>>=
+<<opsr-tools-full-model, results=hide>>=
 fit <- opsr(f, data = timeuse, weights = timeuse$weight)
 @
 %
 This model is likely to be over-specified and as a usual first step, the analyst starts by excluding insignificant variables (above some $p$~value threshold). Given the above formula object with many terms/variables, this process can be tedious or even error prone - boring at best. The function \fct{opsr\_step} allows the modeler to do this automatically. For example, excluding all variables which are not significant at the 10\% level
 %
-<<opsr-step>>=
+<<opsr-tools-opsr-step>>=
 fit_10 <- opsr_step(fit, pval = 0.1, printLevel = 0)
 summary(fit_10)
 @
@@ -91,14 +91,14 @@ where \code{printLevel = 0} is passed to \fct{opsr} and avoids printing working 
 
 While this model (\fit{10}) has considerably fewer parameters than \code{fit}, it is not necessarily the ``best'' model. To more rigorously sparsify the model and carefully evaluate each intermediate model, the function \fct{opsr\_select} can be used
 %
-<<opsr-select, eval=FALSE>>=
+<<opsr-tools-opsr-select, eval=FALSE>>=
 fit_aic <- opsr_select(fit, loss = "aic", printLevel = 0)
 @
 %
 where \code{"aic"} specifies that model selection is based on AIC. Other available options are \code{"bic"} for BIC and \code{"lrt"} for a likelihood ratio test. The above call yields an object of class \class{opsr.select} which can be printed to provide more information about the selection process (and elimination history, which is omitted here for brevity)
 \label{p:f}
 %
-<<print-opsr-select>>=
+<<opsr-tools-print-opsr-select>>=
 print(fit_aic, print.elim.hist = FALSE)
 @
 %
@@ -114,13 +114,13 @@ The final model (after the sixth iteration) has improved AIC by 49 points and wo
 
 The three models can be compared by
 %
-<<anova>>=
+<<opsr-tools-anova>>=
 print(anova(fit_10, fit_aic, fit), print.formula = FALSE)
 @
 %
 where the likelihood ratio test would select the full model. However, the full model is potentially over-fitting the data (in particular for the usual teleworkers, UTWers). To further investigate the out-of-sample (OOS) performance, k-fold cross-validation can be performed
 %
-<<opsr-kfold, eval=FALSE>>=
+<<opsr-tools-opsr-kfold, eval=FALSE>>=
 kfold <- opsr_kfold(fit, k = 10, verbose = FALSE, printLevel = 0)
 kfold_10 <- opsr_kfold(fit_10, k = 10, verbose = FALSE, printLevel = 0)
 kfold_aic <- opsr_kfold(fit_aic, k = 10, verbose = FALSE, printLevel = 0)
@@ -139,13 +139,13 @@ The resulting object of class \class{opsr.kfold} is a nested list: It contains f
 
 \pkg{OPSRtools} provides an extract method to collect the desired information
 %
-<<extract>>=
+<<opsr-tools-extract>>=
 ll_mean <- kfold["ll_mean"]
 list2df(ll_mean)
 @
 %
 The three cross-validation objects can be plotted against each other using \fct{kfplot}
-<<kfplot, eval=FALSE>>=
+<<opsr-tools-kfplot, eval=FALSE>>=
 plot.it <- function(...) {
   op <- par(no.readonly = TRUE)
   on.exit(par(op))
@@ -170,15 +170,15 @@ In Figure~\ref{fig:kfplot} three OOS losses (for the total model \code{ll\_mean}
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<plot-kfplot, echo=FALSE, fig=TRUE, height=3.5, width=8>>=
-<<kfplot>>
+<<opsr-tools-plot-kfplot, echo=FALSE, fig=TRUE, height=3.5, width=8>>=
+<<opsr-tools-kfplot>>
 @
 \caption{\label{fig:kfplot} Model comparison by k-fold cross-validation. Note that $R^2$ can be negative for out-of-sample data points.}
 \end{figure}
 
 Having selected an appropriate model (say, in the name of Occam's razor, \fit{10}) the analyst would like to investigate treatment effects (TE). This can be done by
 %
-<<opsr-ate>>=
+<<opsr-tools-opsr-ate>>=
 ate <- opsr_ate(fit_10, type = "unlog-response")
 print(ate)
 @
@@ -189,9 +189,9 @@ Weights are automatically used to compute group-specific treatment effects and a
 
 Here we see, that the TE on the diagonal and upper triangle are negative, while we observe positive TE for \code{G1} (the NTWers) when switching from \code{T1->T3} (NTWing to UTWing), \code{T2->T3} (NUTWing to UTWing) and \code{G2} (the NUTWers) when switching from \code{T2->T3} (NUTWing to UTWing). Consequently, resulting ATE are positive for \code{T1->T3} and \code{T2->T3}. All effects are significantly different from 0. However, the test does of course not reflect parameter uncertainty.
 
-The treatment effects can be visually summarised with \fct{pairs}
+The treatment effects can be visually summarised by
 %
-<<pairs, eval=FALSE>>=
+<<opsr-tools-pairs, eval=FALSE>>=
 pairs(ate)
 @
 %
@@ -200,7 +200,7 @@ Figure~\ref{fig:pairs} presents all potential pairs of regime switching. The dia
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<plot-pairs, echo=FALSE, fig=TRUE, height=7.5, width=7.5>>=
+<<opsr-tools-plot-pairs, echo=FALSE, fig=TRUE, height=7.5, width=7.5>>=
 pairs(ate, labels.diag = c("NTWing", "NUTWing", "UTWing"), col = colvec,
       labels.reg = c("NTWers", "NUTWers", "UTWers"), cex = 1.75, cex.labels = 2,
       font.labels = 2,lwd.dens = 2.5, lty.diag = 4, xlim = c(0, 1000),
@@ -213,7 +213,7 @@ pairs(ate, labels.diag = c("NTWing", "NUTWing", "UTWing"), col = colvec,
 
 \section{Investigating differences in treatment effects} \label{sec:identification}
 
-At this point, we should highlight, that these results (based on \fit{10}) are very different from the ones presented in \citet{Heimgartner+Axhausen:2025} (based on \fit{aic}), where we found negative TE and ATE only. We now further investigate, why these differences between the two models might arise. The following three hypothesis are scrutinized: 1. The large error correlation ``rho3'' in \fit{10} could inflate (counterfactual) weekly kilometers traveled of the NTWers and NUTWers when adopting NUTWing or UTWing via the Heckman correction term, 2. \fit{10} has fewer explanatory variables than \fit{aic} and therefore $\Xb$ in the two models differ, and, 3. The $\beta$ coefficients are very different (and therefore $\Xb$ in the two models differ).
+At this point, we should highlight, that these results (based on \fit{10}) are very different from the ones presented in Chapter~\ref{ch:twte} (based on \fit{aic}), where we found negative TE and ATE only. We now further investigate, why these differences between the two models might arise. The following three hypothesis are scrutinized: 1. The large error correlation ``rho3'' in \fit{10} could inflate (counterfactual) weekly kilometers traveled of the NTWers and NUTWers when adopting NUTWing or UTWing via the Heckman correction term, 2. \fit{10} has fewer explanatory variables than \fit{aic} and therefore $\Xb$ in the two models differ, and, 3. The $\beta$ coefficients are very different (and therefore $\Xb$ in the two models differ).
 
 Let us first revisit the conditional expectation of the OPSR model as stated in \citet{Heimgartner+Wang:2025}
 %
@@ -234,7 +234,7 @@ Similarly, the ``counterfactual outcome'' reflects the expected outcome under a 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<heckman-correction, echo=FALSE, fig=TRUE, height=7.5, width=7>>=
+<<opsr-tools-heckman-correction, echo=FALSE, fig=TRUE, height=7.5, width=7>>=
 heckman_ij <- function(fit, i, j) {
   correction <- predict(fit, type = "correction", group = i, counterfact = j)
   correction
@@ -297,7 +297,7 @@ The main motivation of OPSR is to correct for biased parameter estimates. We the
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<fixing-rho, echo=FALSE, fig=TRUE, height=7.5, width=7>>=
+<<opsr-tools-fixing-rho, echo=FALSE, fig=TRUE, height=7.5, width=7>>=
 start <- coef(fit_aic)
 fixed <- c("rho1", "rho2", "rho3")
 start[fixed] <- 0
@@ -355,7 +355,7 @@ Figure~\ref{fig:fixing-rho} compares the OPSR predictions (accounting for self-s
 \hline
 Model & Regime switch & NTWers & NUTWers & UTWers & ATE \\
 \hline
-<<te-comparison, echo=FALSE, results=tex>>=
+<<opsr-tools-te-comparison, echo=FALSE, results=tex>>=
 te_table <- function(fit) {
   ate <- opsr_ate(fit, type = "unlog-response")
   sry_ate <- summary(ate)

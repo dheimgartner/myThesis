@@ -13,7 +13,7 @@
 
 - [x] Make sure latest package version is installed...
 - [x] Include R libraries in `thesis.Rnw`
-- [ ] Namespace code chunks
+- [x] Namespace code chunks
 - [x] Use `\emph{}` instead of `\textit{}`
 - [x] Port latex packages and commands to designated files
 - [x] Check number format (not in `$` and with bigmark)
