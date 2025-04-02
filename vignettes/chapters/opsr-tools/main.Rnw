@@ -30,6 +30,14 @@ kfold_aic <- cache$kfold_aic
 
 The \pkg{OPSR} \proglang{R}-package allows analysts to estimate ordered probit switching regression models, a form of endogenous switching regression, accounting for error correlation between an ordinal selection and continuous outcome processes (e.g., the well-known Tobit-5 model for the case of two regimes). \pkg{OPSRtools}, introduced in this paper, helps the analyst during model selection (\fct{opsr\_select}), to cross-validate (\fct{opsr\_kfold} and \fct{kfplot}), to compute treatment effects (\fct{opsr\_ate}) and to visualize the key insights from a model (\fct{pairs}). \fct{print} methods for the various underlying objects allow the analyst to easily grasp the object's key information.
 
+\begin{ChapterInfoTable}
+\ChapterInfoEntry{%
+This chapter is based on the following paper
+}{%
+Heimgartner D. (2025) \pkg{OPSRtools}: Estimation and Post-Estimation Routines for the \pkg{OPSR} Package, unpublished work.
+}%
+\end{ChapterInfoTable}
+
 %% -- Introduction -------------------------------------------------------------
 
 \section{Introduction}
@@ -170,7 +178,7 @@ In Figure~\ref{fig:kfplot} three OOS losses (for the total model \code{ll\_mean}
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<opsr-tools-plot-kfplot, echo=FALSE, fig=TRUE, height=3.5, width=8>>=
+<<opsr-tools-plot-kfplot, echo=FALSE, fig=TRUE, height=3.2, width=7.6>>=
 <<opsr-tools-kfplot>>
 @
 \caption{\label{fig:kfplot} Model comparison by k-fold cross-validation. Note that $R^2$ can be negative for out-of-sample data points.}
@@ -183,7 +191,7 @@ ate <- opsr_ate(fit_10, type = "unlog-response")
 print(ate)
 @
 %
-where we needed to specify \code{type = "unlog-response"} (which is passed to \fct{predict.opsr}) since the outcome variable was log-transformed (log weekly kilometers traveled) before estimation. \fct{opsr\_ate} prepares the data, returning an object of class \class{opsr.ate} and \fct{summary.opsr.ate} then performs the main computations, in particular a weighted paired $t$~test for the TE (with the null that the TE is equal to 0). The method \fct{print.summary.opsr.ate} prints the results (method \fct{print.opsr.ate} redirects to \fct{summary} and a subsequent \fct{print} call).
+where we needed to specify \code{type = "unlog-response"} (which is passed to \fct{predict.opsr}) since the outcome variable was log-transformed (log weekly kilometers traveled) before estimation. \fct{opsr\_ate} prepares the data, returning an object of class \class{opsr.ate} and \fct{summary.opsr.ate} then performs the main computations, in particular a weighted paired $t$~test for the TE (with the null that the TE is equal to 0). The method \fct{print.summary.opsr.ate} (i.e., \fct{print} called on an object of class \class{summar.opsr.ate}) prints the results (method \fct{print.opsr.ate} redirects to \fct{summary} and a subsequent \fct{print} call).
 
 Weights are automatically used to compute group-specific treatment effects and average treatment effects (ATE) if they were used during estimation but can be overridden by passing a new vector as \code{weights} argument to \fct{opsr\_ate}.
 
@@ -351,10 +359,11 @@ Figure~\ref{fig:fixing-rho} compares the OPSR predictions (accounting for self-s
 
 \begin{table}[htbp]
 \centering
-\begin{tabular}{|l|l|rrr|r|}
-\hline
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
 Model & Regime switch & NTWers & NUTWers & UTWers & ATE \\
-\hline
+\midrule
 <<opsr-tools-te-comparison, echo=FALSE, results=tex>>=
 te_table <- function(fit) {
   ate <- opsr_ate(fit, type = "unlog-response")
@@ -378,17 +387,18 @@ mat <- cbind(
   te
 )
 mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
-mat_tex[c(3, 6, 9)] <- paste(mat_tex[c(3, 6, 9)], "\\hline")
+mat_tex[c(3, 6, 9)] <- paste(mat_tex[c(3, 6, 9)], "\\addlinespace")
 writeLines(mat_tex)
 @
-\hline
+\bottomrule
 \end{tabular}
+}%
 \caption{\label{tab:te-comparison} Treatment effect comparison. \code{nocor} implies the regular OLS fit with ``rho'' fixed at 0.}
 \end{table}
 
 This evidence suggests, that it is not actually the direct influence of the error correlation via the Heckman correction term but the indirect influence via the $\beta$ coefficients that leverages the predictions and thus treatment effect computations. And if we only have few explanatory variables, then the error correlation might have a bigger influence on these estimates. Under certain conditions, OPSR models might become poorly identified, suggesting extreme selection bias.
 
-Identification issues of Heckman-type selection models have received considerable attention in the literature \citep[e.g.,][Puhani:2000], investigating conditions under which model estimation becomes challenging. In Monte Carlo simulation studies, the performance of LIML and FIML estimators are then usually compared. The main condition discussed is weak exclusion-restrictions (weak instruments; leading to colinearity between the IMR and $\boldsymbol{X}$) as elaborated in \citet{Chiburis+Lokshin:2007}. \citet{Huismans+etal:2022} discuss maximum likelihood estimation and parameter identification (for a Heckman-selection model with ordered outcomes) and state that in mixture models, the likelihood function may have multiple local maximums and large flat regions and suggest testing different starting values (in our case, both \fit{10} and \fit{aic} converge to the same optimum if we set starting values to 0, -1 for ``kappa1'', 1 for ``kappa2'' and 1 for the ``sigmas''). Since the IMR is technically a regressor, we speculate, that the limited variability (as observed in Figure~\ref{fig:heckman-correction}, in particular for UTWing, column 3) could also yield poor identification.
+Identification issues of Heckman-type selection models have received considerable attention in the literature \citep[e.g.,][][Puhani:2000], investigating conditions under which model estimation becomes challenging. In Monte Carlo simulation studies, the performance of LIML and FIML estimators are then usually compared. The main condition discussed is weak exclusion-restrictions (weak instruments; leading to colinearity between the IMR and $\boldsymbol{X}$) as elaborated in \citet{Chiburis+Lokshin:2007}. \citet{Huismans+etal:2022} discuss maximum likelihood estimation and parameter identification (for a Heckman-selection model with ordered outcomes) and state that in mixture models, the likelihood function may have multiple local maximums and large flat regions and suggest testing different starting values (in our case, both \fit{10} and \fit{aic} converge to the same optimum if we set starting values to 0, -1 for ``kappa1'', 1 for ``kappa2'' and 1 for the ``sigmas''). Since the IMR is technically a regressor, we speculate, that the limited variability (as observed in Figure~\ref{fig:heckman-correction}, in particular for UTWing, column 3) could also yield poor identification.
 
 %% -- Summary ------------------------------------------------------------------
 
