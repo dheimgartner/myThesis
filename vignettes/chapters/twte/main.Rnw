@@ -9,6 +9,8 @@ All models are wrong --- some models are wronger!}%
 \begin{itemize}
 \item Check refs to chapter \pkg{OPSR}'s to method section
 \item Maybe use longtable for Table~\ref{tab:model-km-fit} (and try to increase fontsize, e.g., by decreasing tabcolsep...)
+\item Omit Heckman correction in Appendix, don't reference in text and mention in ChapterInfoTable
+\item Small text in Appendix elaborating on what the comparison table is...
 \item Namespace labels
 \end{itemize}
 }

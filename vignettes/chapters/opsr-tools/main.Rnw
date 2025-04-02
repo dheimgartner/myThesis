@@ -1,4 +1,4 @@
-\chapter{OPSRtools: Estimation and post-estimation routines for the OPSR package}
+\chapter{Estimation and post-estimation routines for OPSR}
 \label{ch:opsr-tools}
 
 \dictum[John Doe]{%
@@ -7,7 +7,7 @@ Hello world!}%
 
 \todo{%
 \begin{itemize}
-\item \proglang{R}-package or \proglang{R} package?
+\item Make Sinput Soutput smaller
 \item Namespace labels
 \end{itemize}
 }

@@ -11,14 +11,14 @@
 
 ## Checklist port
 
-- [ ] Make sure latest package version is installed...
-- [ ] Include R libraries in `thesis.Rnw`
+- [x] Make sure latest package version is installed...
+- [x] Include R libraries in `thesis.Rnw`
 - [ ] Namespace code chunks
-- [ ] Use `\emph{}` instead of `\textit{}`
-- [ ] Port latex packages and commands to designated files
-- [ ] Check number format (not in `$` and with bigmark)
-- [ ] Refs (e.g., `\Section~\ref{label}`)
-- [ ] Port bibliography
+- [x] Use `\emph{}` instead of `\textit{}`
+- [x] Port latex packages and commands to designated files
+- [x] Check number format (not in `$` and with bigmark)
+- [x] Refs (e.g., `\Section~\ref{label}`)
+- [x] Port bibliography
 - [ ] Namespace labels
 - [ ] Organize `\todo{}`s at top
 - [ ] Publication, contributions and changes table
@@ -73,6 +73,7 @@
 - [ ] Include R manuals in appendix => see `R/utils-manual.R` as starting point
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
 - [ ] Don't use `\pkg{}` in chapter headings...
+- [ ] Consistently use R-package (with hyphon)
 
 ## Author contributions
 
