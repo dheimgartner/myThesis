@@ -11,17 +11,17 @@
 
 ## Checklist port
 
-- [x] Make sure latest package version is installed...
-- [x] Include R libraries in `thesis.Rnw`
-- [x] Namespace code chunks
-- [x] Use `\emph{}` instead of `\textit{}`
-- [x] Port latex packages and commands to designated files
-- [x] Check number format (not in `$` and with bigmark)
-- [x] Refs (e.g., `\Section~\ref{label}`)
-- [x] Port bibliography
+- [ ] Make sure latest package version is installed...
+- [ ] Include R libraries in `thesis.Rnw`
+- [ ] Namespace code chunks
+- [ ] Use `\emph{}` instead of `\textit{}`
+- [ ] Port latex packages and commands to designated files
+- [ ] Check number format (not in `$` and with bigmark)
+- [ ] Refs (e.g., `\Section~\ref{label}`)
+- [ ] Port bibliography
 - [ ] Namespace labels
-- [x] Organize `\todo{}`s at top
-- [x] Publication, contributions and changes table
+- [ ] Organize `\todo{}`s at top
+- [ ] Publication, contributions and changes table
 
 ## TODO
 
@@ -49,14 +49,14 @@
 - [x] Think about main thesis structure (order of the papers)
 - [ ] Port papers one by one
   - Only one file per paper (don't split up into multiple sources)
-  - [ ] Author contributions section => Do I need some signature/confirmation from the co-authors?
+  - [x] Author contributions section => Do I need some signature/confirmation from the co-authors?
   - [x] `mpp`: no vignettes folder
   - [x] `responseRateAnalysis`
   - [x] `datapap`: no vignette built
   - [x] `trb24`: no vignettes folder
   - [ ] `OPSR`
-  - [ ] `TWTE`
-  - [ ] `OPSRtools` (maybe before `TWTE`?)
+  - [x] `TWTE`
+  - [ ] `OPSRtools`
 - [x] Adjust bibliography style... maybe Makefile is not needed in the end...
   - See `preamble/general.tex` and `preamble/natbib/` and adjustments in `bibliography.Rnw`
 - [x] What font are they using? => hermann zapf's palatino and eulermath
