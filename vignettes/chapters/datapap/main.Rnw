@@ -406,7 +406,7 @@ Figure~\ref{fig:mto-choice-variation} illustrates discrepancies between real-wor
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}[htbp]
 \centering
-<<datapap-mto-var=FALSE, fig=TRUE, width=4, height=3.75>>=
+<<datapap-mto-var=FALSE, echo=FALSE, fig=TRUE, width=4, height=3.75>>=
 mto_choice_variation$p
 @
 \caption{\label{fig:mto-choice-variation} Comparison of real-world mobility tool ownership shares and SP choice shares.}
@@ -547,7 +547,7 @@ plot.it <- function() {
 
   main <- c("Regular bike", "Car", "Car sharing", "E-bike", "National ST", "Half-fare", "Regional ST")
   for (i in seq_along(dat)) {
-    plt(dat[[i]], main[i], my_colors$colvec[3], "darkgrey")
+    plt(dat[[i]], main[i], datapap::my_colors$colvec[3], "darkgrey")
   }
 }
 

@@ -168,7 +168,7 @@ limits <- c(-1, 1.1)
 
 p1_bar <-
   mpp::activity_spaces$weekday_abs %>%
-  mpp::phase_comparison_chart(gv = weekday, tv = ellipse_area, colors = colors$all,
+  mpp::phase_comparison_chart(gv = weekday, tv = ellipse_area, colors = mpp::colors$all,
                               x = "", y = "Activity space\n95% ellipse area (km2)", fill = "", x = "")
 
 p1 <-
@@ -194,7 +194,7 @@ p2 <-
 p2_bar <-
   mpp::activity_spaces$working_arrangement_abs %>%
   drop_na() %>%
-  mpp::phase_comparison_chart(gv = working_arrangement, tv = ellipse_area, colors = colors$all,
+  mpp::phase_comparison_chart(gv = working_arrangement, tv = ellipse_area, colors = mpp::colors$all,
                               order = c("Home office", "Mixture", "Work outside home"),
                               x = "", y = "Activity space\n95% ellipse area (km2)", fill = "", x = "")
 
@@ -232,7 +232,7 @@ p1 <-
 p1_bar <-
   mpp::average_daily_distance$total_abs %>%
   mutate(dist = dist / 1e3) %>%
-  mpp::phase_comparison_chart(mode, dist, colors = colors$all, y = "Average daily distance (km)", fill = "", x = "")
+  mpp::phase_comparison_chart(mode, dist, colors = mpp::colors$all, y = "Average daily distance (km)", fill = "", x = "")
 
 p2 <-
   mpp::number_of_stages$total %>%
@@ -249,7 +249,7 @@ p2 <-
 
 p2_bar <-
   mpp::number_of_stages$total_abs %>%
-  mpp::phase_comparison_chart(mode, n_stages, colors = colors$all, y = "Average number of stages", fill = "", x = "")
+  mpp::phase_comparison_chart(mode, n_stages, colors = mpp::colors$all, y = "Average number of stages", fill = "", x = "")
 
 p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2.5, 3))
 @
@@ -339,7 +339,7 @@ p2 <-
 p2_bar <-
   mpp::number_of_stages$working_arrangement_abs %>%
   drop_na(working_arrangement) %>%
-  mpp::phase_comparison_chart(working_arrangement, n_stages, colors = colors$all,
+  mpp::phase_comparison_chart(working_arrangement, n_stages, colors = mpp::colors$all,
                               order = c("Home office", "Mixture", "Work outside home"),
                               y = "Average number of stages", fill = "", x = "")
 
@@ -371,7 +371,7 @@ p1 <-
 
 p1_bar <-
   mpp::mode_frequency_shares$abs %>%
-  mpp::phase_comparison_chart(mode, mode_share_pc, colors = colors$all, y = "Mode shares\n(based on mode frequency)", fill = "", x = "") +
+  mpp::phase_comparison_chart(mode, mode_share_pc, colors = mpp::colors$all, y = "Mode shares\n(based on mode frequency)", fill = "", x = "") +
   scale_y_continuous(labels = scales::percent)
 
 p2 <-
@@ -389,7 +389,7 @@ p2 <-
 
 p2_bar <-
   mpp::mode_distance_shares$all_abs %>%
-  mpp::phase_comparison_chart(mode, mode_share, colors = colors$all, y = "Mode shares\n(based on distance)", fill = "", x = "") +
+  mpp::phase_comparison_chart(mode, mode_share, colors = mpp::colors$all, y = "Mode shares\n(based on distance)", fill = "", x = "") +
   scale_y_continuous(labels = scales::percent)
 
 p1_bar + p2_bar + p1 + p2 + plot_layout(heights = c(2.5, 3))
@@ -568,7 +568,7 @@ df <-
   mutate(across(where(is.numeric), ~ round(.x, digits = 3)),
          difftest = ifelse(stringr::str_starts(coef, "sig"), 100, difftest),
          sig_diff = difftest < 0.05) %>%
-  select(-difftest) %>%
+  dplyr::select(-difftest) %>%
   as.data.frame()
 
 ## split coef into mode and coef
@@ -595,7 +595,7 @@ dff <-
                            paste0(estimate, "\\dagger"),
                            estimate),
          estimate = paste0("$", estimate, "$")) %>%
-  select(-stars, -sig_diff)
+  dplyr::select(-stars, -sig_diff)
 
 ## wide
 dfw <-
@@ -605,16 +605,16 @@ dfw <-
 
 dfw <-
   dfw %>%
-  select(phase, coef, matches("^ca"), all_of(sort(names(dfw))))
+  dplyr::select(phase, coef, matches("^ca"), all_of(sort(names(dfw))))
 
 ## translate coefs
 dfw <-
   dfw %>%
   left_join(mpp_coef_labels, by = c("coef" = "from")) %>%
   arrange(phase, order) %>%
-  select(-coef, -order, -phase) %>%
+  dplyr::select(-coef, -order, -phase) %>%
   rename(coef = to) %>%
-  select(coef, everything())
+  dplyr::select(coef, everything())
 
 mat <- as.matrix(dfw)
 mat[is.na(mat)] <- ""

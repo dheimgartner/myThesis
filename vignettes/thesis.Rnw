@@ -75,6 +75,10 @@ ggplot2::theme_set(myThesis::my_theme())
 
 set.seed(0)
 
+## some quick and dirty conflict resolution
+slice <- dplyr::slice
+select <- dplyr::select
+
 options(knitr.kable.NA = "")
 
 ## maybe adjust width here...
