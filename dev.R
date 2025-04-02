@@ -30,3 +30,12 @@ bootstrap$input
 demo("colors")
 
 
+
+## manual tex
+devtools::load_all()
+path <- "~/github/OPSR"
+mtex <- manual_tex(path)
+mtex
+sink("./vignettes/chapters/appendix/opsr-manual.tex")
+print(mtex)
+sink()

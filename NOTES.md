@@ -70,7 +70,7 @@
 - [ ] Light blue references/links as Thoscha (see point above)
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
 - [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
-- [ ] Include R manuals in appendix => see `R/utils-manual.R` as starting point
+- [ ] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
 - [ ] Don't use `\pkg{}` in chapter headings...
 - [x] Consistently use R-package (with hyphon)
