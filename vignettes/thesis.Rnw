@@ -51,6 +51,13 @@ library("mixl")
 
 ## OPSR
 library("OPSR")
+library("MASS")
+library("texreg")
+library("gridExtra")
+library("gridGraphics")
+library("scales")
+library("sampleSelection")
+library("mvtnorm")
 
 ## TWTE
 library("TWTE")
@@ -123,6 +130,9 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 
 % \cleardoublepage%
 % \SweaveInput{chapters/trb24/main}
+
+\cleardoublepage%
+\SweaveInput{chapters/opsr/main}
 
 \cleardoublepage%
 \SweaveInput{chapters/twte/main}
