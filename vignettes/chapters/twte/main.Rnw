@@ -178,13 +178,13 @@ Respondents were asked to state their typical weekly telework frequency (days/we
 <<twte-tw-comparison, echo=FALSE, fig=TRUE, height=4.8, width=4.8>>=
 wfh_survey <-
   TUplus::participants %>%
-  select(uid, wfh_n_days) %>%
+  dplyr::select(uid, wfh_n_days) %>%
   mutate(wfh_n_days = ifelse(is.na(wfh_n_days), 0, wfh_n_days))
 
 check <-
   TWTE::data_analytic$survey %>%
   left_join(wfh_survey, by = "uid") %>%
-  select(survey = wfh_n_days, tracked = wfh_days) %>%
+  dplyr::select(survey = wfh_n_days, tracked = wfh_days) %>%
   mutate(survey = factor(pmin(survey, 5)),
          tracked = factor(pmin(round(tracked), 5)))
 
@@ -285,7 +285,7 @@ dat <-
   TWTE::work %>%
   left_join(mutate(TWTE::sample, in_sample = TRUE), by = c("uid", "activity_date" = "date")) %>%
   filter(in_sample) %>%
-  select(uid, date = activity_date, weekday, is_mixture_day, work_location)
+  dplyr::select(uid, date = activity_date, weekday, is_mixture_day, work_location)
 
 dat <-
   dat %>%
@@ -310,7 +310,7 @@ Figure~\ref{fig:full-index-plot} presents full index plots of activity sequences
 as <-
   TWTE::activity_sequences %>%
   left_join(TWTE:::tw_status(), by = c("uid", "date")) %>%
-  select(uid, date, wfh, tw = tw_location, everything())
+  dplyr::select(uid, date, wfh, tw = tw_location, everything())
 
 w <-
   as %>%
@@ -320,11 +320,11 @@ w <-
 create_as_bin <- function(as, weight, cat, lab, cpal = NULL) {
   as_ <-
     as %>%
-    select(-uid, -date, -wfh, -tw)
+    dplyr::select(-uid, -date, -wfh, -tw)
   as_[as_ != cat] <- paste0("non-", cat)
   as <-
     as %>%
-    select(uid, date, wfh, tw) %>%
+    dplyr::select(uid, date, wfh, tw) %>%
     cbind(as_)
 
   act.seq <- seqdef(as, 5:148, xtstep = 6, cpal = cpal, labels = lab,
@@ -664,7 +664,7 @@ plot.it <- function() {
           dat. %>%
           right_join(template, by = "hour_start") %>%
           mutate(n_rel = ifelse(is.na(n_rel), n_rel_, n_rel)) %>%
-          select(hour_start, n_rel) %>%
+          dplyr::select(hour_start, n_rel) %>%
           arrange(hour_start) %>%
           pull(n_rel)
       })
