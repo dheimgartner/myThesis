@@ -74,6 +74,7 @@
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
 - [ ] Don't use `\pkg{}` in chapter headings...
 - [ ] Consistently use R-package (with hyphon)
+- [ ] In Intro: R> This is R code, this is its output
 
 ## Author contributions
 

@@ -32,4 +32,19 @@
 \newcommand{\COV}{\mathsf{COV}}
 \newcommand{\Prob}{\mathsf{P}}
 
+% Sinput and Soutput fancyvrb verbatim env
+\RequirePackage{fancyvrb}
+\RequirePackage{graphicx}
+
+% Sweave(-like)
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontsize=\normalsize,fontshape=sl}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{fontsize=\normalsize}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{fontshape=sl}
+\newenvironment{Schunk}{}{}
+\DefineVerbatimEnvironment{Code}{Verbatim}{}
+\DefineVerbatimEnvironment{CodeInput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{CodeOutput}{Verbatim}{}
+\newenvironment{CodeChunk}{}{}
+\setkeys{Gin}{width=0.8\textwidth}
+
 % End of class file
