@@ -122,33 +122,32 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 % Mainmatter
 %
 \cleardoublepage\pagenumbering{arabic}%
-\def\dir{chapters/introduction}
-\include{\dir/main}
+\SweaveInput{chapters/introduction/main}
 
-\cleardoublepage%
-\SweaveInput{chapters/mpp/main}
-
-\cleardoublepage%
-\SweaveInput{chapters/rra/main}
-
-\cleardoublepage%
-\SweaveInput{chapters/datapap/main}
-
-\cleardoublepage%
-\SweaveInput{chapters/trb24/main}
-
-\cleardoublepage%
-\SweaveInput{chapters/opsr/main}
-
-\cleardoublepage%
-\SweaveInput{chapters/twte/main}
-
-\cleardoublepage%
-\SweaveInput{chapters/opsr-tools/main}
-
-\appendix
-\cleardoublepage%
-\SweaveInput{chapters/appendix/main}
+% \cleardoublepage%
+% \SweaveInput{chapters/mpp/main}
+%
+% \cleardoublepage%
+% \SweaveInput{chapters/rra/main}
+%
+% \cleardoublepage%
+% \SweaveInput{chapters/datapap/main}
+%
+% \cleardoublepage%
+% \SweaveInput{chapters/trb24/main}
+%
+% \cleardoublepage%
+% \SweaveInput{chapters/opsr/main}
+%
+% \cleardoublepage%
+% \SweaveInput{chapters/twte/main}
+%
+% \cleardoublepage%
+% \SweaveInput{chapters/opsr-tools/main}
+%
+% \appendix
+% \cleardoublepage%
+% \SweaveInput{chapters/appendix/main}
 
 \cleardoublepage%
 \SweaveInput{frontbackmatter/bibliography}

@@ -73,8 +73,8 @@
 - [ ] Include R manuals in appendix => see `R/utils-manual.R` as starting point
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
 - [ ] Don't use `\pkg{}` in chapter headings...
-- [ ] Consistently use R-package (with hyphon)
-- [ ] In Intro: R> This is R code, this is its output
+- [x] Consistently use R-package (with hyphon)
+- [x] In Intro: R> This is R code, this is its output
 
 ## Author contributions
 
