@@ -1,4 +1,4 @@
-\chapter{Predicting response rates once again}
+\chapter{On the relation between response burden and response rate}
 \label{ch:responseRateAnalysis}
 
 \dictum[John Doe]{%

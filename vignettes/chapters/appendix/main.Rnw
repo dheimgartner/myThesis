@@ -52,6 +52,12 @@ writeLines(mat_tex)
 \end{center}
 }
 
+%% -- R reference manuals ------------------------------------------------------
+
+\begin{leftbar}
+\proglang{R}-package reference manuals for \pkg{OPSR} and \pkg{OPSRtools}
+\end{leftbar}
+
 %% -- Computational details ----------------------------------------------------
 
 \section{Computational details}

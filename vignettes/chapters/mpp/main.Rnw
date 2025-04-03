@@ -7,7 +7,7 @@ Hello world!}%
 
 \todo{%
 \begin{itemize}
-\item For author contributions statement see also thesis by Reck
+\item Check figures again (some labels are clipped...)
 \item Namespace labels
 \end{itemize}
 }
