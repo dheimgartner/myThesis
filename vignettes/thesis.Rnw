@@ -145,6 +145,9 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 \cleardoublepage%
 \SweaveInput{chapters/opsr-tools/main}
 
+\cleardoublepage%
+\SweaveInput{chapters/conclusion-outlook/main}
+
 \appendix
 \cleardoublepage%
 \SweaveInput{chapters/appendix/main}
