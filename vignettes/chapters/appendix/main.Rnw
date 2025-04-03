@@ -54,6 +54,8 @@ writeLines(mat_tex)
 
 %% -- R reference manuals ------------------------------------------------------
 
+\section{\proglang{R} reference manuals}
+
 \begin{leftbar}
 \proglang{R}-package reference manuals for \pkg{OPSR} and \pkg{OPSRtools}
 \end{leftbar}
