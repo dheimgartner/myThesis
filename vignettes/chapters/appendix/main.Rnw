@@ -54,20 +54,13 @@ writeLines(mat_tex)
 
 %% -- R reference manuals ------------------------------------------------------
 
+\clearpage%
 \section{\proglang{R} reference manuals}
 
 \subsection{\pkg{OPSR} reference manual} \label{app:opsr-ref}
 
-<<results=tex>>=
-## TODO
-## sink to file and adjust there marginally (e.g., put proper citations, remove some
-## links to functions outside of package, etc.)
-path <- "~/github/OPSR/man/"
-rd_files <- list.files(path)
-rd_files <- rd_files[grepl("Rd$", rd_files)]
-for (i in rd_files) {
-  tools::Rd2latex(paste(path, i, sep = "/"))
-}
+<<app-opsr-manual, results=tex, echo=FALSE>>=
+print(myThesis::OPSR_manual)
 @
 
 %% -- Computational details ----------------------------------------------------

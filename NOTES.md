@@ -24,6 +24,13 @@
 - [ ] Organize `\todo{}`s at top
 - [ ] Publication, contributions and changes table
 
+## Checklist port manual
+
+- [ ] Reorder (-package first)
+- [ ] `\LinkA` (remove to external deps)
+- [ ] Replace cite and add `\bibentry{}`
+- [ ] Make sure it fits page
+
 ## TODO
 
 - [x] What own packages do I need?
@@ -62,6 +69,7 @@
   - See `preamble/general.tex` and `preamble/natbib/` and adjustments in `bibliography.Rnw`
 - [x] What font are they using? => hermann zapf's palatino and eulermath
 - [ ] Make ownpubs in `publications.Rnw` work
+  - `\bibentry{}` would be a solution... but I guess there is a better way?
 - [x] Captionsetup => I like it below
 - [x] Use `{\renewcommand{\arraystretch}{1.5}...}` instead of `\setlength\extrarowheight{2pt}` (which does not scope!)
   - Or enclose whole table stuff in `{...}` which should scope setlength stuff locally

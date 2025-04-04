@@ -22,6 +22,7 @@
 % \addbibresource[label=ownpubs]{ownpubs.bib}
 % \addbibresource{bibliography.bib}
 % \addbibresource{misc.bib}
+\nobibliography* % enables \bibentry{} in text!
 
 % \usepackage{Sweave}
 \SweaveOpts{engine=R, eps=FALSE, keep.source = TRUE}
