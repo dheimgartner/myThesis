@@ -56,9 +56,16 @@ writeLines(mat_tex)
 
 \section{\proglang{R} reference manuals}
 
-\begin{leftbar}
-\proglang{R}-package reference manuals for \pkg{OPSR} and \pkg{OPSRtools}
-\end{leftbar}
+\subsection{\pkg{OPSR} reference manual} \label{app:opsr-ref}
+
+<<results=tex>>=
+path <- "~/github/OPSR/man/"
+rd_files <- list.files(path)
+rd_files <- rd_files[grepl("Rd$", rd_files)]
+for (i in rd_files) {
+  tools::Rd2latex(paste(path, i, sep = "/"))
+}
+@
 
 %% -- Computational details ----------------------------------------------------
 
