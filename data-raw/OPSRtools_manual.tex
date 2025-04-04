@@ -1,0 +1,892 @@
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{OPSRtools-package}{OPSRtools: Tools for OPSR}{OPSRtools.Rdash.package}
+\aliasA{OPSRtools}{OPSRtools-package}{OPSRtools}
+%
+\begin{Description}
+OPSR estimates ordered probit switching regression models - a Heckman type endogenous switching regression model with an ordinal selection/treatment and continuous outcomes. OPSRtools contains estimation and post-estimation routines such as step-wise model selection, k-fold cross-validation, treatment effect computations and some visualizations.
+\end{Description}
+%
+\begin{Author}
+\strong{Maintainer}: Daniel Heimgartner \email{d.heimgartners@gmail.com} (\Rhref{https://orcid.org/0000-0002-0643-8690}{ORCID}) [copyright holder]
+
+\end{Author}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{kfplot}{Comparison Plot Method for List of OPSR kfold Objects}{kfplot}
+%
+\begin{Description}
+Comparison Plot Method for List of OPSR kfold Objects
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+kfplot(
+  x,
+  i = c("ll_mean", "ll_p_mean", "r2"),
+  main = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  ...
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] a list of objects of class \code{"opsr.kfold"}.
+
+\item[\code{i}] the loss to extract (see 'Value' in \code{\LinkA{loss}{loss}}). One of \code{"ll\_mean"},
+\code{"ll\_p\_mean"} or \code{"r2"}.
+
+\item[\code{main}] a main title for the plot, see also \code{title}.
+
+\item[\code{xlab}] a label for the x axis.
+
+\item[\code{ylab}] a label for the y axis.
+
+\item[\code{...}] further arguments passed to \code{boxplot}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+See 'Value' in \code{boxplot}.
+\end{Value}
+%
+\begin{SeeAlso}
+\code{\LinkA{loss}{loss}}
+\end{SeeAlso}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{list2df}{List to Data Frame}{list2df}
+%
+\begin{Description}
+Converts a list of vectors to a data frame.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+list2df(x)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] a list of vectors.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A data frame.
+\end{Value}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{loss}{Out-Of-Sample Goodness of Fit Indicators}{loss}
+%
+\begin{Description}
+Computes a loss for out-of-sample data points.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+loss(object, data, test_ind, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] an object of class \code{"opsr"}.
+
+\item[\code{data}] a data frame containing the variables in the model (usually from
+a call to \code{\LinkA{model.frame.opsr}{model.frame.opsr}}).
+
+\item[\code{test\_ind}] indicator for the test data.
+
+\item[\code{...}] addditional arguments passed to \code{\LinkA{opsr\_from\_opsr}{opsr.Rul.from.Rul.opsr}}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list containing the losses:
+\begin{itemize}
+
+\item{} \code{z}: The regime/treatment membership of the test data.
+\item{} \code{ll}: The out-of-sample log-likelihood of the test data.
+\item{} \code{ll\_mean}: \code{ll} averaged over each regime and in total.
+\item{} \code{ll\_p}: The out-of-sample log-likelihood of the test data for the selection
+process.
+\item{} \code{ll\_p\_mean}: \code{ll\_p} averaged over each regime and in total.
+\item{} \code{r2}: Coefficient of determination for each regime and in total.
+
+\end{itemize}
+
+\end{Value}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{opsr\_ate}{Treatment Effect Computations for OPSR Model Fits}{opsr.Rul.ate}
+%
+\begin{Description}
+Treatment Effect Computations for OPSR Model Fits
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+opsr_ate(object, type, weights = NULL, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] object an object of class \code{"opsr"}.
+
+\item[\code{type}] see \code{\LinkA{predict.opsr}{predict.opsr}} for details.
+
+\item[\code{weights}] a vector of weights. If \code{NULL} then weights from \code{object} will
+be used.
+
+\item[\code{...}] additional arguments passed to \code{\LinkA{predict.opsr}{predict.opsr}}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}
+This function only prepares the input to a further call to \code{\LinkA{summary.opsr.ate}{summary.opsr.ate}}.
+\end{Details}
+%
+\begin{Value}
+An object of class \code{"opsr.ate"}.
+\end{Value}
+%
+\begin{SeeAlso}
+\code{\LinkA{summary.opsr.ate}{summary.opsr.ate}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+sim_dat <- OPSR::opsr_simulate()
+dat <- sim_dat$data
+weights <- runif(nrow(dat))
+fit <- OPSR::opsr(ys | yo ~ xs1 + xs2 | xo1 + xo2, dat = dat,
+                  weights = weights, printLevel = 0)
+ate <- opsr_ate(fit, type = "response")
+print(ate)
+summary(ate)
+
+ate_w <- opsr_ate(fit, type = "response", weights = rep(1, nrow(dat)))
+summary(ate_w)
+
+pairs(ate)
+\end{ExampleCode}
+\end{Examples}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{opsr\_from\_opsr}{Refit an OPSR Model on New Data}{opsr.Rul.from.Rul.opsr}
+%
+\begin{Description}
+Refit an OPSR Model on New Data
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+opsr_from_opsr(object, data, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] an object of class \code{"opsr"}.
+
+\item[\code{data}] a data frame containing the variables in the model.
+
+\item[\code{...}] additional arguments passed to \code{\LinkA{opsr}{opsr}}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+An object of class \code{"opsr"}
+\end{Value}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{opsr\_kfold}{k-Fold Cross-Validation for OPSR Model Fits}{opsr.Rul.kfold}
+%
+\begin{Description}
+Computes out-of-sample losses.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+opsr_kfold(object, k = 10, verbose = TRUE, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] an object of class \code{"opsr"}.
+
+\item[\code{k}] number of folds.
+
+\item[\code{verbose}] if \code{TRUE}, prints working information during iterations over
+folds.
+
+\item[\code{...}] additional arguments passed to \code{\LinkA{opsr\_from\_opsr}{opsr.Rul.from.Rul.opsr}}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}
+The returned object is of length \code{k}, where each element contains the losses
+as computed by \code{\LinkA{loss}{loss}}.
+\end{Details}
+%
+\begin{Value}
+An object of class \code{"opsr.kfold"}. See 'Details' section for more
+information.
+\end{Value}
+%
+\begin{SeeAlso}
+\code{\LinkA{opsr\_from\_opsr}{opsr.Rul.from.Rul.opsr}}, \code{\LinkA{loss}{loss}}, \code{\LinkA{[.opsr.kfold}{[.opsr.kfold}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+sim_dat <- OPSR::opsr_simulate()
+dat <- sim_dat$data
+dat$xo3 <- runif(n = nrow(dat))
+dat$xo4 <- factor(sample(c("level1", "leve2", "level3"), nrow(dat),
+                  replace = TRUE))
+f <- ys | yo ~ xs1 + xs2 + log(xo3) | xo1 + xo2 + xo3 + xo4 |
+  xo1 + xo2 + xo3 | xo1 + xo2
+fit <- OPSR::opsr(f, dat, printLevel = 0)
+fit_select <- opsr_select(fit, loss = "bic", printLevel = 0)
+kfold <- opsr_kfold(fit, printLevel = 0)
+kfold_select <- opsr_kfold(fit_select, printLevel = 0)
+
+## extract
+ll_mean <- kfold["ll_mean"]
+list2df(ll_mean)
+
+## plot
+colvec <- c("#ff8811","#48a9a6")
+kfplot(list(kfold, kfold_select), col = colvec)
+legend("bottomleft", legend = c("fit", "fit_select"), fill = colvec,
+       title = "Model", title.font = 2, bty = "n")
+\end{ExampleCode}
+\end{Examples}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{opsr\_select}{Select a Model in a Stepwise Algorithm}{opsr.Rul.select}
+%
+\begin{Description}
+Iteratively calls \code{\LinkA{opsr\_step}{opsr.Rul.step}} and compares the resulting model to the
+current winner (as evaluated by a selected loss function).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+opsr_select(
+  object,
+  pseq = seq(0.9, 0.1, by = -0.1),
+  log = new.env(),
+  verbose = TRUE,
+  loss = c("aic", "bic", "lrt"),
+  ...
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] an object of class \code{"opsr"}.
+
+\item[\code{pseq}] sequence of p-value thresholds (each of which is passed as \code{pval}
+to \code{\LinkA{opsr\_step}{opsr.Rul.step}}).
+
+\item[\code{log}] environment to keep track of changes to \code{object} (in particular
+variables being eliminated).
+
+\item[\code{verbose}] if \code{TRUE}, prints working information during computation.
+
+\item[\code{loss}] The loss function for model comparison. Can be abbreviated.
+See 'Details' section for more information.
+
+\item[\code{...}] additional arguments passed to \code{\LinkA{opsr\_select}{opsr.Rul.select}}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}
+Currently three loss functions are available which can be selected via the
+\code{loss} argument. The loss is then computed for the two models to be compared
+and a winner is selected. Can be one of \code{"aic"} for AIC, \code{"bic"} for BIC and
+\code{"lrt"} for a likelihood ratio test.
+\end{Details}
+%
+\begin{Value}
+An object of class \code{"opsr.select"}.
+\end{Value}
+%
+\begin{SeeAlso}
+\code{\LinkA{opsr\_select}{opsr.Rul.select}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+sim_dat <- OPSR::opsr_simulate()
+dat <- sim_dat$data
+dat$xo3 <- runif(n = nrow(dat))
+dat$xo4 <- factor(sample(c("level1", "leve2", "level3"), nrow(dat),
+                  replace = TRUE))
+f <- ys | yo ~ xs1 + xs2 + log(xo3) | xo1 + xo2 + xo3 + xo4 |
+  xo1 + xo2 + xo3 | xo1 + xo2
+fit <- OPSR::opsr(f, dat, printLevel = 0)
+fit_select <- opsr_select(fit, loss = "aic", printLevel = 0)
+print(fit_select)
+\end{ExampleCode}
+\end{Examples}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{opsr\_step}{Step Function for OPSR Model Fits}{opsr.Rul.step}
+%
+\begin{Description}
+Excludes all coefficients with p-values below \code{pval} and fits again.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+opsr_step(object, pval, log = new.env(), .step = 1, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] an object of class \code{"opsr"}.
+
+\item[\code{pval}] coefficients with p-values < \code{pval} are dropped.
+
+\item[\code{log}] environment to keep track of changes to \code{object} (in particular
+variables being eliminated).
+
+\item[\code{.step}] used to generate identifier in \code{log} environment. Used in
+\code{\LinkA{opsr\_select}{opsr.Rul.select}}.
+
+\item[\code{...}] additional arguments passed to \code{update} (and hence \code{\LinkA{opsr}{opsr}}).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+An object of class \code{"opsr"}.
+\end{Value}
+%
+\begin{SeeAlso}
+\code{\LinkA{opsr\_select}{opsr.Rul.select}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+sim_dat <- OPSR::opsr_simulate()
+dat <- sim_dat$data
+dat$xo3 <- runif(n = nrow(dat))
+dat$xo4 <- factor(sample(c("level1", "leve2", "level3"), nrow(dat),
+                  replace = TRUE))
+f <- ys | yo ~ xs1 + xs2 + log(xo3) | xo1 + xo2 + xo3 + xo4 |
+  xo1 + xo2 + xo3 | xo1 + xo2
+fit <- OPSR::opsr(f, dat, printLevel = 0)
+fit_step <- opsr_step(fit, pval = 0.1)
+texreg::screenreg(list(fit, fit_step))
+\end{ExampleCode}
+\end{Examples}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{pairs.opsr.ate}{Pairs Plot for OPSR ATE Objects}{pairs.opsr.ate}
+%
+\begin{Description}
+Pairs Plot for OPSR ATE Objects
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'opsr.ate'
+pairs(
+  x,
+  pch = 21,
+  labels.diag = paste0("T", 1:x$nReg),
+  labels.reg = paste0("G", 1:x$nReg),
+  col = 1:x$nReg,
+  add.rug = TRUE,
+  lower.digits = 0,
+  diag.digits = 0,
+  lwd.dens = 1.5,
+  diag.cex.text = 1,
+  upper.digits = 2,
+  upper.cex.text = 2,
+  prefix = "",
+  postfix = "",
+  lty.diag = 1,
+  ...
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an object of class \code{"opsr.ate"}.
+
+\item[\code{pch}] plotting 'character', i.e., symbol to use. See also \code{pch}.
+
+\item[\code{labels.diag}] labels used in the diagonal panels.
+
+\item[\code{labels.reg}] labels for the treatment regimes.
+
+\item[\code{col}] colour vector.
+
+\item[\code{add.rug}] if \code{TRUE}, adds rugs to the lower panels.
+
+\item[\code{lower.digits}] rounding of the digits in the lower panel.
+
+\item[\code{diag.digits}] rounding of the digits in the diagonal panel.
+
+\item[\code{lwd.dens}] linewidth of the densities in the diagonal panel.
+
+\item[\code{diag.cex.text}] \code{cex} for the text in the diagonal panel.
+
+\item[\code{upper.digits}] rounding of the digits in the upper panel.
+
+\item[\code{upper.cex.text}] \code{cex} for the text in the upper panel.
+
+\item[\code{prefix}] for the number plotted in the upper panel.
+
+\item[\code{postfix}] for the number plotted in the upper panel.
+
+\item[\code{lty.diag}] linetype for the diagonal panel.
+
+\item[\code{...}] further arguments passed to or from other methods.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}
+Presents all potential counterfactual outcomes. The diagonal depicts
+distributions in any given treatment regime and separate by the current
+(factual) treatment group. The weighted mean values are shown as red numbers.
+The lower triangular panels compare the model-implied (predicted) outcomes
+of two treatment regimes again separate by current treatment group. The red
+line indicates the 45-degree line of equal outcomes while the red squares
+depict again the weighted mean values. The upper triangular panels show
+(weighted) average treatment effects.
+\end{Details}
+%
+\begin{Value}
+Returns \code{x} invisibly.
+\end{Value}
+%
+\begin{SeeAlso}
+\code{pairs}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+sim_dat <- OPSR::opsr_simulate()
+dat <- sim_dat$data
+weights <- runif(nrow(dat))
+fit <- OPSR::opsr(ys | yo ~ xs1 + xs2 | xo1 + xo2, dat = dat,
+                  weights = weights, printLevel = 0)
+ate <- opsr_ate(fit, type = "response")
+print(ate)
+summary(ate)
+
+ate_w <- opsr_ate(fit, type = "response", weights = rep(1, nrow(dat)))
+summary(ate_w)
+
+pairs(ate)
+\end{ExampleCode}
+\end{Examples}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{plot.opsr.kfold}{Plot Method for OPSR kfold Objects}{plot.opsr.kfold}
+%
+\begin{Description}
+Plot Method for OPSR kfold Objects
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'opsr.kfold'
+plot(
+  x,
+  i = c("ll_mean", "ll_p_mean", "r2"),
+  main = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  ...
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an object of class \code{"opsr.kfold"}.
+
+\item[\code{i}] the loss to extract (see 'Value' in \code{\LinkA{loss}{loss}}). One of \code{"ll\_mean"},
+\code{"ll\_p\_mean"} or \code{"r2"}.
+
+\item[\code{main}] a main title for the plot, see also \code{title}.
+
+\item[\code{xlab}] a label for the x axis.
+
+\item[\code{ylab}] a label for the y axis.
+
+\item[\code{...}] further arguments passed to \code{boxplot}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+See 'Value' in \code{boxplot}.
+\end{Value}
+%
+\begin{SeeAlso}
+\code{\LinkA{loss}{loss}}
+\end{SeeAlso}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{print.ate}{Print Method for ATE Objects}{print.ate}
+%
+\begin{Description}
+Print Method for ATE Objects
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'ate'
+print(x, digits = max(3L, getOption("digits") - 3L),
+      signif.legend = TRUE, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an object of class \code{"ate"}.
+
+\item[\code{digits}] minimum number of significant digits to be used for most numbers
+(passed to \code{stats::printCoefmat}).
+
+\item[\code{signif.legend}] if \code{TRUE}, a legend for the 'significance stars' is printed.
+
+\item[\code{...}] further arguments passed to or from other methods.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Prints \code{x} in 'pretty' form and returns reformatted treatment effects
+invisibly.
+\end{Value}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{print.opsr.ate}{Print Method for OPSR ATE Objects}{print.opsr.ate}
+%
+\begin{Description}
+Print Method for OPSR ATE Objects
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'opsr.ate'
+print(x, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an object of class \code{"opsr.ate"}.
+
+\item[\code{...}] further arguments passed to \code{\LinkA{summary.opsr.ate}{summary.opsr.ate}}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}
+This is just a wrapper around \code{\LinkA{summary.opsr.ate}{summary.opsr.ate}} and a subsequent call to
+\code{\LinkA{print.summary.opsr.ate}{print.summary.opsr.ate}}.
+\end{Details}
+%
+\begin{Value}
+Returns \code{x} invisibly.
+\end{Value}
+%
+\begin{SeeAlso}
+\code{\LinkA{print.summary.opsr.ate}{print.summary.opsr.ate}}
+\end{SeeAlso}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{print.opsr.select}{Print Method for OPSR Select Objects}{print.opsr.select}
+%
+\begin{Description}
+Prints the original model and the final model (winner) as well as the
+stepwise model path.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'opsr.select'
+print(
+  x,
+  digits = max(3L, getOption("digits") - 3L),
+  print.call = TRUE,
+  print.elim.hist = TRUE,
+  ...
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an object of class \code{"opsr.select"}.
+
+\item[\code{digits}] minimum number of significant digits to be used for most numbers (passed to \code{stats::printCoefmat}).
+
+\item[\code{print.call}] if \code{TRUE}, prints the underlying \code{\LinkA{opsr\_select}{opsr.Rul.select}} call.
+
+\item[\code{print.elim.hist}] if \code{TRUE}, prints the elimination history. See
+'Details' section for more information.
+
+\item[\code{...}] further arguments passed to or from other methods.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Prints \code{x} in 'pretty' form and returns it invisibly.
+\end{Value}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{print.summary.opsr.ate}{Print Method for Summary OPSR ATE Objects}{print.summary.opsr.ate}
+%
+\begin{Description}
+Print Method for Summary OPSR ATE Objects
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'summary.opsr.ate'
+print(x, digits = max(3L, getOption("digits") - 3L),
+      print.call = FALSE, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an object of class \code{"summary.opsr.ate"}.
+
+\item[\code{digits}] minimum number of significant digits to be used for most numbers (passed to \code{stats::printCoefmat}).
+
+\item[\code{print.call}] if \code{TRUE}, prints the underlying call.
+
+\item[\code{...}] further arguments passed to or from other methods.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Prints \code{x} in 'pretty' form and returns it invisibly.
+\end{Value}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{print.te}{Print Method for TE Objects}{print.te}
+%
+\begin{Description}
+Print Method for TE Objects
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'te'
+print(x, digits = max(3L, getOption("digits") - 3L),
+      signif.legend = TRUE, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an object of class \code{"te"}.
+
+\item[\code{digits}] minimum number of significant digits to be used for most numbers
+(passed to \code{stats::printCoefmat}).
+
+\item[\code{signif.legend}] if \code{TRUE}, a legend for the 'significance stars' is printed.
+
+\item[\code{...}] further arguments passed to or from other methods.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Prints \code{x} in 'pretty' form and returns reformatted treatment effects
+invisibly.
+\end{Value}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{[.opsr.kfold}{Extract Method for OPSR kfold Object}{[.opsr.kfold}
+%
+\begin{Description}
+Extract Method for OPSR kfold Object
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'opsr.kfold'
+x[i]
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an object of class \code{"opsr.kfold"}.
+
+\item[\code{i}] the loss to extract (see 'Value' in \code{\LinkA{loss}{loss}}).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list of length k (where k is the number of folds).
+\end{Value}
+%
+\begin{SeeAlso}
+\code{\LinkA{loss}{loss}}
+\end{SeeAlso}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{summary.opsr.ate}{Summarizing OPSR ATE Objects}{summary.opsr.ate}
+%
+\begin{Description}
+This function computes weighted treatment effects and corresponding weighted
+paired t-tests.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'opsr.ate'
+summary(object, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] an object of class \code{"opsr.ate"}.
+
+\item[\code{...}] further arguments passed to or from other methods.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+An object of class \code{"summary.opsr.ate"} containing among others:
+\begin{itemize}
+
+\item{} \code{ate}: An object of class \code{"ate"}. See also \code{\LinkA{print.ate}{print.ate}}.
+\item{} \code{te}: An object of class \code{"te"}. See also \code{\LinkA{print.te}{print.te}}.
+
+\end{itemize}
+
+
+The p-values of the weighted paired t-test are attached as attributes.
+\end{Value}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{timeuse}{TimeUse+ Data}{timeuse}
+\keyword{datasets}{timeuse}
+%
+\begin{Description}
+Travel diary data from the TimeUse+ study \citep{Winkler+Meister+Axhausen:2024}.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+timeuse
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+Data frame with numeric and factor columns
+\begin{description}
+
+\item[uid] Respondent ID
+\item[weight] Sample weight
+\item[wfh] Telework status
+\item[wfh\_days] Telework frequency (days/week)
+\item[weekly\_km] Weekly kilometers traveled
+\item[log\_weekly\_km] Log weekly kilometers traveled
+\item[weekly\_n] Weekly number of trips
+\item[log\_weekly\_n] Log weekly number of trips
+\item[start\_tracking] Month when tracking started
+\item[commute] One-way commute distance (km)
+\item[log\_commute\_km] Log one-way commute distance
+\item[age] Age
+\item[car\_access] Car access
+\item[dogs] Has dogs
+\item[driverlicense] Has driverlicense
+\item[educ\_higher] Higher education
+\item[fixed\_workplace] Has fixed workplace
+\item[grocery\_shopper] Main responsible for grocery shopping
+\item[hh\_income] Household income
+\item[hh\_size] Household size
+\item[isco\_clerical] ISCO clerical
+\item[isco\_craft] ISCO craft
+\item[isco\_elementary] ISCO elementary
+\item[isco\_managers] ISCO managers
+\item[isco\_plant] ISCO plant and machine
+\item[isco\_professionals] ISCO professionals
+\item[isco\_service] ISCO service and sales
+\item[isco\_agri] ISCO agriculture
+\item[isco\_tech] ISCO technicians
+\item[married] Married
+\item[n\_children] Number of children
+\item[freq\_onl\_order] Frequent online shopper
+\item[parking\_home] Parking available at home
+\item[parking\_work] Parking available at work
+\item[permanent\_employed] Permanent employment
+\item[rents\_home] Tenant
+\item[res\_loc] Residential location
+\item[sex\_male] Male
+\item[shift\_work] Works in shifts
+\item[swiss] Nationality Swiss
+\item[vacation] Vacation during study
+\item[workload] Workload (in \% of full-time equivalent)
+\item[young\_kids] Has young kids
+\item[wfh\_allowed] Employer allows telework
+\item[teleworkability] Number of days worked from home during COVID-related lockdowns
+
+\end{description}
+
+\end{Format}
+%
+\begin{References}
+\bibentry{Winkler+Meister+Axhausen:2024}
+\end{References}
+

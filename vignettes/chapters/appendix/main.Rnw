@@ -63,6 +63,15 @@ writeLines(mat_tex)
 print(myThesis::OPSR_manual)
 @
 
+\clearpage%
+\subsection{\pkg{OPSRtools} reference manual} \label{app:opsrtools-ref}
+
+<<app-opsrtools-manual, results=tex, echo=FALSE>>=
+print(myThesis::OPSRtools_manual)
+@
+
+
+
 %% -- Computational details ----------------------------------------------------
 
 \section{Computational details}
