@@ -1,0 +1,592 @@
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{snndata-package}{snndata: Data for the Swiss New Normal}{snndata.Rdash.package}
+\aliasA{snndata}{snndata-package}{snndata}
+%
+\begin{Description}
+Contains data collected for the project Multimodality in the Swiss New Normal. It allows researchers to investigate telework behavior in Switzerland, understand the importance of work arrangements on telework supply and the relation between telework and mobility tool ownership. The data collection methods are detailed in \citet{Heimgartner+Axhausen:2024}.
+\end{Description}
+%
+\begin{Author}
+\strong{Maintainer}: Daniel Heimgartner \email{d.heimgartners@gmail.com} (\Rhref{https://orcid.org/0000-0002-0643-8690}{ORCID}) [copyright holder]
+
+Authors:
+\begin{itemize}
+
+\item{} Kay W. Axhausen \email{axhausen@ivt.baug.ethz.ch} (\Rhref{https://orcid.org/0000-0003-3331-1318}{ORCID})
+
+\end{itemize}
+
+
+\end{Author}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{features}{Some Additional Features}{features}
+\keyword{datasets}{features}
+%
+\begin{Description}
+Typology and degree of urbanization for home and work location as well as
+commute distance.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+features
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+Data frame
+\begin{description}
+
+\item[UID] Unique identifier for respondents
+\item[re\_zip] Zip code of the municipality where the participant lives
+\item[wk\_zip] Zip code of the municipality where the participant works
+\item[commute\_km] Crow fly distance from home to work
+\item[log\_commute\_km] Log transformed crow fly distance from home to work
+\item[re\_typology] Typology of municipality where the participant lives
+\item[re\_urbanization] Degree of urbanization of municiplaity where the participant lives
+\item[wk\_typology] Typology of municiplaity where the participant works
+\item[wk\_urbanization] Degree of urbanization of municiplaity where the participant works
+
+\end{description}
+
+\end{Format}
+%
+\begin{SeeAlso}
+\url{https://www.agvchapp.bfs.admin.ch/de/typologies/query}, \url{https://www.agvchapp.bfs.admin.ch/de/typologies/query}
+\end{SeeAlso}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{labels}{Variable Labels}{labels}
+\keyword{datasets}{labels}
+%
+\begin{Description}
+Contains key value pairs mapping the raw recorded (Qualtrics) answer to a more
+user friendly one.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+labels
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+List of lists:
+\begin{itemize}
+
+\item{} \code{intro}: Labels for the variabels in \LinkA{survey\_intro}{survey.Rul.intro}\$main.
+\item{} \code{wfh}: Labels for the variables in \LinkA{survey\_wfh}{survey.Rul.wfh}\$sp.
+\item{} \code{mto}: Labels for the variables in \LinkA{survey\_mto}{survey.Rul.mto}\$sp.
+\item{} \code{srph}: Labels for the variabels in \LinkA{srph}{srph}.
+\item{} \code{mzmv}: Labels for the Microcencus Mobility and Transport (not part of \code{snndata})
+
+\end{itemize}
+
+\end{Format}
+%
+\begin{Details}
+The labels were used to recode the raw data as pulled from Qualtrics. The below
+mentioned data frames are slightly restructured and therefore, some of the variables
+contained there do not have a matching element in \code{labels}. Nevertheless, it
+can be useful to quickly consult the labels list in case you are not sure, what
+the abbreviation implies.
+
+To work with the \code{labels} you might want to consider the \pkg{Heimisc} \citep{Heimgartner:2024} or \pkg{labelr} \citep{Good:2024} package.
+\end{Details}
+%
+\begin{References}
+\bibentry{Heimgartner:2024}
+\bibentry{Good:2024}
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+unique(survey_intro$main$wk_status_1)
+labels$intro$wk_status_1
+
+\end{ExampleCode}
+\end{Examples}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{srph}{Data from the Stichprobenrahmen (FSO)}{srph}
+\keyword{datasets}{srph}
+%
+\begin{Description}
+We received the addresses from the Stichprobenrahmen (Federal Statistical Office, FSO).
+Along the addresses some socio-demographic information is contained in the data
+frame.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+srph
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+Data frame
+\begin{description}
+
+\item[UID] Unique identifier for respondents
+\item[age] Age
+\item[yearOfBirth] Year of birth
+\item[countryIdOfBirth] Country where the respondent was born
+\item[sex] Gender
+\item[maritalStatus] Marital status
+\item[nationalityState] Nationality (CHE, other or staatenlos)
+\item[reportingMunicipalityId] Municipality where the respondent lives
+\item[reportingCanton] Canton where the respondent lives
+\item[residenceSwissZipCode] Zip code of municipality where the respondent lives
+\item[residenceTown] Town where the respondent lives
+\item[communicationlanguage] Language spoken at communal level
+\item[HouseholdSizeSRPH] Household size
+
+\end{description}
+
+\end{Format}
+%
+\begin{SeeAlso}
+\LinkA{labels}{labels}
+\end{SeeAlso}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{survey\_id}{Survey Id}{survey.Rul.id}
+\keyword{datasets}{survey\_id}
+%
+\begin{Description}
+Qualtrics survey ids.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+survey_id
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+Named list
+\end{Format}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{survey\_intro}{Introductory Survey}{survey.Rul.intro}
+\keyword{datasets}{survey\_intro}
+%
+\begin{Description}
+Basic background information on the respondents.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+survey_intro
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+List of data frames:
+\begin{itemize}
+
+\item{} \code{main}: Main variables of interest for the analysis (see section 'Main data frame').
+\item{} \code{timer}: How much time the respondents took to answer.
+\item{} \code{meta}: Some meta information as automatically collected by Qualtrics.
+\item{} \code{telework}: Main telework access and frequency variables (see section
+'telework data frame').
+
+\end{itemize}
+
+\end{Format}
+%
+\begin{Details}
+A representative sample of the German-speaking part of Switzerland was recruited.
+The final survey population encompasses individuals in the workforce (excluding
+self-employed, students and retired).
+
+At survey launch there was a subtle bug in the survey logic where some of the
+telework related questions were asked to respondents without the option to
+telework. This led to confusion and random answers. We corrected for this mistake
+and the values reported in the \code{telework} data frame are reliable.
+\end{Details}
+%
+\begin{Section}{Main data frame}
+
+The \code{main} data frame contains:
+\begin{itemize}
+
+\item{} Socio-economic information
+\item{} Household structure
+\item{} Current telework status
+\item{} Telework status during and before the pandemic
+\item{} Work and residential situation
+\item{} Mobility behavior
+\item{} Mobility tool ownership
+
+\end{itemize}
+
+
+The \LinkA{labels}{labels} are currently set to \code{filter == short}.
+
+The BFI indicators (for personality traits) are based on \citet{Gerlitz+Schupp:2005}.
+
+\begin{description}
+
+\item[UID] Unique identifier for respondents
+\item[is\_self\_employed] Self-employed
+\item[is\_in\_workforce] In workforce
+\item[consent] Consented to participate
+\item[wk\_status\_1] Employment status: employed
+\item[wk\_status\_2] Employment status: self-employed
+\item[wk\_status\_3] Employment status: unemployed
+\item[wk\_status\_4] Employment status: apprentice
+\item[wk\_status\_5] Employment status: student
+\item[wk\_status\_6] Employment status: retired
+\item[wk\_status\_7] Employment status: other
+\item[wfh\_fully\_shift] Could you shift \code{telework\$feasible} days to home office without feeling pressured to return to the regular work place more often?
+\item[wfh\_employer\_pov] How does your employer feel about home office
+\item[p\_marital\_status] Marital status
+\item[p\_education] Highest completed level of education
+\item[hh\_size\_1] Household size: Young children (<6 years)
+\item[hh\_size\_2] Household size: Children (6-12 years)
+\item[hh\_size\_3] Household size: Children (13-18 years)
+\item[hh\_size\_4] Household size: Adults
+\item[hh\_income] Monthly household income: Annual income before taxes divided by 12
+\item[p\_income] Monthly personal income: Annual income before taxes divided by 12
+\item[re\_type] Residence type
+\item[re\_size\_1] Residence size: Number of rooms
+\item[re\_size\_2] Residence size: Square meters
+\item[re\_nk] What are the monthly additional costs (e.g., heating and hot water, house maintenance, waste water charges, costs for general electricity, etc.) of your residence?
+\item[re\_second\_1] Participant or household member has second residence, apartment or room within Switzerland
+\item[re\_second\_2] Participant or household member has second residence, apartment or room outside Switzerland
+\item[wk\_full\_time] Works full time (100\%)
+\item[wk\_workload] Workload (percentage of full-time employment)
+\item[wk\_multiworkload\_1] Percentage of full-time employment of main job (if participant works multiple jobs)
+\item[wk\_multiworkload\_2] Percentage of full-time employment of secondary job (if participant works multiple jobs)
+\item[wk\_noga] General classification of economic activities (NOGA 2008)
+\item[wk\_firm\_size] Firm size (number of employed)
+\item[wk\_isco\_cat\_1] International standard classification of Occupations (ISCO-08): Managers
+\item[wk\_isco\_cat\_2] International standard classification of Occupations (ISCO-08): Professionals
+\item[wk\_isco\_cat\_3] International standard classification of Occupations (ISCO-08): Technicians and associate professionals
+\item[wk\_isco\_cat\_4] International standard classification of Occupations (ISCO-08): Clerical support workers
+\item[wk\_isco\_cat\_5] International standard classification of Occupations (ISCO-08): Service and sales workers
+\item[wk\_isco\_cat\_6] International standard classification of Occupations (ISCO-08): Skilled agricultural, forestry and fishery workers
+\item[wk\_isco\_cat\_7] International standard classification of Occupations (ISCO-08): Craft related trade workers
+\item[wk\_isco\_cat\_8] International standard classification of Occupations (ISCO-08): Plant and machine operators, and assemblers
+\item[wk\_isco\_cat\_9] International standard classification of Occupations (ISCO-08): Elementary occupations
+\item[wk\_isco\_cat\_10] International standard classification of Occupations (ISCO-08): Armed forces occupations
+\item[wk\_isco\_cat\_TEXT] International standard classification of Occupations (ISCO-08): Self-classification
+\item[wk\_contract] Type of employment contract
+\item[wk\_contract\_TEXT] Type of employment contract: Other (please specify)
+\item[wk\_shiftwork] Works in shifts
+\item[wk\_schedule] Work schedule
+\item[wk\_schedule\_TEXT] Work schedule: Other (please specify)
+\item[wk\_leader] Manages or leads people (colinear with \code{wk\_isco\_cat\_1})
+\item[mo\_driving\_license] Has driving license for passenger cars (category B)
+\item[mo\_moto\_license] Has driving license for motorcycles (category A/A1/A-)
+\item[mo\_bikesharing\_sub] Has bikesharing subscription
+\item[mo\_mto\_pre\_covid\_1] Mobility tool ownership before the pandemic: Car
+\item[mo\_mto\_pre\_covid\_2] Mobility tool ownership before the pandemic: Car sharing subscription
+\item[mo\_mto\_pre\_covid\_3] Mobility tool ownership before the pandemic: Regular bike
+\item[mo\_mto\_pre\_covid\_4] Mobility tool ownership before the pandemic: E-bike
+\item[mo\_mto\_pre\_covid\_5] Mobility tool ownership before the pandemic: Motorbike
+\item[mo\_mto\_pre\_covid\_6] Mobility tool ownership before the pandemic: National season ticket (GA)
+\item[mo\_mto\_pre\_covid\_7] Mobility tool ownership before the pandemic: Regional season ticket
+\item[mo\_mto\_pre\_covid\_8] Mobility tool ownership before the pandemic: Half-fare card (HT)
+\item[mo\_mto\_now\_1] Mobility tool ownership at survey date: Car
+\item[mo\_mto\_now\_2] Mobility tool ownership at survey date: Car sharing subscription
+\item[mo\_mto\_now\_3] Mobility tool ownership at survey date: Regular bike
+\item[mo\_mto\_now\_4] Mobility tool ownership at survey date: E-bike
+\item[mo\_mto\_now\_5] Mobility tool ownership at survey date: Motorbike
+\item[mo\_mto\_now\_6] Mobility tool ownership at survey date: National season ticket (GA)
+\item[mo\_mto\_now\_7] Mobility tool ownership at survey date: Regional season ticket
+\item[mo\_mto\_now\_8] Mobility tool ownership at survey date: Half-fare card (HT)
+\item[mo\_moto\_everyday] Uses motorbike as daily means of transportation
+\item[mo\_car\_size] Car size
+\item[mo\_car\_fuel] Car fuel type
+\item[mo\_car\_var\_cost] Car's per kilometer cost considering all costs associated with car travel, including depreciation of the car's value, fuel or energy costs, tire costs and maintenance
+\item[mo\_car\_fix\_cost] Annual fixed cost of the car including amortization, garaging costs, insurance as well as taxes and interest payments (if leased)
+\item[mo\_parking\_1] Reserved parking available at home
+\item[mo\_parking\_2] Reserved parking available at work
+\item[mo\_parking\_hood] Available parking in the residential neighborhood
+\item[mo\_company\_car] Employer offers a company car
+\item[mo\_ebike\_type\_1] Owns E-bike/pedelec up to 25 km/h (no license plate)
+\item[mo\_ebike\_type\_2] Owns E-bike/S-pedelect up to 45 km/h (yellow license plate)
+\item[mo\_pt\_pass\_1] Owns public transport pass: National season ticket (GA)
+\item[mo\_pt\_pass\_2] Owns public transport pass: Half-fare card (HT)
+\item[mo\_pt\_pass\_3] Owns public transport pass: Regional season ticket
+\item[mo\_pt\_pass\_4] Owns public transport pass: Seven25
+\item[mo\_pt\_pass\_5] Does not own any public transport pass
+\item[mo\_pt\_pass\_TEXT] Owns public transport pass: Other (please specify)
+\item[mo\_pt\_class] Class eligibility of public transport pass (1st or 2nd)
+\item[mo\_commute\_mode] Main mode of transportation for commute
+\item[wk\_before\_pandemic] Participant worked before the pandemic
+\item[wk\_switch\_before] Participant switched job since the outbreak of the pandemic
+\item[wk\_during\_pandemic] Participant worked during the pandemic
+\item[wk\_switch\_during] Participant switched job since the end of the pandmic
+\item[wfh\_hw\_budget] Yearly budget required to set up a productive home office workstation
+\item[wfh\_budget\_contrib] Employer's contribution to \code{wfh\_hw\_budget}
+\item[wfh\_desk\_sharing] Desk sharing policy at workplace
+\item[wfh\_which\_days\_1] Teleworking day: Monday
+\item[wfh\_which\_days\_2] Teleworking day: Tuesday
+\item[wfh\_which\_days\_3] Teleworking day: Wednesday
+\item[wfh\_which\_days\_4] Teleworking day: Thursday
+\item[wfh\_which\_days\_5] Teleworking day: Friday
+\item[wfh\_which\_days\_6] Teleworking day: Saturday
+\item[wfh\_which\_days\_7] Teleworking day: Sunday
+\item[wfh\_coordination] Whether or not the teleworking days can be freely chosen
+\item[wfh\_core\_hours] Whether or not the respondent is required to be available during particular hours when working from home
+\item[wfh\_nk] Whether or not the employer contributes to additional costs (e.g., heating and electricity costs) when employee works from home
+\item[wfh\_salary\_adjust] Is the salary adjusted when working from home
+\item[wfh\_work\_from\_any] Work from anywhere policy or only designated home office location
+\item[wfh\_help\_and\_train] Employer provides help desk for technical assistance or offers training for effective home office collaboration
+\item[re\_wfh\_equipment\_1] Work from home equipment: Separate room for home office activities
+\item[re\_wfh\_equipment\_2] Work from home equipment: Laptop or desktop computer provided by employer
+\item[re\_wfh\_equipment\_3] Work from home equipment: At least one external monitor available
+\item[re\_wfh\_equipment\_4] Work from home equipment: Designated work place where you can leave working material from one day to the other
+\item[re\_wfh\_equipment\_5] Work from home equipment: Office chair and table available
+\item[re\_wfh\_equipment\_6] Work from home equipment: Permanent, stable and fast internet connection
+\item[wfh\_ind\_agree\_1] Work from home indicator: Digitization - my job can be done mostly on the computer
+\item[wfh\_ind\_agree\_2] Work from home indicator: Physical interaction - my job requires phyiscal/interpersonal interaction which cannot be performed via digital channels
+\item[wfh\_ind\_agree\_3] Work from home indicator: Work context - my job requires a specific work environment (e.g., equipment, safety precautions, working outdoors, etc.)
+\item[wfh\_ind\_agree\_4] Work from home indicator: Tech savy - I find it easy to work with computers
+\item[wfh\_ind\_suitable\_1] How suitable do you consider your main occupation for home office?
+\item[wfh\_ind\_suitable\_2] How suitable do you consider yourself as a person for home office?
+\item[wfh\_ind\_suitable\_3] How suitable do you consider your residential environment (distraction through family, noise, number of rooms, etc.) for home office?
+\item[wfh\_ind\_suitable\_4] How suitable do you consider your home office workstation for home office?
+\item[p\_psy\_1] Personality inventory: I see myself as someone who does a thorough job
+\item[p\_psy\_2] Personality inventory: I see myself as someone who is communicative, talkative
+\item[p\_psy\_3] Personality inventory: I see myself as someone who tends to find fault with others
+\item[p\_psy\_4] Personality inventory: I see myself as someone who is original
+\item[p\_psy\_5] Personality inventory: I see myself as someone who often worries
+\item[p\_psy\_6] Personality inventory: I see myself as someone who is generally trusting
+\item[p\_psy\_7] Personality inventory: I see myself as someone who tends to be lazy
+\item[p\_psy\_8] Personality inventory: I see myself as someone who is outgoing, sociable
+\item[p\_psy\_9] Personality inventory: I see myself as someone who appreciates artistic experiences
+\item[p\_psy\_10] Personality inventory: I see myself as someone who gets nervous easily
+\item[p\_psy\_11] Personality inventory: I see myself as someone who performs tasks effectively and efficiently
+\item[p\_psy\_12] Personality inventory: I see myself as someone who is an environmentally friendly person
+\item[p\_psy\_13] Personality inventory: I see myself as someone who is reserved
+\item[p\_psy\_14] Personality inventory: I see myself as someone who is considerate and friendly with others
+\item[p\_psy\_15] Personality inventory: I see myself as someone who has an active imagination
+\item[p\_psy\_16] Personality inventory: I see myself as someone who is relaxed, handles stress well
+
+\end{description}
+
+\end{Section}
+%
+\begin{Section}{Telework data frame}
+
+\begin{itemize}
+
+\item{} \code{pre} and \code{lockdown} is \code{NA} if participants did not work in that period
+\item{} \code{budget}, \code{free\_choice}, \code{may} and \code{want} only asked to 'can' population (i.e., \code{can == "yes"}, otherwise \code{NA})
+\item{} \code{current}, \code{can} and \code{do} for full survey population (so \code{0} for \code{current} and \code{do} if \code{can == "no"})
+
+\end{itemize}
+
+
+\begin{description}
+
+\item[pre] Telework frequency before pandemic (if worked then)
+\item[lockdown] Telework frequency during COVID-related lockdowns (if worked then)
+\item[current] Current telework frequency (as of survey date June - August 2023)
+\item[budget] Max. number of allowed teleworking days (for telework feasible population; i.e. \code{can == "yes"})
+\item[free\_choice] Free-choice telework frequency (for telework feasible population, i.e. \code{can == "yes"})
+\item[feasible] Max. feasible telework frequency
+\item[can] Telework feasible? (i.e. no if \code{feasible == 0})
+\item[may] Teleworking allowed (for telework feasible population, i.e. \code{can == "yes"})
+\item[want] Want to telework (for telework feasbible population, i.e. \code{can == "yes"})
+\item[do] Do currently telework (as of survey date June - August 2023, i.e. yes if \code{current != 0})
+
+\end{description}
+
+\end{Section}
+%
+\begin{References}
+\bibentry{Gerlitz+Schupp:2005}
+\end{References}
+%
+\begin{SeeAlso}
+\LinkA{labels}{labels}, \LinkA{survey\_logic}{survey.Rul.logic}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+skimr::skim(survey_intro$main)
+
+\end{ExampleCode}
+\end{Examples}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{survey\_logic}{Survey Logic}{survey.Rul.logic}
+\keyword{datasets}{survey\_logic}
+%
+\begin{Description}
+The survey flow in Qualtrics did skip some of the question blocks depending on
+the participants' answers. For such questions we list here who/which population
+subgroup got the question shown.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+survey_logic
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+Data frame
+\begin{description}
+
+\item[key] Question key (variable name)
+\item[population] Question population: Who got asked this question?
+
+\end{description}
+
+\end{Format}
+%
+\begin{SeeAlso}
+\LinkA{survey\_intro}{survey.Rul.intro}\$main
+\end{SeeAlso}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{survey\_mto}{Mobility Tool Ownership Stated-Preference Experiment}{survey.Rul.mto}
+\keyword{datasets}{survey\_mto}
+%
+\begin{Description}
+Investigates preferences for mobility tool ownership given individual-specific
+telework preferences.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+survey_mto
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+List of data frames:
+\begin{itemize}
+
+\item{} \code{sp}: Main variables of interest for the analysis (see section 'Sp data frame').
+\item{} \code{understood}: Whether the participant understood what the SP attribute implies.
+\item{} \code{timer}: How much time the respondents took to answer.
+\item{} \code{meta}: Some meta information as automatically collected by Qualtrics.
+
+\end{itemize}
+
+\end{Format}
+%
+\begin{Section}{Sp data frame}
+
+The unit of observation (each row) is a single choice observation.
+\begin{description}
+
+\item[UID] Unique identifier for respondents
+\item[choice\_situation] Choice situation (1-4)
+\item[ca\_chosen] Whether or not the car alternative was chosen
+\item[pt\_chosen] Whether or not the public transport alternative was chosen
+\item[ht\_chosen] Whether or not the half-fare card was chosen
+\item[cs\_chosen] Whether or not the car sharing alternative was chosen
+\item[bi\_chosen] Whether or not the bicycle was chosen
+\item[is\_driver] Has driving license for passenger cars (category B); corresponds to \code{survey\_intro\$main\$mo\_driving\_license}
+\item[wfh] Telework frequency
+\item[wfa] Whether or not work from anywhere is allowed (see also \code{\LinkA{survey\_wfh}{survey.Rul.wfh}}\$sp)
+\item[ca\_type] Type of the car
+\item[ca\_fuel] Fuel type
+\item[ca\_fixed\_cost] Car fixed costs including amortization, garaging cost, insurance and taxes. The price of the car is reflected in the fixed cost (amortization).
+\item[ca\_variable\_cost] Car per kilometer cost, including depreciation of the car's value, fuel and energy costs, tire costs and maintenance.
+\item[pt\_type] Public transport travel card type: National or regional season ticket
+\item[pt\_class] Public transport class (1st or 2nd)
+\item[pt\_fixed\_cost] Price of the public transport travel card
+\item[pt\_additional\_zone] Price of an additional zone included in the regional season ticket
+\item[ht\_fixed\_cost] Price of the half-fare card
+\item[bi\_type] Bicycle type
+\item[bi\_fixed\_cost] Bicycle fixed costs including amortization, maintenance, and insurance. The price of the bicycle is reflected in the fixed cost (amortization).
+\item[cs\_free\_floating] Car sharing free floating: Whether or not the car sharing is station-based or free-floating
+\item[cs\_membership\_fee] Car sharing membership fee
+\item[cs\_time\_tariff] Car sharing time tariff
+\item[cs\_km\_tariff] Car sharing km tariff
+
+\end{description}
+
+\end{Section}
+%
+\begin{SeeAlso}
+\LinkA{labels}{labels}
+\end{SeeAlso}
+
+%%%%%
+
+\inputencoding{utf8}
+\HeaderA{survey\_wfh}{Work from Home Stated-Preference Experiment}{survey.Rul.wfh}
+\keyword{datasets}{survey\_wfh}
+%
+\begin{Description}
+Investigates preferences for hybrid work arrangements as well as their
+implications for telework frequencies. Individuals were tasked to choose
+between two work arrangements and subsequently state how many days they would
+like to work from home given the preferred arrangement.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+survey_wfh
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+List of data frames:
+\begin{itemize}
+
+\item{} \code{sp}: Main variables of interest for the analysis (see section 'Sp data frame').
+\item{} \code{understood}: Whether the participant understood what the SP attribute implies.
+\item{} \code{timer}: How much time the respondents took to answer.
+\item{} \code{meta}: Some meta information as automatically collected by Qualtrics.
+
+\end{itemize}
+
+\end{Format}
+%
+\begin{Section}{Sp data frame}
+
+This data frame is in long format where each row represents a work arrangement
+(i.e., for each respondent and each choice situation, there are two rows).
+\begin{description}
+
+\item[UID] Unique identifier for respondents
+\item[block] Block assigned (from blocked design)
+\item[choice\_situation] Choice situation (1-4)
+\item[choice] Discrete work arrangement choice (A or B)
+\item[frequency] Telework frequency given preferred arrangement
+\item[arrangement] Work arrangement (A or B)
+\item[co\_ordination] Coordinated presence: Office attendance of team members is coordinated on these days
+\item[core\_hours] Core hours: Employee can freely allocate working time or is expected to work during regular working hours
+\item[help\_and\_training] Help-desk and training: Help desk for technical assistance and training for effective home office collaboration and management
+\item[salary\_adjustments] Salary adjustment: On an hourly wage basis for home office hours.
+\item[nk] Additional cost: Compensation for increased energy consumption among others.
+\item[hardware\_budget] Hardware budget: Yearly budget for setting up a productive home office work station.
+\item[work\_from\_anywhere] Work from anywhere: Whether or not the remote work location can be freely chosen within Switzerland
+\item[desk\_sharing] Restructuring of the office space.
+
+\end{description}
+
+\end{Section}
+%
+\begin{SeeAlso}
+\LinkA{labels}{labels}
+\end{SeeAlso}
+

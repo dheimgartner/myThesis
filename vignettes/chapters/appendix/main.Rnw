@@ -54,7 +54,7 @@ writeLines(mat_tex)
 
 %% -- R reference manuals ------------------------------------------------------
 
-\clearpage%
+\cleardoublepage%
 \section{\proglang{R} reference manuals}
 
 \subsection{\pkg{OPSR} reference manual} \label{app:opsr-ref}
@@ -63,13 +63,19 @@ writeLines(mat_tex)
 print(myThesis::OPSR_manual)
 @
 
-\clearpage%
+\cleardoublepage%
 \subsection{\pkg{OPSRtools} reference manual} \label{app:opsrtools-ref}
 
 <<app-opsrtools-manual, results=tex, echo=FALSE>>=
 print(myThesis::OPSRtools_manual)
 @
 
+\cleardoublepage%
+\subsection{\pkg{snndata} reference manual} \label{app:snndata-ref}
+
+<<app-snndata-manual, results=tex, echo=FALSE>>=
+print(myThesis::snndata_manual)
+@
 
 
 %% -- Computational details ----------------------------------------------------

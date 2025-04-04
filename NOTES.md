@@ -92,6 +92,7 @@
 - [x] Consistently use R-package (with hyphon)
 - [x] In Intro: R> This is R code, this is its output
 - [ ] Table of figures and tables
+- [ ] Reference reference manuals in text (datapap, opsr, opsrtools)
 
 ## Author contributions
 
