@@ -71,8 +71,9 @@
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
 - [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
 - [ ] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
+  - Yayy: resolved => see TODO in appendix/main.Rnw
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
-- [ ] Don't use `\pkg{}` in chapter headings...
+- [ ] Don't use `\pkg{}` in chapter headings (but subheadings?)...
 - [x] Consistently use R-package (with hyphon)
 - [x] In Intro: R> This is R code, this is its output
 - [ ] Table of figures and tables
