@@ -91,7 +91,8 @@
 
 \newcommand{\Header}[2]{%
   \vneed{1ex}
-  \markboth{#1}{#1}
+  %% daniehei: commented out
+  % \markboth{#1}{#1}
   \noindent
   \nopagebreak
   \begin{center}
@@ -268,7 +269,8 @@
   \normalfont\spaceskip=\fontdimen2\font\relax
   \Rd@noligs \Rd@frenchspacing \Rd@code@obeyspaces
 }
-\DeclareRobustCommand{\code}{\bgroup \Rd@code@ini \Rd@code@wrk}
+%% daniehei: commented out
+% \DeclareRobustCommand{\code}{\bgroup \Rd@code@ini \Rd@code@wrk}
 
 \let\command=\code
 \let\env=\code
@@ -437,7 +439,8 @@
 
 \newcommand{\HeaderA}[3]{%
   \vneed{1ex}
-  \markboth{#1}{#1}
+  %% daniehei: commented out
+  % \markboth{#1}{#1}
   \noindent
   \nopagebreak
   \begin{center}
