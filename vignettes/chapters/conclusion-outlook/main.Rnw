@@ -5,4 +5,50 @@
    I dream my painting and I paint my dream. }
 \vskip 1em
 
-Summary here.
+The aim of this final chapter is to summarize the main contributions of this thesis, to reflect on their relevance for science and society, and to outline directions for future work.
+
+\section{Summary and main contributions}
+
+\begin{leftbar}
+Key take-away (elevator pitch)
+Why it matters
+for each chapter
+then for the objective posited in the introduction
+\end{leftbar}
+
+In the following, we summarize the key findings of each chapter separately and then synthetically for the thesis as a whole, reflecting on the research objective posited in Chapter~\ref{ch:introduction}. Further, the main contributions of the thesis are stated.
+
+Chapter~\ref{ch:mpp} analyzed long-term mobility changes during and after COVID-19, using the MOBIS-Covid panel data. While temporary shifts in mode use occurred (e.g., increased walking and cycling) mode preferences largely returned to pre-pandemic patterns. Overall, the pandemic did not induce a structural break in underlying mobility preferences. The lasting legacy of the pandemic, is higher telework adoption which seems to affect mobility indirectly via sociodemographic segmentation.
+
+Chapter~\ref{ch:rra} examined how survey response burden affects response rates, distinguishing the impacts of recruitment efforts and incentives. The burden had a more negative effect than previously anticipated. While recruitment raised overall response levels, only incentives mitigated the steep decline.
+
+Chapter~\ref{ch:datapap} analyzed the rise of telework in Switzerland post-COVID, using a large-scale survey and two stated preference experiments. It found that while telework increased by 15 percentage points, a notable gap remained between those able to telework and those actually doing so. Employer constraints limited broader adoption. No direct shift from public transport to car ownership was observed, even at high telework frequencies. The dataset offers a valuable basis for future research on hybrid work and its impact on mobility tool ownership beyond the scope of this thesis.
+
+Chapter~\ref{ch:trb24} explored how hybrid work policies influence telework frequency, emphasizing the role of incentives. It found that salary adjustments were the most effective in encouraging telework, but deviations from baseline preferences were hard to achieve. The results suggest that returning employees to the office would imply significant utility losses. Meanwhile, broader societal benefits of telework, such as reduced vehicle miles, are overlooked during labor market negotiations. This potentially leads to suboptimal telework adoption.
+
+Chapter~\ref{ch:opsr} introduced the \pkg{OPSR} \proglang{R}-package, a tool for addressing selection bias in ordinal treatments using endogenous switching regression. The implementation offers a fast, memory-efficient and easy-to-use API, leveraging \proglang{C++} for parallelized log-likelihood computation. It also handles log-transformed outcomes.
+
+Chapter~\ref{ch:twte} examined the effects of telework on transport demand, finding that telework leads to a significant reduction in weekly kilometers traveled, with an estimated 16\% reduction compared to a no-telework scenario. The analysis showed that rebound effects from telework are minimal and do not offset the reduction in travel. The study highlighted that the true treatment effects of telework are likely underestimated if selection bias is not accounted for. Further, counterfactual travel distances for teleworkers are much higher than observed for non-teleworkers. Overall, the results support the narrative that telework reduces transport demand substantially.
+
+Chapter~\ref{ch:opsr-tools} introduced \pkg{OPSRtools}, an \proglang{R}-package designed to support the estimation and post-estimation of ordered probit switching regression models. The tools facilitate model selection, cross-validation, treatment effect computation, and visualization. The study also explored how different treatment effects arise and highlighted the role of the Heckman correction term in model predictions. The findings suggest that treatment effect differences are largely due to unbiased parameter estimates from OPSR rather than the correction term itself. Potential concerns about model stability and identification issues are left for future research.
+
+\todo{%
+\begin{itemize}
+\item In how far does it answer the posited research question
+\item Main contributions
+\end{itemize}
+}%
+
+\section{Relevance of the thesis to science and society}
+
+While the methods used in this thesis are old, their implementation in statistical environments are limited. At the same time, understanding when and why selection bias might occur could be complicated by a mostly technical discussion surrounding the topic. This thesis demonstrates, that sometimes, more complex econometric models are justified arising from intricate error structures of the underlying processes and the need to account for error correlation. Results and thereby policy implications can be widely different or even suggest opposite directions of effect. The OPSR modeling frame is limited to an ordinal selection and continuous outcome process (see Section~\ref{sec:future-work} for a more in-depth discussion). However, such treatment situations can readily occur and therefore \pkg{OPSR} is of potential use in various contexts and across disciplines.
+
+The transport sector contributes 15\% of global greenhouse gas emissions \citep{IPCC:2022}, with emissions at 31\% being significantly higher in Switzerland \citep{BAFU:2024}. Meanwhile, reducing it through policies such as road pricing or fuel taxes is unpopular. Similarly, being mobile yields great utility and behavioral adjustments (e.g., reducing leisure travel) is difficult. The thesis provides evidence, that telework can be an effective tool to reduce transport demand. At the same time, foregone commutes imply a substantial utility gain. However, employers would like to see their workforce returning to the office more frequently. The elephant in the room is feared productivity losses. While evidence on such productivity losses is contested, I claim, that potential foregone profits are nowhere near telework's utility gains (see Chapter~\ref{ch:trb24}). Depending on the labor market situation, employers could nevertheless be able to demand employees back to the office (having realized that a free lunch won't be sufficient). In spirit of the efficient market hypothesis, the resulting labor market equilibrium is suboptimal, since it does not reflect (``price in'') broader societal benefits such as reduced emissions, congestion, etc. In that regard, I hope that telework won't be a pill not taken, and that politicians recognize and protect its value (e.g., through a right to telework).
+
+\section{Limitations and future work} \label{sec:future-work}
+
+\begin{leftbar}
+E.g., checking distributional assumptions and error distribtuions beyond the multivariate normal (elaborate why MVN is convenient) => Copula modeling in R.
+Probably the biggest impact tools and the possibility to readily employ the methods in other contexts. This thesis mainly looks at the Swiss case and generalization beyond the country boarder is not adviced. However, with the toolchain provided, an OPSR analysis for a new study context can be conducted within a day (whereas before, it would have taken weeks). Once census data incorporates more telework related data.
+Also: LOL value proposition!
+\end{leftbar}

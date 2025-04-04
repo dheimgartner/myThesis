@@ -7,7 +7,14 @@ Sapere aude! Habe Mut, dich deines eigenen Verstandes zu bedienen! }%
 
 \todo{%
 \begin{itemize}
-\item See also \url{https://rechtssammlung.sp.ethz.ch/Dokumente/344.0200.10en.pdf} which contains information what to include in the framework text.
+\item See also \url{https://rechtssammlung.sp.ethz.ch/Dokumente/344.0200.10en.pdf} which contains information what to include in the framework text:
+\begin{itemize}
+\item Overarching introduction into the motivation and the topic of the doctoral thesis
+\item Elaboration on the (primary) theoretical bases and the methodology used
+\item Relevance of the thesis to science and society
+\item General conclusion and outlook on future research and development in the field
+\item Summary of publications
+\end{itemize}
 \end{itemize}
 }%
 
@@ -19,10 +26,42 @@ f <- function() {
 f()
 @
 
+Measuring the unmeasurable (e.g., work arrangement characteristics, counterfactual outcomes)
+Port from mail task list
+Check snn report intro
 
-\begin{otherlanguage}{ngerman}
-Die ältesten Bestimmungen der wahren Grösse der Moleküle hat die kinetische
-Theorie der Gase ermöglicht, während die an Flüssigkeiten beobachteten
-physikalischen Phänomene bis jetzt zur Bestimmung der Molekülgrössen nicht
-gedient haben. \dots
-\end{otherlanguage}
+\section{Background, motivation and objectives}
+
+Maybe use subchapters
+Including objectives
+Why modeling telework is complicated and why understanding the impact on transport demand is complicated (second-order effects).
+
+Refactor from datapaper and twte intro with maybe some inputs from snn report...
+
+Mail pavel:
+My conceptual summary of our discussion is that the following dimensions need to be distinguished and understood:
+-	Employer vs. employee perspective/preference
+-	Preference vs. feasibility (how teleworkable is a job)
+-	Long-term perspective (average telework frequency or non-teleworker vs. non-usual TWer vs. usual TWer) vs. daily decision (binary choice)
+-	Further points of interest: serial correlation (of this binary choice) and weekday preference
+
+Ideally, you would understand each of these dimensions, their interplay and then find a way to combine them in an integrated modeling approach.
+
+Further, understanding transport demand implications would necessitate an understanding of (changes, “treatment effects” [!see below] in) mobility tool ownership and mode choice, … I think all of these factors make it a rather complex problem and I think simplifications/abstractions are needed. F.ex., as I’ve understood your policy dimension is the full employer perspective: I.e., what instruments do employers have to manage telework demand (and what are the consequences for transport). So you might simply want to treat it as an exogenous factor (in your final tool you play around with these variables [and here I think it is important to identify these instruments/tools employers have available first] and look what happens to your KPI).
+
+A final point to consider is the distinction between treatment effects and simple group comparisons (in the transport telework literature this distinction is usually not made). For example, using telework (e.g., the long-term frequency) as an explanatory variable to model e.g., weekly vehicle miles driven (VMD) does not necessarily tell you something about the effect of telework on VMD. This is because current teleworkers (TWers) might not necessarily behave like current non-TWers, were they not to telework… See also the paper by Xinyi Wang below (we also wrote an R package implementing the underlying ordered probit switching regression methodology, in case this should be relevant).
+
+
+\section{Theoretical bases and methodology used}
+
+Discrete choice models, generalized linear models (?), Heckman, \proglang{R}, error is not nuissance but integral or even main defining characteristic of the probability model.
+
+Conceptual framework to understand treatment effects and self-selection:
+Let's assume for conceptual clarity that we observe three different groups A, B and C in a world where telework is unheard of (yet technologically perfectly feasible). These three groups might be very different socio-economically and also in terms of their mobility behavior. We now treat a random third of each group with ``non-usual'' telework (NUTW; say 2 days/week) and the another third with ``usual'' telework (UTW; say 3+ days/week). We could then test whether or not there are within (e.g., $A_{NTW}$ vs. $A_{NUTW}$ vs. $A_{UTW}$) and across group differences (e.g., $A_{NTW}$ vs. $B_{NTW}$ vs. $C_{NTW}$) with respect to a metric of interest such as kilometers traveled (where $A_{NTW}$ are the weekly kilometers traveled by an NTW-treated individual A). In technical words we could test whether both the treatment and/or the treatment effects depend on the group receiving it.
+
+Our world differs in two crucial regards: First, we can not randomly prescribe a treatment such as telework (it already has been prescribed by nature) and second, nature rarely prescribes a treatment randomly. As a consequence answering the above question in our world is not as trivial as in teleworkomania. In other words, we only observe, say, $A_{NTW}$, $B_{NUTW}$ and $C_{UTW}$ and it is spurious (while tempting) to assume $A_{NTW} = B_{NTW}$. Somewhat more subtle (and therefore even more tempting) is to assume that $A_{NTW}(X) = B_{NTW}(X)$, i.e., apples are just pairs if we control for differences in size and shape...
+
+
+\section{Outline of the thesis}
+
+Reck does summary here, Adrian does contributions here... I think here we only briefly moderate what to come...
