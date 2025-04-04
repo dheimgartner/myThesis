@@ -6,6 +6,7 @@
 - [ ] See `QUOTES.md` for ideas at beginning of chapter
 
 - The chapter titles do not necessarily have to be the paper titles
+- Hyperref colors are set in `myRd.sty`...
 
 ## PROCEED HERE
 
@@ -65,13 +66,17 @@
 - [x] Use `{\renewcommand{\arraystretch}{1.5}...}` instead of `\setlength\extrarowheight{2pt}` (which does not scope!)
   - Or enclose whole table stuff in `{...}` which should scope setlength stuff locally
 - [ ] Formatting numbers (not in `$` and big mark `
-- [ ] See hyperlink setup and colors in https://github.com/dheimgartner/paperPackage/blob/main/inst/templates/JSS/jss.cls
-- [ ] Why is doi in bibliography not red? (see point above)
-- [ ] Light blue references/links as Thoscha (see point above)
+- [x] See hyperlink setup and colors in https://github.com/dheimgartner/paperPackage/blob/main/inst/templates/JSS/jss.cls
+  - Set in `myRd.sty`
+- [x] Why is doi in bibliography not red? (see point above)
+  - Set in `myRd.sty`
+- [x] Light blue references/links as Thoscha (see point above)
+  - Set in `myRd.sty`
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
 - [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
 - [ ] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
   - Yayy: resolved => see TODO in appendix/main.Rnw
+  - Maybe also snndata?
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
 - [ ] Don't use `\pkg{}` in chapter headings (but subheadings?)...
 - [x] Consistently use R-package (with hyphon)
