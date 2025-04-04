@@ -76,6 +76,8 @@
 - [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
 - [ ] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
   - Yayy: resolved => see TODO in appendix/main.Rnw
+  - [ ] Don't show objects in table of contents...
+    - I think you have to adjust the `\Header` `\HeaderA` command in `myRd.sty`
   - Maybe also snndata?
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
 - [ ] Don't use `\pkg{}` in chapter headings (but subheadings?)...
