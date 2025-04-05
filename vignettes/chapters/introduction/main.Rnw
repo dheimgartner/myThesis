@@ -51,16 +51,33 @@ Further, understanding transport demand implications would necessitate an unders
 
 A final point to consider is the distinction between treatment effects and simple group comparisons (in the transport telework literature this distinction is usually not made). For example, using telework (e.g., the long-term frequency) as an explanatory variable to model e.g., weekly vehicle miles driven (VMD) does not necessarily tell you something about the effect of telework on VMD. This is because current teleworkers (TWers) might not necessarily behave like current non-TWers, were they not to telework… See also the paper by Xinyi Wang below (we also wrote an R package implementing the underlying ordered probit switching regression methodology, in case this should be relevant).
 
+\subsection{Background and motivation}
+
+
+\subsection{Objectives}
+
+As we are now aware, the pandemic worked as a catalyst in telework adoption. During the crisis, telework was used to avoid travel and contact with other people thereby containing the spread of the virus. Anyone who could telework should (or rather had to) do so as much as possible. However, it was clear that once such telework recommendations or duties were lifted, there would be some backlash. In that context I ask
+%
+\begin{enumerate}
+\item How did telework adoption change over the course of the pandemic in Switzerland?
+\item Who are the teleworkers? Who has the option to telework, who wants to telework and how much?
+\item How can telework be managed? Can employers entice employees back to the office once lockdown measures are lifted?
+\item What is the impact of telework on transport demand?
+\end{enumerate}
+
+The operationalization of these research questions as well as the hypothesis posited are stated in the individual chapters. The nature of the thesis is empirical and I try to be methodologically rigorous. An objective of this thesis was also to contribute to \proglang{R}'s \citep{R} ecosystem and develop statistical packages if implementations are missing.
 
 \section{Theoretical bases and methodology used}
 
-Discrete choice models, generalized linear models (?), Heckman, \proglang{R}, error is not nuissance but integral or even main defining characteristic of the probability model.
+Methodologically, all papers employ discrete choice models \citep[e.g.,][]{Train:2009} or some form of generalized linear model \citep[e.g.,][]{Venables+Ripley:2002}. Thes include ordinal probit or logit, multinomial logit, the multiple discrete-continuous extreme value model and random error component extensions. The fourth research question, being concerned with treatment effects, then draws heavily on the program evaluation literature. In particular, a form of endogenous switching regression is employed. As we will argue, the treatment is not exogenously prescribed but self-selected and therefore is related to Heckman's seminal work \citep{Heckman:1979} on selection bias.
 
-Conceptual framework to understand treatment effects and self-selection:
-Let's assume for conceptual clarity that we observe three different groups A, B and C in a world where telework is unheard of (yet technologically perfectly feasible). These three groups might be very different socio-economically and also in terms of their mobility behavior. We now treat a random third of each group with ``non-usual'' telework (NUTW; say 2 days/week) and the another third with ``usual'' telework (UTW; say 3+ days/week). We could then test whether or not there are within (e.g., $A_{NTW}$ vs. $A_{NUTW}$ vs. $A_{UTW}$) and across group differences (e.g., $A_{NTW}$ vs. $B_{NTW}$ vs. $C_{NTW}$) with respect to a metric of interest such as kilometers traveled (where $A_{NTW}$ are the weekly kilometers traveled by an NTW-treated individual A). In technical words we could test whether both the treatment and/or the treatment effects depend on the group receiving it.
+As might be clear for the technical reader, defining characteristic of such models is always the assumed error distribution. I think that this assumed error distribution is the (latent) main character in this thesis and plays an important role in almost any chapter. I hope that after having read the thesis, sentences such as ``where we assume that the errors are independent'' are cautiously read or even questioned.
 
-Our world differs in two crucial regards: First, we can not randomly prescribe a treatment such as telework (it already has been prescribed by nature) and second, nature rarely prescribes a treatment randomly. As a consequence answering the above question in our world is not as trivial as in teleworkomania. In other words, we only observe, say, $A_{NTW}$, $B_{NUTW}$ and $C_{UTW}$ and it is spurious (while tempting) to assume $A_{NTW} = B_{NTW}$. Somewhat more subtle (and therefore even more tempting) is to assume that $A_{NTW}(X) = B_{NTW}(X)$, i.e., apples are just pairs if we control for differences in size and shape...
+\subsection{Conceptual framework to understand treatment effects and self-selection}
 
+Let's assume for conceptual clarity that we observe three different groups A, B and C in a world where telework is unheard of (yet technologically perfectly feasible). These three groups might be very different socio-economically and also in terms of their mobility behavior. We now treat a random third of each group with ``non-usual'' telework (NUTW; say 2 days/week) and the another third with ``usual'' telework (UTW; say 3+ days/week). We could then test whether or not there are within (e.g., $A_{NTW}$ vs. $A_{NUTW}$ vs. $A_{UTW}$) and across group differences (e.g., $A_{NTW}$ vs. $B_{NTW}$ vs. $C_{NTW}$) with respect to a metric of interest such as kilometers traveled (where $A_{NTW}$ are the weekly kilometers traveled by an NTW-treated individual A). In technical words, we could test, whether both the treatment and/or the treatment effects depend on the group receiving it.
+
+Our world differs in two crucial regards: First, we can not randomly prescribe a treatment such as telework (it already has been prescribed by nature) and second, nature rarely prescribes a treatment randomly. As a consequence answering the above question in our world is not as trivial as in teleworkomania. We only observe, say, $A_{NTW}$, $B_{NUTW}$ and $C_{UTW}$ and it is spurious (while tempting) to assume $A_{NTW} = B_{NTW}$. Somewhat more subtle (and therefore even more tempting) is to assume that $A_{NTW}(X) = B_{NTW}(X)$, i.e., apples are just pairs if we control for differences in size and shape... This thesis makes a point that even comparing apples to apples might not be trivial: Some fruits might be foul from the inside which is not always observable. Clearly, such apples might look the same but taste certainly different. While this analogy might be confusing at the moment, we encourage the reader to come back to it in the end and recognize the cases of ``selection on observables and unobservables''.
 
 \section{Outline of the thesis}
 

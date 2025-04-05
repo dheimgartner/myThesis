@@ -1,8 +1,8 @@
 \chapter{Data}
 \label{ch:datapap}
 
-\dictum[John Doe]{%
-Hello world!}%
+\dictum[Vincent van Gogh]{%
+I dream my painting and I paint my dream.}%
 \vskip 1em
 
 \todo{%
