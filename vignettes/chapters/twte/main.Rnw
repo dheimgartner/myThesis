@@ -74,7 +74,7 @@ This study builds on three key literature streams: Modeling telework frequency, 
 
 Early studies focused primarily on telework adoption, with interest gradually shifting to understand telework frequency. Common approaches include multinomial logit, ordered logit, and probit models, understanding frequency as count \citep{Singh+Etal:2013} or as an ordinal scale \citep{Shabanpour+Etal:2018}. Treatment of zero telework frequencies varies: Some include it within one process \citep{Beck+Etal:2020}, while others model adoption separately \citep{Pouri+Bhat:2003} or even propose multiple (conditional) processes that manifest in a final frequency outcome \citep[e.g.][who differentiate option, choice/adoption and frequency]{Singh+Etal:2013}.
 
-Employer-employee interactions remain understudied. Many studies use job attributes as proxies for employer constraints \citep{Asmussen+Etal:2024}. \citet{Heimgartner+Axhausen:2023*} investigate in how far preference and feasibility/employer constraints can be disentangled in an endogenous choice set formation approach while \citet{Mokhtarian+Salmon:1996} suggest directly incorporating such constraints into utility specifications.
+Employer-employee interactions remain understudied. Many studies use job attributes as proxies for employer constraints \citep{Asmussen+Etal:2024}. \citet{Heimgartner+Axhausen:2023b} investigate in how far preference and feasibility/employer constraints can be disentangled in an endogenous choice set formation approach while \citet{Mokhtarian+Salmon:1996} suggest directly incorporating such constraints into utility specifications.
 
 \subsection{Systemic consequences of telework}
 
@@ -1015,7 +1015,7 @@ ce13 <- round(ce[1, 3])
 ce11 <- round(ce[1, 1])
 @
 
-The upper half of Table~\ref{tab:model-km-ate} also implies that treatment effects are much stronger than what simple group comparison would suggest: The counterfactual weekly kilometers traveled by UTWers under the NTWing scenario (\Sexpr{ce13} km) are substantially larger than the factual weekly kilometers traveled by the current NTWers (\Sexpr{ce11} km). In that sense it is right to state that telework reduces the mobility of a particularly mobile group (as speculated in \citealt{Heimgartner+Axhausen:2023}).
+The upper half of Table~\ref{tab:model-km-ate} also implies that treatment effects are much stronger than what simple group comparison would suggest: The counterfactual weekly kilometers traveled by UTWers under the NTWing scenario (\Sexpr{ce13} km) are substantially larger than the factual weekly kilometers traveled by the current NTWers (\Sexpr{ce11} km). In that sense it is right to state that telework reduces the mobility of a particularly mobile group (as speculated in \citealt{Heimgartner+Axhausen:2023a}).
 
 \begin{table}[htbp]
 \centering

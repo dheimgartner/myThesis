@@ -79,7 +79,20 @@
       MTMC & mobility and transport microcensus \\
       MNL & multinomial logit \\
       OL & ordinal logit \\
+      RQ & research question \\
       %\bottomrule
     \end{tabularx}
+
+    \section*{\proglang{R} code}
+
+    \proglang{R} code and its output is formatted verbatim
+<<this-is-code>>=
+f <- function() {
+  cat("Hello, world!\n")
+  1 + 2
+}
+f()
+@
+
 
 \endgroup
