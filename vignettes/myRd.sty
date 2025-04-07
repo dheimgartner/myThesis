@@ -365,19 +365,20 @@
     pdfview={XYZ null null null}%
   }
   %% </NOTE>
-  \renewcommand\tableofcontents{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
-    \@ifundefined{chapter*}{}{\chapter*{\contentsname
-        \@mkboth{%
-           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}}%
-    \pdfbookmark{Contents}{contents}
-    \@starttoc{toc}%
-    \if@restonecol\twocolumn\fi
-    }
+  %% daniehei: commented out
+  % \renewcommand\tableofcontents{%
+  %   \if@twocolumn
+  %     \@restonecoltrue\onecolumn
+  %   \else
+  %     \@restonecolfalse
+  %   \fi
+  %   \@ifundefined{chapter*}{}{\chapter*{\contentsname
+  %       \@mkboth{%
+  %          \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}}%
+  %   \pdfbookmark{Contents}{contents}
+  %   \@starttoc{toc}%
+  %   \if@restonecol\twocolumn\fi
+  %   }
   \renewenvironment{theindex}
   {\if@twocolumn
     \@restonecolfalse

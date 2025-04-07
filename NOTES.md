@@ -102,7 +102,7 @@
 - [ ] Update dictum
 - [ ] Resolve todos (at beginning of each chapter)
 - [ ] Maybe adjust some section titles
-- [ ] Why is contents listed twice? => it should be Notation
+- [x] Why is contents listed twice? => it should be Notation
 
 ## Author contributions
 
