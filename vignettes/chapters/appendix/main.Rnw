@@ -1,6 +1,44 @@
 \chapter{Appendix}
 \label{ch:appendix}
 
+%% -- Computational details ----------------------------------------------------
+
+\section{Computational details}
+
+\begin{PackageVersionTable}
+\PackageVersionEntry{%
+The results in this thesis were obtained using \proglang{R}~\Sexpr{paste(R.Version()[6:7], collapse = ".")}. \proglang{R} itself and all packages used are available from the Comprehensive \proglang{R} Archive Network (CRAN) at \url{https://CRAN.R-project.org/}.
+}{%
+\pkg{apollo}~\Sexpr{packageVersion("apollo")},
+\pkg{gridExtra}~\Sexpr{packageVersion("gridExtra")},
+\pkg{gridGraphics}~\Sexpr{packageVersion("gridGraphics")},
+\pkg{kableExtra}~\Sexpr{packageVersion("kableExtra")},
+\pkg{knitr}~\Sexpr{packageVersion("knitr")},
+\pkg{MASS}~\Sexpr{packageVersion("MASS")},
+\pkg{mixl}~\Sexpr{packageVersion("mixl")},
+\pkg{mvtnorm}~\Sexpr{packageVersion("mvtnorm")},
+\pkg{ordinal}~\Sexpr{packageVersion("ordinal")},
+\pkg{sampleSelection}~\Sexpr{packageVersion("sampleSelection")},
+\pkg{tableone}~\Sexpr{packageVersion("tableone")},
+\pkg{texreg}~\Sexpr{packageVersion("texreg")},
+\pkg{TraMineR}~\Sexpr{packageVersion("TraMineR")}.
+}%
+\PackageVersionEntry{%
+Each chapter is organized as a separate \proglang{R}-package, available from \url{https://github.com/phd-thesis-heimgartner} and can be shared on request.
+}{%
+\pkg{myThesis}~\Sexpr{packageVersion("myThesis")},
+\pkg{mpp}~\Sexpr{packageVersion("mpp")},
+\pkg{mppData}~\Sexpr{packageVersion("mppData")},
+\pkg{responseRateAnalysis}~\Sexpr{packageVersion("responseRateAnalysis")},
+\pkg{datapap}~\Sexpr{packageVersion("datapap")},
+\pkg{trb24}~\Sexpr{packageVersion("trb24")},
+\pkg{OPSR}~\Sexpr{packageVersion("OPSR")},
+\pkg{TUplus}~\Sexpr{packageVersion("TUplus")},
+\pkg{TWTE}~\Sexpr{packageVersion("TWTE")},
+\pkg{OPSRtools}~\Sexpr{packageVersion("OPSRtools")}.
+}%
+\end{PackageVersionTable}
+
 %% -- TWTE ---------------------------------------------------------------------
 
 \section{Model comparison} \label{app:model-comparison}
@@ -77,41 +115,3 @@ print(myThesis::OPSRtools_manual)
 print(myThesis::snndata_manual)
 @
 
-%% -- Computational details ----------------------------------------------------
-
-\cleardoublepage%
-\section{Computational details}
-
-\begin{PackageVersionTable}
-\PackageVersionEntry{%
-The results in this thesis were obtained using \proglang{R}~\Sexpr{paste(R.Version()[6:7], collapse = ".")}. \proglang{R} itself and all packages used are available from the Comprehensive \proglang{R} Archive Network (CRAN) at \url{https://CRAN.R-project.org/}.
-}{%
-\pkg{apollo}~\Sexpr{packageVersion("apollo")},
-\pkg{gridExtra}~\Sexpr{packageVersion("gridExtra")},
-\pkg{gridGraphics}~\Sexpr{packageVersion("gridGraphics")},
-\pkg{kableExtra}~\Sexpr{packageVersion("kableExtra")},
-\pkg{knitr}~\Sexpr{packageVersion("knitr")},
-\pkg{MASS}~\Sexpr{packageVersion("MASS")},
-\pkg{mixl}~\Sexpr{packageVersion("mixl")},
-\pkg{mvtnorm}~\Sexpr{packageVersion("mvtnorm")},
-\pkg{ordinal}~\Sexpr{packageVersion("ordinal")},
-\pkg{sampleSelection}~\Sexpr{packageVersion("sampleSelection")},
-\pkg{tableone}~\Sexpr{packageVersion("tableone")},
-\pkg{texreg}~\Sexpr{packageVersion("texreg")},
-\pkg{TraMineR}~\Sexpr{packageVersion("TraMineR")}.
-}%
-\PackageVersionEntry{%
-Each chapter is organized as a separate \proglang{R}-package, available from \url{https://github.com/phd-thesis-heimgartner} and can be shared on request.
-}{%
-\pkg{myThesis}~\Sexpr{packageVersion("myThesis")},
-\pkg{mpp}~\Sexpr{packageVersion("mpp")},
-\pkg{mppData}~\Sexpr{packageVersion("mppData")},
-\pkg{responseRateAnalysis}~\Sexpr{packageVersion("responseRateAnalysis")},
-\pkg{datapap}~\Sexpr{packageVersion("datapap")},
-\pkg{trb24}~\Sexpr{packageVersion("trb24")},
-\pkg{OPSR}~\Sexpr{packageVersion("OPSR")},
-\pkg{TUplus}~\Sexpr{packageVersion("TUplus")},
-\pkg{TWTE}~\Sexpr{packageVersion("TWTE")},
-\pkg{OPSRtools}~\Sexpr{packageVersion("OPSRtools")}.
-}%
-\end{PackageVersionTable}
