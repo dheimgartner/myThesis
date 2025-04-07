@@ -133,19 +133,19 @@ As shown in \cite{Wang+Mokhtarian:2024}, the log-likelihood of observing all ind
 %
 \begin{multline} \label{eq:log-lik}
 \ell(\theta \mid \boldsymbol{W}, \boldsymbol{X_j}) = \sum_{j = 1}^{J} \sum_{\{j\}}
-\left\{
-\ln\left[
-\frac{1}{\sigma_j} \phi\left(\frac{y_j - \Xb}{\sigma_j}\right)
-\right] \quad + \right. \\
-\left. \ln\left[
-\Phi\left(
+\Biggl\{
+\ln\Biggl[
+\frac{1}{\sigma_j} \phi\Biggl(\frac{y_j - \Xb}{\sigma_j}\Biggr)
+\Biggr] \quad + \\
+\ln\Biggl[
+\Phi\Biggl(
 \frac{\sigma_j (\kappa_j - \Wg) - \rho_j(y_j - \Xb)}{\sigma_j\sqrt{1 - \rho_j^2}}
-\right) -
-\Phi\left(
+\Biggr) - \\
+\Phi\Biggl(
 \frac{\sigma_j (\kappa_{j-1} - \Wg) - \rho_j(y_j - \Xb)}{\sigma_j\sqrt{1 - \rho_j^2}}
-\right)
-\right]
-\right\}
+\Biggr)
+\Biggr]
+\Biggr\}
 \end{multline}
 %
 where $\sum_{\{j\}}$ means the summation of all the cases belonging to the \jth selection outcome, $\phi(\cdot)$ and $\Phi(\cdot)$ are the density and cumulative distribution function of the standard normal distribution.
@@ -159,7 +159,7 @@ The conditional expectation can be expressed as
 \end{aligned}
 \end{equation}
 %
-where the negative fraction ($-\frac{\phi(\kappa_j - \Wg) - \phi(\kappa_{j-1} - \Wg)}{\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)}$) is the ordered probit switching regression model counterpart to the inverse Mills ratio (IMR) term of a binary switching regression model (because of its resemblance, we will also refer to this fraction as inverse Mills ratio in the OPSR case). We immediately see, that regressing $\boldsymbol{X_j}$ on $y_j$ leads to an omitted variable bias if $\rho_j \neq 0$ which is the root cause of the selection bias. However, the IMR can be pre-computed based on an ordered probit model and then included in the second stage regression, which describes the Heckman correction \citep{Heckman:1979}. It should be warned, that since the Heckman two-step procedure includes an estimate in the second step regression, the resulting OLS standard errors and heteroskedasticity-robust standard errors are incorrect \citep{Greene:2002}.
+where the (negative) fraction is the ordered probit switching regression model counterpart to the inverse Mills ratio (IMR) term of a binary switching regression model (because of its resemblance, we will also refer to this fraction as inverse Mills ratio in the OPSR case). We immediately see, that regressing $\boldsymbol{X_j}$ on $y_j$ leads to an omitted variable bias if $\rho_j \neq 0$ which is the root cause of the selection bias. However, the IMR can be pre-computed based on an ordered probit model and then included in the second stage regression, which describes the Heckman correction \citep{Heckman:1979}. It should be warned, that since the Heckman two-step procedure includes an estimate in the second step regression, the resulting OLS standard errors and heteroskedasticity-robust standard errors are incorrect \citep{Greene:2002}.
 
 To obtain unbiased treatment effects, we must further evaluate the ``counterfactual outcome'', which reflects the expected outcome under a counterfactual treatment (i.e., for $j' \neq j$)
 %
@@ -172,25 +172,25 @@ To obtain unbiased treatment effects, we must further evaluate the ``counterfact
 %
 Let's assume that $y_j = \ln(Y_j + \delta)$ in the previous equations. I.e., the continuous outcome was log-transformed as is usual in regression analysis. We have to note, that in such cases the Equations~\ref{eq:cond-exp}-\ref{eq:counterfact-exp} provide the conditional expectation of the log-transformed outcome. Therefore we need to back-transform $Y_j = \exp(y_j) - \delta$ which yields
 %
-\begin{equation} \label{eq:log-cond-exp}
+\begin{multline} \label{eq:log-cond-exp}
 \E[Y_j \mid Z = j] =
-\exp\left(\Xb + \frac{\sigma_j^2}{2}\right)
-\left[
+\exp\Biggl(\Xb + \frac{\sigma_j^2}{2}\Biggr) \\
+\Biggl[
 \frac{\Phi(\kappa_j - \Wg - \rho_j\sigma_j) - \Phi(\kappa_{j-1} - \Wg - \rho_j\sigma_j)}
 {\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)}
-\right] - \delta
-\end{equation}
+\Biggr] - \delta
+\end{multline}
 %
 for the factual case, and
 %
-\begin{equation} \label{eq:log-counterfact-exp}
+\begin{multline} \label{eq:log-counterfact-exp}
 \E[Y_{j'} \mid Z = j] =
-\exp\left(\Xbd + \frac{\sigma_{j'}^2}{2}\right)
-\left[
+\exp\Biggl(\Xbd + \frac{\sigma_{j'}^2}{2}\Biggr) \\
+\Biggl[
 \frac{\Phi(\kappa_j - \Wg - \rho_{j'}\sigma_{j'}) - \Phi(\kappa_{j-1} - \Wg - \rho_{j'}\sigma_{j'})}
 {\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)}
-\right] - \delta
-\end{equation}
+\Biggr] - \delta
+\end{multline}
 %
 for the counterfactual case \citep{Wang+Mokhtarian:2024}.
 
@@ -334,8 +334,8 @@ and the model can be estimated by
 %
 <<opsr-model-xinyi>>=
 start_default <- opsr(f, telework_data, .get2step = TRUE)
-fit <- opsr(f, telework_data, start = start, method = "NM", iterlim = 50e3,
-  printLevel = 0)
+fit <- opsr(f, telework_data, start = start, method = "NM",
+  iterlim = 50e3, printLevel = 0)
 @
 %
 where we demonstrate that
@@ -399,9 +399,10 @@ With help of the \pkg{texreg} package, production-grade tables (in various outpu
 <<opsr-replica, results=tex>>=
 texreg::texreg(
   fit, beside = TRUE, include.R2 = TRUE, include.pseudoR2 = TRUE,
-  custom.model.names = custom.model.names, custom.coef.names = custom.coef.names,
-  groups = groups, scalebox = 0.76, booktabs = TRUE, dcolumn = TRUE,
-  no.margin = TRUE, use.packages = FALSE, float.pos = "htbp", single.row = TRUE,
+  custom.model.names = custom.model.names, groups = groups,
+  custom.coef.names = custom.coef.names, scalebox = 0.76,
+  booktabs = TRUE, dcolumn = TRUE, no.margin = TRUE,
+  use.packages = FALSE, float.pos = "htbp", single.row = TRUE,
   caption = "Replica of \\citet{Wang+Mokhtarian:2024}, Table 3.",
   label = "tab:wang-replica",
   custom.note = custom.note
@@ -474,7 +475,7 @@ A basic boxplot of the response variable against the three telework statuses is 
 \setkeys{Gin}{width=.8\textwidth}
 \begin{figure}[t!]
 \centering
-<<opsr-boxplot, echo=FALSE, fig=TRUE, height=5, width=9>>=
+<<opsr-boxplot, echo=FALSE, fig=TRUE, height=4.5, width=8.1>>=
 par(mfrow = c(1, 2))
 plot(log_weekly_km ~ factor(wfh), data = timeuse_data, varwidth = TRUE,
   ylab = "Log weekly distance traveled (km)", xlab = "Telework status",
@@ -492,8 +493,8 @@ plot(log_commute_km ~ factor(wfh), data = timeuse_data, varwidth = TRUE,
 As mentioned in Section~\ref{sec:model}, the analyst needs to think of an identification restriction: In our application, we reserve the international standard classification of occupations (ISCO-08) variables for the selection process. To simplify model specification, we first estimate the ordered probit model separately, using \fct{polr} from the \pkg{MASS} package \citep{Venables+Ripley:2002}. It should be noted here, that the resulting parameter estimates of the selection process are unbiased.
 %
 <<opsr-fit-polr>>=
-drop <- c("id", "weekly_km", "log_weekly_km", "commute_km", "log_commute_km",
-  "wfh_days")
+drop <- c("id", "weekly_km", "log_weekly_km", "commute_km",
+  "log_commute_km", "wfh_days")
 dat_polr <- subset(timeuse_data, select = !(names(timeuse_data) %in% drop))
 dat_polr$wfh <- factor(dat_polr$wfh)
 fit_polr <- MASS::polr(wfh ~ ., dat_polr, method = "probit")
@@ -567,7 +568,8 @@ estimated_weekly_km <- function(object, type = "unlog-response") {
   counterfacts <- vector("list", nReg)
   for (g in 1:nReg) {
     for (c in 1:nReg) {
-      counterfacts[[c]] <- predict(object, group = g, counterfact = c, type = type)
+      counterfacts[[c]] <- predict(object, group = g, counterfact = c,
+        type = type)
     }
     df <- as.data.frame(counterfacts)
     names(df) <- tw_status
@@ -595,7 +597,8 @@ pairwise_diff <- function(mat) {
       mat[3, j] - mat[2, j]
     )
   }
-  rownames(result) <- c("NTWing -> NUTWing", "NTWing -> UTWing", "NUTWing -> UTWing")
+  rownames(result) <-
+    c("NTWing -> NUTWing", "NTWing -> UTWing", "NUTWing -> UTWing")
   colnames(result) <- c("NTWer", "NUTWer", "UTWer")
   result
 }
@@ -750,7 +753,7 @@ plot_treat_obs <- function(object, x, y, type, xlim = NULL, ylim = NULL, main = 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[t!]
 \centering
-<<opsr-plot-treatment, echo=FALSE, fig=TRUE, height=8.5, width=8.5>>=
+<<opsr-plot-treatment, echo=FALSE, fig=TRUE, height=8.2, width=8.2>>=
 x <- aggregate(wfh_days ~ wfh, data = timeuse_data, FUN = mean)$wfh_days
 
 fit <- fit_red
@@ -809,6 +812,7 @@ gridExtra::grid.arrange(g1grob, g2grob, g3grob, g4grob, ncol = 2)
 
 \begin{table}[htbp]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|>{\centering\arraybackslash}p{2cm}|p{7.4cm}|}
 \hline
 Model & Parent & \centering Error \\ correlation & Description \\
@@ -818,6 +822,7 @@ Model & Parent & \centering Error \\ correlation & Description \\
 \code{fit_nocor} & \code{fit_red} & $\circ$ & Fixing the \code{rho} coefficients at 0 \\
 \hline
 \end{tabular}
+}%
 \caption{\label{tab:model-overview} Model overview. The model is based on \emph{Parent} as elaborated under \emph{Description}.}
 \end{table}
 
@@ -844,8 +849,8 @@ Lastly (using \code{fit_red}), we compute unit treatment effects and compare the
 %
 <<opsr-unit-treatment-effects>>=
 dat_ute <- subset(timeuse_data, select = c(commute_km, wfh, wfh_days))
-dat_ute <- aggregate(cbind(wfh_days, 2 * commute_km) ~ wfh, data = dat_ute,
-  FUN = mean)
+dat_ute <- aggregate(cbind(wfh_days, 2 * commute_km) ~ wfh,
+  data = dat_ute, FUN = mean)
 
 top <- t(dat_ute[2:3])
 colnames(top) <- c("NTWers", "NUTWers", "UTWers")
@@ -856,7 +861,10 @@ twdiff1 <- top[i, "NUTWers"] - top[i, "NTWers"]
 twdiff2 <- top[i, "UTWers"] - top[i, "NTWers"]
 twdiff3 <- top[i, "UTWers"] - top[i, "NUTWers"]
 
-twdiff <- matrix(c(rep(twdiff1, 3), rep(twdiff2, 3), rep(twdiff3, 3)), nrow = 3)
+twdiff <- matrix(
+  c(rep(twdiff1, 3), rep(twdiff2, 3), rep(twdiff3, 3)),
+  nrow = 3
+)
 bottom <- te(fit_red) / twdiff
 
 ute <- rbind(top, bottom)
