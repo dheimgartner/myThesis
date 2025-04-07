@@ -164,7 +164,7 @@ To obtain unbiased treatment effects, we must further evaluate the ``counterfact
 \end{aligned}
 \end{equation}
 %
-Let's assume that $y_j = \ln(Y_j + \delta)$ in the previous equations. I.e., the continuous outcome was log-transformed as is usual in regression analysis. We have to note, that in such cases the Equations~\ref{eq:opsr-cond-exp}-\ref{eq:opsr-counterfact-exp} provide the conditional expectation of the log-transformed outcome. Therefore we need to back-transform $Y_j = \exp(y_j) - \delta$ which yields
+Let's assume that $y_j = \ln(Y_j + \delta)$ in the previous equations. I.e., the continuous outcome was log-transformed as is usual in regression analysis. We have to note, that in such cases the Equations~\ref{eq:opsr-cond-exp}--\ref{eq:opsr-counterfact-exp} provide the conditional expectation of the log-transformed outcome. Therefore we need to back-transform $Y_j = \exp(y_j) - \delta$ which yields
 %
 \begin{multline} \label{eq:opsr-log-cond-exp}
 \E[Y_j \mid Z = j] =
@@ -381,7 +381,7 @@ custom.coef.names <- c(
 )
 groups <- list(
   "Education (ref: high school or less)" = 9:10,
-  "Household income (ref: less than \\$50,000)" = 11:12,
+  "Household income (ref: <\\$50,000)" = 11:12,
   "Attitudes" = 16:22,
   "Race (ref: white)" = 27:28,
   "Residential location (ref: urban)" = 30:32
@@ -395,7 +395,7 @@ With help of the \pkg{texreg} package, production-grade tables (in various outpu
 texreg::texreg(
   fit, beside = TRUE, include.R2 = TRUE, include.pseudoR2 = TRUE,
   custom.model.names = custom.model.names, groups = groups,
-  custom.coef.names = custom.coef.names, scalebox = 0.65,
+  custom.coef.names = custom.coef.names, scalebox = 0.73,
   booktabs = TRUE, dcolumn = TRUE, no.margin = TRUE,
   use.packages = FALSE, float.pos = "htbp", single.row = TRUE,
   caption = "Replica of \\citet{Wang+Mokhtarian:2024}, Table 3.",
@@ -404,12 +404,13 @@ texreg::texreg(
 )
 @
 %
-{\renewcommand{\arraystretch}{0.9}%
+{\renewcommand{\arraystretch}{0.75}%
+\setlength{\tabcolsep}{1pt}
 <<opsr-replica, echo=FALSE, results=tex>>=
 tex <- texreg::texreg(
   fit, beside = TRUE, include.R2 = TRUE, include.pseudoR2 = TRUE,
   custom.model.names = custom.model.names, groups = groups,
-  custom.coef.names = custom.coef.names, scalebox = 0.65,
+  custom.coef.names = custom.coef.names, scalebox = 0.73,
   booktabs = TRUE, dcolumn = TRUE, no.margin = TRUE,
   use.packages = FALSE, float.pos = "htbp", single.row = TRUE,
   caption = "Replica of \\citet{Wang+Mokhtarian:2024}, Table 3.",
