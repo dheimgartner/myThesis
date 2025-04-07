@@ -89,7 +89,7 @@
     - I think you have to adjust the `\Header` `\HeaderA` command in `myRd.sty`
   - Maybe also snndata?
 - [x] Namespace labels
-H: - [ ] Use -- for Gedankenstrich
+- [x] Use -- for Gedankenstrich
 H: - [ ] Don't use `\pkg{}` in chapter headings (but subheadings?)...
 H:   - [ ] For section commands use `\Section[]{}` if special formatting!
 - [x] Consistently use R-package (with hyphon)

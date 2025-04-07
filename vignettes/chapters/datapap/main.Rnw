@@ -113,7 +113,7 @@ A series of Likert-scale questions was included to assess an individual's theore
 \subsection{Stage II: Work from home SP}
 \label{sec:datapap-stage-ii}
 
-Individuals identified as eligible for telework were invited to participate in the second stage - the work from home (WFH) SP. Eligibility required participants to be in the workforce and to have a work profile permitting at least one home office day per week, regardless of whether their current employer offers this option. Self-employed individuals were excluded since they do not face exogenous work arrangements.
+Individuals identified as eligible for telework were invited to participate in the second stage -- the work from home (WFH) SP. Eligibility required participants to be in the workforce and to have a work profile permitting at least one home office day per week, regardless of whether their current employer offers this option. Self-employed individuals were excluded since they do not face exogenous work arrangements.
 
 The selection of attributes was largely inspired by \citet{Bernardino:1995} and insights from the pre-study detailed in Section~\ref{sec:datapap-pre-study}. Salary adjustments were included in the design despite being deemed irrelevant by participants in the pre-study. This inclusion was justified for three reasons: First, salary adjustments as (dis)incentives for home office have been a topic of recent public debate; second, this attribute serves as a natural cost component, allowing modelers to interpret other attributes in a monetary (willingness to pay) framework; third, the attribute was found to be relevant in \citet{Bernardino:1995}.
 
@@ -433,7 +433,7 @@ While a majority (83.72\%) of those with teleworkable jobs work from home, emplo
 \toprule
 \input{chapters/datapap/tables/wfh_table_weighted_combined}\\
 \bottomrule
-\multicolumn{15}{p{22cm}}{*Population where telework is feasible (Can == Yes), \emph{Budget:} Max. number of days allowed to telework, \emph{Current:} Telework frequency as of survey date (June - August 2023), \emph{Feasible:} Max. number of teleworking days feasible given job situation, \emph{Free-choice:} Free-choice telework frequency (given job situation), \emph{Lockdown:} Telework frequency during COVID-related lockdowns, \emph{Pre-COVID:} Telework frequency before the COVID-pandemic, \emph{Can:} Job is teleworkable, \emph{May:} Employer allows teleworking, \emph{Want:} Respondent wants to telework, \emph{Do:} Respondent teleworks.}\\
+\multicolumn{15}{p{22cm}}{*Population where telework is feasible (Can == Yes), \emph{Budget:} Max. number of days allowed to telework, \emph{Current:} Telework frequency as of survey date (June -- August 2023), \emph{Feasible:} Max. number of teleworking days feasible given job situation, \emph{Free-choice:} Free-choice telework frequency (given job situation), \emph{Lockdown:} Telework frequency during COVID-related lockdowns, \emph{Pre-COVID:} Telework frequency before the COVID-pandemic, \emph{Can:} Job is teleworkable, \emph{May:} Employer allows teleworking, \emph{Want:} Respondent wants to telework, \emph{Do:} Respondent teleworks.}\\
 \end{tabular}
 }%
 }%
