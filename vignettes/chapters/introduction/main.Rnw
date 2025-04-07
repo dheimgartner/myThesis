@@ -5,47 +5,21 @@
 Don't mistake the intuitive and the truth.}%
 \vskip 1em
 
-\todo{%
-\begin{itemize}
-\item See also \url{https://rechtssammlung.sp.ethz.ch/Dokumente/344.0200.10en.pdf} which contains information what to include in the framework text:
-\begin{itemize}
-\item Overarching introduction into the motivation and the topic of the doctoral thesis
-\item Elaboration on the (primary) theoretical bases and the methodology used
-\item Relevance of the thesis to science and society
-\item General conclusion and outlook on future research and development in the field
-\item Summary of publications
-\end{itemize}
-\end{itemize}
-}%
-
-Measuring the unmeasurable (e.g., work arrangement characteristics, counterfactual outcomes)
-Port from mail task list
-Check snn report intro
-
-Including objectives
-Why modeling telework is complicated and why understanding the impact on transport demand is complicated (second-order effects).
-
-Refactor from datapaper and twte intro with maybe some inputs from snn report...
-
-Mail pavel:
-My conceptual summary of our discussion is that the following dimensions need to be distinguished and understood:
--	Employer vs. employee perspective/preference
--	Preference vs. feasibility (how teleworkable is a job)
--	Long-term perspective (average telework frequency or non-teleworker vs. non-usual TWer vs. usual TWer) vs. daily decision (binary choice)
--	Further points of interest: serial correlation (of this binary choice) and weekday preference
-
-Ideally, you would understand each of these dimensions, their interplay and then find a way to combine them in an integrated modeling approach.
-
-Further, understanding transport demand implications would necessitate an understanding of (changes, “treatment effects” [!see below] in) mobility tool ownership and mode choice, … I think all of these factors make it a rather complex problem and I think simplifications/abstractions are needed. F.ex., as I’ve understood your policy dimension is the full employer perspective: I.e., what instruments do employers have to manage telework demand (and what are the consequences for transport). So you might simply want to treat it as an exogenous factor (in your final tool you play around with these variables [and here I think it is important to identify these instruments/tools employers have available first] and look what happens to your KPI).
-
-A final point to consider is the distinction between treatment effects and simple group comparisons (in the transport telework literature this distinction is usually not made). For example, using telework (e.g., the long-term frequency) as an explanatory variable to model e.g., weekly vehicle miles driven (VMD) does not necessarily tell you something about the effect of telework on VMD. This is because current teleworkers (TWers) might not necessarily behave like current non-TWers, were they not to telework… See also the paper by Xinyi Wang below (we also wrote an R package implementing the underlying ordered probit switching regression methodology, in case this should be relevant).
-
 \section{Background and motivation}
 
+The transport sector contributes 15\% of global greenhouse gas emissions \citep{IPCC:2022}, with emissions at 31\% being significantly higher in Switzerland \citep{BAFU:2024}. Meanwhile, reducing it through policies such as road pricing or fuel taxes is unpopular. Similarly, being mobile yields great utility and behavioral adjustments such as reducing leisure travel or choosing greener transport modes are difficult.
+
+The COVID pandemic enforced such behavioral change and constrained our free movement. Meanwhile, economies adjusted quickly and shifted to remote work wherever possible, quadrupling the home office share in just a few quarters \citep[for the case of US,]{Barrero+Etal:2023}. Telework (working from home, home office) was largely successful and popular and it was clear that the new work form, to some extent, would be integral part of our everyday work-life. However, three questions emerged: First, what population share would telework after mandatory lockdowns and restrictions were lifted, second, to what degree would the telework and third, what is the impact of telework on transport demand beyond the pandemic circumstances?
+
+Scholarly work investigating this relation dates back to the revolution of information and communication technology (see \citealt{Salomon:1986, Nilles:1988, Mokhtarian:1991} for early work). However, findings regarding the direction of effect have always been debated \citep{Hook+Etal:2020}.
+
+This might not be surprising, as the relation between telework and transport demand is intricate with second-order effects potentially offsetting reduced commuting. Telework is more than a change of workplace. For example, more freedom in time-allocation might induce non-work travel, teleworkers might find new mobility tools attractive, or they might even relocate. In fact, \citet{DeVos+Etal:2018} find that teleworkers accept longer commutes, i.e., they commute less frequently but when they do, they travel further.
+
+Another possible explanation, is, the different methods employed --- some more suitable than others. As we will argue, telework can be seen as a self-selected treatment (see Section~\ref{sec:conceptual-framework} for the conceptual framework) and as such, requires causal inference methods from the program evaluation literature.
 
 \section{Objectives}
 
-As we are now aware, the pandemic worked as a catalyst in telework adoption. During the crisis, telework was used to avoid travel and contact with other people thereby containing the spread of the virus. Anyone who could telework should (or rather had to) do so as much as possible. However, it was clear that once such telework recommendations or duties were lifted, there would be some backlash. In that context I ask
+As we are now aware, the pandemic worked as a catalyst in telework adoption. During the crisis, telework was used to avoid travel and contact with other people, thereby containing the spread of the virus. Anyone who could telework should (or rather had to) do so as much as possible. However, it was clear that once such telework recommendations or duties were lifted, there would be some backlash. In that context I ask
 %
 \begin{itemize}
 \item[RQ1:] How did telework adoption change over the course of the pandemic in Switzerland?
@@ -72,7 +46,7 @@ Methodologically, all papers employ discrete choice models \citep[e.g.,][]{Train
 
 As is clear for the technical reader, defining characteristic of such probability models is always the assumed error distribution. I think that this assumed error distribution is the (latent) main character in this thesis and plays an important role in almost any chapter. I hope that after having read this thesis, sentences such as ``where we assume that the errors are independent'' are questioned or at least cautiously read.
 
-\section{Conceptual framework to understand treatment effects and self-selection}
+\section{Conceptual framework to understand treatment effects and self-selection} \label{sec:conceptual-framework}
 
 \begin{leftbar}
 Add conceptual figure based on \citet{Wang+Mokhtarian:2024}.
@@ -80,7 +54,9 @@ Add conceptual figure based on \citet{Wang+Mokhtarian:2024}.
 
 Let's assume for conceptual clarity that we observe three different groups A, B and C in a world where telework is unheard of (yet technologically perfectly feasible). These three groups might be very different socio-economically and also in terms of their mobility behavior. We now treat a random third of each group with ``non-usual'' telework (NUTW; say 2 days/week), another third with ``usual'' telework (UTW; say 3+ days/week), and leave the rest untreated (``non'' telework, NTW). We could then test whether or not there are within (e.g., $A_{NTW}$ vs. $A_{NUTW}$ vs. $A_{UTW}$) and across group differences (e.g., $A_{NTW}$ vs. $B_{NTW}$ vs. $C_{NTW}$) with respect to a metric of interest such as kilometers traveled (where $A_{NTW}$ are the weekly kilometers traveled by an NTW-treated individual A). In technical words, we could test, whether both the treatment and/or the treatment effects depend on the group receiving it.
 
-Our world differs in two crucial regards: First, we can not randomly prescribe a treatment such as telework (it already has been prescribed by nature) and second, nature rarely prescribes a treatment randomly. As a consequence answering the above question in our world is not as trivial as in teleworkomania. We only observe, say, $A_{NTW}$, $B_{NUTW}$ and $C_{UTW}$ and it is spurious (while tempting) to assume $A_{NTW} = B_{NTW}$. Somewhat more subtle (and therefore even more tempting) is to assume that $A_{NTW}(X) = B_{NTW}(X)$, i.e., apples are just pairs if we control for differences in size and shape... This thesis makes a point that even comparing apples to apples might not be trivial: Some fruits might be foul from the inside which is not always observable. Clearly, such apples might look the same but taste certainly different. While this analogy might be confusing at the moment, we encourage the reader to come back to it in the end and recognize the cases of ``selection on observables and unobservables''.
+Our world differs in two crucial regards: First, we can not randomly prescribe a treatment such as telework (it already has been prescribed by nature) and second, nature rarely prescribes a treatment randomly. As a consequence answering the above question in our world is not as trivial as in teleworkomania. We only observe, say, $A_{NTW}$, $B_{NUTW}$ and $C_{UTW}$ and it is spurious (while tempting) to assume $A_{NTW} = B_{NTW}$. Somewhat more subtle (and therefore even more tempting) is to assume that $A_{NTW}(X) = B_{NTW}(X)$, i.e., differences in the outcome of interest can be attributed to observables. This thesis makes a point that unobserved factors influencing the group allocation (A, B, C) might be correlated with unobserved factors influencing the outcome. This correlation needs to be accounted for!
+
+For example, cyclists riding without a helmet (the ``untreated'') might be young and have a risk-seeking tendency. We therefore potentially overestimate the benefit of wearing a helmet if we compare the accident rate and/or crash severity rate between those who wear and do not wear helmets directly. Even if we may control age for the comparison, variables such as risk-seeking are not readily measured, and it may still be part of the error in applied research and thus leading cause of a selection bias.
 
 \section{Outline of the thesis}
 
