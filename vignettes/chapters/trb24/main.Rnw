@@ -5,12 +5,6 @@
 Hello world!}%
 \vskip 1em
 
-\todo{%
-\begin{itemize}
-\item Namespace labels
-\end{itemize}
-}
-
 %% -- Abstract -----------------------------------------------------------------
 
 While the home office frequency choice is well researched, applicable work arrangement attributes are usually not known and therefore omitted. The goal of our work is to elicit the attractiveness of different hybrid work policies as well as their implications for home office frequencies. We hypothesize that in the absence of any incentive schemes or constraints, employees would choose their stated free choice frequency (baseline preference) and any deviation from it has to be attributed to the work arrangement. Multinomial logit (work arrangement choice) and ordinal logistic regression (frequency choice) models are employed, leveraging stated preference data uniquely collected for this purpose. We find that salary adjustments provide the biggest lever both in terms of attractiveness of the arrangement and its elasticity effect on telework supplied. We find that deviation from the baseline is very hard to achieve with our proposed incentives. This indicates that baseline preferences are substantial and the marginal home office day is valued highly.
@@ -41,7 +35,7 @@ Chapter~\ref{ch:datapap} portrayed the telework landscape in Switzerland, where 
 
 The goal of our work is to elicit the attractiveness of different hybrid work policies as well as their implications for telework frequencies. We hypothesize that in the absence of any incentive schemes, employees would choose their stated free choice frequency (referred to as the baseline preference) and any deviation from it has to be attributed to the work arrangement. We then reflect on whether or not the implied sensitivities are large enough to explain the discrepancy between the status quo (1.65 days/week) and the free choice (2.31 days/week).
 
-The question is investigated based on the stated preference (SP) data, collected as outlined in Section~\ref{foo}. We employ multinomial logistic regression (MNL) to elicit the attractiveness of the proposed policies and an ordered logistic regression (OL) with random error components to estimate the impact of the chosen attributes on the telework frequency. Marginal probability effects and elasticities are then computed to scrutinize whether or not the effect strength is large enough to explain the aforementioned discrepancy.
+The question is investigated based on the stated preference (SP) data, collected as outlined in Section~\ref{sec:datapap-stage-ii}. We employ multinomial logistic regression (MNL) to elicit the attractiveness of the proposed policies and an ordered logistic regression (OL) with random error components to estimate the impact of the chosen attributes on the telework frequency. Marginal probability effects and elasticities are then computed to scrutinize whether or not the effect strength is large enough to explain the aforementioned discrepancy.
 
 %% -- Methods ------------------------------------------------------------------
 
@@ -109,7 +103,7 @@ We now discuss the modeling results, discussing the work arrangement MNL and tel
 
 \subsection{Work arrangement choice}
 
-The estimation results of the MNL model are presented in Table~\ref{tab:mnl-estimates}. In addition to the conventional metrics and goodness of fit indicators, marginal probability effects (MPE) were computed. The MPE is the change in choice probability, attributed to a single variable and in comparison to its reference level. The reference levels are noted in brackets. For example, if two work arrangements are exactly the same, except that the first features a salary increase of 10\% (per hour teleworked), while the second a deduction of 10\%, then the probability that the first is chosen is 33.4 percentage points higher.
+The estimation results of the MNL model are presented in Table~\ref{tab:trb24-mnl-estimates}. In addition to the conventional metrics and goodness of fit indicators, marginal probability effects (MPE) were computed. The MPE is the change in choice probability, attributed to a single variable and in comparison to its reference level. The reference levels are noted in brackets. For example, if two work arrangements are exactly the same, except that the first features a salary increase of 10\% (per hour teleworked), while the second a deduction of 10\%, then the probability that the first is chosen is 33.4 percentage points higher.
 
 \begin{table}[htbp]
 \begin{center}
@@ -184,7 +178,7 @@ writeLines(mat_tex)
 \multicolumn{4}{l}{\Sexpr{signif_codes()}}\\
 \multicolumn{4}{l}{MPE = Marginal probability effect;}\\
 \end{tabular}
-\caption{\label{tab:mnl-estimates} MNL estimation results.}
+\caption{\label{tab:trb24-mnl-estimates} MNL estimation results.}
 \end{center}
 \end{table}
 
@@ -198,7 +192,7 @@ Last, coordinating office presence on Mondays and Fridays reduces the attractive
 
 \subsection{Telework frequency choice}
 
-The estimation results of the OL model are presented in Table~\ref{tab:ol-estimates}. Elasticities (expressed in number of days deviating from the baseline) are shown in the last column: For example, the elasticity corresponding to a salary increase by 10\% (compared to the reference of a 10\% salary reduction) reads 0.04 d/week. Overall, the computed elasticities are very small, suggesting that the proposed attributes have little lever to (dis-) incentivize deviations from the baseline preference.
+The estimation results of the OL model are presented in Table~\ref{tab:trb24-ol-estimates}. Elasticities (expressed in number of days deviating from the baseline) are shown in the last column: For example, the elasticity corresponding to a salary increase by 10\% (compared to the reference of a 10\% salary reduction) reads 0.04 d/week. Overall, the computed elasticities are very small, suggesting that the proposed attributes have little lever to (dis-) incentivize deviations from the baseline preference.
 
 {%
 \begin{center}
@@ -295,7 +289,7 @@ writeLines(mat_tex)
 \bottomrule
 \multicolumn{4}{l}{\Sexpr{signif_codes()}}\\
 \multicolumn{4}{l}{Elast. = Elasticity (d/week)};\\
-\caption{\label{tab:ol-estimates} OL estimation results.}
+\caption{\label{tab:trb24-ol-estimates} OL estimation results.}
 \end{longtable}
 \end{center}
 }%

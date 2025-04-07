@@ -15,7 +15,7 @@ Scholarly work investigating this relation dates back to the revolution of infor
 
 This might not be surprising, as the relation between telework and transport demand is intricate with second-order effects potentially offsetting reduced commuting. Telework is more than a change of workplace. For example, more freedom in time-allocation might induce non-work travel, teleworkers might find new mobility tools attractive, or they might even relocate. In fact, \citet{DeVos+Etal:2018} find that teleworkers accept longer commutes, i.e., they commute less frequently but when they do, they travel further.
 
-Another possible explanation, is, the different methods employed --- some more suitable than others. As we will argue, telework can be seen as a self-selected treatment (see Section~\ref{sec:conceptual-framework} for the conceptual framework) and as such, requires causal inference methods from the program evaluation literature.
+Another possible explanation, is, the different methods employed --- some more suitable than others. As we will argue, telework can be seen as a self-selected treatment (see Section~\ref{sec:intro-conceptual-framework} for the conceptual framework) and as such, requires causal inference methods from the program evaluation literature.
 
 \section{Objectives}
 
@@ -46,7 +46,7 @@ Methodologically, all papers employ discrete choice models \citep[e.g.,][]{Train
 
 As is clear for the technical reader, defining characteristic of such probability models is always the assumed error distribution. I think that this assumed error distribution is the (latent) main character in this thesis and plays an important role in almost any chapter. I hope that after having read this thesis, sentences such as ``where we assume that the errors are independent'' are questioned or at least cautiously read.
 
-\section{Conceptual framework to understand treatment effects and self-selection} \label{sec:conceptual-framework}
+\section{Conceptual framework to understand treatment effects and self-selection} \label{sec:intro-conceptual-framework}
 
 \begin{leftbar}
 Add conceptual figure based on \citet{Wang+Mokhtarian:2024}.

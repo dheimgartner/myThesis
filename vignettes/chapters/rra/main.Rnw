@@ -5,12 +5,6 @@
 Hello world!}%
 \vskip 1em
 
-\todo{%
-\begin{itemize}
-\item Namespace labels
-\end{itemize}
-}
-
 <<rra-preliminaries, echo=FALSE, results=hide>>=
 my_colors <- c("aquamarine3", "darkorange", "blue4", "darkgrey")
 cat_cols <- c("RxI", "RxNI", "NRxI", "NRxNI")
@@ -56,7 +50,7 @@ devtools::install_github("dheimgartner/responseRateAnalyis")
 \section{Methods}
 \label{sec:rra-methods}
 
-The main data collection effort consists of scoring the survey instruments according to Table~\ref{tab:response-burden-scheme}.
+The main data collection effort consists of scoring the survey instruments according to Table~\ref{tab:rra-response-burden-scheme}.
 
 <<rra-scheme, echo=FALSE>>=
 tex <-
@@ -80,7 +74,7 @@ In comparison to the previous publication \citep{Schmid+Axhausen:2019}, 14 addit
 data("response_rates", package = "responseRateAnalysis")
 @
 
-The distribution of the response burden scores (RBS) for the four recruitment (R) and incentive (I) categories are visualized in Figure~\ref{fig:response-burden-scores}. The following abbreviations are used throughout the text: For example, \emph{RxI} stands for the category where respondents were recruited as well as incentives paid. An \emph{N} negates; hence as an example, \emph{NRxNI} reflects the category without recruitment and without incentives (i.e., participants were not contacted prior to the survey administration and were not promised any form of incentive upon completion). The median RBS is 399 and surveys with a score higher than 1`500 are rare (twelve points roughly correspond to a one-minute response time).
+The distribution of the response burden scores (RBS) for the four recruitment (R) and incentive (I) categories are visualized in Figure~\ref{fig:rra-response-burden-scores}. The following abbreviations are used throughout the text: For example, \emph{RxI} stands for the category where respondents were recruited as well as incentives paid. An \emph{N} negates; hence as an example, \emph{NRxNI} reflects the category without recruitment and without incentives (i.e., participants were not contacted prior to the survey administration and were not promised any form of incentive upon completion). The median RBS is 399 and surveys with a score higher than 1`500 are rare (twelve points roughly correspond to a one-minute response time).
 
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}[htbp]
@@ -106,12 +100,12 @@ plot.it <- function() {
 
 plot.it()
 @
-\caption{\label{fig:response-burden-scores} Distribution of the response burden scores for \emph{recruitment x incentive} categories. \emph{RxI} stands for recruited, with incentives, \emph{N} negates.}
+\caption{\label{fig:rra-response-burden-scores} Distribution of the response burden scores for \emph{recruitment x incentive} categories. \emph{RxI} stands for recruited, with incentives, \emph{N} negates.}
 \end{figure}
 
 Building on \citet{Axhausen+Schmid:2019}, we estimate a logistic regression model relating response burden scores to log-transformed response rates
 %
-\begin{equation} \label{eq:response-burden}
+\begin{equation} \label{eq:rra-response-burden}
 \log \left( \frac{y_i}{100 - y_i} \right) = \beta_0 + \beta_1 \frac{x_i}{1000} + \varepsilon_i
 \end{equation}
 %
@@ -119,12 +113,12 @@ where $y_i$ denotes the response rate (in percent), $x_i$ represents the ex-ante
 
 If a survey instrument's response burden score increases by 100 points, the odds of participating decrease according to
 %
-\begin{equation} \label{eq:log-odds-decrease}
+\begin{equation} \label{eq:rra-log-odds-decrease}
 \left( \exp \left( \frac{\beta_1}{1000} \right) -1 \right) \cdot 100.
 \end{equation}
 
 The basic workflow is as follows
-\label{p:workflow}
+\label{p:rra-workflow}
 %
 \begin{enumerate}
 \item \fct{default\_data} loads and prepares the \code{response\_rates} data for estimation. It selects the input variables, computes the weights, rescales the response burden score and log transforms the response rate.
@@ -145,7 +139,7 @@ m1 <- add_clustered(fit, cluster = dat$survey_id, type = "CR2")
 class(m1)
 @
 
-We repeat the above estimation for different samples, comparing the estimates of the last publication to the updated ones as well as estimate separate models for the four different recruitment and incentive categories. Table~\ref{tab:comparison} summarises the results.
+We repeat the above estimation for different samples, comparing the estimates of the last publication to the updated ones as well as estimate separate models for the four different recruitment and incentive categories. Table~\ref{tab:rra-comparison} summarises the results.
 
 <<rra-comparison, echo=FALSE>>=
 estimator <- function(dat, subset) {
@@ -223,7 +217,7 @@ tex <- gsub("scriptsize", "normalsize", tex)
 \section{Findings}
 \label{sec:rra-findings}
 
-For the newly added group (no recruitment but with incentive payments, \emph{NRxI}) the effect of the response burden is not significant, as expected because of limited sample size. Due to the logistic transformation, parameters reflect changes in log-odds when the RBS marginally increases. The effect of response burden is generally more negative than previously expected. The strongest effect can be found for the recruited subsample without incentive payment (\emph{RxNI}), where the odds of participating decrease by -0.297 (i.e., roughly 30\%) according to Equation~\ref{eq:log-odds-decrease} if the RBS increases by 100 points. The other comparisons are listed in Table~\ref{tab:pc-odds}.
+For the newly added group (no recruitment but with incentive payments, \emph{NRxI}) the effect of the response burden is not significant, as expected because of limited sample size. Due to the logistic transformation, parameters reflect changes in log-odds when the RBS marginally increases. The effect of response burden is generally more negative than previously expected. The strongest effect can be found for the recruited subsample without incentive payment (\emph{RxNI}), where the odds of participating decrease by -0.297 (i.e., roughly 30\%) according to Equation~\ref{eq:rra-log-odds-decrease} if the RBS increases by 100 points. The other comparisons are listed in Table~\ref{tab:rra-pc-odds}.
 
 \begin{landscape}
 <<rra-comparison-tex, echo=FALSE, results=tex>>=
@@ -382,12 +376,12 @@ p_ny <- plot_by_category(df, df_last, survey_data, cat = "NRxI", shape = 16, col
 
 (p | (p_yy / p_ny) | (p_yn / p_nn)) + patchwork::plot_layout(widths = c(2.5, 1, 1))
 @
-\caption{\label{fig:response-curves} Response rate curves (response rates as a function of the response burden). The left-hand panel compares the curves for each \emph{recruitment x incentive} category based on the four separately estimated models (\emph{RxI} stands for recruited, with incentives, \emph{N} negates). The right-hand (smaller) panels compare the response rate curves to the ones based on the data of the previous publication (pink lines). New data points (since the last publication) are enlarged.}
+\caption{\label{fig:rra-response-curves} Response rate curves (response rates as a function of the response burden). The left-hand panel compares the curves for each \emph{recruitment x incentive} category based on the four separately estimated models (\emph{RxI} stands for recruited, with incentives, \emph{N} negates). The right-hand (smaller) panels compare the response rate curves to the ones based on the data of the previous publication (pink lines). New data points (since the last publication) are enlarged.}
 \end{figure}
 
-The back-transformed relationship between response burden and response rates (response rate curve) is visualized in Figure~\ref{fig:response-curves}, along their confidence intervals (i.e., the shaded area reflects the uncertainty of the curve estimates and is not a prediction interval). Recruitment shifts the curve, while incentives flatten it. Notably, the domain above a response burden score of 2`000 is sparsely populated, and the few observations potentially strongly influence the curve's shape (however, according to \emph{Cook's distance} no influential outliers are present in our data). The results indicate that surveys beyond 2`000 points appear overly burdensome for respondents, sustaining high response rates only through recruitment efforts combined with incentive payments, intensive care of the respondents and general interest of the respondents in the topic of these intense studies.
+The back-transformed relationship between response burden and response rates (response rate curve) is visualized in Figure~\ref{fig:rra-response-curves}, along their confidence intervals (i.e., the shaded area reflects the uncertainty of the curve estimates and is not a prediction interval). Recruitment shifts the curve, while incentives flatten it. Notably, the domain above a response burden score of 2`000 is sparsely populated, and the few observations potentially strongly influence the curve's shape (however, according to \emph{Cook's distance} no influential outliers are present in our data). The results indicate that surveys beyond 2`000 points appear overly burdensome for respondents, sustaining high response rates only through recruitment efforts combined with incentive payments, intensive care of the respondents and general interest of the respondents in the topic of these intense studies.
 
-Generally, the 14 new data points do not dramatically change the overall shape of the curves (Figure~\ref{fig:response-curves}, RHS), but the curves are slightly steeper as explained based on the parameter estimates. \emph{RxI} is almost identical (only two new data points were added). For \emph{NRxNI} the confidence bounds increased because two of the five added surveys have unprecedented high response rates. For the category \emph{RxNI} the function has gained support for higher response burdens which substantially steepened the curve and reduced its uncertainty. In particular, we now have higher confidence that the curve quickly joins the other response curves on the domain above 1`500 response burden points. I.e., recruitment without incentive payments only matters for surveys with low response burden (but can make a big difference there).
+Generally, the 14 new data points do not dramatically change the overall shape of the curves (Figure~\ref{fig:rra-response-curves}, RHS), but the curves are slightly steeper as explained based on the parameter estimates. \emph{RxI} is almost identical (only two new data points were added). For \emph{NRxNI} the confidence bounds increased because two of the five added surveys have unprecedented high response rates. For the category \emph{RxNI} the function has gained support for higher response burdens which substantially steepened the curve and reduced its uncertainty. In particular, we now have higher confidence that the curve quickly joins the other response curves on the domain above 1`500 response burden points. I.e., recruitment without incentive payments only matters for surveys with low response burden (but can make a big difference there).
 
 Similar to \citet{Schmid+Axhausen:2019}, we can add a linear time-trend with the year 2004 (when the survey scoring effort started) serving as the base. The following code shows the trivial addition of the time-trend to the pooled model.
 %
@@ -398,7 +392,7 @@ fit_t <- lm(y ~ 0 + x + RxI + RxNI + NRxI + NRxNI + year,
 mt <- add_clustered(fit_t, cluster = dat$survey_id, type = "CR2")
 @
 
-We repeat the steps for the individual categories and synthesise the results in Table~\ref{tab:time-trend}. In contrast to \citet{Schmid+Axhausen:2019} we do not find a negative time-trend and therefore do not support the hypothesis of a general fatigue and less willingness to participate in our surveys.
+We repeat the steps for the individual categories and synthesise the results in Table~\ref{tab:rra-time-trend}. In contrast to \citet{Schmid+Axhausen:2019} we do not find a negative time-trend and therefore do not support the hypothesis of a general fatigue and less willingness to participate in our surveys.
 
 <<rra-time-trend, echo=FALSE, results=hide>>=
 estimator <- function(dat, subset) {

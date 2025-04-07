@@ -8,9 +8,8 @@ I dream my painting and I paint my dream.}%
 \todo{%
 \begin{itemize}
 \item Maybe adjust colors...
-\item 95\% confidence bounds to Figure~\ref{fig:bootstrap}
-\item There is sometimes weird formatting going on at the linebreak in Table~\ref{tab:mzmv-marginals}
-\item Namespace labels
+\item 95\% confidence bounds to Figure~\ref{fig:datapap-bootstrap}
+\item There is sometimes weird formatting going on at the linebreak in Table~\ref{tab:datapap-mzmv-marginals}
 \item Apply \code{my\_theme} (but needs to be done in \pkg{datapap}...)
 \end{itemize}
 }
@@ -33,14 +32,14 @@ Study conception and design: all authors; survey design: all authors; data colle
 \ChapterInfoEntry{
 The following changes were made
 }{%
-The section elaborating on the response rate analysis was shortened, as it largely overlaps with Chapter~\ref{ch:responseRateAnalysis}; Figure~\ref{fig:bootstrap} was improved and now shows the individual bootstrap predictions; The wording of the SPs introductory text was incorporated in the chapter (instead the Appendix); The remainder of the Appendix was omitted.
+The section elaborating on the response rate analysis was shortened, as it largely overlaps with Chapter~\ref{ch:responseRateAnalysis}; Figure~\ref{fig:datapap-bootstrap} was improved and now shows the individual bootstrap predictions; The wording of the SPs introductory text was incorporated in the chapter (instead the Appendix); The remainder of the Appendix was omitted.
 }%
 \end{ChapterInfoTable}
 
 %% -- Introduction -------------------------------------------------------------
 
 \section{Introduction and motivation}
-\label{sec:introduction-and-motivation}
+\label{sec:datapap-introduction-and-motivation}
 
 The revolution in information and communication technologies (ICTs) enabled remote work, sparking interest in the relationship between telework, transport demand, energy, and climate impacts \citep{Salomon:1986, Hook+Etal:2020}. Alongside economic and digital transformations, the service industry's growth has also contributed to the steady increase in telework. However, the COVID-19 pandemic dramatically accelerated this trend, quadrupling the home office share in a few quarters \citep{Barrero+Etal:2023}. It remains uncertain how pre-pandemic findings translate to the post-pandemic ``new normal''. For instance, \citet{Asmussen+Etal:2023} suggests a reduction in the heterogeneity of telework adoption and frequency, with fewer sociodemographic and work-related variables influencing these factors. Additionally, the literature shows significant variation in home office potential and adoption across countries, cities, and economic sectors \citep[see][]{Dingel+Neiman:2020, Groen+Etal:2018, Cetrulo+Etal:2020}, complicating the generalization of findings.
 
@@ -64,16 +63,16 @@ The data collected in this work allows researchers to investigate key questions:
 
 The broader goal of this data collection was to enrich a synthetic population for MATSim \citep{Horni+Etal:2016} and simulate transport demand implications. Results are reported in \citet{Heimgartner+Etal:2024}.
 
-The remainder of the text is structured as follows: Section~\ref{sec:survey-methods} details the survey methods and SP experiments. Section~\ref{sec:response-behavior} analyzes response behavior and relates the response rate to the response burden score as proposed by \citet{Axhausen+Etal:2015}. Section~\ref{sec:descriptive-findings} presents a descriptive analysis addressing who can, may, and wants to work from home. Section~\ref{sec:telework-treatment-effects} demonstrates the usefulness of the data by investigating telework treatment effects on mobility tool ownership. Finally, Section~\ref{sec:conclusion} concludes the study.
+The remainder of the text is structured as follows: Section~\ref{sec:datapap-survey-methods} details the survey methods and SP experiments. Section~\ref{sec:datapap-response-behavior} analyzes response behavior and relates the response rate to the response burden score as proposed by \citet{Axhausen+Etal:2015}. Section~\ref{sec:datapap-descriptive-findings} presents a descriptive analysis addressing who can, may, and wants to work from home. Section~\ref{sec:datapap-telework-treatment-effects} demonstrates the usefulness of the data by investigating telework treatment effects on mobility tool ownership. Finally, Section~\ref{sec:datapap-conclusion} concludes the study.
 
 %% -- Survey methods -----------------------------------------------------------
 
 \section{Survey methods}
-\label{sec:survey-methods}
+\label{sec:datapap-survey-methods}
 
 The following sections provide an in-depth explanation of the survey instruments' structure and the details of the stated preference (SP) designs. Two different population samples from the German-speaking part of Switzerland were recruited for the two main survey waves: the pre-study and the main study. For the pre-study, 7`967 addresses were purchased from an address dealer, targeting age and gender marginals from the mobility and transport microcensus (MTMC21, \citealp{MTMC:2021}). For the main study, a stratified sample of 10`441 individuals was obtained from the Federal Statistical Office. Respondents from the canton of Zurich were over-sampled due to the city's and canton's partnership in this project. Additionally, the data collection aimed to estimate statistical models for MATSim, with scenario analysis planned for that particular area.
 
-Both samples were invited by postal letter to participate in the introductory survey. One reminder was sent, and for the main study, an incentive of 20 Swiss francs was offered upon completion of all three stages of the study.  After completion of the introductory survey, communication happened via E-mail. The importance of participating was emphasized, even if the respondent's current work situation did not permit telework. Key statistics of the four survey instruments are detailed in Table~\ref{tab:surveys-key-statistics}.
+Both samples were invited by postal letter to participate in the introductory survey. One reminder was sent, and for the main study, an incentive of 20 Swiss francs was offered upon completion of all three stages of the study.  After completion of the introductory survey, communication happened via E-mail. The importance of participating was emphasized, even if the respondent's current work situation did not permit telework. Key statistics of the four survey instruments are detailed in Table~\ref{tab:datapap-surveys-key-statistics}.
 
 \begin{table}[htbp]
 \centering
@@ -96,29 +95,29 @@ Response burden score\textsuperscript{*} & 373 & 254 & 88 & 163 \\
 \multicolumn{5}{l}{*Response burden scores are based on \citet{Axhausen+Etal:2015}}\\
 \end{tabular}
 }%
-\caption{\label{tab:surveys-key-statistics} Surveys key statistics.}
+\caption{\label{tab:datapap-surveys-key-statistics} Surveys key statistics.}
 \end{table}
 
 \subsection{Pre-study}
-\label{sec:pre-study}
+\label{sec:datapap-pre-study}
 
-As only little academic work has investigated the importance of work arrangement attributes on telework adoption, the main purpose of the pre-study was to identify attributes of relevance in the decision-making process required to design meaningful trade-offs in the SP. Participants were asked to rank order a menu of eight proposed generic work arrangement attributes (e.g., flexible working hours, free choice of home office days, financial compensation, etc.) and subsequently distribute 100 points among their top four choices. We find that employees place high value on efforts to maintain collegiality, corporate identity, and flexibility. Flexibility in choosing when to telework (day of the week), where to work from, and time management when teleworking. Meanwhile, financial incentives are of less relevance. The reader can later confirm in Section~\ref{sec:stage-ii} that we accounted for this revealed attribute importance in the SP design.
+As only little academic work has investigated the importance of work arrangement attributes on telework adoption, the main purpose of the pre-study was to identify attributes of relevance in the decision-making process required to design meaningful trade-offs in the SP. Participants were asked to rank order a menu of eight proposed generic work arrangement attributes (e.g., flexible working hours, free choice of home office days, financial compensation, etc.) and subsequently distribute 100 points among their top four choices. We find that employees place high value on efforts to maintain collegiality, corporate identity, and flexibility. Flexibility in choosing when to telework (day of the week), where to work from, and time management when teleworking. Meanwhile, financial incentives are of less relevance. The reader can later confirm in Section~\ref{sec:datapap-stage-ii} that we accounted for this revealed attribute importance in the SP design.
 
 \subsection{Stage I: Introductory survey}
-\label{sec:stage-i}
+\label{sec:datapap-stage-i}
 
 At the first stage, respondents were invited to participate in an online survey that collected socio-economic information, household structure, current home office status, work and residential situation, as well as mobility behavior and mobility tool ownership. Only individuals currently in the workforce qualified for participation, and telework-related questions were asked exclusively to those with jobs suitable for remote work.
 
 A series of Likert-scale questions was included to assess an individual's theoretical telework feasibility (\emph{teleworkability}). These questions encompassed job characteristics, the residential environment, and personality traits. This distinction allows modelers to differentiate between possibility and preference, an important concept emphasized by \citet{Mokhtarian+Salomon:1994}. A factor analysis was conducted on these items and two factors emerged as important: One representing job-related dimensions (work context and work activities), and the other relating to personal characteristics and the home office environment. These latent factors could be incorporated into modeling approaches, either directly or indirectly, such as through a probabilistic choice set formation approach as in Manski's model \citep[e.g.,][]{Manski:1977, Bierlaire+Etal:2010}.
 
 \subsection{Stage II: Work from home SP}
-\label{sec:stage-ii}
+\label{sec:datapap-stage-ii}
 
 Individuals identified as eligible for telework were invited to participate in the second stage - the work from home (WFH) SP. Eligibility required participants to be in the workforce and to have a work profile permitting at least one home office day per week, regardless of whether their current employer offers this option. Self-employed individuals were excluded since they do not face exogenous work arrangements.
 
-The selection of attributes was largely inspired by \citet{Bernardino:1995} and insights from the pre-study detailed in Section~\ref{sec:pre-study}. Salary adjustments were included in the design despite being deemed irrelevant by participants in the pre-study. This inclusion was justified for three reasons: First, salary adjustments as (dis)incentives for home office have been a topic of recent public debate; second, this attribute serves as a natural cost component, allowing modelers to interpret other attributes in a monetary (willingness to pay) framework; third, the attribute was found to be relevant in \citet{Bernardino:1995}.
+The selection of attributes was largely inspired by \citet{Bernardino:1995} and insights from the pre-study detailed in Section~\ref{sec:datapap-pre-study}. Salary adjustments were included in the design despite being deemed irrelevant by participants in the pre-study. This inclusion was justified for three reasons: First, salary adjustments as (dis)incentives for home office have been a topic of recent public debate; second, this attribute serves as a natural cost component, allowing modelers to interpret other attributes in a monetary (willingness to pay) framework; third, the attribute was found to be relevant in \citet{Bernardino:1995}.
 
-Attributes and their levels are presented in Table~\ref{tab:wfh-attributes-levels}. Notably, three attributes (\emph{hardware budget, additional cost}, and \emph{salary adjustments}) imply a cost component and a marginal utility of one Swiss franc. It is to be tested whether the monetary utility equivalent remains constant across these three attributes. The \emph{coordination} attribute could have both positive and negative utility implications: While it reduces personal flexibility, it also coordinates office attendance, enhancing collaboration and collegiality. The \emph{desk sharing} attribute captures the concept of flexible office space utilization and expands on \citet{Appel+Etal:2022} where work location attributes such as \emph{noise, openness} and \emph{crowdedness} were tested and found to be important. The \emph{help and training} attribute implies support for technical difficulties and training, promoting effective digital collaboration and a successful home office culture. The full factorial design was reduced according to D-efficiency principles. Each participant completed four choice tasks.
+Attributes and their levels are presented in Table~\ref{tab:datapap-wfh-attributes-levels}. Notably, three attributes (\emph{hardware budget, additional cost}, and \emph{salary adjustments}) imply a cost component and a marginal utility of one Swiss franc. It is to be tested whether the monetary utility equivalent remains constant across these three attributes. The \emph{coordination} attribute could have both positive and negative utility implications: While it reduces personal flexibility, it also coordinates office attendance, enhancing collaboration and collegiality. The \emph{desk sharing} attribute captures the concept of flexible office space utilization and expands on \citet{Appel+Etal:2022} where work location attributes such as \emph{noise, openness} and \emph{crowdedness} were tested and found to be important. The \emph{help and training} attribute implies support for technical difficulties and training, promoting effective digital collaboration and a successful home office culture. The full factorial design was reduced according to D-efficiency principles. Each participant completed four choice tasks.
 
 {\setlength{\tabcolsep}{4pt}
 \begin{table}[htbp]
@@ -137,47 +136,47 @@ Work from anywhere & Allowed\newline Not allowed & Only within Switzerland.\\
 Desk sharing & Yes\newline No & Restructuring of the office space.\\
 \bottomrule
 \end{tabular}
-\caption{\label{tab:wfh-attributes-levels} Attributes and levels of the WFH-SP experiment.}
+\caption{\label{tab:datapap-wfh-attributes-levels} Attributes and levels of the WFH-SP experiment.}
 \end{table}
 }
 
-\citet{Bernardino:1995} included telecommuting frequency as an attribute of the work arrangement, potentially resulting in unrealistic levels that do not account for teleworkability. In contrast, we propose a sequential choice setting where respondents first choose their desired work arrangement and subsequently reveal their preferred frequency, given the characteristics of the selected arrangement. However, this approach may result in unbalanced attribute-level combinations in the frequency choice, as less attractive work arrangement features are filtered out in the initial choice (see the discussion in Figure~\ref{fig:wfh-attribute-level-balance}). Further, it might necessitate a simultaneous modeling approach since work arrangement attributes are no longer exogenous in the frequency choice. An example of a combined choice task is provided in Figure~\ref{fig:wfh-choice-task}. The introductory text explaining the WFH choice task was as follows
+\citet{Bernardino:1995} included telecommuting frequency as an attribute of the work arrangement, potentially resulting in unrealistic levels that do not account for teleworkability. In contrast, we propose a sequential choice setting where respondents first choose their desired work arrangement and subsequently reveal their preferred frequency, given the characteristics of the selected arrangement. However, this approach may result in unbalanced attribute-level combinations in the frequency choice, as less attractive work arrangement features are filtered out in the initial choice (see the discussion in Figure~\ref{fig:datapap-wfh-attribute-level-balance}). Further, it might necessitate a simultaneous modeling approach since work arrangement attributes are no longer exogenous in the frequency choice. An example of a combined choice task is provided in Figure~\ref{fig:datapap-wfh-choice-task}. The introductory text explaining the WFH choice task was as follows
 
 \begin{leftbar}
 On the following pages, you are asked to choose between different \textbf{work arrangements} and tell us about \textbf{how many days} you would work from home under the selected scenario. Here is what a choice situation looks like
 
 \begin{center}
-(Figure~\ref{fig:wfh-choice-task})
+(Figure~\ref{fig:datapap-wfh-choice-task})
 \end{center}
 
 \begin{enumerate}
 \item Two work arrangements are presented (A and B), which differ along eight dimensions.
 \item You are asked to choose your preferred arrangement.
 \item As a last step, you are asked to reveal how many days you would work from home given your selected arrangement.
-\item The above choice (see Figure~\ref{fig:wfh-choice-task}) would imply that you would prefer work arrangement A over B and would like to work from home on 3 days a week given the conditions in arrangement A.
+\item The above choice (see Figure~\ref{fig:datapap-wfh-choice-task}) would imply that you would prefer work arrangement A over B and would like to work from home on 3 days a week given the conditions in arrangement A.
 \end{enumerate}
 \end{leftbar}
 
 \begin{figure}[htbp]
 \centering
 \fbox{\includegraphics[width=0.6\textwidth]{chapters/datapap/figures/wfh_choice_task}}
-\caption{\label{fig:wfh-choice-task} Example of a choice task for the work from home stated preference experiment.}
+\caption{\label{fig:datapap-wfh-choice-task} Example of a choice task for the work from home stated preference experiment.}
 \end{figure}
 
 \subsection{Stage III: Mobility tool ownership SP}
-\label{sec:stage-iii}
+\label{sec:datapap-stage-iii}
 
 Conducting an SP experiment on mobility tool ownership presents challenges due to the necessity to precisely define the characteristics of each proposed mobility tool. Moreover, households may own and share multiple tools of the same type, and interdependencies between tools could exist (e.g., negative correlation between car ownership and public transport subscriptions). Therefore, decision-making involves complex trade-offs that may consider collective household preferences, bargaining dynamics, and the composition of bundles rather than evaluating each mobility tool in isolation. Accordingly, the SP design should incorporate bundled choices to assess the specific attributes of one tool against the entire set of available tools.
 
 The bundle structure involves two primary dimensions: The availability of each considered mobility tool and their respective characteristics. Our study includes five distinct tools: cars, public transport (PT) subscriptions (national or regional season tickets), half-fare card (HT, allowing travelers to purchase PT tickets for half the price), car-sharing subscriptions, and (E-)bikes, following \citet{Becker+Etal:2017} with additions of (E-)bikes and HT. Participants can combine these tools into 32 unique bundles ($2^5$ combinations), differing only in tool availability without imposing trade-offs within the same tool category (e.g., choosing between different types of cars).
 
-Given the impracticality of directly comparing 32 alternatives (known as the ``curse of dimensionality''), we initially explored an unlabeled approach in a pre-test where respondents chose between two predefined bundles. However, participants found this method too abstract and detached from their actual preferences, leading us to adopt a simpler design. In this revised approach, participants are presented with individual options for each mobility tool and are asked to compose a bundle from these options. An example choice task is illustrated in Figure~\ref{fig:mto-choice-task}. The introductory text explaining the mobility tool ownership (MTO) choice task was as follows
+Given the impracticality of directly comparing 32 alternatives (known as the ``curse of dimensionality''), we initially explored an unlabeled approach in a pre-test where respondents chose between two predefined bundles. However, participants found this method too abstract and detached from their actual preferences, leading us to adopt a simpler design. In this revised approach, participants are presented with individual options for each mobility tool and are asked to compose a bundle from these options. An example choice task is illustrated in Figure~\ref{fig:datapap-mto-choice-task}. The introductory text explaining the mobility tool ownership (MTO) choice task was as follows
 
 \begin{leftbar}
 In this survey, we want to determine how far \textbf{home office} impacts your \textbf{mobility tool ownership} choices. On the following pages, you are asked to choose between different mobility tools under various home office scenarios. Imagine that all your current mobility tools have expired and need to be \textbf{renewed} anyways. This is what a choice task looks like
 
 \begin{center}
-(Figure~\ref{fig:mto-choice-task})
+(Figure~\ref{fig:datapap-mto-choice-task})
 \end{center}
 
 \begin{enumerate}
@@ -186,19 +185,19 @@ In this survey, we want to determine how far \textbf{home office} impacts your \
 \item Each choice card contains a \textbf{car} offer, a \textbf{public transport (PT) subscription} offer (either GA or regional season ticket), the price of the \textbf{half-fare card}, a \textbf{car sharing} service as well as a \textbf{bicycle} (either regular or E-bike) offer.
 \item Last, you can choose for each of the five mobility tools whether or not you would like to own the tool at the conditions outlined. There are no other options available. F.ex. if you do not want to own the presented car, you don't have any other car available. So think about what composition of mobility tools would best match your needs given the home office scenario.
 \item Apart from the costs presented, you can assume that \textbf{all other prices are as of today} (e.g., fuel prices, single-fare train tickets, electricity prices, etc.).
-\item The above choice (see Figure~\ref{fig:mto-choice-task}) would imply that given the home office situation presented, you would choose to own the PT subscription and the bicycle.
+\item The above choice (see Figure~\ref{fig:datapap-mto-choice-task}) would imply that given the home office situation presented, you would choose to own the PT subscription and the bicycle.
 \end{enumerate}
 \end{leftbar}
 
 \begin{figure}[htbp]
 \centering
 \fbox{\includegraphics[width=0.6\textwidth]{chapters/datapap/figures/mto_choice_task}}
-\caption{\label{fig:mto-choice-task} Example of an individualized choice task for the mobility tool ownership stated preference experiment.}
+\caption{\label{fig:datapap-mto-choice-task} Example of an individualized choice task for the mobility tool ownership stated preference experiment.}
 \end{figure}
 
 While conceptually simpler, this design emphasizes the availability trade-off and explicitly abstracts from trade-offs between mobility tools of the same type (not choosing the depicted car implies not owning a car at all). Thus, a particular mobility tool is chosen if the net benefit/utility is positive. For instance, even if a participant strongly dislikes a specific car attribute (e.g., car type being luxury or sports car), they might still choose it if the disutility of not owning any car outweighs their aversion to that attribute. This approach questions whether the utility or disutility of not owning a car remains constant across choice occasions, influenced by the characteristics of other mobility tools available which should be accounted for when modeling the choices collectively.
 
-The attributes and assumed reference values are detailed in Table~\ref{tab:mto-attributes-levels} based on which a random design was generated. The cost implications of owning and using a car were meticulously considered to provide a comparable basis for trade-offs with other mobility tools. Fixed costs, depreciation, taxes, insurance, and other expenses were factored into the analysis, with data sourced from the \citet{TCS:2024} website for various vehicle classes and fuel types. See also the \pkg{tcsscraper} \proglang{Python}-package available at \url{https://github.com/dheimgartner/tcsscraper} providing an API to retrieve many variables for the current Swiss car fleet.
+The attributes and assumed reference values are detailed in Table~\ref{tab:datapap-mto-attributes-levels} based on which a random design was generated. The cost implications of owning and using a car were meticulously considered to provide a comparable basis for trade-offs with other mobility tools. Fixed costs, depreciation, taxes, insurance, and other expenses were factored into the analysis, with data sourced from the \citet{TCS:2024} website for various vehicle classes and fuel types. See also the \pkg{tcsscraper} \proglang{Python}-package available at \url{https://github.com/dheimgartner/tcsscraper} providing an API to retrieve many variables for the current Swiss car fleet.
 
 {\setlength{\tabcolsep}{2pt}  % adjust column padding
 \begin{center}
@@ -220,7 +219,7 @@ Attribute & Level & Reference & Remark\\
 \input{chapters/datapap/tables/mto_attributes_levels}\\
 \bottomrule
 \multicolumn{4}{l}{*An archetype has the average car specifics for a certain car and fuel type combination; ST = Season ticket}\\
-\caption{\label{tab:mto-attributes-levels} Attributes and levels of the MTO-SP experiment.}
+\caption{\label{tab:datapap-mto-attributes-levels} Attributes and levels of the MTO-SP experiment.}
 \end{longtable}
 \end{center}
 }
@@ -230,11 +229,11 @@ Attribute & Level & Reference & Remark\\
 %% -- Response behavior --------------------------------------------------------
 
 \section{Response behavior}
-\label{sec:response-behavior}
+\label{sec:datapap-response-behavior}
 
 This section examines the demographic composition of survey participants, relates the surveys' response burdens to other studies conducted at the institute (see Chapter~\ref{ch:responseRateAnalysis}), and explores the variability in choices observed in the two SP experiments.
 
-As previously mentioned, the survey instrument in stage I targeted the entire working population, while SP experiments focused exclusively on those eligible for telework. The distribution across cantons, completion rates, and response rates for stage I are depicted in Figure~\ref{fig:cantonal-distribution}. To emphasize variability among cantons, Zurich, which was oversampled, is excluded from the linear color scale of the first two panels. The remaining German-speaking cantons are included, with invited participants proportionally reflecting their respective populations. Response rates vary across cantons, ranging from 14.29\% (Glarus) to 34.10\% (Lucerne).
+As previously mentioned, the survey instrument in stage I targeted the entire working population, while SP experiments focused exclusively on those eligible for telework. The distribution across cantons, completion rates, and response rates for stage I are depicted in Figure~\ref{fig:datapap-cantonal-distribution}. To emphasize variability among cantons, Zurich, which was oversampled, is excluded from the linear color scale of the first two panels. The remaining German-speaking cantons are included, with invited participants proportionally reflecting their respective populations. Response rates vary across cantons, ranging from 14.29\% (Glarus) to 34.10\% (Lucerne).
 
 \setkeys{Gin}{width=0.8\textwidth}
 \begin{figure}
@@ -242,7 +241,7 @@ As previously mentioned, the survey instrument in stage I targeted the entire wo
 <<datapap-cant-dist, echo=FALSE, fig=TRUE, width=5, height=7>>=
 cantonal_distribution$plot
 @
-\caption{\label{fig:cantonal-distribution} Distribution of invited participants, survey completion, and response rates across cantons. Zurich is excluded from the color scale in the first two panels to highlight variation among other cantons.}
+\caption{\label{fig:datapap-cantonal-distribution} Distribution of invited participants, survey completion, and response rates across cantons. Zurich is excluded from the color scale in the first two panels to highlight variation among other cantons.}
 \end{figure}
 
 {\setlength{\tabcolsep}{4pt}  % adjust column padding
@@ -308,12 +307,12 @@ Variable & Value & MTMC21 & Pre-study & Main study\\
 & Regional season ticket & 11.6 & 8.0 & 17.3\\
 \multirow[t]{-4}{*}{\raggedright\arraybackslash Season Tickets} & None of above & 42.8 & 21.9 & 21.6\\
 \bottomrule
-\caption{\label{tab:mzmv-marginals} Descriptive statistics: MTMC21 versus pre-study and main samples.}
+\caption{\label{tab:datapap-mzmv-marginals} Descriptive statistics: MTMC21 versus pre-study and main samples.}
 \end{longtable}
 \end{center}
 }
 
-Table~\ref{tab:mzmv-marginals} presents marginal distributions of shared variables for the MTMC21 sample, the pre-study, and the main study populations. The main study sample closely mirrors the MTMC21 sample with some exceptions, likely attributable to Zurich's oversampling. Overrepresentation is noted among high-income households and PT season-ticket holders. Regarding ownership of mobility tools, comparability of marginals is limited due to differing survey questions: MTMC21 assessed access to tools while ours inquired about ownership and regular usage. Marginal distributions across reported NOGA sectors diverge notably, reflecting Zurich's status as a financial and ICT hub. Disparities in telework distributions are expected, influenced by the ongoing COVID-19 pandemic during the MTMC21 and pre-study survey periods, detailed further in Section~\ref{sec:descriptive-findings}.
+Table~\ref{tab:datapap-mzmv-marginals} presents marginal distributions of shared variables for the MTMC21 sample, the pre-study, and the main study populations. The main study sample closely mirrors the MTMC21 sample with some exceptions, likely attributable to Zurich's oversampling. Overrepresentation is noted among high-income households and PT season-ticket holders. Regarding ownership of mobility tools, comparability of marginals is limited due to differing survey questions: MTMC21 assessed access to tools while ours inquired about ownership and regular usage. Marginal distributions across reported NOGA sectors diverge notably, reflecting Zurich's status as a financial and ICT hub. Disparities in telework distributions are expected, influenced by the ongoing COVID-19 pandemic during the MTMC21 and pre-study survey periods, detailed further in Section~\ref{sec:datapap-descriptive-findings}.
 
 Despite successful sampling, a re-weighting scheme was implemented to enhance sample representativeness. Using iterative proportional fitting, weights were adjusted based on specified variables, excluding telework and mobility tool ownership due to aforementioned limited comparability. These weights were applied to aggregate statistics whenever findings were generalized to the entire population, employing the \pkg{anesrake} \proglang{R}-package \citep{Pasek:2018} for weight determination.
 
@@ -323,12 +322,12 @@ Despite successful sampling, a re-weighting scheme was implemented to enhance sa
 <<datapap-rra, echo=FALSE, fig=TRUE, width=4.5, height=4.25>>=
 response_rate_analysis$p
 @
-\caption{\label{fig:response-rate-analysis} Relationship between response burden score and response rates. The surveys of this study are enlarged.}
+\caption{\label{fig:datapap-response-rate-analysis} Relationship between response burden score and response rates. The surveys of this study are enlarged.}
 \end{figure}
 
-Figure~\ref{fig:response-rate-analysis} shows the relationship between response burden and response rates, alongside 95\% confidence intervals. The surveys of this study have enlarged symbols. Response rates closely approximate ex-ante predictions, with the exception of the pre-study, falling below the 95\% confidence bound. A potential explanation could be fatigue among respondents sourced via an address dealer, possibly due to frequent solicitations. Addresses for the main study were sourced from the Federal Statistical Office's official sampling frame, with careful measures to avoid repeated sampling. Additionally, initial participation was likely influenced by potential incentives offered upon completion of all three survey stages.
+Figure~\ref{fig:datapap-response-rate-analysis} shows the relationship between response burden and response rates, alongside 95\% confidence intervals. The surveys of this study have enlarged symbols. Response rates closely approximate ex-ante predictions, with the exception of the pre-study, falling below the 95\% confidence bound. A potential explanation could be fatigue among respondents sourced via an address dealer, possibly due to frequent solicitations. Addresses for the main study were sourced from the Federal Statistical Office's official sampling frame, with careful measures to avoid repeated sampling. Additionally, initial participation was likely influenced by potential incentives offered upon completion of all three survey stages.
 
-The variability in telework choices within the SP experiment is illustrated in Figure~\ref{fig:wfh-choice-variation}. Frequencies of telework choices reflect typical experimental work arrangement conditions but may not generalize universally. Choices of two to three teleworking days per week dominate, each accounting for over 30\% of choices. Moreover, aggregate SP telework supply closely matches free-choice telework supply ($\Delta$ = -0.22 days/week), with stated frequencies differing only marginally from free-choice frequencies in most instances. This suggests that the average pre-selected telework arrangement offers limited incentives for deviation beyond the marginal day.
+The variability in telework choices within the SP experiment is illustrated in Figure~\ref{fig:datapap-wfh-choice-variation}. Frequencies of telework choices reflect typical experimental work arrangement conditions but may not generalize universally. Choices of two to three teleworking days per week dominate, each accounting for over 30\% of choices. Moreover, aggregate SP telework supply closely matches free-choice telework supply ($\Delta$ = -0.22 days/week), with stated frequencies differing only marginally from free-choice frequencies in most instances. This suggests that the average pre-selected telework arrangement offers limited incentives for deviation beyond the marginal day.
 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
@@ -387,10 +386,10 @@ plot.it <- function(...) {
 
 plot.it()
 @
-\caption{\label{fig:wfh-choice-variation} Variation in telework choices and deviation from the free-choice scenario.}
+\caption{\label{fig:datapap-wfh-choice-variation} Variation in telework choices and deviation from the free-choice scenario.}
 \end{figure}
 
-Given respondents first selected preferred telework arrangements before specifying intended frequencies, the extent to which attribute-level balance is sustained in the frequency choices is questioned. Figure~\ref{fig:wfh-attribute-level-balance} features separate panels for each attribute level, detailing mean telework frequencies on the left y-axis and frequency of attribute levels retained on the right y-axis. Attributes display generally balanced distributions, even in secondary frequency choices. Initial work arrangement choices filtered out some attributes such as salary decreases and restricted telework locations (\emph{work from anywhere}). The direction of the effects (blue lines) align with intuition: Attributes favorable to telework (e.g., salary increases) correlate with increased mean telework frequencies. The reported maximum difference (\emph{Max diff}) in each panel serves as an indicator for effect strength, highlighting salary adjustments and flexible telework locations as influential levers in telework behavior.
+Given respondents first selected preferred telework arrangements before specifying intended frequencies, the extent to which attribute-level balance is sustained in the frequency choices is questioned. Figure~\ref{fig:datapap-wfh-attribute-level-balance} features separate panels for each attribute level, detailing mean telework frequencies on the left y-axis and frequency of attribute levels retained on the right y-axis. Attributes display generally balanced distributions, even in secondary frequency choices. Initial work arrangement choices filtered out some attributes such as salary decreases and restricted telework locations (\emph{work from anywhere}). The direction of the effects (blue lines) align with intuition: Attributes favorable to telework (e.g., salary increases) correlate with increased mean telework frequencies. The reported maximum difference (\emph{Max diff}) in each panel serves as an indicator for effect strength, highlighting salary adjustments and flexible telework locations as influential levers in telework behavior.
 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
@@ -398,10 +397,10 @@ Given respondents first selected preferred telework arrangements before specifyi
 <<datapap-wfh-attr, echo=FALSE, fig=TRUE, width=8, height=6.5>>=
 wfh_attribute_level_balance$p
 @
-\caption{\label{fig:wfh-attribute-level-balance} Relation between attribute levels and aggregate telework supply (blue lines, left y-axis) and attribute level balance (orange lines, right y-axis).}
+\caption{\label{fig:datapap-wfh-attribute-level-balance} Relation between attribute levels and aggregate telework supply (blue lines, left y-axis) and attribute level balance (orange lines, right y-axis).}
 \end{figure}
 
-Figure~\ref{fig:mto-choice-variation} illustrates discrepancies between real-world and SP-implied shares of mobility tool ownership. Notably, car ownership is underrepresented, while PT subscriptions are overrepresented, reflecting the abstract nature of choice tasks. For example, one of the car attributes might be so unfavorable that respondents switch to PT, whereas in reality, they would simply buy another car. However, as these trade-offs are random they are in particular not correlated with telework frequencies and therefore should not bias telework treatment effects (see Section~\ref{sec:telework-treatment-effects}).
+Figure~\ref{fig:datapap-mto-choice-variation} illustrates discrepancies between real-world and SP-implied shares of mobility tool ownership. Notably, car ownership is underrepresented, while PT subscriptions are overrepresented, reflecting the abstract nature of choice tasks. For example, one of the car attributes might be so unfavorable that respondents switch to PT, whereas in reality, they would simply buy another car. However, as these trade-offs are random they are in particular not correlated with telework frequencies and therefore should not bias telework treatment effects (see Section~\ref{sec:datapap-telework-treatment-effects}).
 
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}[htbp]
@@ -409,19 +408,19 @@ Figure~\ref{fig:mto-choice-variation} illustrates discrepancies between real-wor
 <<datapap-mto-var=FALSE, echo=FALSE, fig=TRUE, width=4, height=3.75>>=
 mto_choice_variation$p
 @
-\caption{\label{fig:mto-choice-variation} Comparison of real-world mobility tool ownership shares and SP choice shares.}
+\caption{\label{fig:datapap-mto-choice-variation} Comparison of real-world mobility tool ownership shares and SP choice shares.}
 \end{figure}
 
 %% -- Descriptive findings -----------------------------------------------------
 
 \section{Descriptive findings}
-\label{sec:descriptive-findings}
+\label{sec:datapap-descriptive-findings}
 
-Our dataset offers a unique opportunity to analyze shifts in telework patterns prompted by the COVID-19 pandemic. We distinguish between individuals who have the capability (\emph{can}), permission (\emph{may}), and inclination (\emph{want}) to telework, and assess the extent of untapped telework potential. Table~\ref{tab:wfh-table-weighted-combined} provides comprehensive insights into these dimensions of telework and their distribution, presenting all possible two-way contingency tables for frequency and binary indicators.
+Our dataset offers a unique opportunity to analyze shifts in telework patterns prompted by the COVID-19 pandemic. We distinguish between individuals who have the capability (\emph{can}), permission (\emph{may}), and inclination (\emph{want}) to telework, and assess the extent of untapped telework potential. Table~\ref{tab:datapap-wfh-table-weighted-combined} provides comprehensive insights into these dimensions of telework and their distribution, presenting all possible two-way contingency tables for frequency and binary indicators.
 
-Table (12) (first row, second column of Table~\ref{tab:wfh-table-weighted-combined}) reveals a profound telework potential among the Swiss workforce, with over 60\% holding teleworkable positions. Of these, 91.33\% express a desire to telework, indicating widespread preference for remote work. As of the survey period (June-August 2023), approximately 40\% actually teleworked, which implies a 20 percentage point gap between those who can and those who do.
+Table (12) (first row, second column of Table~\ref{tab:datapap-wfh-table-weighted-combined}) reveals a profound telework potential among the Swiss workforce, with over 60\% holding teleworkable positions. Of these, 91.33\% express a desire to telework, indicating widespread preference for remote work. As of the survey period (June-August 2023), approximately 40\% actually teleworked, which implies a 20 percentage point gap between those who can and those who do.
 
-We now turn to telework frequency shares before, during, and after the pandemic (table indexed (11)). The lockdown period witnessed exceptional telework uptake, with over half of the workforce shifting to remote work, and about one third fully remote. Comparison with the \emph{Feasible} scenario suggests an oversupply during the lockdown (Lockdown, 5+ $>$ Feasible, 5+). The pandemic accelerated telework adoption by approximately 15 percentage points. Notably, the share of employees teleworking two to three days increased disproportionately, while full-time remote work even decreased. Panel a of Figure~\ref{fig:wfh-share-simulation-leeway} presents these results visually.
+We now turn to telework frequency shares before, during, and after the pandemic (table indexed (11)). The lockdown period witnessed exceptional telework uptake, with over half of the workforce shifting to remote work, and about one third fully remote. Comparison with the \emph{Feasible} scenario suggests an oversupply during the lockdown (Lockdown, 5+ $>$ Feasible, 5+). The pandemic accelerated telework adoption by approximately 15 percentage points. Notably, the share of employees teleworking two to three days increased disproportionately, while full-time remote work even decreased. Panel a of Figure~\ref{fig:datapap-wfh-share-simulation-leeway} presents these results visually.
 
 While a majority (83.72\%) of those with teleworkable jobs work from home, employer constraints are still prevalent (table (11), row \emph{Budget}). To assess the extent of these constraints, refer to table (51), which cross-tabulates \emph{Budget} and \emph{Free-choice}. The upper triangular matrix indicates the share of employees who desire more frequent telework but are constrained. For instance, the first row, second column shows 6.23\% who wish to telework one day but are not allowed to. Totaling 26.47\% across the upper triangular matrix, highlights significant binding constraints. Understanding employer perspectives is crucial for interpreting telework frequencies.
 
@@ -438,12 +437,12 @@ While a majority (83.72\%) of those with teleworkable jobs work from home, emplo
 \end{tabular}
 }%
 }%
-\caption{\label{tab:wfh-table-weighted-combined} Telework distributions and contingency tables.}
+\caption{\label{tab:datapap-wfh-table-weighted-combined} Telework distributions and contingency tables.}
 \end{center}
 \end{table}
 }%
 
-Figure~\ref{fig:wfh-weekday-distribution} illustrates current telework distribution across weekdays for full-time and part-time employees. Mondays and Fridays are preferred telework days: Full-time employed favor Fridays, while part-time employed favor Mondays (potentially not working at all on Fridays). A preference for Mondays and Fridays can be observed among full-time employed teleworking at least three days a week.
+Figure~\ref{fig:datapap-wfh-weekday-distribution} illustrates current telework distribution across weekdays for full-time and part-time employees. Mondays and Fridays are preferred telework days: Full-time employed favor Fridays, while part-time employed favor Mondays (potentially not working at all on Fridays). A preference for Mondays and Fridays can be observed among full-time employed teleworking at least three days a week.
 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
@@ -451,10 +450,10 @@ Figure~\ref{fig:wfh-weekday-distribution} illustrates current telework distribut
 <<datapap-weekday-dist, echo=FALSE, fig=TRUE, width=7.4, height=5.75>>=
 wfh_weekday_distribution$p
 @
-\caption{\label{fig:wfh-weekday-distribution} Distribution of telework shares across weekdays by number of teleworking days, for teleworking population only. Differentiating between full-time and part-time employed.}
+\caption{\label{fig:datapap-wfh-weekday-distribution} Distribution of telework shares across weekdays by number of teleworking days, for teleworking population only. Differentiating between full-time and part-time employed.}
 \end{figure}
 
-Simulations based on telework access and frequency distributions project potential telework shares under alternative scenarios (panel b, Figure~\ref{fig:wfh-share-simulation-leeway}). Implied home office shares under free-choice frequencies substantially increase, notably peaking on Fridays with nearly half of the workforce teleworking from home. Tuesdays and Thursdays show lower shares, suggesting varied impacts on transport infrastructure load across weekdays. These insights underline the need for separate analysis of Fridays and Tuesdays to Thursdays when examining telework's impact on transport demand.
+Simulations based on telework access and frequency distributions project potential telework shares under alternative scenarios (panel b, Figure~\ref{fig:datapap-wfh-share-simulation-leeway}). Implied home office shares under free-choice frequencies substantially increase, notably peaking on Fridays with nearly half of the workforce teleworking from home. Tuesdays and Thursdays show lower shares, suggesting varied impacts on transport infrastructure load across weekdays. These insights underline the need for separate analysis of Fridays and Tuesdays to Thursdays when examining telework's impact on transport demand.
 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
@@ -462,12 +461,12 @@ Simulations based on telework access and frequency distributions project potenti
 <<datapap-share-sim, echo=FALSE, fig=TRUE, height=4.5, width=8>>=
 wfh_share_simulation$p_
 @
-\caption{\label{fig:wfh-share-simulation-leeway} Evolution of telework frequency shares, before, during and after the pandemic (panel a), and potential leeway for teleworking shares on weekdays (panel b). Workforce population only.}
+\caption{\label{fig:datapap-wfh-share-simulation-leeway} Evolution of telework frequency shares, before, during and after the pandemic (panel a), and potential leeway for teleworking shares on weekdays (panel b). Workforce population only.}
 \end{figure}
 
-Given these pandemic-driven shifts and the remaining potential, reconsidering the effect on mobility tool ownership is pertinent. As discussed in Section~\ref{sec:introduction-and-motivation}, this higher-order effect has been overlooked in previous studies. While group differences in ownership (panel a and b, Figure~\ref{fig:mto-wfh-variation}) suggest teleworkers more commonly own a half-fare card and slightly more often bicycles or E-bikes, car ownership and PT subscriptions are marginally lower among teleworkers. Panel b highlights distinct mobility tool compositions among those teleworking five or more days weekly, notably lower car and PT subscription ownership, the predominant commuting modes in Switzerland. However, simple group comparison might not portray the full picture as teleworkers likely constitute a special group with different mobility tool preferences even in the absence of the telework treatment (selection bias).
+Given these pandemic-driven shifts and the remaining potential, reconsidering the effect on mobility tool ownership is pertinent. As discussed in Section~\ref{sec:datapap-introduction-and-motivation}, this higher-order effect has been overlooked in previous studies. While group differences in ownership (panel a and b, Figure~\ref{fig:datapap-mto-wfh-variation}) suggest teleworkers more commonly own a half-fare card and slightly more often bicycles or E-bikes, car ownership and PT subscriptions are marginally lower among teleworkers. Panel b highlights distinct mobility tool compositions among those teleworking five or more days weekly, notably lower car and PT subscription ownership, the predominant commuting modes in Switzerland. However, simple group comparison might not portray the full picture as teleworkers likely constitute a special group with different mobility tool preferences even in the absence of the telework treatment (selection bias).
 
-Therefore, clearer trends emerge from stated preference data where telework treatment was exogenous (see discussion in Section~\ref{sec:stage-iii}). Fully remote employees exhibit unique characteristics, evidenced by trends in (E-)bike and car ownership reversals, alongside linear trends in half-fare card and bike ownership increases, and declines in car ownership and PT subscriptions, particularly evident beyond four telework days weekly.
+Therefore, clearer trends emerge from stated preference data where telework treatment was exogenous (see discussion in Section~\ref{sec:datapap-stage-iii}). Fully remote employees exhibit unique characteristics, evidenced by trends in (E-)bike and car ownership reversals, alongside linear trends in half-fare card and bike ownership increases, and declines in car ownership and PT subscriptions, particularly evident beyond four telework days weekly.
 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
@@ -475,15 +474,15 @@ Therefore, clearer trends emerge from stated preference data where telework trea
 <<datapap-mto-wfh-var, echo=FALSE, fig=TRUE, height=5.75, width=14>>=
 mto_wfh_variation$p
 @
-\caption{\label{fig:mto-wfh-variation} Comparison of mobility tool ownership shares by telework status and frequency. Panel a and b reflect ownership as of the survey period (June-August 2023), panel c is based on stated preference choices.}
+\caption{\label{fig:datapap-mto-wfh-variation} Comparison of mobility tool ownership shares by telework status and frequency. Panel a and b reflect ownership as of the survey period (June-August 2023), panel c is based on stated preference choices.}
 \end{figure}
 
 %% -- Telework treatment effects -----------------------------------------------
 
 \section{Telework treatment effects}
-\label{sec:telework-treatment-effects}
+\label{sec:datapap-telework-treatment-effects}
 
-To assess the telework treatment effects, we conducted simple probit regressions, regressing telework frequency on mobility tool ownership. Due to observed non-linearities, separate coefficients were estimated for each telework frequency. Further distinctions were made between E-bikes and regular bikes, as well as between national and regional PT season tickets (ST). Results including estimates and standard errors are presented in Table~\ref{tab:bootstrap}. Bootstrapped ownership shares derived from these probit models are illustrated in Figure~\ref{fig:bootstrap}.
+To assess the telework treatment effects, we conducted simple probit regressions, regressing telework frequency on mobility tool ownership. Due to observed non-linearities, separate coefficients were estimated for each telework frequency. Further distinctions were made between E-bikes and regular bikes, as well as between national and regional PT season tickets (ST). Results including estimates and standard errors are presented in Table~\ref{tab:datapap-bootstrap}. Bootstrapped ownership shares derived from these probit models are illustrated in Figure~\ref{fig:datapap-bootstrap}.
 
 {\setlength{\tabcolsep}{1pt}  % adjust column padding
 \begin{table}
@@ -514,7 +513,7 @@ writeLines(mat_tex)
 \multicolumn{8}{l}{ST = Season ticket}\\
 \end{tabular}
 }%
-\caption{\label{tab:bootstrap} Simple probit models regressing telework frequency (as an indicator) on mobility tool ownership.}
+\caption{\label{tab:datapap-bootstrap} Simple probit models regressing telework frequency (as an indicator) on mobility tool ownership.}
 \end{table}
 }
 
@@ -553,11 +552,11 @@ plot.it <- function() {
 
 plot.it()
 @
-\caption{\label{fig:bootstrap} Bootstrapped ownership shares based on probit models linking telework frequency to ownership choices (based on the models presented in Table~\ref{tab:bootstrap}). Each line corresponds to the predictions based on one bootstrap sample. ST denotes season ticket.}
+\caption{\label{fig:datapap-bootstrap} Bootstrapped ownership shares based on probit models linking telework frequency to ownership choices (based on the models presented in Table~\ref{tab:datapap-bootstrap}). Each line corresponds to the predictions based on one bootstrap sample. ST denotes season ticket.}
 \end{figure}
 
 \section{Conclusion}
-\label{sec:conclusion}
+\label{sec:datapap-conclusion}
 
 There has been enduring interest in the complex interplay between telework and mobility behavior, particularly regarding their implications for energy consumption and broader climate considerations. The COVID-19 pandemic acted as a catalyst for the widespread adoption of telework, reigniting academic discussions on its impact. In Switzerland, our data indicates a 15 percentage point increase in the teleworking population during the pandemic, with a notable rise in those opting for two to three teleworking days. The comprehensive dataset gathered for this study uniquely positions us to analyze the telework-related shifts brought about by the pandemic in Switzerland, including distinctions among those capable, permitted, and desiring to telework, as well as the potential for further expansion of telework practices.
 

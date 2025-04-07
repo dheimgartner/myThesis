@@ -5,12 +5,6 @@
 Hello world!}%
 \vskip 1em
 
-\todo{%
-\begin{itemize}
-\item Namespace labels
-\end{itemize}
-}
-
 %% -- Abstract -----------------------------------------------------------------
 
 Selection bias may arise if unobserved factors simultaneously influence the selection process for who gets treated (or not), and the outcome of (not) receiving the treatment. Different methods exist to correct for this bias depending on whether longitudinal or cross-sectional data is available. A possible cure in the latter case (where the counterfactual treatment outcome is never observed) is to explicitly account for the arising error correlation and estimate the covariance matrix of the selection and outcome processes. This is known as endogenous switching regression. The \proglang{R} package \pkg{OPSR} introduced in this article provides an easy-to-use, fast and memory efficient interface to ordered probit switching regression, accounting for self-selection into an ordinal treatment. It handles log-transformed outcomes which need special consideration when computing conditional expectations and thus treatment effects.
@@ -24,7 +18,7 @@ Heimgartner D. and X. Wang (2025) \pkg{OPSR}: A Package for Estimating Ordered P
 \ChapterInfoEntry{
 Author contributions
 }{%
-Xinyi Wang and Daniel Heimgartner conceived the presented idea to formalize the findings of \citet{Wang+Mokhtarian:2024} into an \proglang{R} package. The theory presented in Section~\ref{sec:model} stems from that work. Daniel Heimgartner implemented the functionality and \proglang{R} package architecture based on Xinyi Wang's original scripts, as well as drafted the paper. All authors discussed the results and contributed to the final manuscript.
+Xinyi Wang and Daniel Heimgartner conceived the presented idea to formalize the findings of \citet{Wang+Mokhtarian:2024} into an \proglang{R} package. The theory presented in Section~\ref{sec:opsr-model} stems from that work. Daniel Heimgartner implemented the functionality and \proglang{R} package architecture based on Xinyi Wang's original scripts, as well as drafted the paper. All authors discussed the results and contributed to the final manuscript.
 }%
 \ChapterInfoEntry{
 The following changes were made
@@ -35,7 +29,7 @@ The model \code{fit\_intercept} was excluded from the \fct{texreg::screenreg} ca
 
 %% -- Introduction -------------------------------------------------------------
 
-\section{Introduction} \label{sec:intro}
+\section{Introduction} \label{sec:opsr-intro}
 
 The goal of the program evaluation literature is to estimate the effect of a treatment program (e.g., a new policy, technology, medical treatment, or agricultural practice) on an outcome. To evaluate such a program, the ``treated'' are compared to the ``untreated''. In an experimental setting, the treatment can be (randomly) assigned by the researcher. However, in an observational setting, the treatment is not always exogenously prescribed but rather self-selected. This gives rise to a selection bias when factors (either observed or unobserved) influencing the treatment adoption also influence the outcome (also known as selection on observables and unobservables). Simple group comparison no longer yield an unbiased estimate of the treatment effect. In more technical terms, the counterfactual outcome of the treated (``if they had not been treated'') does not necessarily correspond to the factual outcome of the untreated. For example, cyclists riding without a helmet (the ``untreated'') might be young and have a risk-seeking tendency. We therefore potentially overestimate the benefit of wearing a helmet if we compare the accident rate and/or crash severity rate between those who wear and do not wear helmets directly. Even if we may control age for the comparison, variables such as risk-seeking are not readily measured, and it may still be part of the error in applied research and thus leading cause of a selection bias.
 
@@ -49,12 +43,12 @@ OPSR is available as a \proglang{Stata} command, \code{oheckman} \citep{Chiburis
 
 \pkg{OPSR} is tailored to one particular method, easy to use (understand, extend and maintain), fast and memory efficient. Unlike the implementations mentioned, this approach accommodates log-transformed continuous outcomes. Log transformation is a widely used technique in real-world applications to enhance data normality and meet model assumptions. In multi-layer models like OPSR, special consideration is required for computing conditional expectations on the original scale (i.e., back-transform from the log scale) to ensure meaningful real-world interpretations. \pkg{OPSR} obeys to \proglang{R}'s implicit modeling conventions (by providing a formula interface to a fitter function and by extending the established generics such as \fct{summary}, \fct{predict}, \fct{update}, \fct{anova} among others) and produces production-grade output tables. This work generalizes the learnings from \cite{Wang+Mokhtarian:2024} and makes the OPSR methodology readily available. The mathematical notation presented here translates to code almost verbatim which hopefully serves a pedagogical purpose for the curious reader.
 
-The remainder of this paper is organized as follows: Section~\ref{sec:model} outlines the ordered probit switching regression model, lists all the key formulas underlying the software implementation and details \pkg{OPSR}'s architecture. In Section~\ref{sec:illustrations} the key functionality is demonstrated both on simulated data and the data from \cite{Wang+Mokhtarian:2024} which we use to reproduce their core model. Further, it is shown, that \pkg{OPSR} can be used to estimate the well-known Tobit-5 model and yields the same parameters as the implementation in \pkg{sampleSelection}. The case study in Section~\ref{sec:case-study} leverages tracking data from the TimeUse+ study \citep{Winkler+Meister+Axhausen:2024} investigating telework treatment effects on weekly distance traveled. There, we also compare the OPSR model to a model not accounting for error correlation and discuss the implications for treatment effects. The summary in Section~\ref{sec:summary} concludes.
+The remainder of this paper is organized as follows: Section~\ref{sec:opsr-model} outlines the ordered probit switching regression model, lists all the key formulas underlying the software implementation and details \pkg{OPSR}'s architecture. In Section~\ref{sec:opsr-illustrations} the key functionality is demonstrated both on simulated data and the data from \cite{Wang+Mokhtarian:2024} which we use to reproduce their core model. Further, it is shown, that \pkg{OPSR} can be used to estimate the well-known Tobit-5 model and yields the same parameters as the implementation in \pkg{sampleSelection}. The case study in Section~\ref{sec:opsr-case-study} leverages tracking data from the TimeUse+ study \citep{Winkler+Meister+Axhausen:2024} investigating telework treatment effects on weekly distance traveled. There, we also compare the OPSR model to a model not accounting for error correlation and discuss the implications for treatment effects. The summary in Section~\ref{sec:opsr-summary} concludes.
 
 
 %% -- Manuscript ---------------------------------------------------------------
 
-\section{Model and software} \label{sec:model}
+\section{Model and software} \label{sec:opsr-model}
 
 In the following, we outline the ordered probit switching regression model as well as list all the key formulas underlying the software implementation. \pkg{OPSR} follows the \proglang{R}-typical formula interface to a workhorse fitter function. Its architecture is detailed after the mathematical part.
 
@@ -64,7 +58,7 @@ We borrow the notation from \cite{Wang+Mokhtarian:2024} where also all the deriv
 
 Let $\mathcal{Z}$ be a latent propensity governing the selection outcome
 %
-\begin{equation} \label{eq:selection}
+\begin{equation} \label{eq:opsr-selection}
 \mathcal{Z} = \Wg + \epsilon,
 \end{equation}
 %
@@ -72,13 +66,13 @@ where $\boldsymbol{W}$ represents the vector of attributes of an individual, $\b
 
 As $\mathcal{Z}$ increases and passes some unknown but estimable thresholds, we move up from one ordinal treatment to the next higher level
 %
-\begin{equation} \label{eq:thresholds}
+\begin{equation} \label{eq:opsr-thresholds}
 Z = j \quad \mathrm{if}\ \kappa_{j-1} < \mathcal{Z} \le \kappa_j,
 \end{equation}
 %
 where $Z$ is the observed ordinal selection variable, $j = 1, \dots, J$ indexes the ordinal levels of $Z$, and $\kappa_j$ are the thresholds (with $\kappa_0 = -\infty$ and $\kappa_J = \infty$). Hence, there are $J-1$ thresholds to be estimated. The probability that an individual self-selects into treatment group $j$ is
 %
-\begin{equation} \label{eq:prob-selection}
+\begin{equation} \label{eq:opsr-prob-selection}
 \begin{aligned}
 \Prob[Z = j] &= \Prob[\kappa_{j-1} < \mathcal{Z} \le \kappa_j] \\
 &= \Prob[\kappa_{j-1} - \Wg < \epsilon \le \kappa_j - \Wg] \\
@@ -90,7 +84,7 @@ where $\Phi(\cdot)$ is the cumulative distribution function of the standard norm
 
 The outcome model for the \jth treatment group is expressed as
 %
-\begin{equation} \label{eq:outcome}
+\begin{equation} \label{eq:opsr-outcome}
 y_j = \Xb + \eta_j,
 \end{equation}
 %
@@ -98,7 +92,7 @@ where $y_j$ is the observed continuous outcome, $\boldsymbol{X_j}$ the vector of
 
 The key assumption of OPSR is now that the errors of the selection and outcome models are jointly multivariate normally distributed
 %
-\begin{equation} \label{eq:multi-norm}
+\begin{equation} \label{eq:opsr-multi-norm}
 \begin{pmatrix}
 \epsilon \\
 \eta_1 \\
@@ -131,7 +125,7 @@ where $\rho_j$ represents the correlation between the errors of the selection mo
 
 As shown in \cite{Wang+Mokhtarian:2024}, the log-likelihood of observing all individuals self-selecting into treatment $j$ and choosing continuous outcome $y_j$ can be expressed as
 %
-\begin{multline} \label{eq:log-lik}
+\begin{multline} \label{eq:opsr-log-lik}
 \ell(\theta \mid \boldsymbol{W}, \boldsymbol{X_j}) = \sum_{j = 1}^{J} \sum_{\{j\}}
 \Biggl\{
 \ln\Biggl[
@@ -152,7 +146,7 @@ where $\sum_{\{j\}}$ means the summation of all the cases belonging to the \jth 
 
 The conditional expectation can be expressed as
 %
-\begin{equation} \label{eq:cond-exp}
+\begin{equation} \label{eq:opsr-cond-exp}
 \begin{aligned}
 \E[y_j \mid Z = j] &= \Xb + \E[\eta_j \mid \kappa_{j-1} - \Wg < \epsilon \le \kappa_j - \Wg] \\
 &= \Xb - \rho_j\sigma_j \frac{\phi(\kappa_j - \Wg) - \phi(\kappa_{j-1} - \Wg)}{\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)},
@@ -163,16 +157,16 @@ where the (negative) fraction is the ordered probit switching regression model c
 
 To obtain unbiased treatment effects, we must further evaluate the ``counterfactual outcome'', which reflects the expected outcome under a counterfactual treatment (i.e., for $j' \neq j$)
 %
-\begin{equation} \label{eq:counterfact-exp}
+\begin{equation} \label{eq:opsr-counterfact-exp}
 \begin{aligned}
 \E[y_{j'} \mid Z = j] &= \Xbd + \E[\eta_{j'} \mid \kappa_{j-1} - \Wg < \epsilon \le \kappa_j - \Wg] \\
 &= \Xbd - \rho_{j'}\sigma_{j'} \frac{\phi(\kappa_j - \Wg) - \phi(\kappa_{j-1} - \Wg)}{\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)}.
 \end{aligned}
 \end{equation}
 %
-Let's assume that $y_j = \ln(Y_j + \delta)$ in the previous equations. I.e., the continuous outcome was log-transformed as is usual in regression analysis. We have to note, that in such cases the Equations~\ref{eq:cond-exp}-\ref{eq:counterfact-exp} provide the conditional expectation of the log-transformed outcome. Therefore we need to back-transform $Y_j = \exp(y_j) - \delta$ which yields
+Let's assume that $y_j = \ln(Y_j + \delta)$ in the previous equations. I.e., the continuous outcome was log-transformed as is usual in regression analysis. We have to note, that in such cases the Equations~\ref{eq:opsr-cond-exp}-\ref{eq:opsr-counterfact-exp} provide the conditional expectation of the log-transformed outcome. Therefore we need to back-transform $Y_j = \exp(y_j) - \delta$ which yields
 %
-\begin{multline} \label{eq:log-cond-exp}
+\begin{multline} \label{eq:opsr-log-cond-exp}
 \E[Y_j \mid Z = j] =
 \exp\Biggl(\Xb + \frac{\sigma_j^2}{2}\Biggr) \\
 \Biggl[
@@ -183,7 +177,7 @@ Let's assume that $y_j = \ln(Y_j + \delta)$ in the previous equations. I.e., the
 %
 for the factual case, and
 %
-\begin{multline} \label{eq:log-counterfact-exp}
+\begin{multline} \label{eq:opsr-log-counterfact-exp}
 \E[Y_{j'} \mid Z = j] =
 \exp\Biggl(\Xbd + \frac{\sigma_{j'}^2}{2}\Biggr) \\
 \Biggl[
@@ -198,7 +192,7 @@ This concludes the mathematical treatment and we briefly outline \pkg{OPSR}'s ar
 \begin{itemize}
 \item We provide the usual formula interface to specify a model. To allow for multiple parts and multiple responses, we rely on the \pkg{Formula} package \citep{Zeileis+Croissant:2010}.
 \item After parsing the formula object, checking the user inputs and computing the model matrices, the Heckman two-step estimator is called in \fct{opsr\_2step} to generate reasonable starting values.
-\item These are then passed together with the data to the basic computation engine \fct{opsr.fit}. The main estimates are retrieved using maximum likelihood estimation by passing the log-likelihood function \fct{loglik\_cpp} (Equation~\ref{eq:log-lik}) to \fct{maxLik} from the \pkg{maxLik} package \citep{Henningsen+Toomet:2011}.
+\item These are then passed together with the data to the basic computation engine \fct{opsr.fit}. The main estimates are retrieved using maximum likelihood estimation by passing the log-likelihood function \fct{loglik\_cpp} (Equation~\ref{eq:opsr-log-lik}) to \fct{maxLik} from the \pkg{maxLik} package \citep{Henningsen+Toomet:2011}.
 \item All the above calls are nested in the main interface \fct{opsr} which returns an object of class \class{opsr}. Several methods then exist to post-process this object as illustrated below.
 \end{itemize}
 
@@ -207,11 +201,11 @@ The likelihood function \fct{loglik\_cpp} is implemented in \proglang{C++} using
 
 %% -- Illustrations ------------------------------------------------------------
 
-\section{Illustrations} \label{sec:illustrations}
+\section{Illustrations} \label{sec:opsr-illustrations}
 
 We first illustrate how to specify a model using \pkg{Formula}'s extended syntax and simulated data. Then the main functionality of the package is demonstrated. We conclude this section by demonstrating some nuances, reproducing the core model of \cite{Wang+Mokhtarian:2024}. Finally, we show that \pkg{OPSR} can also estimate the classic Tobit-5 model and matches the results obtained with the implementation from \pkg{sampleSelection}.
 
-\subsection[OPSR core]{\pkg{OPSR} core} \label{sec:opsr-core}
+\subsection[OPSR core]{\pkg{OPSR} core} \label{sec:opsr-opsr-core}
 
 Let us simulate date from an OPSR process with three ordinal outcomes and distinct design matrices $\boldsymbol{W}$ and $\boldsymbol{X}$ (where $\boldsymbol{X} = \boldsymbol{X_j} \ \forall{j}$) by
 %
@@ -242,7 +236,7 @@ The presentation of the model results is fairly standard and should not warrant 
 \begin{enumerate}
 \item The number of regimes along absolute counts are reported.
 \item Pseudo R-squared (EL) is determined by comparing the log-likelihood of the specified model to that of the ``equally likely'' model, while Pseudo R-squared (MS) is obtained by comparing the log-likelihood of the specified model to that of the ``market-share'' model. These indicators reflect the goodness of fit for the selection process. The multiple R-squared is reported for all continuous outcomes collectively and for the regimes separately in brackets (i.e., only considering the continuous observations belonging to the respective treatment regime). These indicators reflect the goodness of fit for the outcome processes.
-\item Coefficient names are based on the variable names as passed to the formula specification, except that \code{"s_"} is prepended to the selection coefficients, \code{"o[0-9]_"} to the outcome coefficients and the structural components \code{"kappa", "sigma", "rho"} (aligning with the letters used in Equation~\ref{eq:log-lik}) are hard-coded (but can be over-written).
+\item Coefficient names are based on the variable names as passed to the formula specification, except that \code{"s_"} is prepended to the selection coefficients, \code{"o[0-9]_"} to the outcome coefficients and the structural components \code{"kappa", "sigma", "rho"} (aligning with the letters used in Equation~\ref{eq:opsr-log-lik}) are hard-coded (but can be over-written).
 \item The coefficients table reports robust standard errors based on the sandwich covariance matrix as computed with help of the \pkg{sandwich} package \citep{Zeileis:2006}. \code{rob = FALSE} reports conventional standard errors.
 \item Two Wald-tests are conducted. One, testing the null that all coefficients of explanatory variables are zero and two, testing the null that all error correlation coefficients (\code{rho}) are zero. The latter being rejected indicates that selection bias is an issue.
 \end{enumerate}
@@ -270,7 +264,7 @@ anova(fit_null, fit_intercept, fit)
 If only a single object is passed, then the model is compared to the null model. If more than one object is specified a likelihood ratio test is conducted for each pair of neighboring models. As expected, both tests reject the null hypothesis.
 
 Models can be compared side-by-side using the \pkg{texreg} package \citep{Leifeld:2013}, which also allows the user to build production-grade tables as illustrated later.
-\label{p:omitted-fit-intercept}
+\label{p:opsr-omitted-fit-intercept}
 %
 <<texreg>>==
 texreg::screenreg(list(fit_null, fit),
@@ -284,14 +278,14 @@ p1 <- predict(fit, group = 1, type = "response")
 p2 <- predict(fit, group = 1, counterfact = 2, type = "response")
 @
 %
-where \code{p1} is the result of applying Equation~\ref{eq:cond-exp} and \code{p2} is the counterfactual outcome resulting from Equation~\ref{eq:counterfact-exp}. The following \code{type} arguments are available
+where \code{p1} is the result of applying Equation~\ref{eq:opsr-cond-exp} and \code{p2} is the counterfactual outcome resulting from Equation~\ref{eq:opsr-counterfact-exp}. The following \code{type} arguments are available
 \begin{itemize}
 \item \code{type = "response"}: Predicts the continuous outcome according to the Equations referenced above.
-\item \code{type = "unlog-response"}: Predicts the back-transformed response according to Equations~\ref{eq:log-cond-exp}-\ref{eq:log-counterfact-exp} if the continuous outcome was log-transformed (either in the \code{formula} or during data pre-processing). The smoothing constant used during the continuity correction (i.e., the $\delta$ in $y_j = \ln(Y_j + \delta)$) can be specified via the \code{delta} argument and defaults to 1.
+\item \code{type = "unlog-response"}: Predicts the back-transformed response according to Equations~\ref{eq:opsr-log-cond-exp}-\ref{eq:opsr-log-counterfact-exp} if the continuous outcome was log-transformed (either in the \code{formula} or during data pre-processing). The smoothing constant used during the continuity correction (i.e., the $\delta$ in $y_j = \ln(Y_j + \delta)$) can be specified via the \code{delta} argument and defaults to 1.
 \item \code{type = "prob"}: Returns the probability vector of belonging to \code{group}.
 \item \code{type = "mills"}: Returns the ``inverse Mills ratio''.
-\item \code{type = "correction"}: Returns $\rho_j \sigma_j$IMR respectively $\rho_{j'} \sigma_{j'}$IMR (if \code{counterfact = j'} was specified) from Equation~\ref{eq:cond-exp} or \ref{eq:counterfact-exp}.
-\item \code{type = "Xb"}: Returns $\Xb$ respectively $\Xbd$ (if \code{counterfact = j'} was specified) from Equation~\ref{eq:cond-exp} or \ref{eq:counterfact-exp}.
+\item \code{type = "correction"}: Returns $\rho_j \sigma_j$IMR respectively $\rho_{j'} \sigma_{j'}$IMR (if \code{counterfact = j'} was specified) from Equation~\ref{eq:opsr-cond-exp} or \ref{eq:opsr-counterfact-exp}.
+\item \code{type = "Xb"}: Returns $\Xb$ respectively $\Xbd$ (if \code{counterfact = j'} was specified) from Equation~\ref{eq:opsr-cond-exp} or \ref{eq:opsr-counterfact-exp}.
 \end{itemize}
 Elements are \code{NA_real_} if the \code{group} does not correspond to the observed regime. This ensures consistent output length.
 
@@ -434,9 +428,9 @@ Dot arguments (\code{...}) passed to \fct{texreg} (or similar functions) are for
 \item The output formatting can be controlled flexibly, by reordering, renaming and grouping coefficients (the fiddly but trivial details are hidden here for brevity).
 \end{enumerate}
 
-\subsection[Tobit-5 model and comparison to sampleSelection]{Tobit-5 model and comparison to \pkg{sampleSelection}} \label{sec:tobit-5}
+\subsection[Tobit-5 model and comparison to sampleSelection]{Tobit-5 model and comparison to \pkg{sampleSelection}} \label{sec:opsr-tobit-5}
 
-As noted in Section~\ref{sec:intro}, the Tobit-5 model can be seen as a form of OPSR with only two selection outcomes and can be fitted with the \proglang{R}-package \pkg{sampleSelection}. In this section, we illustrate that \pkg{OPSR} can estimate Tobit-5 models (as all the other examples involve three regimes) and that the results match the ones obtained with \pkg{sampleSelection}. The example, using simulated data, is directly taken from the vignette \citet[Section~4.2]{Toomet+Henningsen:2020} \code{vignette("selection", package = "sampleSelection")}.
+As noted in Section~\ref{sec:opsr-intro}, the Tobit-5 model can be seen as a form of OPSR with only two selection outcomes and can be fitted with the \proglang{R}-package \pkg{sampleSelection}. In this section, we illustrate that \pkg{OPSR} can estimate Tobit-5 models (as all the other examples involve three regimes) and that the results match the ones obtained with \pkg{sampleSelection}. The example, using simulated data, is directly taken from the vignette \citet[Section~4.2]{Toomet+Henningsen:2020} \code{vignette("selection", package = "sampleSelection")}.
 
 We create the following switching regression problem
 %
@@ -473,7 +467,7 @@ summary(tobit5_o)
 @
 
 %% -- Case study ---------------------------------------------------------------
-\section{Case study} \label{sec:case-study}
+\section{Case study} \label{sec:opsr-case-study}
 
 Now, that the reader is familiar with the main functionality of \pkg{OPSR}, this section demonstrates how to employ it in a real-world example. The emphasis, therefore, lies not on what each function does but on guiding the reader through the modeling and post-estimation steps. We investigate telework treatment effects on weekly distance traveled (aggregated over all modes of transport). This contrasts \citet{Wang+Mokhtarian:2024} who used vehicle miles driven (i.e., car only).
 
@@ -488,7 +482,7 @@ The data, underlying this analysis, is attached, documented (\code{?timeuse_data
 data("timeuse_data", package = "OPSR")
 @
 %
-A basic boxplot of the response variable against the three telework statuses is displayed in Figure~\ref{fig:boxplot}. By simply looking at the data descriptively, we might prematurely conclude that telework does not impact weekly distance traveled. However, the whole value proposition of OPSR (and switching regression models in general) lies in estimating treatment effects by generating conterfactuals that are otherwise unobservable in cross-sectional datasets. If the teleworkers self-select, the counterfactual is not simply the group average of the non-teleworkers. More prosaically, if UTWers stopped teleworking, they might travel more or less than the actual NTWers. And as discussed, this might stem from both observable as well as unobservable factors. Meanwhile, UTWers have the highest average commute distance, followed by NUTWers and NTWers.
+A basic boxplot of the response variable against the three telework statuses is displayed in Figure~\ref{fig:opsr-boxplot}. By simply looking at the data descriptively, we might prematurely conclude that telework does not impact weekly distance traveled. However, the whole value proposition of OPSR (and switching regression models in general) lies in estimating treatment effects by generating conterfactuals that are otherwise unobservable in cross-sectional datasets. If the teleworkers self-select, the counterfactual is not simply the group average of the non-teleworkers. More prosaically, if UTWers stopped teleworking, they might travel more or less than the actual NTWers. And as discussed, this might stem from both observable as well as unobservable factors. Meanwhile, UTWers have the highest average commute distance, followed by NUTWers and NTWers.
 
 \setkeys{Gin}{width=.8\textwidth}
 \begin{figure}[t!]
@@ -504,11 +498,11 @@ plot(log_commute_km ~ factor(wfh), data = timeuse_data, varwidth = TRUE,
   names = c("NTWers", "NUTWers", "UTWers"), main = "Commute distance",
   col = "white")
 @
-\caption{\label{fig:boxplot} Log weekly distance traveled and log one-way commute distance for different telework statuses.}
+\caption{\label{fig:opsr-boxplot} Log weekly distance traveled and log one-way commute distance for different telework statuses.}
 \end{figure}
 
 %% The model
-As mentioned in Section~\ref{sec:model}, the analyst needs to think of an identification restriction: In our application, we reserve the international standard classification of occupations (ISCO-08) variables for the selection process. To simplify model specification, we first estimate the ordered probit model separately, using \fct{polr} from the \pkg{MASS} package \citep{Venables+Ripley:2002}. It should be noted here, that the resulting parameter estimates of the selection process are unbiased.
+As mentioned in Section~\ref{sec:opsr-model}, the analyst needs to think of an identification restriction: In our application, we reserve the international standard classification of occupations (ISCO-08) variables for the selection process. To simplify model specification, we first estimate the ordered probit model separately, using \fct{polr} from the \pkg{MASS} package \citep{Venables+Ripley:2002}. It should be noted here, that the resulting parameter estimates of the selection process are unbiased.
 %
 <<opsr-fit-polr>>=
 drop <- c("id", "weekly_km", "log_weekly_km", "commute_km",
@@ -634,9 +628,9 @@ te(fit_red)
 te.fr <- te(fit_red)
 @
 %
-Telework reduces weekly kilometers traveled across all groups, with the exception of NTWers who would be more mobile when switching from NTWing to NUTWing (\Sexpr{round(te.fr[1, 1], 2)} km; column \code{NTWer}, row \code{NTWing -> NUTWing}) and UTWers who would travel more when further adopting telework from NUTWing (\Sexpr{round(te.fr[3, 3], 2)} km). The treatment effects when switching from NTWing to NUTWing are strongest for UTWers (\Sexpr{round(te.fr[1, 3], 2)} km) compared to NTWers (\Sexpr{round(te.fr[1, 1], 2)} km) and NUTWers (\Sexpr{round(te.fr[1, 2], 2)} km). Treatment effects for NTWing to UTWing are similar across all three groups, slightly stronger for NTWers (\Sexpr{round(te.fr[2, 1], 2)} km). Interestingly, NTWers show a non-linear pattern, first increasing weekly kilometers when adopting some telework (\Sexpr{round(te.fr[1, 1], 2)} km; NTWing to NUTWing) but then substantially decreasing weekly kilometers with more telework (\Sexpr{round(te.fr[3, 1], 2)} km; NUTWing to UTWing). An explanation could be, that these individuals (living closer to their workplace) do initially not adjust activity chains and location choices when only occasionally teleworking. For example, an individual might stay subscribed to the gym close to the workplace and visit that facility even on a home office day. On the other hand, UTWers show exactly an inverse pattern, first (NTWing to NUTWing) strongly reducing weekly kilometers (\Sexpr{round(te.fr[1, 3], 2)} km) but upon further telework adoption (NUTWing to UTWing) only minimally adjusting weekly kilometers (\Sexpr{round(te.fr[3, 3], 2)} km). A similar argument could be made, that these individuals (living further from their workplace) already from the start adjust activity chains and location choices. One can therefore conclude, that the treatment effect over the full range (NTWing to UTWing) is similar across all groups but the main travel reduction happens at different treatment intensities. Figure~\ref{fig:treatment} (panel d) visualizes these treatment effects and shows the linear pattern for NUTWers and the (mirrored) hockey stick pattern for NTWers and UTWers.
+Telework reduces weekly kilometers traveled across all groups, with the exception of NTWers who would be more mobile when switching from NTWing to NUTWing (\Sexpr{round(te.fr[1, 1], 2)} km; column \code{NTWer}, row \code{NTWing -> NUTWing}) and UTWers who would travel more when further adopting telework from NUTWing (\Sexpr{round(te.fr[3, 3], 2)} km). The treatment effects when switching from NTWing to NUTWing are strongest for UTWers (\Sexpr{round(te.fr[1, 3], 2)} km) compared to NTWers (\Sexpr{round(te.fr[1, 1], 2)} km) and NUTWers (\Sexpr{round(te.fr[1, 2], 2)} km). Treatment effects for NTWing to UTWing are similar across all three groups, slightly stronger for NTWers (\Sexpr{round(te.fr[2, 1], 2)} km). Interestingly, NTWers show a non-linear pattern, first increasing weekly kilometers when adopting some telework (\Sexpr{round(te.fr[1, 1], 2)} km; NTWing to NUTWing) but then substantially decreasing weekly kilometers with more telework (\Sexpr{round(te.fr[3, 1], 2)} km; NUTWing to UTWing). An explanation could be, that these individuals (living closer to their workplace) do initially not adjust activity chains and location choices when only occasionally teleworking. For example, an individual might stay subscribed to the gym close to the workplace and visit that facility even on a home office day. On the other hand, UTWers show exactly an inverse pattern, first (NTWing to NUTWing) strongly reducing weekly kilometers (\Sexpr{round(te.fr[1, 3], 2)} km) but upon further telework adoption (NUTWing to UTWing) only minimally adjusting weekly kilometers (\Sexpr{round(te.fr[3, 3], 2)} km). A similar argument could be made, that these individuals (living further from their workplace) already from the start adjust activity chains and location choices. One can therefore conclude, that the treatment effect over the full range (NTWing to UTWing) is similar across all groups but the main travel reduction happens at different treatment intensities. Figure~\ref{fig:opsr-treatment} (panel d) visualizes these treatment effects and shows the linear pattern for NUTWers and the (mirrored) hockey stick pattern for NTWers and UTWers.
 
-While the discussion above was based on averaged group-level treatment effects, Figure~\ref{fig:treatment} shows the distributions of predicted weekly distance traveled by teleworker group. Each panel presents a pair of (un)treated telework statuses as the margins and the dashed lines are the empirical sample means. The solid black reference line marks the instances where weekly distance traveled is equal for both of the paired (un)treated telework statuses. I.e., points below the reference line indicate more travel under the regime depicted on the x-axis.
+While the discussion above was based on averaged group-level treatment effects, Figure~\ref{fig:opsr-treatment} shows the distributions of predicted weekly distance traveled by teleworker group. Each panel presents a pair of (un)treated telework statuses as the margins and the dashed lines are the empirical sample means. The solid black reference line marks the instances where weekly distance traveled is equal for both of the paired (un)treated telework statuses. I.e., points below the reference line indicate more travel under the regime depicted on the x-axis.
 %
 <<opsr-hidden, echo=FALSE>>=
 plot_treat_avg <- function(object, x, ylim, col, main,
@@ -825,7 +819,7 @@ g3grob <- gridGraphics::echoGrob(g3)
 
 gridExtra::grid.arrange(g1grob, g2grob, g3grob, g4grob, ncol = 2)
 @
-\caption{\label{fig:treatment} Treatment effects.}
+\caption{\label{fig:opsr-treatment} Treatment effects.}
 \end{figure}
 
 \begin{table}[htbp]
@@ -840,7 +834,7 @@ Model & Parent & Error correlation & Description \\
 \code{fit_nocor} & \code{fit_red} & $\circ$ & Fixing the \code{rho} coefficients at 0 \\
 \bottomrule
 \end{tabular}
-\caption{\label{tab:model-overview} Model overview. The model is based on \emph{Parent} as elaborated under \emph{Description}.}
+\caption{\label{tab:opsr-model-overview} Model overview. The model is based on \emph{Parent} as elaborated under \emph{Description}.}
 \end{table}
 
 We now demonstrate, that not controlling for error correlation leads to different and most likely wrong conclusions, since parameter estimates might be biased. We derive a model (\code{fit_nocor}) without error correlation by setting the \code{rho} coefficients to 0. I.e., this is the same as separately estimating an ordered probit model and three linear regression models.
@@ -892,6 +886,6 @@ Generally, telework reduces weekly distance traveled by less than the foregone c
 
 %% -- Summary/conclusions/discussion -------------------------------------------
 
-\section{Summary and discussion} \label{sec:summary}
+\section{Summary and discussion} \label{sec:opsr-summary}
 
 In a real-world setting, the treatment is usually not exogenously prescribed but self-selected. Various methods in various statistical environments exist to account for selection-bias which arises if unobserved factors simultaneously influence both the selection and outcome process. OPSR is introduced as a special case of endogenous switching regression to account selection biases for ordinal treatments (where the well-known Tobit-5 model is a special case of OPSR, i.e., with only two treatment regimes). The model frame for such Heckman-type models as well as their implementation in the \proglang{R} system for statistical computing is reviewed. The here presented \proglang{R} implementation in package \pkg{OPSR} re-uses design and functionality of the corresponding \proglang{R} software. Hence, the new function \fct{opsr} is straightforward to apply for model fitting and diagnostics. Further, it is fast and memory efficient thanks to the \proglang{C++} implementation of the log-likelihood function which can also be parallelized. \pkg{OPSR} handles log-transformed outcomes which need special consideration when computing conditional expectations and thus treatment effects. In the case study, the OPSR method is applied to a tracking and activity diary dataset collected in Switzerland, investigating the telework treatment effects on weekly distance traveled across all modes. We demonstrate, first, how to specify an appropriate model and check for error correlation, and second, in how far computed treatment effects differ if the error correlation is not accounted for. We find that, overall, telework reduces travel. Non-teleworkers tend to have shorter commutes and adjust mobility patterns mainly when switching from non-usual telework to usual telework. On the other hand, weekly distance traveled slightly increases when initially adopting some telework. Contrary, usual teleworkers (had they not been teleworking) adjust mobility patterns strongly when adopting some telework but then only marginally adjust distance traveled when further adopting telework. Comparing the unit treatment effects to the two-way commute distance indicates that telework generally reduces weekly distance traveled and it does so by less than the foregone commute. Therefore, some compensating travel (rebound effects) exists for most of the teleworker groups.

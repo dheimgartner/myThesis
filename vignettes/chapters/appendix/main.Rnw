@@ -34,7 +34,7 @@ The final model from Section~\ref{sec:twte-telework-treatment-effects} is compar
 \endfoot
 \bottomrule
 \insertTableNotes \\
-\caption{\label{tab:model-km-comparison} Model comparison.}
+\caption{\label{tab:app-model-km-comparison} Model comparison.}
 \endlastfoot
 <<app-model-km-comparison, echo=FALSE, results=tex>>=
 mat <- TWTE::model_km$mat_comparison

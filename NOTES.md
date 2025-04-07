@@ -82,20 +82,23 @@
   - Set in `myRd.sty`
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
 - [x] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
-- [ ] Bumpt version numbers (no dev versions...)
+- [ ] Bump version numbers (no dev versions...)
 - [x] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
   - Yayy: resolved => see TODO in appendix/main.Rnw
   - [ ] Don't show objects in table of contents...
     - I think you have to adjust the `\Header` `\HeaderA` command in `myRd.sty`
   - Maybe also snndata?
-- [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
-- [ ] Don't use `\pkg{}` in chapter headings (but subheadings?)...
-  - [ ] For section commands use `\Section[]{}` if special formatting!
+- [x] Namespace labels
+H: - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
+H: - [ ] Don't use `\pkg{}` in chapter headings (but subheadings?)...
+H:   - [ ] For section commands use `\Section[]{}` if special formatting!
 - [x] Consistently use R-package (with hyphon)
 - [x] In Intro: R> This is R code, this is its output
-- [ ] Table of figures and tables
-- [ ] Reference reference manuals in text (datapap, opsr, opsrtools)
+H: - [ ] Table of figures and tables
+H: - [ ] Reference reference manuals in text (datapap, opsr, opsrtools)
 - [ ] In Kap 8 könnten Sie noch klar machen, welchen Ansatz Sie jetzt empfehlen würden; welche Zahlen sollte die Politik verwerden.
+- [ ] Update dictum
+- [ ] Resolve todos (at beginning of each chapter)
 
 ## Author contributions
 
