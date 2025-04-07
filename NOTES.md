@@ -94,6 +94,7 @@
 - [ ] Table of figures and tables
 - [ ] Reference reference manuals in text (datapap, opsr, opsrtools)
 - [ ] For section commands use `\Section[]{}` if special formatting!
+- [ ] In Kap 8 könnten Sie noch klar machen, welchen Ansatz Sie jetzt empfehlen würden; welche Zahlen sollte die Politik verwerden.
 
 ## Author contributions
 
