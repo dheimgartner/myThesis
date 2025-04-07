@@ -29,7 +29,7 @@ Xinyi Wang and Daniel Heimgartner conceived the presented idea to formalize the 
 \ChapterInfoEntry{
 The following changes were made
 }{%
--
+The model \code{fit\_intercept} was excluded from the \fct{texreg::screenreg} call on Page~\pageref{p:omitted-fit-intercept}.
 }%
 \end{ChapterInfoTable}
 
@@ -270,9 +270,10 @@ anova(fit_null, fit_intercept, fit)
 If only a single object is passed, then the model is compared to the null model. If more than one object is specified a likelihood ratio test is conducted for each pair of neighboring models. As expected, both tests reject the null hypothesis.
 
 Models can be compared side-by-side using the \pkg{texreg} package \citep{Leifeld:2013}, which also allows the user to build production-grade tables as illustrated later.
+\label{p:omitted-fit-intercept}
 %
 <<texreg>>==
-texreg::screenreg(list(fit_null, fit_intercept, fit),
+texreg::screenreg(list(fit_null, fit),
   include.pseudoR2 = TRUE, include.R2 = TRUE, single.row = TRUE)
 @
 %
@@ -391,16 +392,16 @@ groups <- list(
   "Race (ref: white)" = 27:28,
   "Residential location (ref: urban)" = 30:32
 )
-custom.note <- "%stars. We used robust standard errors in this replica, which may result in slight differences from the original standard errors."
+custom.note <- signif_codes()
 @
 %
 With help of the \pkg{texreg} package, production-grade tables (in various output formats) can be generated with ease.
 %
-<<opsr-replica, results=tex>>=
+<<opsr-replica, eval=FALSE>>=
 texreg::texreg(
   fit, beside = TRUE, include.R2 = TRUE, include.pseudoR2 = TRUE,
   custom.model.names = custom.model.names, groups = groups,
-  custom.coef.names = custom.coef.names, scalebox = 0.76,
+  custom.coef.names = custom.coef.names, scalebox = 0.65,
   booktabs = TRUE, dcolumn = TRUE, no.margin = TRUE,
   use.packages = FALSE, float.pos = "htbp", single.row = TRUE,
   caption = "Replica of \\citet{Wang+Mokhtarian:2024}, Table 3.",
@@ -408,6 +409,23 @@ texreg::texreg(
   custom.note = custom.note
 )
 @
+%
+{\renewcommand{\arraystretch}{0.9}%
+<<opsr-replica, echo=FALSE, results=tex>>=
+tex <- texreg::texreg(
+  fit, beside = TRUE, include.R2 = TRUE, include.pseudoR2 = TRUE,
+  custom.model.names = custom.model.names, groups = groups,
+  custom.coef.names = custom.coef.names, scalebox = 0.65,
+  booktabs = TRUE, dcolumn = TRUE, no.margin = TRUE,
+  use.packages = FALSE, float.pos = "htbp", single.row = TRUE,
+  caption = "Replica of \\citet{Wang+Mokhtarian:2024}, Table 3.",
+  label = "tab:wang-replica",
+  custom.note = custom.note
+)
+tex <- gsub("scriptsize", "normalsize", tex)
+tex
+@
+}%
 %
 Dot arguments (\code{...}) passed to \fct{texreg} (or similar functions) are forwarded to a \proglang{S4} method \fct{extract} which extracts the variables of interest from a model fit (see also \code{?extract.opsr}). We demonstrate here that
 \begin{enumerate}
@@ -550,7 +568,7 @@ summary(fit_red)
 The reduced model specification (\code{fit_red}) is not rejected in the likelihood ratio test. Further, there is significant error correlation between the selection process and the outcome process for the UTWers (\code{rho3}). The Wald-test suggests that the null hypothesis (\code{rho1} = \code{rho2} = \code{rho3} = 0) can be rejected at the 5\% level, suggesting that OPSR is beneficial given our model assumptions.
 
 %% The treatment effects
-We first define some helper functions to compute treatment effects:\footnote{More rigorous treatment effect computations will be part of the \pkg{OPSRtools} package available from the Comprehensive \proglang{R} Archive Network (CRAN) in the near future.}
+We first define some helper functions to compute treatment effects
 \begin{itemize}
 \item \fct{estimated\_weekly\_km}: Computes all possible factual and counterfactual conditional expectations (for each \code{group} and \code{counterfact} tuple).
 \item \fct{average}: Averages the conditional expectations from the previous step.
@@ -753,7 +771,7 @@ plot_treat_obs <- function(object, x, y, type, xlim = NULL, ylim = NULL, main = 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[t!]
 \centering
-<<opsr-plot-treatment, echo=FALSE, fig=TRUE, height=8.2, width=8.2>>=
+<<opsr-plot-treatment, echo=FALSE, fig=TRUE, height=8.4, width=8.4>>=
 x <- aggregate(wfh_days ~ wfh, data = timeuse_data, FUN = mean)$wfh_days
 
 fit <- fit_red
@@ -812,17 +830,16 @@ gridExtra::grid.arrange(g1grob, g2grob, g3grob, g4grob, ncol = 2)
 
 \begin{table}[htbp]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|>{\centering\arraybackslash}p{2cm}|p{7.4cm}|}
-\hline
-Model & Parent & \centering Error \\ correlation & Description \\
-\hline
+\small
+\begin{tabular}{ll>{\centering\arraybackslash}p{1.8cm}p{5.3cm}}
+\toprule
+Model & Parent & Error correlation & Description \\
+\midrule
 \code{fit_full} & & $\bullet$ & Full identified model, including all variables as linear effects \\
 \code{fit_red} & \code{fit_full} & $\bullet$ & Excluding all variables not significant at the 10\% level \\
 \code{fit_nocor} & \code{fit_red} & $\circ$ & Fixing the \code{rho} coefficients at 0 \\
-\hline
+\bottomrule
 \end{tabular}
-}%
 \caption{\label{tab:model-overview} Model overview. The model is based on \emph{Parent} as elaborated under \emph{Description}.}
 \end{table}
 

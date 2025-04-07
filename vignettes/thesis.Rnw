@@ -79,6 +79,7 @@ set.seed(0)
 ## some quick and dirty conflict resolution
 slice <- dplyr::slice
 select <- dplyr::select
+kfplot <- OPSRtools::kfplot
 
 options(knitr.kable.NA = "")
 

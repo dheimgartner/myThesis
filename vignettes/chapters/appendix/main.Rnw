@@ -8,7 +8,7 @@
 The final model from Section~\ref{sec:twte-telework-treatment-effects} is compared to other benchmark models (the null, full and AIC-preferred model) along with conventional goodness of fit indicators.
 
 {\setlength{\tabcolsep}{1pt}  % remove column padding
-\renewcommand{\arraystretch}{0.8}  % default row height
+\renewcommand{\arraystretch}{0.8}
 \footnotesize
 \begin{center}
 \begin{ThreePartTable}
