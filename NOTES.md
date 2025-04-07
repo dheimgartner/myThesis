@@ -93,9 +93,9 @@
 - [x] Don't use `\pkg{}` in chapter headings (but sections `\Section[]{}`)...
 - [x] Consistently use R-package (with hyphon)
 - [x] In Intro: R> This is R code, this is its output
+- [x] Reference reference manuals in text (datapap, opsr, opsrtools)
 H: - [ ] Table of figures and tables
-H: - [ ] Reference reference manuals in text (datapap, opsr, opsrtools)
-H: - [x] Avoid indents in methods section (if only one line or two) => only in trb24
+- [x] Avoid indents in methods section (if only one line or two) => only in trb24
 H: - [ ] Can't we make Wang table font bigger as in "Sample comparison by telework status (weighted)."? or "Table 7.5: Model estimates"
 - [ ] In Kap 8 könnten Sie noch klar machen, welchen Ansatz Sie jetzt empfehlen würden; welche Zahlen sollte die Politik verwerden.
 - [ ] Update dictum
