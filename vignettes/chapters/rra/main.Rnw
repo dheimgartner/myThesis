@@ -37,7 +37,7 @@ The table containing the full data sample (originally in the Appendix) was omitt
 \section{Questions}
 \label{sec:rra-questions}
 
-Counting \emph{response burden scores} \citep{Schmid+Axhausen:2019} is not a very popular task at the Institute for Transport Planning and Systems (IVT, ETH Zurich). One or the other former PhD student got away without reporting them. However, the collective effort over the years yielded a unique dataset allowing us to understand response rates as a function of recruitment efforts and incentives. Other research institutes might therefore be encouraged to also contribute. This paper briefly elaborates the methodology once again and introduces the \pkg{responseRateAnalysis}~\proglang{R}-package (\url{https://github.com/dheimgartner/responseRateAnalysis}) with its helper functions to easily replicate the results. Since the last update \citep{Axhausen+Schmid:2019} a handful of students left not until the final response burden score of their surveys was counted. Thanks to them, we feel that the time is right to update response rates results once again.
+Counting \emph{response burden scores} \citep{Schmid+Axhausen:2019} is not a very popular task at the Institute for Transport Planning and Systems (IVT, ETH Zurich). One or the other former PhD student got away without reporting them. However, the collective effort over the years yielded a unique dataset allowing us to understand response rates as a function of recruitment efforts and incentives. Other research institutes might therefore be encouraged to also contribute. This paper briefly elaborates the methodology once again and introduces the \pkg{responseRateAnalysis}~\proglang{R}-package \citep{Heimgartner:2024b} with its helper functions to easily replicate the results. Since the last update \citep{Axhausen+Schmid:2019} a handful of students left not until the final response burden score of their surveys was counted. Thanks to them, we feel that the time is right to update response rates results once again.
 
 The main purpose of this paper is to replicate the analysis, update the estimates based on the enlarged sample and to make the analysis easily replicable: The \proglang{R}-package can be installed as explained below but we hope that other research groups rather clone the repository and contribute with their scored survey instruments according to the guidelines outlined on GitHub so that we or they can predict response rates from time to time again.
 
@@ -58,7 +58,7 @@ tex <-
   mutate(Item = str_replace_all(Item, "    ", "\\\\quad ")) %>%
   kableExtra::kbl(format = "latex",
                   caption = "Response burden: Points by question type and action.",
-                  label = "response-burden-scheme",
+                  label = "rra-response-burden-scheme",
                   booktabs = TRUE,
                   escape = FALSE,
                   linesep = "")
@@ -204,7 +204,7 @@ tex <- texreg::texreg(m_both,
                       caption.above = TRUE,
                       custom.header = list("Updated models" = 1:5, "Old models\\dag" = 6:9),
                       caption = "Logistic regression results: Regressing response burden score on (logit-transformed) response rates.",
-                      label = "tab:comparison",
+                      label = "tab:rra-comparison",
                       custom.note = custom.note,
                       scalebox = 0.75)
 
@@ -254,7 +254,7 @@ tex <-
   pc_both %>%
   kbl(format = "latex", digits = 2, booktabs = TRUE,
       caption = "Percentage change in the odds of participating if the response burden score increases by 100 points.",
-      label = "pc-odds") %>%
+      label = "rra-pc-odds") %>%
   # kableExtra::kable_styling(font_size = 9) %>%
   kableExtra::footnote(general = "\\\\emph{RxI} = Recruited, with incentives, \\\\emph{N} negates.",
                        footnote_as_chunk = TRUE,
@@ -438,7 +438,7 @@ tex <- texreg::texreg(m_both,
                       caption.above = TRUE,
                       custom.header = list("No time-trend" = 1:5, "With time-trend" = 6:10),
                       caption = "Logistic regression results: Adding a linear time-trend",
-                      label = "tab:time-trend",
+                      label = "tab:rra-time-trend",
                       custom.note = custom.note,
                       scalebox = 0.75,
                       float.pos = "htbp")

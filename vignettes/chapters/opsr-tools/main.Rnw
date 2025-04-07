@@ -51,7 +51,7 @@ Let us revisit the full model from Chapter~\ref{ch:twte}, modeling telework adop
 data("timeuse", package = "OPSRtools")
 @
 %
-Using \pkg{OPSR}'s functionality, the model can be estimated by (the formula \code{f} is hidden here for brevity but can be found on Page~\pageref{p:f} under \emph{Initial model})
+Using \pkg{OPSR}'s functionality, the model can be estimated by (the formula \code{f} is hidden here for brevity but can be found on Page~\pageref{p:opsr-tools-f} under \emph{Initial model})
 %
 <<opsr-tools-hidden-formula, echo=FALSE>>=
 f <- wfh | log_weekly_km ~ wfh_allowed + teleworkability + start_tracking +

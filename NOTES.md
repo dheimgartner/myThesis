@@ -96,9 +96,12 @@ H:   - [ ] For section commands use `\Section[]{}` if special formatting!
 - [x] In Intro: R> This is R code, this is its output
 H: - [ ] Table of figures and tables
 H: - [ ] Reference reference manuals in text (datapap, opsr, opsrtools)
+H: - [ ] Avoid indents in methods section (if only one line or two)
+H: - [ ] Can't we make Wang table font bigger as in "Sample comparison by telework status (weighted)."? or "Table 7.5: Model estimates"
 - [ ] In Kap 8 könnten Sie noch klar machen, welchen Ansatz Sie jetzt empfehlen würden; welche Zahlen sollte die Politik verwerden.
 - [ ] Update dictum
 - [ ] Resolve todos (at beginning of each chapter)
+- [ ] Maybe adjust some section titles
 
 ## Author contributions
 

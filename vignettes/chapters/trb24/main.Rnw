@@ -58,7 +58,7 @@ L(\beta) = \prod_n^N \prod_j^J \prod_t^{T_n} (P_{njt})^{y_{njt}}
 where $N$ is the total sample of decision makers, $T_n$ the individual-specific total number of choice tasks and $J$ the number of alternatives (in our case two). $y_{njt} = 1$ if person $n$ chooses $j$ and zero otherwise. However, computationally it is beneficial to remove the product operators by taking logs
 %
 \begin{equation}
-\ell(\beta) = \sum_n^N \sum_j^J \sum_t^{T_n} y_{njt} \log(P_{njt})
+\ell(\beta) = \sum_n^N \sum_j^J \sum_t^{T_n} y_{njt} \log(P_{njt}).
 \end{equation}
 %
 The model is estimated in \proglang{R} \citep{R}, using the \pkg{mixl} package \citep{Molloy:2021}.

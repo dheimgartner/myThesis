@@ -488,7 +488,7 @@ It can be shown that conditional on the random error component, the probability 
 P(x_{qt} | \mu_q) = \left[ \prod_{i=1}^{M} c_{qti} \right]  \left[ \sum_{i=1}^{M} \frac{1}{c_{qti}} \right] \left[ \frac{ \prod_{i=1}^{M} e^{V_{iqt}} }{ ( \sum_{k=1}^{K} e^{V_{qtk}} )^M } \right] (M_{qt} - 1)!
 \end{equation}
 %
-where $M$ is the number of alternatives chosen by individual $q$ at choice occasion $t$. Discrete choice modelers can see the familiar ratio of exponential utilities in \cref{eq:choice-probability}. Further
+where $M$ is the number of alternatives chosen by individual $q$ at choice occasion $t$. Discrete choice modelers can see the familiar ratio of exponential utilities in \ref{eq:mpp-choice-probability}. Further
 %
 \begin{equation}
 c_{qti} = \left( \frac{1}{x_{qti}^{*} + \gamma_i} \right)

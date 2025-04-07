@@ -23,7 +23,7 @@ Xinyi Wang and Daniel Heimgartner conceived the presented idea to formalize the 
 \ChapterInfoEntry{
 The following changes were made
 }{%
-The model \code{fit\_intercept} was excluded from the \fct{texreg::screenreg} call on Page~\pageref{p:omitted-fit-intercept}.
+The model \code{fit\_intercept} was excluded from the \fct{texreg::screenreg} call on Page~\pageref{p:opsr-omitted-fit-intercept}.
 }%
 \end{ChapterInfoTable}
 
@@ -281,7 +281,7 @@ p2 <- predict(fit, group = 1, counterfact = 2, type = "response")
 where \code{p1} is the result of applying Equation~\ref{eq:opsr-cond-exp} and \code{p2} is the counterfactual outcome resulting from Equation~\ref{eq:opsr-counterfact-exp}. The following \code{type} arguments are available
 \begin{itemize}
 \item \code{type = "response"}: Predicts the continuous outcome according to the Equations referenced above.
-\item \code{type = "unlog-response"}: Predicts the back-transformed response according to Equations~\ref{eq:opsr-log-cond-exp}-\ref{eq:opsr-log-counterfact-exp} if the continuous outcome was log-transformed (either in the \code{formula} or during data pre-processing). The smoothing constant used during the continuity correction (i.e., the $\delta$ in $y_j = \ln(Y_j + \delta)$) can be specified via the \code{delta} argument and defaults to 1.
+\item \code{type = "unlog-response"}: Predicts the back-transformed response according to Equations~\ref{eq:opsr-log-cond-exp}--\ref{eq:opsr-log-counterfact-exp} if the continuous outcome was log-transformed (either in the \code{formula} or during data pre-processing). The smoothing constant used during the continuity correction (i.e., the $\delta$ in $y_j = \ln(Y_j + \delta)$) can be specified via the \code{delta} argument and defaults to 1.
 \item \code{type = "prob"}: Returns the probability vector of belonging to \code{group}.
 \item \code{type = "mills"}: Returns the ``inverse Mills ratio''.
 \item \code{type = "correction"}: Returns $\rho_j \sigma_j$IMR respectively $\rho_{j'} \sigma_{j'}$IMR (if \code{counterfact = j'} was specified) from Equation~\ref{eq:opsr-cond-exp} or \ref{eq:opsr-counterfact-exp}.
