@@ -1,5 +1,5 @@
 \chapter{On the relation between response burden and response rate}
-\label{ch:responseRateAnalysis}
+\label{ch:rra}
 
 \dictum[John Doe]{%
 Hello world!}%
@@ -28,7 +28,7 @@ Study conception and design: all authors; data processing: D. Heimgartner; analy
 \ChapterInfoEntry{
 The following changes were made
 }{%
-The table containing the full data sample (originally in the Appendix) was omitted; The text elaborating on the basic workflow on Page~\pageref{p:workflow} was revised.
+The table containing the full data sample (originally in the Appendix) was omitted; The text elaborating on the basic workflow on Page~\pageref{p:rra-workflow} was revised.
 }%
 \end{ChapterInfoTable}
 

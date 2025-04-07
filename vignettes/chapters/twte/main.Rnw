@@ -1006,7 +1006,7 @@ dirty_pairs(TWTE::model_km$ate, labels.diag = c("NTWing", "NUTWing", "UTWing"),
 \caption{\label{fig:twte-model-km-pairs} Pairs plot: Comparison of conditional expectations (weekly km traveled) by telework status in the lower panel. Corresponding distributions on the diagonal. Average treatment effects in the upper panel.}
 \end{figure}
 
-The ATE are presented along group-specific treatment effects in Table~\ref{tab:twte-model-km-ate}. Beyond the previous insights, treatment effects indicate that NTWers reduce travel in particular when switching from NTWing to NUTWing, while UTWers show a stronger treatment effect when switching from NUTWing to UTWing (compared to NTWing to NUTWing). Meanwhile, NUTWers show very similar treatment effects in the two scenarios. All TE and ATE are significant at the 0.1\% level as confirmed by a pairwise weighted t-test.
+The ATE are presented along group-specific treatment effects in Table~\ref{tab:twte-model-km-ate}. Beyond the previous insights, treatment effects indicate that NTWers reduce travel in particular when switching from NTWing to NUTWing, while UTWers show a stronger treatment effect when switching from NUTWing to UTWing (compared to NTWing to NUTWing). Meanwhile, NUTWers show very similar treatment effects in the two scenarios. All TE and ATE are significant at the 0.1\% level as confirmed by a pairwise weighted $t$~test.
 
 <<twte-hidden-ce, echo=FALSE, results=hide>>=
 ce <- TWTE::model_km$ate$ce.mean

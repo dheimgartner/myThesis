@@ -48,7 +48,7 @@ We now describe the two modeling frameworks separately, starting with the MNL: L
 \begin{equation}
 P_{njt} = \frac{\exp(\bx{njt})}{\sum_{j}\exp(\bx{njt})}.
 \end{equation}
-
+%
 The resulting likelihood can be written as
 %
 \begin{equation}
@@ -74,17 +74,17 @@ y_{nt} =
 5 & \text{if } \tau_{10} < y_{nt}^* \leq +\infty
 \end{cases}
 \end{equation}
-
+%
 This yields the following probability
 %
 \begin{equation}
 \begin{aligned}
 P_{nkt} &= P(y_{nt} = k \mid x_{nt}, \mu_n) = P(\tau_{k-1} < y_{nt}^* \leq \tau_{k}) \\
 &= P(\tau_{k-1} < \bx{nt} + \mu_n + \varepsilon_{nt} \leq \tau_{k}) \\
-&= \frac{1}{1 + \exp(\tau_k - \bx{nt} - \mu_n)} - \frac{1}{1 + \exp(\tau_{k-1} - \bx{nt} - \mu_n)}
+&= \frac{1}{1 + \exp(\tau_k - \bx{nt} - \mu_n)} - \frac{1}{1 + \exp(\tau_{k-1} - \bx{nt} - \mu_n)}.
 \end{aligned}
 \end{equation}
-
+%
 The likelihood (``integrating out'' the error component) can be written as
 %
 \begin{equation}

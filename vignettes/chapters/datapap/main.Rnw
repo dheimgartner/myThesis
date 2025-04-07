@@ -32,7 +32,7 @@ Study conception and design: all authors; survey design: all authors; data colle
 \ChapterInfoEntry{
 The following changes were made
 }{%
-The section elaborating on the response rate analysis was shortened, as it largely overlaps with Chapter~\ref{ch:responseRateAnalysis}; Figure~\ref{fig:datapap-bootstrap} was improved and now shows the individual bootstrap predictions; The wording of the SPs introductory text was incorporated in the chapter (instead the Appendix); The remainder of the Appendix was omitted.
+The section elaborating on the response rate analysis was shortened, as it largely overlaps with Chapter~\ref{ch:rra}; Figure~\ref{fig:datapap-bootstrap} was improved and now shows the individual bootstrap predictions; The wording of the SPs introductory text was incorporated in the chapter (instead the Appendix); The remainder of the Appendix was omitted.
 }%
 \end{ChapterInfoTable}
 
@@ -231,7 +231,7 @@ Attribute & Level & Reference & Remark\\
 \section{Response behavior}
 \label{sec:datapap-response-behavior}
 
-This section examines the demographic composition of survey participants, relates the surveys' response burdens to other studies conducted at the institute (see Chapter~\ref{ch:responseRateAnalysis}), and explores the variability in choices observed in the two SP experiments.
+This section examines the demographic composition of survey participants, relates the surveys' response burdens to other studies conducted at the institute (see Chapter~\ref{ch:rra}), and explores the variability in choices observed in the two SP experiments.
 
 As previously mentioned, the survey instrument in stage I targeted the entire working population, while SP experiments focused exclusively on those eligible for telework. The distribution across cantons, completion rates, and response rates for stage I are depicted in Figure~\ref{fig:datapap-cantonal-distribution}. To emphasize variability among cantons, Zurich, which was oversampled, is excluded from the linear color scale of the first two panels. The remaining German-speaking cantons are included, with invited participants proportionally reflecting their respective populations. Response rates vary across cantons, ranging from 14.29\% (Glarus) to 34.10\% (Lucerne).
 
