@@ -55,7 +55,7 @@
   - [x] `TWTE`
   - [x] `OPSRtools`
 - [x] Think about main thesis structure (order of the papers)
-- [ ] Port papers one by one
+- [x] Port papers one by one
   - Only one file per paper (don't split up into multiple sources)
   - [x] Author contributions section => Do I need some signature/confirmation from the co-authors?
   - [x] `mpp`: no vignettes folder
@@ -73,7 +73,7 @@
 - [x] Captionsetup => I like it below
 - [x] Use `{\renewcommand{\arraystretch}{1.5}...}` instead of `\setlength\extrarowheight{2pt}` (which does not scope!)
   - Or enclose whole table stuff in `{...}` which should scope setlength stuff locally
-- [ ] Formatting numbers (not in `$` and big mark `
+- [x] Formatting numbers (not in `$` and big mark `
 - [x] See hyperlink setup and colors in https://github.com/dheimgartner/paperPackage/blob/main/inst/templates/JSS/jss.cls
   - Set in `myRd.sty`
 - [x] Why is doi in bibliography not red? (see point above)
@@ -81,7 +81,8 @@
 - [x] Light blue references/links as Thoscha (see point above)
   - Set in `myRd.sty`
 - [ ] longtable in `\ChapterInfoTable` adds to table index...
-- [ ] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
+- [x] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
+- [ ] Bumpt version numbers (no dev versions...)
 - [x] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
   - Yayy: resolved => see TODO in appendix/main.Rnw
   - [ ] Don't show objects in table of contents...
@@ -89,11 +90,11 @@
   - Maybe also snndata?
 - [ ] Use --- for Gedankenstrich and separation (- for compound words, -- for ranges, --- for Gedankenstrich)
 - [ ] Don't use `\pkg{}` in chapter headings (but subheadings?)...
+  - [ ] For section commands use `\Section[]{}` if special formatting!
 - [x] Consistently use R-package (with hyphon)
 - [x] In Intro: R> This is R code, this is its output
 - [ ] Table of figures and tables
 - [ ] Reference reference manuals in text (datapap, opsr, opsrtools)
-- [ ] For section commands use `\Section[]{}` if special formatting!
 - [ ] In Kap 8 könnten Sie noch klar machen, welchen Ansatz Sie jetzt empfehlen würden; welche Zahlen sollte die Politik verwerden.
 
 ## Author contributions
