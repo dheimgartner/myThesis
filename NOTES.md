@@ -90,8 +90,7 @@
   - Maybe also snndata?
 - [x] Namespace labels
 - [x] Use -- for Gedankenstrich
-H: - [ ] Don't use `\pkg{}` in chapter headings (but subheadings?)...
-H:   - [ ] For section commands use `\Section[]{}` if special formatting!
+- [x] Don't use `\pkg{}` in chapter headings (but sections `\Section[]{}`)...
 - [x] Consistently use R-package (with hyphon)
 - [x] In Intro: R> This is R code, this is its output
 H: - [ ] Table of figures and tables

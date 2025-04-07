@@ -55,23 +55,23 @@ writeLines(mat_tex)
 %% -- R reference manuals ------------------------------------------------------
 
 \cleardoublepage%
-\section{\proglang{R} reference manuals}
+\section[R reference manuals]{\proglang{R} reference manuals}
 
-\subsection{\pkg{OPSR} reference manual} \label{app:opsr-ref}
+\subsection[OPSR reference manual]{\pkg{OPSR} reference manual} \label{app:opsr-ref}
 
 <<app-opsr-manual, results=tex, echo=FALSE>>=
 print(myThesis::OPSR_manual)
 @
 
 \cleardoublepage%
-\subsection{\pkg{OPSRtools} reference manual} \label{app:opsrtools-ref}
+\subsection[OPSRtools reference manual]{\pkg{OPSRtools} reference manual} \label{app:opsrtools-ref}
 
 <<app-opsrtools-manual, results=tex, echo=FALSE>>=
 print(myThesis::OPSRtools_manual)
 @
 
 \cleardoublepage%
-\subsection{\pkg{snndata} reference manual} \label{app:snndata-ref}
+\subsection[snndata reference manual]{\pkg{snndata} reference manual} \label{app:snndata-ref}
 
 <<app-snndata-manual, results=tex, echo=FALSE>>=
 print(myThesis::snndata_manual)
