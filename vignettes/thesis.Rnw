@@ -138,8 +138,8 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 % \cleardoublepage%
 % \SweaveInput{chapters/trb24/main}
 %
-\cleardoublepage%
-\SweaveInput{chapters/opsr/main}
+% \cleardoublepage%
+% \SweaveInput{chapters/opsr/main}
 %
 % \cleardoublepage%
 % \SweaveInput{chapters/twte/main}

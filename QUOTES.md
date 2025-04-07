@@ -11,3 +11,4 @@
 - The proof of the pudding is in the eating. (proverb)
 - Det finns ingen ko pa isen. There is no cow on the ice (proverb; everything is calm and under control)
 - All data is wrong - some data is useful.
+- Es ist nicht unsere Aufgabe, die Zukunft vorherzusagen, sondern uns auf sie vorzubereiten - Perikles
