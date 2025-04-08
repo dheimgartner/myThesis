@@ -103,6 +103,9 @@
 - [ ] Resolve todos (at beginning of each chapter)
 - [ ] Maybe adjust some section titles
 - [x] Why is contents listed twice? => it should be Notation
+- [ ] Check appendix again (clearpage needed?)
+- [ ] Abstract
+- [ ] CV
 
 ## Author contributions
 

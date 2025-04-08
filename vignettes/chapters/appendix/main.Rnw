@@ -75,7 +75,7 @@ The results in this thesis were obtained using \proglang{R}~\Sexpr{paste(R.Versi
 \pkg{TraMineR}~\Sexpr{packageVersion("TraMineR")}.
 }%
 \PackageVersionEntry{%
-Each chapter is organized as a separate \proglang{R}-package, available from \url{https://github.com/phd-thesis-heimgartner} and can be shared on request.
+Each chapter is organized as a separate \proglang{R}-package, available on request from \url{https://github.com/phd-thesis-heimgartner}.
 }{%
 \pkg{myThesis}~\Sexpr{packageVersion("myThesis")},
 \pkg{mpp}~\Sexpr{packageVersion("mpp")},
