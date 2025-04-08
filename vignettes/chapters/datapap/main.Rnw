@@ -2,7 +2,8 @@
 \label{ch:datapap}
 
 \dictum[Vincent van Gogh]{%
-I dream my painting and I paint my dream.}%
+I dream my painting and I paint my dream.
+}%
 \vskip 1em
 
 \todo{%

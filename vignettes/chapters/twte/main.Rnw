@@ -2,7 +2,7 @@
 \label{ch:twte}
 
 \dictum{%
-All models are wrong -- some models are wronger!}%
+All models are wrong, some are wronger!}%
 \vskip 1em
 
 \todo{%

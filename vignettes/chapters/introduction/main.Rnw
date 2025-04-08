@@ -1,8 +1,9 @@
 \chapter{Introduction}
 \label{ch:introduction}
 
-\dictum{%
-Don't mistake the intuitive and the truth.}%
+\dictum[Albert Einstein]{%
+The definition of insanity is doing the same thing over and over and expecting different results.
+}%
 \vskip 1em
 
 \section{Background and motivation}

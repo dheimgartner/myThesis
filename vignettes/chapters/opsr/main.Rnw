@@ -1,8 +1,9 @@
 \chapter{Tools}
 \label{ch:opsr}
 
-\dictum[John Doe]{%
-Hello world!}%
+\dictum[Vladimir Vapnik]{%
+When solving a problem of interest, do not solve a more general problem as an intermediate step.
+}%
 \vskip 1em
 
 %% -- Abstract -----------------------------------------------------------------

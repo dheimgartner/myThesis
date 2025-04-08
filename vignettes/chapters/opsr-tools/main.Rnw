@@ -1,8 +1,9 @@
 \chapter{Estimation and post-estimation routines for OPSR}
 \label{ch:opsr-tools}
 
-\dictum[John Doe]{%
-Hello world!}%
+\dictum{%
+In dubio pro reo.
+}%
 \vskip 1em
 
 <<opsr-tools-preliminaries, echo=FALSE, results=hide>>=
@@ -35,7 +36,7 @@ Heimgartner D. (2025) \pkg{OPSRtools}: Estimation and Post-Estimation Routines f
 
 \section{Introduction}
 
-The \pkg{OPSR} \proglang{R}-package, intruduced in \citet{Heimgartner+Wang:2025}, provides an easy-to-use, fast and memory efficient interface to ordered probit switching regression (OPSR). OPSR is a form of endogenous switching regression, accounting for error correlation between an ordinal selection and continuous outcome processes. In spirit of \citet{Heckman:1979}, self-selection bias might result, if this error correlation is not explicitly modeled.
+The \pkg{OPSR} \proglang{R}-package, introduced in \citet{Heimgartner+Wang:2025}, provides an easy-to-use, fast and memory efficient interface to ordered probit switching regression (OPSR). OPSR is a form of endogenous switching regression, accounting for error correlation between an ordinal selection and continuous outcome processes. In spirit of \citet{Heckman:1979}, self-selection bias might result, if this error correlation is not explicitly modeled.
 
 While the \pkg{OPSR} package contains the minimal machinery to estimate such models, present their results and compute conditional expectations, it does not provide routines supporting model selection, cross-validation and the computation of treatment and average treatment effects. This is where \pkg{OPSRtools} steps in. Along functions and methods to compute and present (\fct{print}) the statistics in appropriate form, it also contains visualization routines.
 
@@ -223,7 +224,7 @@ Let us first revisit the conditional expectation of the OPSR model as stated in 
 \E[y_j \mid Z = j] = \underbrace{\Xb}_{{\text{\code{type = "Xb"}}}} - \underbrace{\rho_j\sigma_j \frac{\phi(\kappa_j - \Wg) - \phi(\kappa_{j-1} - \Wg)}{\Phi(\kappa_j - \Wg) - \Phi(\kappa_{j-1} - \Wg)}}_{{\text{\code{type = "correction"}}}},
 \end{equation}
 %
-where $\Xb$ is the linear combination underlying the continuous outcome, $\kappa_j$ and $\kappa_{j-1}$ are the thresholds of the ordered probit model, $\Wg$ is the linear combination modeling the latent propensity underlying the selection outcome, $\phi(\cdot)$ and $\Phi(\cdot)$ are the density and cumulative distribution function of the standard normal distribution. The fraction is the ordered probit switching regression model counterpart to the inverse Mills ratio (IMR) term of a binary switching regression model and the leading cause of selection bias. We also see, that higher $\rho_j$ (and/or higher $\sigma_j$) ``inflates'' the Heckman correction by scaling the IMR.
+where $\Xb$ is the linear combination underlying the continuous outcome, $\kappa_j$ and $\kappa_{j-1}$ are the thresholds of the ordered probit model, $\Wg$ is the linear combination modeling the latent propensity underlying the selection outcome, $\phi(\cdot)$ and $\Phi(\cdot)$ are the density and cumulative distribution function of the standard normal distribution. The fraction is the ordered probit switching regression model counterpart to the inverse Mills ratio (IMR) term of a binary switching regression model and the leading cause of selection bias (if omitted). We also see, that higher $\rho_j$ (and/or higher $\sigma_j$) ``inflates'' the Heckman correction by scaling the IMR.
 
 Similarly, the ``counterfactual outcome'' reflects the expected outcome under a counterfactual treatment (i.e., for $j' \neq j$) and can be expressed as
 %
@@ -349,7 +350,7 @@ plot.it()
 \caption{\label{fig:opsr-tools-fixing-rho} The influence of accounting for error correlation on predictions: Plotting the OPSR predictions against the OLS predictions.}
 \end{figure}
 
-Figure~\ref{fig:opsr-tools-fixing-rho} compares the OPSR predictions (accounting for self-selection) to the OLS predictions (not accounting for self-selection) for both \fit{10} and \fit{aic}. For example, the first panel (NTWers NTWing) shows, that accounting for self-selection does not influence the prediction results, while panel UTWers NUTWing (row 3, column 2) indicates, that there is a selection bias, underestimating the weekly kilometers traveled of UTWers when NUTWing. Meanwhile, the selection bias is comparable for \fit{10} and \fit{aic}. Interestingly, the two models seem to agree on the selection bias with the exception of NTWers UTWing and NUTWers UTWing (column 3, row 1 and 2), when \fit{10} suddenly suggests a sizable selection bias -- considerably underestimating the weekly distance traveled if not accounted for. The treatment effects of the four models are summarized in Table~\ref{tab:opsr-tools-te-comparison} where the reader can confirm, that resulting treatment effects are very different. However, the OLS model \fit{aic\_nocor} (i.e., the model with the same specification $\Xb$ as \fit{aic}) agrees with the direction of the treatment effect, despite generally underestimating it. Similarly, \fit{10\_nocor} shows negative TE and ATE and the numbers are similar to \fit{aic\_nocor}. Again, the reversed TE for \fit{10} seem to be the clear exception.
+Figure~\ref{fig:opsr-tools-fixing-rho} compares the OPSR predictions (accounting for selection on unobservables) to the OLS predictions (not accounting for selection on unobservables) for both \fit{10} and \fit{aic}. For example, the first panel (NTWers NTWing) shows, that accounting for error correlation does not influence the prediction results, while panel UTWers NUTWing (row 3, column 2) indicates, that there is a selection bias, underestimating the weekly kilometers traveled of UTWers when NUTWing. Meanwhile, the selection bias is comparable for \fit{10} and \fit{aic}. Interestingly, the two models seem to agree on the selection bias with the exception of NTWers UTWing and NUTWers UTWing (column 3, row 1 and 2), when \fit{10} suddenly suggests a sizable selection bias -- considerably underestimating the weekly distance traveled if not accounted for. The treatment effects of the four models are summarized in Table~\ref{tab:opsr-tools-te-comparison} where the reader can confirm, that resulting treatment effects are very different. However, the OLS model \fit{aic\_nocor} (i.e., the model with the same specification $\Xb$ as \fit{aic}) agrees with the direction of the treatment effect, despite generally underestimating it. Similarly, \fit{10\_nocor} shows negative TE and ATE and the numbers are similar to \fit{aic\_nocor}. Again, the reversed TE for \fit{10} seem to be the clear exception.
 
 \begin{table}[htbp]
 \centering
@@ -390,7 +391,7 @@ writeLines(mat_tex)
 \caption{\label{tab:opsr-tools-te-comparison} Treatment effect comparison. \code{nocor} implies the regular OLS fit with ``rho'' fixed at 0.}
 \end{table}
 
-This evidence suggests, that it is not actually the direct influence of the error correlation via the Heckman correction term but the indirect influence via the $\beta$ coefficients that leverages the predictions and thus treatment effect computations. And if we only have few explanatory variables, then the error correlation might have a bigger influence on these estimates. Under certain conditions, OPSR models might become poorly identified, suggesting extreme selection bias.
+This evidence suggests, that it is not actually the direct influence of the error correlation via the Heckman correction term but the indirect influence via the $\beta$ coefficients that leverages the predictions and thus treatment effect computations. And if we only have few explanatory variables, then the error correlation might have a bigger influence on these estimates. Under certain conditions, OPSR models might become poorly identified, suggesting extreme selection bias (as does \fit{10} in our case). Taking all this evidence into account, we would still trust the insights based on \fit{aic} (as discussed in Chapter~\ref{ch:twte}) the most.
 
 Identification issues of Heckman-type selection models have received considerable attention in the literature \citep[e.g.,][]{Puhani:2000}, investigating conditions under which model estimation becomes challenging. In Monte Carlo simulation studies, the performance of LIML and FIML estimators are then usually compared. The main condition discussed is weak exclusion-restrictions (weak instruments; leading to colinearity between the IMR and $\boldsymbol{X}$) as elaborated in \citet{Chiburis+Lokshin:2007}. \citet{Huismans+etal:2022} discuss maximum likelihood estimation and parameter identification (for a Heckman-selection model with ordered outcomes) and state that in mixture models, the likelihood function may have multiple local maximums and large flat regions and suggest testing different starting values (in our case, both \fit{10} and \fit{aic} converge to the same optimum if we set starting values to 0, -1 for ``kappa1'', 1 for ``kappa2'' and 1 for the ``sigmas''). Since the IMR is technically a regressor, we speculate, that the limited variability (as observed in Figure~\ref{fig:opsr-tools-heckman-correction}, in particular for UTWing, column 3) could also yield poor identification.
 

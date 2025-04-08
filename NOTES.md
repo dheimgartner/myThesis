@@ -80,12 +80,13 @@
   - Set in `myRd.sty`
 - [x] Light blue references/links as Thoscha (see point above)
   - Set in `myRd.sty`
-- [ ] longtable in `\ChapterInfoTable` adds to table index...
+- [x] longtable in `\ChapterInfoTable` adds to table index...
+  - `\addtocounter{table}{-1}` (also in `\PackageVersionTable`)
 - [x] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
 - [ ] Bump version numbers (no dev versions...)
 - [x] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
   - Yayy: resolved => see TODO in appendix/main.Rnw
-  - [ ] Don't show objects in table of contents...
+  - [~] Don't show objects in table of contents... => I kinda like it...
     - I think you have to adjust the `\Header` `\HeaderA` command in `myRd.sty`
   - Maybe also snndata?
 - [x] Namespace labels
@@ -98,12 +99,13 @@
   - Simply uncomment lines in `frontbackmatter/contents.Rnw` => But I don't like it that much...
 - [x] Avoid indents in methods section (if only one line or two) => only in trb24
 - [x] Can't we make Wang table font bigger as in "Sample comparison by telework status (weighted)."? or "Table 7.5: Model estimates"
-- [ ] In Kap 8 könnten Sie noch klar machen, welchen Ansatz Sie jetzt empfehlen würden; welche Zahlen sollte die Politik verwerden.
-- [ ] Update dictum
+- [x] In Kap 8 könnten Sie noch klar machen, welchen Ansatz Sie jetzt empfehlen würden; welche Zahlen sollte die Politik verwerden.
+- [x] Update dictum
 - [ ] Resolve todos (at beginning of each chapter)
-- [ ] Maybe adjust some section titles
+- [x] Maybe adjust some section titles
 - [x] Why is contents listed twice? => it should be Notation
 - [ ] Check appendix again (clearpage needed?)
+- [ ] Conceptual figure
 - [ ] Abstract
 - [ ] CV
 

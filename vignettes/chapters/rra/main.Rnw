@@ -1,8 +1,8 @@
 \chapter{On the relation between response burden and response rate}
 \label{ch:rra}
 
-\dictum[John Doe]{%
-Hello world!}%
+\dictum[George Box]{%
+All models are wrong, some are useful.}%
 \vskip 1em
 
 <<rra-preliminaries, echo=FALSE, results=hide>>=
@@ -34,7 +34,7 @@ The table containing the full data sample (originally in the Appendix) was omitt
 
 %% -- Questions ----------------------------------------------------------------
 
-\section{Questions}
+\section{Introduction}
 \label{sec:rra-questions}
 
 Counting \emph{response burden scores} \citep{Schmid+Axhausen:2019} is not a very popular task at the Institute for Transport Planning and Systems (IVT, ETH Zurich). One or the other former PhD student got away without reporting them. However, the collective effort over the years yielded a unique dataset allowing us to understand response rates as a function of recruitment efforts and incentives. Other research institutes might therefore be encouraged to also contribute. This paper briefly elaborates the methodology once again and introduces the \pkg{responseRateAnalysis}~\proglang{R}-package \citep{Heimgartner:2024b} with its helper functions to easily replicate the results. Since the last update \citep{Axhausen+Schmid:2019} a handful of students left not until the final response burden score of their surveys was counted. Thanks to them, we feel that the time is right to update response rates results once again.

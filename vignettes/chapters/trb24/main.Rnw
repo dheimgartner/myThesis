@@ -1,8 +1,8 @@
 \chapter{On the valuation of telework baseline preferences}
 \label{ch:trb24}
 
-\dictum[John Doe]{%
-Hello world!}%
+\dictum[Proverb]{%
+The proof of the pudding is in the eating.}%
 \vskip 1em
 
 %% -- Abstract -----------------------------------------------------------------

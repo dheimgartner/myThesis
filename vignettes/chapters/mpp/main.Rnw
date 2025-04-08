@@ -1,8 +1,8 @@
 \chapter{Modal splits before during and after the pandemic}
 \label{ch:mpp}
 
-\dictum[John Doe]{%
-Hello world!}%
+\dictum[Perikles]{%
+The key is not to predict the future but to prepare for it.}%
 \vskip 1em
 
 \todo{%
@@ -124,7 +124,7 @@ To summarize, the general narrative reveals a modal shift away from public trans
 
 %% -- Methodology --------------------------------------------------------------
 
-\section{Method}
+\section{Methods}
 \label{sec:mpp-method}
 
 In the following, we first introduce the data and conduct comprehensive descriptive analysis for various mobility indicators before elaborating on the MMDCEV modeling framework.

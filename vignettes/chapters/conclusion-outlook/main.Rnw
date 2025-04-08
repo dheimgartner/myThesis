@@ -1,8 +1,8 @@
 \chapter{Summary}
 \label{ch:summary}
 
-\dictum[Vincent van Gogh]{%
-   I dream my painting and I paint my dream. }
+\dictum[]{%
+In the end, everything is endogenous!}
 \vskip 1em
 
 The aim of this final chapter is to summarize the main contributions of this thesis, to reflect on their relevance for science and society, and to outline directions for future work.
