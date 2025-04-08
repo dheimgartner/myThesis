@@ -5,12 +5,6 @@
 The key is not to predict the future but to prepare for it.}%
 \vskip 1em
 
-\todo{%
-\begin{itemize}
-\item Check figures again (some labels are clipped...)
-\end{itemize}
-}
-
 <<mpp-preliminaries, echo=FALSE, results=hide>>=
 MAX <- as.Date("2022-12-30")
 
@@ -162,7 +156,7 @@ For all the time-series graphs moving averages (with a window size corresponding
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-activity-spaces, echo=FALSE, fig=TRUE, width=8.6, height=7.1>>=
+<<mpp-activity-spaces, echo=FALSE, fig=TRUE, width=8.9, height=7.1>>=
 limits <- c(-1, 1.1)
 
 p1_bar <-
@@ -212,7 +206,7 @@ Not surprisingly, activity spaces, as measured by the 95\% CI Ellipse area, were
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-overview, echo=FALSE, fig=TRUE, width=8.4, height=7>>=
+<<mpp-overview, echo=FALSE, fig=TRUE, width=8.6, height=7.5>>=
 limits <- c(-1, 1.1)
 
 p1 <-
@@ -260,7 +254,7 @@ In Figure~\ref{fig:mpp-overview} the change in average daily distance as well as
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-day-on-day, echo=FALSE, fig=TRUE, width=8, height=10.2>>=
+<<mpp-day-on-day, echo=FALSE, fig=TRUE, width=8, height=10.4>>=
 p1 <-
   mpp::axa_data$stage_length %>%
   filter(week_start <= MAX) %>%
@@ -271,7 +265,7 @@ p1 <-
   facet_wrap(vars(mode), scales = "free_y", ncol = 1) +
   scale_color_manual(values = mpp::colors$all[c(4, 2, 6, 7)]) +
   scale_shape_manual(values = c(15, 16, 17, 18)) +
-  labs(x = "Day of year", y = "Trip leg length [km/leg]", col = "Year", shape = "Year")
+  labs(x = "Day of year", y = "Trip leg length (km/leg)", col = "Year", shape = "Year")
 
 
 p2 <-
@@ -296,7 +290,7 @@ A very similar picture is portrayed in Figure~\ref{fig:mpp-day-on-day} where we 
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-overview-by-wa, echo=FALSE, fig=TRUE, width=8.4, height=7>>=
+<<mpp-overview-by-wa, echo=FALSE, fig=TRUE, width=8.4, height=7.4>>=
 limits <- c(-0.75, 0.1)
 
 p1 <-
@@ -352,7 +346,7 @@ Similarly, when differentiating by working arrangement, the collinearity between
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<mpp-mode-shares, echo=FALSE, fig=TRUE, width=8.6, height=7.1>>=
+<<mpp-mode-shares, echo=FALSE, fig=TRUE, width=8.9, height=7.2>>=
 limits <- c(-1, 2.5)
 
 p1 <-
