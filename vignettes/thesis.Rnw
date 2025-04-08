@@ -126,14 +126,14 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE,
 \cleardoublepage\pagenumbering{arabic}%
 \SweaveInput{chapters/introduction/main}
 
-\cleardoublepage%
-\SweaveInput{chapters/mpp/main}
-
+% \cleardoublepage%
+% \SweaveInput{chapters/mpp/main}
+%
 % \cleardoublepage%
 % \SweaveInput{chapters/rra/main}
 %
-% \cleardoublepage%
-% \SweaveInput{chapters/datapap/main}
+\cleardoublepage%
+\SweaveInput{chapters/datapap/main}
 %
 % \cleardoublepage%
 % \SweaveInput{chapters/trb24/main}

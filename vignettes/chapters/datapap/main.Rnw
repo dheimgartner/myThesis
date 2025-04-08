@@ -8,10 +8,7 @@ I dream my painting and I paint my dream.
 
 \todo{%
 \begin{itemize}
-\item Maybe adjust colors...
-\item 95\% confidence bounds to Figure~\ref{fig:datapap-bootstrap}
 \item There is sometimes weird formatting going on at the linebreak in Table~\ref{tab:datapap-mzmv-marginals}
-\item Apply \code{my\_theme} (but needs to be done in \pkg{datapap}...)
 \end{itemize}
 }
 
@@ -346,7 +343,7 @@ p1 <- function(offset = 100) {
   ## 0.7 == 0
   offset <- diff(range(x.)) / offset
   top <- 5
-  col <- datapap::my_colors$colvec[1]
+  col <- "red"
   x <- ml + x.[1]
   rect(xleft = x - offset, ybottom = 0.1, xright = x + offset, ytop = top,
        col = col, border = col)
@@ -368,7 +365,7 @@ p2 <- function(offset = 100) {
   ## 5.5 == 0
   offset <- diff(range(x.)) / offset
   top <- 6.25
-  col <- datapap::my_colors$colvec[1]
+  col <- "red"
   x <- ml + x.[6]
   rect(xleft = x - offset, ybottom = 0.1, xright = x + offset, ytop = top,
        col = col, border = col)
@@ -532,16 +529,25 @@ plot.it <- function() {
 
   plt <- function(x, main, col, col.zero) {
     mean_line <- apply(x, 2, mean)
+    lower <- apply(x, 2, function(x) quantile(x, probs = 0.025))
+    upper <- apply(x, 2, function(x) quantile(x, probs = 0.975))
     ml0 <- mean_line[1]
     mean_line <- mean_line - ml0
+    lower <- lower - ml0
+    upper <- upper - ml0
     mat <- t(x)
     mat <- mat - ml0
     matplot(x = 0:5, mat, type = "l", lty = 1, col = scales::alpha(col, alpha = 0.075),
             xlab = "Telework frequency (d/week)",
             ylab = "Ownership share (normalized)",
             main = main)
+    lp <- ifelse(main == "Half-fare", "topleft", "bottomleft")
+    legend(lp, legend = c("mean", "2.5th perc.", "97.5th perc."),
+           lty = c(1, 3, 3), col = col, bty = "n")
     grid()
     lines(x = 0:5, y = mean_line, col = col, lwd = 2)
+    lines(x = 0:5, y = lower, col = col, lwd = 1, lty = 3)
+    lines(x = 0:5, y = upper, col = col, lwd = 1, lty = 3)
     abline(h = 0, col = col.zero)
   }
 
