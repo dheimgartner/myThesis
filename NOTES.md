@@ -101,13 +101,14 @@
 - [x] Can't we make Wang table font bigger as in "Sample comparison by telework status (weighted)."? or "Table 7.5: Model estimates"
 - [x] In Kap 8 könnten Sie noch klar machen, welchen Ansatz Sie jetzt empfehlen würden; welche Zahlen sollte die Politik verwerden.
 - [x] Update dictum
-- [ ] Resolve todos (at beginning of each chapter)
+- [x] Resolve todos (at beginning of each chapter)
 - [x] Maybe adjust some section titles
 - [x] Why is contents listed twice? => it should be Notation
 - [ ] Check appendix again (clearpage needed?)
 - [ ] Conceptual figure
 - [ ] Abstract
 - [ ] CV
+- [ ] Check Table~\ref{tab:datapap-mzmv-marginals} again
 
 ## Author contributions
 

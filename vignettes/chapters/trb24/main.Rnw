@@ -1,7 +1,7 @@
 \chapter{On the valuation of telework baseline preferences}
 \label{ch:trb24}
 
-\dictum[Proverb]{%
+\dictum{%
 The proof of the pudding is in the eating.}%
 \vskip 1em
 

@@ -2,7 +2,7 @@
 \label{ch:summary}
 
 \dictum[]{%
-In the end, everything is endogenous!}
+In the end, everything is endogenous! If it's not, it's not the end.}
 \vskip 1em
 
 The aim of this final chapter is to summarize the main contributions of this thesis, to reflect on their relevance for science and society, and to outline directions for future work.

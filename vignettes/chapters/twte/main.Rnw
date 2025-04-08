@@ -5,13 +5,6 @@
 All models are wrong, some are wronger!}%
 \vskip 1em
 
-\todo{%
-\begin{itemize}
-\item Check refs to chapter \pkg{OPSR}'s to method section
-\item Maybe use longtable for Table~\ref{tab:twte-model-km-fit} (and try to increase fontsize, e.g., by decreasing tabcolsep...)
-\end{itemize}
-}
-
 <<twte-preliminaries, echo=FALSE, results=hide>>=
 colvec <- c("#4c5760","#ff8811","#48a9a6")
 barcolvec <- colorRampPalette(c("white", "grey70"))
