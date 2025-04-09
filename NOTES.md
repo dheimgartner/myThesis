@@ -104,8 +104,8 @@
 - [x] Maybe adjust some section titles
 - [x] Why is contents listed twice? => it should be Notation
 - [x] Abstract
-- [ ] Conceptual figure
-- [ ] CV
+- [x] Conceptual figure
+- [x] CV
 - [ ] Submit JSS
 - [ ] Maybe don't use leftbar in datapap
 - [ ] Bump version numbers (no dev versions...) => and check in ownpubs

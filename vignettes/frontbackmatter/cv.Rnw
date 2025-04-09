@@ -14,45 +14,64 @@
 \section*{Personal data}
 
 \noindent\cvleft{Name}%
-\cvright{Albert Einstein}\\
+\cvright{Daniel Heimgartner}\\
 %
 \cvleft{Date of Birth}%
-\cvright{March 14, 1879}\\
+\cvright{August 22, 1992}\\
 %
 \cvleft{Place of Birth}%
-\cvright{Ulm, Germany}\\
+\cvright{Muri AG, Switzerland}\\
 %
 \cvleft{Citizen of}%
 \cvright{Switzerland}
 
 \section*{Education}
 
-\noindent\cvleft{1896 --~1900}%
+\noindent\cvleft{October 2021 --~May 2025}%
 \cvright{%
-  Eidgenössisches Polytechnikum, \\
-  Zürich, Switzerland\\
-  \emph{Final degree:} Diploma
+  PhD candidate at the Institute for Transport Planning and Systems,
+  \emph{ETH Z{\"u}rich},\\
+  Switzerland
 }\vspace{0.75em}
 
-\noindent\cvleft{1895 --~1896}%
+\noindent\cvleft{September 2018 --~July 2020}%
 \cvright{%
-  Aargauische Kantonsschule (grammar school)\\
-  Aarau, Switzerland \\
-  \emph{Final degree:} Matura (university entrance diploma)
+  MSc. in Economics, Double degree track,
+  \emph{University of St. Gallen and Stockholm School of Economics},\\
+  Switzerland \& Sweden
 }\vspace{0.75em}
 
-\noindent\cvleft{--~July 1894}%
+\noindent\cvleft{September 2015 --~July 2018}%
 \cvright{%
-  Luitpold-Gymnasium (grammar school)\\
-  Munich, Germany
-}
+  BSc. in Sport, Exercise and Health \& BA in Economics,
+  \emph{University of Basel},\\
+  Switzerland
+}\vspace{0.75em}
 
 \section*{Employment}
 
-\noindent\cvleft{June 1902 --}%
+\noindent\cvleft{June 2020 --~June 2021}%
 \cvright{%
-  Technical Expert, III Class\\
-  \emph{Federal Office for Intellectual Property},\\ Bern, Switzerland
+  Internship; \emph{Department II, Financial Stability, Swiss National Bank},\\
+  Bern, Switzerland
+}\vspace{0.75em}
+
+\noindent\cvleft{January 2020 --~June 2020}%
+\cvright{%
+  Research intern; \emph{Nepa, Team Data Science},\\
+  Stockholm, Sweden
+}\vspace{0.75em}
+
+\noindent\cvleft{July 2019 --~September 2019}%
+\cvright{%
+  Research assistant; \emph{Swiss Institute for Empirical Economic Research},\\
+  St. Gallen, Switzerland
+}\vspace{0.75em}
+
+\noindent\cvleft{October 2012 --~April 2013}%
+\cvright{%
+  Military Service; \emph{Mountain Specialist, Center of Excellence for Armed Forces},\\
+  Andermatt, Switzerland
 }\vspace{0.75em}
 
 \endgroup
