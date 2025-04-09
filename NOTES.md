@@ -103,7 +103,7 @@
 - [x] Resolve todos (at beginning of each chapter)
 - [x] Maybe adjust some section titles
 - [x] Why is contents listed twice? => it should be Notation
-- [ ] Abstract
+- [x] Abstract
 - [ ] Conceptual figure
 - [ ] CV
 - [ ] Submit JSS
