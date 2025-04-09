@@ -131,11 +131,11 @@ plot.it <- function() {
                     y = c(1, 2.5, 1, 2))
   plot(dat, ylim = c(0, 4), xlim = c(-0.5, 1.5), axes = FALSE, cex = 2,
        xlab = "TW status", ylab = "Weekly km traveled",
-       pch = c(19, 1, 1, 19), col = c(col_ntw, col_tw, col_ntw, col_tw))
+       pch = c(19, 1, 1, 19), col = c(col_ntw, col_tw, col_ntw, col_tw), lwd = 1.5)
   axis(1, at = c(0, 1), labels = c("NTWing", "TWing"))
   axis(2, labels = FALSE)
-  legend("topleft", c("NTWers", "TWers", "factual", "counterfactual"), bty = "n",
-         pch = c(19, 19, 19, 1), col = c(col_ntw, col_tw, "black", "black"))
+  legend("topleft", c("NTWers", "TWers"), bty = "n",
+         pch = c(19, 19), col = c(col_ntw, col_tw))
   abline(v = 0.5, lty = 2)
   abline(h = 1, col = col_ntw, lty = 3)
   abline(h = 2, col = col_tw, lty = 3)
@@ -143,6 +143,6 @@ plot.it <- function() {
   box(bty = "l")
 }
 
-png("./vignettes/chapters/introduction/conceptual_figure.png", height = 8, width = 10, units = "in", res = 144)
+png("conceptual_figure.png", height = 5, width = 6.5, units = "in", res = 144)
 plot.it()
 dev.off()

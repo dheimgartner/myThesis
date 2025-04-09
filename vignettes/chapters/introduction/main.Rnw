@@ -59,12 +59,6 @@ Our world differs in two crucial regards: First, we can not randomly prescribe a
 
 For example, cyclists riding without a helmet (the ``untreated'') might be young and have a risk-seeking tendency. We therefore potentially overestimate the benefit of wearing a helmet if we compare the accident rate and/or crash severity rate between those who wear and do not wear helmets directly. Even if we may control age for the comparison, variables such as risk-seeking are not readily measured, and it may still be part of the error in applied research and thus leading cause of a selection bias.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.8\textwidth]{conceptual_figure}
-\caption{\label{fig:intro-conceptual-figure} Illustration of longitudinal and cross-sectional treatment effects. An common fallacy?}
-\end{figure}
-
 \section{Outline of the thesis}
 
 This thesis is structured as follows: Chapter~\ref{ch:mpp} analyses changes in mobility behavior brought about by the pandemic descriptively and investigates modal shares before, during and after the pandemic in Switzerland. Telework is identified as the main constituent of a ``new normal'' (if such a name is even deserved, as the analysis reveals). Chapter~\ref{ch:rra} updates the relation between survey response burden and response rate -- a simple framework to estimate ex-ante survey completion. Chapter~\ref{ch:datapap} introduces the \pkg{snndata}, the most complete dataset for Switzerland, allowing researchers to investigate telework behavior, the importance of employer incentives (work arrangements) and the relation between telework and mobility tool ownership. Chapter~\ref{ch:trb24} leverages this data and explores how hybrid work policies influence telework frequency, emphasizing the role of incentives. Chapter~\ref{ch:opsr} introduces the \pkg{OPSR} \proglang{R}-package, a toolbox for estimating ordered probit switching regression (OPSR) -- a form of endogenous switching regression. This enables us to conduct the main analysis of this thesis in Chapter~\ref{ch:twte} where we estimate the effects of telework on transport demand. Chapter~\ref{ch:opsr-tools} demonstrates various estimation and post-estimation routines as part of the \pkg{OPSRtools} \proglang{R}-package, completing the \pkg{OPSR}-universe. Chapter~\ref{ch:summary} summarizes the thesis and concludes.
