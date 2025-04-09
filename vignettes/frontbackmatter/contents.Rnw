@@ -73,11 +73,11 @@
       NTW & non-telework (0 days/week) \\
       NUTW & non-usual telework (<3 days/week) \\
       UTW & usual telework (3+ days/week) \\
-      OPSR & ordinal probit switching regression \\
       TE & treatment effect \\
       ATE & average treatment effect \\
       MTMC & mobility and transport microcensus \\
       MNL & multinomial logit \\
+      OPSR & ordinal probit switching regression \\
       OL & ordinal logit \\
       RQ & research question \\
       %\bottomrule

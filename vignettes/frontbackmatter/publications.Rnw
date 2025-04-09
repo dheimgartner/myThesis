@@ -4,10 +4,6 @@
 \pdfbookmark[1]{Publications}{publications}
 \chapter*{Publications}
 
-\noindent
-\begin{leftbar}
-Make ownpubs.bib work or do it manually...
-\end{leftbar}
 % Articles in peer-reviewed journals:
 % \begin{refsection}[ownpubs]
 %   \small%

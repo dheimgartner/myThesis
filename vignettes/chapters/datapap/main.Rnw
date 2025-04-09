@@ -471,7 +471,7 @@ mto_wfh_variation$p
 
 %% -- Telework treatment effects -----------------------------------------------
 
-\section{Telework treatment effects}
+\section{Effect of telework on mobility tool ownership}
 \label{sec:datapap-telework-treatment-effects}
 
 To assess the telework treatment effects, we conducted simple probit regressions, regressing telework frequency on mobility tool ownership. Due to observed non-linearities, separate coefficients were estimated for each telework frequency. Further distinctions were made between E-bikes and regular bikes, as well as between national and regional PT season tickets (ST). Results including estimates and standard errors are presented in Table~\ref{tab:datapap-bootstrap}. Bootstrapped ownership shares derived from these probit models are illustrated in Figure~\ref{fig:datapap-bootstrap}.

@@ -109,6 +109,7 @@
 - [ ] Abstract
 - [ ] CV
 - [ ] Check Table~\ref{tab:datapap-mzmv-marginals} again
+- [ ] Maybe don't use leftbar in datapap
 
 ## Author contributions
 
