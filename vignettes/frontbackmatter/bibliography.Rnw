@@ -12,5 +12,5 @@
 {%
   \emergencystretch=1em%
   % \printbibliography%
-  \bibliography{bibliography, misc}
+  \bibliography{bibliography, ownpubs, misc}
 }
