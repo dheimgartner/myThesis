@@ -49,10 +49,6 @@ As is clear for the technical reader, defining characteristic of such probabilit
 
 \section{Conceptual framework to understand treatment effects and self-selection} \label{sec:intro-conceptual-framework}
 
-\begin{leftbar}
-Add conceptual figure based on \citet{Wang+Mokhtarian:2024}.
-\end{leftbar}
-
 Let's assume for conceptual clarity that we observe three different groups A, B and C in a world where telework is unheard of (yet technologically perfectly feasible). These three groups might be very different socio-economically and also in terms of their mobility behavior. We now treat a random third of each group with ``non-usual'' telework (NUTW; say 2 days/week), another third with ``usual'' telework (UTW; say 3+ days/week), and leave the rest untreated (``non'' telework, NTW). We could then test whether or not there are within (e.g., $A_{NTW}$ vs. $A_{NUTW}$ vs. $A_{UTW}$) and across group differences (e.g., $A_{NTW}$ vs. $B_{NTW}$ vs. $C_{NTW}$) with respect to a metric of interest such as kilometers traveled (where $A_{NTW}$ are the weekly kilometers traveled by an NTW-treated individual A). In technical words, we could test, whether both the treatment and/or the treatment effects depend on the group receiving it.
 
 Our world differs in two crucial regards: First, we can not randomly prescribe a treatment such as telework (it already has been prescribed by nature) and second, nature rarely prescribes a treatment randomly. As a consequence answering the above question in our world is not as trivial as in teleworkomania. We only observe, say, $A_{NTW}$, $B_{NUTW}$ and $C_{UTW}$ and it is spurious (while tempting) to assume $A_{NTW} = B_{NTW}$. Somewhat more subtle (and therefore even more tempting) is to assume that $A_{NTW}(X) = B_{NTW}(X)$, i.e., differences in the outcome of interest can be attributed to observables. This thesis makes a point that unobserved factors influencing the group allocation (A, B, C) might be correlated with unobserved factors influencing the outcome. This correlation needs to be accounted for!

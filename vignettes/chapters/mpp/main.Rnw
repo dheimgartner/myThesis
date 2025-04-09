@@ -2,7 +2,7 @@
 \label{ch:mpp}
 
 \dictum[Perikles]{%
-The key is not to predict the future but to prepare for it.}%
+The key is not to predict the future, but to prepare for it.}%
 \vskip 1em
 
 <<mpp-preliminaries, echo=FALSE, results=hide>>=

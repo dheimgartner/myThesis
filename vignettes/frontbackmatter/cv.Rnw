@@ -52,25 +52,25 @@
 
 \noindent\cvleft{June 2020 --~June 2021}%
 \cvright{%
-  Internship; \emph{Department II, Financial Stability, Swiss National Bank},\\
+  Internship, \emph{Department II, Financial Stability, Swiss National Bank},\\
   Bern, Switzerland
 }\vspace{0.75em}
 
 \noindent\cvleft{January 2020 --~June 2020}%
 \cvright{%
-  Research intern; \emph{Nepa, Team Data Science},\\
+  Research intern, \emph{Nepa, Team Data Science},\\
   Stockholm, Sweden
 }\vspace{0.75em}
 
 \noindent\cvleft{July 2019 --~September 2019}%
 \cvright{%
-  Research assistant; \emph{Swiss Institute for Empirical Economic Research},\\
+  Research assistant, \emph{Swiss Institute for Empirical Economic Research},\\
   St. Gallen, Switzerland
 }\vspace{0.75em}
 
 \noindent\cvleft{October 2012 --~April 2013}%
 \cvright{%
-  Military Service; \emph{Mountain Specialist, Center of Excellence for Armed Forces},\\
+  Military Service, \emph{Mountain Specialist, Center of Excellence for Armed Forces},\\
   Andermatt, Switzerland
 }\vspace{0.75em}
 
