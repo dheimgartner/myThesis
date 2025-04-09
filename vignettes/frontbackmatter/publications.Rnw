@@ -23,11 +23,42 @@
 Articles in peer-reviewed journals:
 \begin{enumerate}
 \small
-\item \bibentry{Einstein1905:1}
+\item \bibentry{Heimgartner+Axhausen:2023a*}
+\item \bibentry{Heimgartner+Axhausen:2024a*}
+\item \bibentry{Heimgartner+Axhausen:2024b*}
+\item \bibentry{Heimgartner+Wang:2025a*}
+\item \bibentry{Heimgartner+Axhausen:2025*}
 \end{enumerate}
-
+%
 Conference contributions:
 \begin{enumerate}[resume]
 \small
-\item \bibentry{Einstein1905:1}
+\item \bibentry{Heimgartner+Etal:2022*}
+\item \bibentry{Heimgartner+Schmid+Axhausen:2022*}
+\item \bibentry{Heimgartner+Etal:2023a*}
+\item \bibentry{Heimgartner+Axhausen:2023b*}
+\item \bibentry{Heimgartner+Axhausen:2023c*}
+\item \bibentry{Heimgartner+Axhausen:2023d*}
+\item \bibentry{Heimgartner+Axhausen:2024c*}
+\item \bibentry{Heimgartner+Lichtin+Axhausen:2024*}
+\end{enumerate}
+%
+Working papers:
+\begin{enumerate}[resume]
+\small
+\item \bibentry{Lichtin+Etal:2025*}
+\item \bibentry{Heimgartner+Etal:2024*}
+\end{enumerate}
+%
+\proglang{R}-packages:
+\begin{enumerate}[resume]
+\small
+\item \bibentry{Heimgartner:2022*}
+\item \bibentry{Heimgartner:2024a*}
+\item \bibentry{Heimgartner:2024b*}
+\item \bibentry{Heimgartner:2025a*}
+\item \bibentry{Heimgartner+Reiffer:2025*}
+\item \bibentry{Heimgartner+Wang:2025b*}
+\item \bibentry{Heimgartner:2025b*}
+\item \bibentry{Heimgartner:2025c*}
 \end{enumerate}

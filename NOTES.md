@@ -68,7 +68,7 @@
 - [x] Adjust bibliography style... maybe Makefile is not needed in the end...
   - See `preamble/general.tex` and `preamble/natbib/` and adjustments in `bibliography.Rnw`
 - [x] What font are they using? => hermann zapf's palatino and eulermath
-- [ ] Make ownpubs in `publications.Rnw` work
+- [x] Make ownpubs in `publications.Rnw` work
   - `\bibentry{}` would be a solution... but I guess there is a better way?
 - [x] Captionsetup => I like it below
 - [x] Use `{\renewcommand{\arraystretch}{1.5}...}` instead of `\setlength\extrarowheight{2pt}` (which does not scope!)
@@ -83,7 +83,7 @@
 - [x] longtable in `\ChapterInfoTable` adds to table index...
   - `\addtocounter{table}{-1}` (also in `\PackageVersionTable`)
 - [x] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
-- [ ] Bump version numbers (no dev versions...)
+- [ ] Bump version numbers (no dev versions...) => and check in ownpubs
 - [x] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
   - Yayy: resolved => see TODO in appendix/main.Rnw
   - [~] Don't show objects in table of contents... => I kinda like it...
@@ -110,6 +110,7 @@
 - [ ] CV
 - [ ] Check Table~\ref{tab:datapap-mzmv-marginals} again
 - [ ] Maybe don't use leftbar in datapap
+- [ ] Adjust submitted => under review (if not desk rejected) und PE-paper => journal article
 
 ## Author contributions
 
