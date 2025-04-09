@@ -83,7 +83,6 @@
 - [x] longtable in `\ChapterInfoTable` adds to table index...
   - `\addtocounter{table}{-1}` (also in `\PackageVersionTable`)
 - [x] Computational details section for whole thesis (in particular own phd-thesis-heimgartner repos)
-- [ ] Bump version numbers (no dev versions...) => and check in ownpubs
 - [x] Include R manuals in appendix => see `dev.R` and `R/utils-manual.R` as starting point (but `\include{Rd}` messes up all formatting!)
   - Yayy: resolved => see TODO in appendix/main.Rnw
   - [~] Don't show objects in table of contents... => I kinda like it...
@@ -104,12 +103,15 @@
 - [x] Resolve todos (at beginning of each chapter)
 - [x] Maybe adjust some section titles
 - [x] Why is contents listed twice? => it should be Notation
-- [ ] Check appendix again (clearpage needed?)
-- [ ] Conceptual figure
 - [ ] Abstract
+- [ ] Conceptual figure
 - [ ] CV
-- [ ] Check Table~\ref{tab:datapap-mzmv-marginals} again
+- [ ] Submit JSS
 - [ ] Maybe don't use leftbar in datapap
+- [ ] Bump version numbers (no dev versions...) => and check in ownpubs
+- [ ] Check appendix again (clearpage needed?)
+- [ ] Check Table~\ref{tab:datapap-mzmv-marginals} again
+
 - [ ] Adjust submitted => under review (if not desk rejected) und PE-paper => journal article
 
 ## Author contributions
