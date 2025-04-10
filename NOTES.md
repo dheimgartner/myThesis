@@ -107,7 +107,7 @@
 - [x] Conceptual figure
 - [x] CV
 - [ ] Bibliography prints ownpubs too!
-- [ ] Maybe don't use leftbar in datapap
+- [x] Maybe don't use leftbar in datapap
 - [ ] Print out (new sections), read, correct, finalize text
 - [ ] Submit JSS
 - [ ] Bump version numbers (no dev versions...) => and check in ownpubs
