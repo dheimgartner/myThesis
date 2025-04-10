@@ -429,7 +429,7 @@ Figure~\ref{fig:datapap-wfh-weekday-distribution} illustrates current telework d
 \setkeys{Gin}{width=\textwidth}
 \begin{figure}[htbp]
 \centering
-<<datapap-weekday-dist, echo=FALSE, fig=TRUE, width=7.4, height=5.75>>=
+<<datapap-weekday-dist, echo=FALSE, fig=TRUE, width=7.8, height=5.75>>=
 wfh_weekday_distribution$p
 @
 \caption{\label{fig:datapap-wfh-weekday-distribution} Distribution of telework shares across weekdays by number of teleworking days, for teleworking population only. Differentiating between full-time and part-time employed.}

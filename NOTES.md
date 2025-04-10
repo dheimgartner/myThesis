@@ -115,6 +115,7 @@
 - [ ] Check Table~\ref{tab:datapap-mzmv-marginals} again
 
 - [ ] Adjust submitted => under review (if not desk rejected) und PE-paper => journal article
+- [ ] Add ETH diss number and doi stuff
 
 ## Author contributions
 
