@@ -134,7 +134,7 @@ Desk sharing & Yes\newline No & Restructuring of the office space.\\
 
 \citet{Bernardino:1995} included telecommuting frequency as an attribute of the work arrangement, potentially resulting in unrealistic levels that do not account for teleworkability. In contrast, we propose a sequential choice setting where respondents first choose their desired work arrangement and subsequently reveal their preferred frequency, given the characteristics of the selected arrangement. However, this approach may result in unbalanced attribute-level combinations in the frequency choice, as less attractive work arrangement features are filtered out in the initial choice (see the discussion in Figure~\ref{fig:datapap-wfh-attribute-level-balance}). Further, it might necessitate a simultaneous modeling approach since work arrangement attributes are no longer exogenous in the frequency choice. An example of a combined choice task is provided in Figure~\ref{fig:datapap-wfh-choice-task}. The introductory text explaining the WFH choice task was as follows
 
-\begin{leftbar}
+\begin{mybox}
 On the following pages, you are asked to choose between different \textbf{work arrangements} and tell us about \textbf{how many days} you would work from home under the selected scenario. Here is what a choice situation looks like
 
 \begin{center}
@@ -147,7 +147,7 @@ On the following pages, you are asked to choose between different \textbf{work a
 \item As a last step, you are asked to reveal how many days you would work from home given your selected arrangement.
 \item The above choice (see Figure~\ref{fig:datapap-wfh-choice-task}) would imply that you would prefer work arrangement A over B and would like to work from home on 3 days a week given the conditions in arrangement A.
 \end{enumerate}
-\end{leftbar}
+\end{mybox}
 
 \begin{figure}[htbp]
 \centering
@@ -164,7 +164,7 @@ The bundle structure involves two primary dimensions: The availability of each c
 
 Given the impracticality of directly comparing 32 alternatives (known as the ``curse of dimensionality''), we initially explored an unlabeled approach in a pre-test where respondents chose between two predefined bundles. However, participants found this method too abstract and detached from their actual preferences, leading us to adopt a simpler design. In this revised approach, participants are presented with individual options for each mobility tool and are asked to compose a bundle from these options. An example choice task is illustrated in Figure~\ref{fig:datapap-mto-choice-task}. The introductory text explaining the mobility tool ownership (MTO) choice task was as follows
 
-\begin{leftbar}
+\begin{mybox}
 In this survey, we want to determine how far \textbf{home office} impacts your \textbf{mobility tool ownership} choices. On the following pages, you are asked to choose between different mobility tools under various home office scenarios. Imagine that all your current mobility tools have expired and need to be \textbf{renewed} anyways. This is what a choice task looks like
 
 \begin{center}
@@ -179,7 +179,7 @@ In this survey, we want to determine how far \textbf{home office} impacts your \
 \item Apart from the costs presented, you can assume that \textbf{all other prices are as of today} (e.g., fuel prices, single-fare train tickets, electricity prices, etc.).
 \item The above choice (see Figure~\ref{fig:datapap-mto-choice-task}) would imply that given the home office situation presented, you would choose to own the PT subscription and the bicycle.
 \end{enumerate}
-\end{leftbar}
+\end{mybox}
 
 \begin{figure}[htbp]
 \centering
