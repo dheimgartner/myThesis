@@ -132,28 +132,23 @@ Desk sharing & Yes\newline No & Restructuring of the office space.\\
 \end{table}
 }
 
-\citet{Bernardino:1995} included telecommuting frequency as an attribute of the work arrangement, potentially resulting in unrealistic levels that do not account for teleworkability. In contrast, we propose a sequential choice setting where respondents first choose their desired work arrangement and subsequently reveal their preferred frequency, given the characteristics of the selected arrangement. However, this approach may result in unbalanced attribute-level combinations in the frequency choice, as less attractive work arrangement features are filtered out in the initial choice (see the discussion in Figure~\ref{fig:datapap-wfh-attribute-level-balance}). Further, it might necessitate a simultaneous modeling approach since work arrangement attributes are no longer exogenous in the frequency choice. An example of a combined choice task is provided in Figure~\ref{fig:datapap-wfh-choice-task}. The introductory text explaining the WFH choice task was as follows
+\citet{Bernardino:1995} included telecommuting frequency as an attribute of the work arrangement, potentially resulting in unrealistic levels that do not account for teleworkability. In contrast, we propose a sequential choice setting where respondents first choose their desired work arrangement and subsequently reveal their preferred frequency, given the characteristics of the selected arrangement. However, this approach may result in unbalanced attribute-level combinations in the frequency choice, as less attractive work arrangement features are filtered out in the initial choice (see the discussion in Figure~\ref{fig:datapap-wfh-attribute-level-balance}). Further, it might necessitate a simultaneous modeling approach since work arrangement attributes are no longer exogenous in the frequency choice. The introductory text explaining the WFH choice task was as follows
 
 \begin{mybox}
+\footnotesize
 On the following pages, you are asked to choose between different \textbf{work arrangements} and tell us about \textbf{how many days} you would work from home under the selected scenario. Here is what a choice situation looks like
 
 \begin{center}
-(Figure~\ref{fig:datapap-wfh-choice-task})
+\includegraphics[width=0.6\textwidth]{chapters/datapap/figures/wfh_choice_task}
 \end{center}
 
 \begin{enumerate}
 \item Two work arrangements are presented (A and B), which differ along eight dimensions.
 \item You are asked to choose your preferred arrangement.
 \item As a last step, you are asked to reveal how many days you would work from home given your selected arrangement.
-\item The above choice (see Figure~\ref{fig:datapap-wfh-choice-task}) would imply that you would prefer work arrangement A over B and would like to work from home on 3 days a week given the conditions in arrangement A.
+\item The above choice would imply that you would prefer work arrangement A over B and would like to work from home on 3 days a week given the conditions in arrangement A.
 \end{enumerate}
 \end{mybox}
-
-\begin{figure}[htbp]
-\centering
-\fbox{\includegraphics[width=0.6\textwidth]{chapters/datapap/figures/wfh_choice_task}}
-\caption{\label{fig:datapap-wfh-choice-task} Example of a choice task for the work from home stated preference experiment.}
-\end{figure}
 
 \subsection{Stage III: Mobility tool ownership SP}
 \label{sec:datapap-stage-iii}
@@ -162,13 +157,14 @@ Conducting an SP experiment on mobility tool ownership presents challenges due t
 
 The bundle structure involves two primary dimensions: The availability of each considered mobility tool and their respective characteristics. Our study includes five distinct tools: cars, public transport (PT) subscriptions (national or regional season tickets), half-fare card (HT, allowing travelers to purchase PT tickets for half the price), car-sharing subscriptions, and (E-)bikes, following \citet{Becker+Etal:2017} with additions of (E-)bikes and HT. Participants can combine these tools into 32 unique bundles ($2^5$ combinations), differing only in tool availability without imposing trade-offs within the same tool category (e.g., choosing between different types of cars).
 
-Given the impracticality of directly comparing 32 alternatives (known as the ``curse of dimensionality''), we initially explored an unlabeled approach in a pre-test where respondents chose between two predefined bundles. However, participants found this method too abstract and detached from their actual preferences, leading us to adopt a simpler design. In this revised approach, participants are presented with individual options for each mobility tool and are asked to compose a bundle from these options. An example choice task is illustrated in Figure~\ref{fig:datapap-mto-choice-task}. The introductory text explaining the mobility tool ownership (MTO) choice task was as follows
+Given the impracticality of directly comparing 32 alternatives (known as the ``curse of dimensionality''), we initially explored an unlabeled approach in a pre-test where respondents chose between two predefined bundles. However, participants found this method too abstract and detached from their actual preferences, leading us to adopt a simpler design. In this revised approach, participants are presented with individual options for each mobility tool and are asked to compose a bundle from these options. The introductory text explaining the mobility tool ownership (MTO) choice task was as follows
 
 \begin{mybox}
+\footnotesize
 In this survey, we want to determine how far \textbf{home office} impacts your \textbf{mobility tool ownership} choices. On the following pages, you are asked to choose between different mobility tools under various home office scenarios. Imagine that all your current mobility tools have expired and need to be \textbf{renewed} anyways. This is what a choice task looks like
 
 \begin{center}
-(Figure~\ref{fig:datapap-mto-choice-task})
+\includegraphics[width=0.6\textwidth]{chapters/datapap/figures/mto_choice_task}
 \end{center}
 
 \begin{enumerate}
@@ -177,15 +173,9 @@ In this survey, we want to determine how far \textbf{home office} impacts your \
 \item Each choice card contains a \textbf{car} offer, a \textbf{public transport (PT) subscription} offer (either GA or regional season ticket), the price of the \textbf{half-fare card}, a \textbf{car sharing} service as well as a \textbf{bicycle} (either regular or E-bike) offer.
 \item Last, you can choose for each of the five mobility tools whether or not you would like to own the tool at the conditions outlined. There are no other options available. F.ex. if you do not want to own the presented car, you don't have any other car available. So think about what composition of mobility tools would best match your needs given the home office scenario.
 \item Apart from the costs presented, you can assume that \textbf{all other prices are as of today} (e.g., fuel prices, single-fare train tickets, electricity prices, etc.).
-\item The above choice (see Figure~\ref{fig:datapap-mto-choice-task}) would imply that given the home office situation presented, you would choose to own the PT subscription and the bicycle.
+\item The above choice would imply that given the home office situation presented, you would choose to own the PT subscription and the bicycle.
 \end{enumerate}
 \end{mybox}
-
-\begin{figure}[htbp]
-\centering
-\fbox{\includegraphics[width=0.6\textwidth]{chapters/datapap/figures/mto_choice_task}}
-\caption{\label{fig:datapap-mto-choice-task} Example of an individualized choice task for the mobility tool ownership stated preference experiment.}
-\end{figure}
 
 While conceptually simpler, this design emphasizes the availability trade-off and explicitly abstracts from trade-offs between mobility tools of the same type (not choosing the depicted car implies not owning a car at all). Thus, a particular mobility tool is chosen if the net benefit/utility is positive. For instance, even if a participant strongly dislikes a specific car attribute (e.g., car type being luxury or sports car), they might still choose it if the disutility of not owning any car outweighs their aversion to that attribute. This approach questions whether the utility or disutility of not owning a car remains constant across choice occasions, influenced by the characteristics of other mobility tools available which should be accounted for when modeling the choices collectively.
 
