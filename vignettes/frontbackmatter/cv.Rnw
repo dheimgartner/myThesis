@@ -36,14 +36,14 @@
 
 \noindent\cvleft{September 2018 --~July 2020}%
 \cvright{%
-  MSc. in Economics, Double degree track,
+  MSc in Economics, Double degree track,
   \emph{University of St. Gallen and Stockholm School of Economics},\\
   Switzerland \& Sweden
 }\vspace{0.75em}
 
 \noindent\cvleft{September 2015 --~July 2018}%
 \cvright{%
-  BSc. in Sport, Exercise and Health \& BA in Economics,
+  BSc in Sport, Exercise and Health \& BA in Economics,
   \emph{University of Basel},\\
   Switzerland
 }\vspace{0.75em}
