@@ -106,16 +106,16 @@
 - [x] Abstract
 - [x] Conceptual figure
 - [x] CV
-- [ ] Bibliography prints ownpubs too!
+- [x] Bibliography prints ownpubs too!
 - [x] Maybe don't use leftbar in datapap
 - [x] Print out (new sections), read, correct, finalize text
-- [ ] Submit JSS
-- [ ] Bump version numbers (no dev versions...) => and check in ownpubs
-- [ ] Check appendix again (clearpage needed?)
-- [ ] Check Table~\ref{tab:datapap-mzmv-marginals} again
+- [x] Submit JSS
+- [~] Bump version numbers (no dev versions...) => and check in ownpubs
+- [x] Check appendix again (clearpage needed?)
+- [x] Check Table~\ref{tab:datapap-mzmv-marginals} again
 
-- [ ] Adjust submitted => under review (if not desk rejected) und PE-paper => journal article
-- [ ] Add ETH diss number and doi stuff
+- [x] Adjust submitted => under review (if not desk rejected) und PE-paper => journal article
+- [x] Add ETH diss number and doi stuff
 
 ## Author contributions
 
