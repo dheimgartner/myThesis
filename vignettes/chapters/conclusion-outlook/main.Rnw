@@ -83,3 +83,25 @@ Let's assume there are $M$ environments for statistical computing and $N$ models
 While 1. and 2. are relatively easy, 3. can be quite an effort, especially when speed and memory considerations play a role and a language such as \proglang{C++} is chosen.
 
 However, if a common interface from 2. to 3. would exist and modelers would agree on a language of likelihood (LOL) the $MxN$ problem would collapse to an (almost) $M+N$ problem (as any environment could leverage the same implementation of the main computation engine). A similar value proposition (arguing that \proglang{Julia} should be the language of choice) was made in \citet{Roodman:2024}. The \emph{Stan} project \citep{Stan:2024} is somewhat similar to this idea and covers the Bayesian case.
+
+\section{Final words on endogeneity} \label{sec:final-words}
+
+Endogeneity problems may have several causes and are ubiquitous. Alone in this thesis, I have (loosely) discussed three potential causes: 1. measurement error, 2. simultaneity/reverse causality and 3. sample selection (leading to a form of omitted variable bias). While the first two were only acknowledged, considerable emphasis was given to 3. Once, I was aware of self-selection and it's mechanism, I started to see potential selection bias throughout the transportation research and beyond. For example, in mode choice models, mode availability (mobility tool ownership) is usually dealt with (exogenous) availability constraints. However, in reality, we are really comparing different sub-groups -- e.g., the ones who own a car versus the ones that do not. And isn't it easy to imagine, that (unobserved/unmeasurable) factors influencing car ownership might also influence mode choice? If yes, then we should model mobility tool ownership and mode choice simultaneously and account for error correlation.
+
+While there is potential value in simple group comparison, this thesis highlights that it should not be mistaken for a causal effect (since the counterfactual outcome for one group, might not be the factual outcome of the other). Throughout the telework literature, the influence of telework on an outcome of interest is simply modeled via an indicator variable approach. Let's compare this to OPSR
+%
+\begin{center}
+\begin{longtable}{p{5.4cm}|p{5.4cm}}
+\toprule
+\textbf{Indicator approach} & \textbf{OPSR}\\
+\midrule
+Weekly km traveled is a function of $X$ (i.e., $Y(X)$). & Weekly km traveled is a function of $X$ but the effect of $x$ depends on telework status $J$ (i.e., $Y(X|J)$). E.g., the effect of having children on weekly km traveled might be different for NTWers (who bring children to school as part of the commute) and UTWers (extra trip).\\
+Telework is exogeneous -- i.e., there are no factors simultaneously influencing telework and the error term. & Telework is endogenous -- i.e., there are (unobserved) factors simultaneously influencing telework adoption and weekly km traveled.\\
+Treatment effect is simply the level effect of the telework indicator. However, (all!) parameter estimates might be biased! & Treatment effect is a result of 1. different parameters/process specifications for the groups (i.e., the $\Xb$ and $\Xbd$) and 2. the selection on unobservables (IMR term; see Equations~\ref{eq:opsr-cond-exp} and \ref{eq:opsr-counterfact-exp}).\\
+\bottomrule
+\end{longtable}
+\end{center}
+%
+In plain, the indicator variable approach is only able to account for differences stemming from observable factors. Meanwhile, the assumed exogeneity of telework might bias all parameter estimates (if the assumption should in fact be violated).
+
+My hope for the future of (transportation) research is, that 1. reviewers are aware of the various causes of endogeneity, 2. are able to detect and identify the exact potential cause in applied research and elaborate on it in intuitive terms, and 3. insist on resolving the concern. Lastly, 4. with the development and advancement of the statistical modeling toolbox estimating more complex models (dealing with endogeneity) should be feasible for any researcher. In that sense, conducting an OPSR study (with the \pkg{OPSR} \proglang{R}-package) is no more difficult than running simple linear regression models -- anyone can do it! And if the problem at hand investigates the effect of an ordinal treatment on a continuous outcome with cross-sectional data -- anyone should do it!
