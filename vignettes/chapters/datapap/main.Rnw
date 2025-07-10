@@ -14,7 +14,7 @@ The Swiss New Normal is defined by a substantial increase in telework adoption f
 \ChapterInfoEntry{%
 This chapter is based on the following paper
 }{%
-Heimgartner D. and K. W. Axhausen (2024) Multimodality in the Swiss New Normal: Data Collection Methods and Response Behavior in a Multi-Stage Survey with Linked Stated Preference Designs, \emph{Transportation}, under review.
+Heimgartner D. and K. W. Axhausen (2024) Multimodality in the Swiss New Normal: Data Collection Methods and Response Behavior in a Multi-Stage Survey with Linked Stated Preference Designs, \emph{Transportation}, accepted for publication.
 }%
 \ChapterInfoEntry{
 Author contributions
