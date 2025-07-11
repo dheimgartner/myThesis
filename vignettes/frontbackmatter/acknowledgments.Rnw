@@ -19,6 +19,26 @@
 \endgroup
 }
 
-I would like to thank \dots
+%% Kay
+I would like to thank Kay Axhausen for supervising me during my doctoral studies within his research group at the Institute for Transport Planning and Systems (IVT). I've always felt great support and the liberty to pursue my ideas and interests. I greatly appreciated the formal courtesy, mutual respect and countless invites for dinners, Nikolaus-Apéros and Sushi get-togethers. Our research group had the privilege to join conferences across the globe and I would like to acknowledge that the TRB conferences in Washington and the useR-meeting in Salzburg were highlights of my PhD journey. Thank you!
+
+%% Committee
+With the appointment of Professor Axhausen as Professor Emeritus, David Kaufman took over the formal role of being my main supervisor -- thanks so much for stepping in! Thanks to all my co-examinors, Thomas Bernauer, Michel Bierlaire and Stephane Hess, and their fruitful comments both during the defense but also on various other occasions.
+
+%% ISTP
+With the gradual dissolvement of Kay Axhausen's research group, I had the great privilege to be adopted by Thomas Bernauer and his group. Thanks to Clara Brügge, Jan Freihardt, Ella Henninger, Sarah Gomm, Vally Koubi, Camille Fournier De Lauriere, Alessio Levis, Florian Lichtin, Susanne Rhein, Keith Smith and Lea Stapper for integrating me in your group!
+
+%% IVT
+At IVT, my special thank goes to Basil Schmid, who was and still is my mentor, who introduced me to the fascinating world of choice modeling and greatly supported me from the very beginning. Likewise, Milo{\v{s}} Bala{\'c} was a great role model and always had an open door. Thanks to Lukas Ambühl, Lukas Ballo, Igor Dakic, Eduardo Falbel, Benjamin Gramsch, Grace Kagho, Clarissa Livingston, Adrian Meister, Raphael Mesaric, Lucas Meyer de Freitas, Joseph Molloy, Thomas Schatzmann, Aurore Sallard, Christopher Tchervenkov and Caro Winkler for being part of my journey and being such great friends on and beyond the campus.
+
+%% Family and friends
+I would like to thank my parents, siblings and entourage -- I am proud to be the first Doctor of this family. You contributed to this achievement ``simply'' by being great. Therefore, you may continue to call me Mr. Heimgartner! ;)
+
+Speziellen Dank gilt meinem Vater, Adrian Heimgartner, der mich im Leben immer so selbstlos unterstützt. Ich durfte stets frei aus dem Bauch heraus neue Lebenswege einschlagen und ohne die Erkenntnis, dass der Weg das Ziel sei, würden einige behaupten, ich hätte keins...
+
+%% Miriam
+Thank you Miriam, I am happy to have met you on this journey, that our life's paths crossed.
+\vspace{1em}
+Der Weg ist das Ziel!
 
 \endgroup
