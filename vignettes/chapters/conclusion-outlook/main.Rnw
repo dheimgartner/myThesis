@@ -36,6 +36,15 @@ RQ2 was only implicitly and partially answered in Chapter~\ref{ch:twte}, modelin
 
 Chapter~\ref{ch:opsr-tools} introduced \pkg{OPSRtools}, an \proglang{R}-package designed to support the estimation and post-estimation of ordered probit switching regression models (developed as part of the analysis in the preceeding chapter). The tools facilitate model selection, cross-validation, treatment effect computation, and visualization. The study also explored how different treatment effects arise and highlighted the role of the Heckman correction term in model predictions. The findings suggest that treatment effect differences are largely due to unbiased parameter estimates from OPSR rather than the correction term itself. Potential concerns about model stability and identification issues are left for future research.
 
+Based on these findings, we provide short answers summarizing the main results for each research question
+%
+\begin{itemize}
+\item[RQ1:] Telework adoption in Switzerland increased by 15 percentage points post-pandemic, yet a notable gap persists between employees who can telework and those who actually do due to employer constraints.
+\item[RQ2:] Teleworkers are a particularly mobile group with longer commutes, suggesting that the current teleworkers would travel particularly much in absence of the hybrid workform. Overall time-allocation and mode shares are very similar for teleworkers and non-teleworkers.
+\item[RQ3:] Work policies provide only little lever to (dis-) incentivize employees back to the office workplace, suggesting that baseline preferences are valued highly.
+\item[RQ4:] Telework substantially reduces overall transport demand by an estimated 16\% in weekly kilometers traveled (compared to the no telework reference), primarily altering weekly load patterns rather than fundamentally changing mode choices or mobility tool ownership. Compensating rebound and second-order effects (offsetting foregone commutes) are minimal.
+\end{itemize}
+
 \section{Relevance of the thesis to science and society}
 
 While the methods used in this thesis are old, their implementation in statistical environments were limited. At the same time, understanding when and why selection bias might occur could be complicated by a mostly technical discussion surrounding the topic. This thesis demonstrates, that sometimes, more complex econometric models are justified arising from intricate error structures of the underlying processes and the need to account for error correlation. Results and thereby policy implications can be widely different or even suggest opposite directions of effect. The OPSR modeling frame is limited to an ordinal selection and continuous outcome process (see Section~\ref{sec:summary-future-work} for a more in-depth discussion). However, such treatment situations can readily occur and therefore \pkg{OPSR} is of potential use in various contexts and across disciplines.
