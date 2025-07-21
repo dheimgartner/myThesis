@@ -228,14 +228,14 @@ mat[, "Estimate"] <- ifelse(
   paste0(mat[, "Estimate"], "^{", mat[, "stars"], "}")
 )
 
-mat_struc <- mat[1:9, ]
+mat_struc <- mat[14:22, ]
 
 ## align thresholds
 mat_struc[, "Coef."] <- ifelse(stringr::str_starts(mat_struc[, "Coef."], "-"),
                                mat_struc[, "Coef."],
                                paste0("\\phantom{-}", mat_struc[, "Coef."]))
 
-mat <- mat[10:nrow(mat), ]
+mat <- mat[1:12, ]
 
 ## update coefs with \\quad
 mat[, "Coef."] <- paste0("\\quad ", mat[, "Coef."])
