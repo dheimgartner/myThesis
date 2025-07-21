@@ -19,21 +19,21 @@
 \endgroup
 }
 
-I would like to thank Kay Axhausen for supervising me during my doctoral studies within his research group at the Institute for Transport Planning and Systems (IVT). I always felt greatly supported and had the freedom to pursue my own ideas and interests. I truly appreciated the formal courtesy, mutual respect, and countless invitations to dinners, Nikolaus-Apéros, and sushi get-togethers. Thank you!
+I would like to thank Kay Axhausen for supervising my doctoral studies within his research group at the Institute for Transport Planning and Systems (IVT). I always felt greatly supported and had the freedom to pursue my own ideas. I truly appreciated the formal courtesy, mutual respect, and countless invitations to dinners, Nikolaus-Apéros, and sushi get-togethers. Thank you!
 
-With the appointment of Professor Axhausen as Professor Emeritus, David Kaufman took over the formal role of my main supervisor -- thank you so much for stepping in! Many thanks to all my co-examiners -- Thomas Bernauer, Michel Bierlaire, and Stephane Hess -- for their insightful comments, both during the defense and on various other occasions.
+When Professor Axhausen was appointed Professor Emeritus, David Kaufman took over as my main supervisor -- thank you for stepping in. Many thanks to my co-examiners -- Thomas Bernauer, Michel Bierlaire, and Stephane Hess -- for their insightful comments during the defense and on other occasions.
 
-With the gradual dissolution of Kay Axhausen's research group, I had the great privilege of being welcomed into Thomas Bernauer’s group. Thank you to Clara Brügge, Jan Freihardt, Ella Henninger, Sarah Gomm, Vally Koubi, Camille Fournier De Lauriere, Alessio Levis, Florian Lichtin, Susanne Rhein, Keith Smith, and Lea Stapper for integrating me into your group!
+As Kay Axhausen's research group gradually dissolved, I had the great privilege of being welcomed into Thomas Bernauer’s group. Thank you to Clara Brügge, Jan Freihardt, Ella Henninger, Sarah Gomm, Vally Koubi, Camille Fournier De Lauriere, Alessio Levis, Florian Lichtin, Susanne Rhein, Keith Smith, and Lea Stapper for integrating me into your group!
 
-At IVT, my special thanks go to Basil Schmid, who has been -- and still is -- my mentor. He introduced me to the fascinating world of choice modeling and supported me greatly from the very beginning. Likewise, Milo{\v{s}} Bala{\'c} was a great role model and always had an open door.
+At IVT, my special thanks go to Basil Schmid, who has been and continues to be my mentor. He introduced me to the fascinating world of choice modeling and supported me greatly from the very beginning. Likewise, Milo{\v{s}} Bala{\'c} was a great role model and always had an open door for me.
 
 Thanks to Lukas Ambühl, Lukas Ballo, Igor Dakic, Eduardo Falbel, Benjamin Gramsch, Grace Kagho, Clarissa Livingston, Adrian Meister, Raphael Mesaric, Lucas Meyer de Freitas, Joseph Molloy, Thomas Schatzmann, Aurore Sallard, Christopher Tchervenkov, and Caro Winkler for being part of my journey and for your friendship on and beyond the campus.
 
-I would like to thank my parents, siblings, and close circle -- I am proud to be the first Doctor in our family. You contributed to this achievement ``simply'' by being great. Therefore, you may continue to call me Mr. Heimgartner! ;)
+I would like to thank my parents, siblings, and close friends. You contributed to this achievement simply by being yourselves.
 
-Speziellen Dank gilt meinem Vater, Adrian Heimgartner, der mich im Leben immer so selbstlos unterstützt hat. Ich durfte stets frei aus dem Bauch heraus neue Lebenswege einschlagen -- und ohne die Erkenntnis, dass der Weg das Ziel sei, würden manche behaupten, ich hätte keins...
+Spezieller Dank gilt meinem Vater, Adrian Heimgartner, der mich im Leben immer so selbstlos unterstützt hat. Ich durfte stets frei aus dem Bauch heraus neue Lebenswege einschlagen -- und ohne die Erkenntnis, dass der Weg das Ziel ist, würden manche behaupten, ich hätte keins...
 
-Thank you Miriam, I am happy to have met you on this journey -- that our life paths have crossed.
+Thank you, Miriam. I am happy to have met you on this journey -- that our life paths have crossed.
 
 \vspace{1em}
 \noindent\emph{Der Weg ist das Ziel!}
