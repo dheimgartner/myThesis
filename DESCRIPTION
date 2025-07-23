@@ -1,6 +1,6 @@
 Package: myThesis
 Title: Measuring and Modeling the Impact of Telework on Transport Demand - Data, Tools and Analysis
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     person("Daniel", "Heimgartner", email = "d.heimgartners@gmail.com", role = c("aut", "cre", "cph"),
     comment = c(ORCID = "0000-0002-0643-8690"))
