@@ -23,7 +23,7 @@ Study conception and design: all authors; analysis and interpretation of results
 \ChapterInfoEntry{
 The following changes were made
 }{%
-Most of the original text became part of the paper under review, underlying Chapter~\ref{ch:datapap} and is not repeated here. The original analysis modeled the telework frequency and used the baseline preference as explanatory variable. Here, we model the deviation from the baseline directly. Further, the random error component was added. While the qualitative conclusions did not change, modeling results did, with elasticities being even smaller. The methods section and the discussion of the results were adjusted accordingly.
+Most of the original text became part of the paper, underlying Chapter~\ref{ch:datapap} and is not repeated here. The original analysis modeled the telework frequency and used the baseline preference as explanatory variable. Here, we model the deviation from the baseline directly. Further, the random error component was added. While the qualitative conclusions did not change, modeling results did, with elasticities being even smaller. The methods section and the discussion of the results were adjusted accordingly.
 }%
 \end{ChapterInfoTable}
 

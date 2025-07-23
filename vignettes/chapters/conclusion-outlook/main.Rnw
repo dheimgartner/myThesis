@@ -99,7 +99,7 @@ Endogeneity is a pervasive issue in empirical research and may arise from severa
 
 For instance, in mode choice models, mode availability (e.g., car ownership) is often treated via (exogenous) availability constraints. However, in reality, we are comparing different sub-populations -- e.g., those who own a car versus those who do not. It is not difficult to imagine that (unobserved or unmeasurable) factors influencing car ownership may also influence mode choice. If so, then both mobility tool ownership and mode choice should be modeled simultaneously, accounting for correlated error terms.
 
-While simple group comparisons can offer some value, this thesis emphasizes that such comparisons should not be mistaken for causal effects. The counterfactual outcome for one group is not necessarily the factual outcome for the other. In the telework literature, for example, the effect of telework on an outcome of interest is often modeled using a simple indicator variable. Let us contrast this with the OPSR framework:
+While simple group comparisons can offer some value, this thesis emphasizes that such comparisons should not be mistaken for causal effects. The counterfactual outcome for one group is not necessarily the factual outcome for the other, even when controlling for (observable) differences in group composition. In the telework literature, for example, the effect of telework on an outcome of interest is often modeled using a simple indicator variable. Let us contrast this with the OPSR framework:
 %
 \begin{center}
 \begin{longtable}{p{5.4cm}|p{5.4cm}}
