@@ -25,10 +25,8 @@
 
         \begingroup
             A dissertation submitted to attain the degree of\\
-            \vspace{0.5em}
-            \spacedlowsmallcaps{Doctor of Sciences}
-            of
-            \spacedlowsmallcaps{ETH Zurich} \\
+            \vspace{1em}
+            \spacedlowsmallcaps{Doctor of Sciences}\\
             (Dr.\ sc.\ ETH Zurich)
         \endgroup
 
@@ -36,21 +34,19 @@
 
         \begingroup
             presented by\\
-            \vspace{0.5em}
+            \vspace{1em}
             \spacedlowsmallcaps{\myName}\\
-            MSc. Economics \\ Stockholm School of Economics\\
-            \vspace{0.5em}
+            \vspace{1em}
             born on 22 August 1992\\
-            citizen of Switzerland
         \endgroup
 
         \vfill
 
         \begingroup
             accepted on the recommendation of\\
-            \vspace{0.5em}
+            \vspace{1em}
             Prof.\ Dr.\ D. Kaufmann, examiner\\
-            Prof.\ em.\ Dr.\ K. W. Axhausen co-examiner\\
+            Prof.\ em.\ Dr.\ K. W. Axhausen, co-examiner\\
             Prof.\ Dr.\ T. Bernauer, co-examiner\\
             Prof.\ Dr.\ M. Bierlaire, co-examiner\\
             Prof.\ Dr.\ S. Hess, co-examiner

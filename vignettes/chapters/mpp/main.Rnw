@@ -614,11 +614,12 @@ mat[is.na(mat)] <- ""
 
 ## grouped rows
 mat[, "coef"] <- paste0("\\quad ", mat[, "coef"])
+mat[1, "coef"] <- "Sigma"
 
 mat_tex <- paste0(apply(mat, 1, paste, collapse = " & "), "\\\\")
 
 ## add baseline and normalization
-mat_tex <- c("BASELINE\\\\", mat_tex)
+mat_tex <- c(mat_tex[1], "BASELINE\\\\", mat_tex[2:length(mat_tex)])
 mat_tex <- c(mat_tex[1:19], "NORMALIZATION\\\\", mat_tex[20:length(mat_tex)])
 
 ## force break to the next page

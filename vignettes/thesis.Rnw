@@ -47,7 +47,6 @@ library("datapap")
 
 ## trb24
 library("trb24")
-library("ordinal")
 library("mixl")
 
 ## OPSR

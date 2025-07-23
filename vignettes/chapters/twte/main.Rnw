@@ -25,7 +25,7 @@ The net effects of telework on transport demand are debated. We operationalize t
 \ChapterInfoEntry{%
 This chapter is based on the following paper
 }{%
-Heimgartner D. and K. W. Axhausen (2025) All Models are Wrong, Some Models are Wronger: On the Importance of Accounting for Self-Selection when Estimating Telework Treatment Effects, \emph{Transportation Research Part B: Methodological}, submitted.
+Heimgartner D. and K. W. Axhausen (2025) All Models are Wrong, Some Models are Wronger: On the Importance of Accounting for Self-Selection when Estimating Telework Treatment Effects, \emph{Transportation Research Part A: Policy and Practice}, submitted.
 }%
 \ChapterInfoEntry{
 Author contributions
@@ -261,7 +261,7 @@ A description of the OPSR modeling framework can be found in Section~\ref{sec:op
 
 \subsubsection{A word on the sensitivity with respect to ``rho''}  \label{sec:twte-a-word-on-rho}
 
-It immediately follows that the derivative of Equation~\ref{eq:opsr-cond-exp} with respect to $\rho_j$ is the IMR scaled by the standard deviation $\sigma_j$.  The sensitivity of the conditional expectation with respect to $\rho_j$ depends on the IMR. Further, Equation~\ref{eq:twte-cond-exp} consists of two parts: $\Xb$ and $\rho_j \sigma_j$IMR (the Heckman correction). In how far the conditional expectation is influenced by ``rho'' therefore depends on the relative size of the two parts. If $\Xb$ is relatively small compared to $\sigma_j$IMR, then $\rho_j$ plays a relatively more important role for the conditional expectation and thus the treatment effects (depending on the influence on the counterfactual conditional expectation). Furthermore, not accounting for error correlation (dropping the Heckman correction) could lead to very different beta estimates and thereby treatment effects.
+It immediately follows that the derivative of Equation~\ref{eq:opsr-cond-exp} with respect to $\rho_j$ is the IMR scaled by the standard deviation $\sigma_j$.  The sensitivity of the conditional expectation with respect to $\rho_j$ depends on the IMR. Further, Equation~\ref{eq:opsr-cond-exp} consists of two parts: $\Xb$ and $\rho_j \sigma_j$IMR (the Heckman correction). In how far the conditional expectation is influenced by ``rho'' therefore depends on the relative size of the two parts. If $\Xb$ is relatively small compared to $\sigma_j$IMR, then $\rho_j$ plays a relatively more important role for the conditional expectation and thus the treatment effects (depending on the influence on the counterfactual conditional expectation). Furthermore, not accounting for error correlation (dropping the Heckman correction) could lead to very different beta estimates and thereby treatment effects.
 
 
 %% -- Results ------------------------------------------------------------------

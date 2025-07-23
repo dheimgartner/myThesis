@@ -20,45 +20,55 @@
 %   % \printbibliography[heading=none,type=inproceedings]
 % \end{refsection}
 
+<<R-bibtex, include=FALSE, echo=FALSE>>=
+bib <- bibtex::read.bib("ownpubs.bib")
+bibit <- function(key) {
+  o <- capture.output(print(bib[[key]], style = "latex", .bibstyle = "JSS"))
+  o <- paste(o, collapse = " ")
+  o <- gsub("\\\\", "\\\\\\\\", o)
+  o
+}
+@
+
 Articles in peer-reviewed journals:
 \begin{enumerate}
 \small
-\item \bibentry{Heimgartner+Axhausen:2023a*}
-\item \bibentry{Heimgartner+Axhausen:2024a*}
-\item \bibentry{Heimgartner+Axhausen:2024b*}
-\item \bibentry{Heimgartner+Wang:2025a*}
-\item \bibentry{Heimgartner+Axhausen:2025*}
+\item \Sexpr{bibit("Heimgartner+Axhausen:2023a*")}
+\item \Sexpr{bibit("Heimgartner+Axhausen:2024a*")}
+\item \Sexpr{bibit("Heimgartner+Axhausen:2024b*")}
+\item \Sexpr{bibit("Heimgartner+Wang:2025a*")}
+\item \Sexpr{bibit("Heimgartner+Axhausen:2025*")}
 \end{enumerate}
 %
 Conference contributions:
 \begin{enumerate}[resume]
 \small
-\item \bibentry{Heimgartner+Etal:2022*}
-\item \bibentry{Heimgartner+Schmid+Axhausen:2022*}
-\item \bibentry{Heimgartner+Etal:2023a*}
-\item \bibentry{Heimgartner+Axhausen:2023b*}
-\item \bibentry{Heimgartner+Axhausen:2023c*}
-\item \bibentry{Heimgartner+Axhausen:2023d*}
-\item \bibentry{Heimgartner+Axhausen:2024c*}
-\item \bibentry{Heimgartner+Lichtin+Axhausen:2024*}
+\item \Sexpr{bibit("Heimgartner+Etal:2022*")}
+\item \Sexpr{bibit("Heimgartner+Schmid+Axhausen:2022*")}
+\item \Sexpr{bibit("Heimgartner+Etal:2023a*")}
+\item \Sexpr{bibit("Heimgartner+Axhausen:2023b*")}
+\item \Sexpr{bibit("Heimgartner+Axhausen:2023c*")}
+\item \Sexpr{bibit("Heimgartner+Axhausen:2023d*")}
+\item \Sexpr{bibit("Heimgartner+Axhausen:2024c*")}
+\item \Sexpr{bibit("Heimgartner+Lichtin+Axhausen:2024b*")}
 \end{enumerate}
 %
 Working papers:
 \begin{enumerate}[resume]
 \small
-\item \bibentry{Lichtin+Etal:2025*}
-\item \bibentry{Heimgartner+Etal:2024*}
+\item \Sexpr{bibit("Lichtin+Etal:2025*")}
+\item \Sexpr{bibit("Heimgartner+Etal:2024*")}
 \end{enumerate}
 %
 \proglang{R}-packages:
 \begin{enumerate}[resume]
 \small
-\item \bibentry{Heimgartner:2022*}
-\item \bibentry{Heimgartner:2024a*}
-\item \bibentry{Heimgartner:2024b*}
-\item \bibentry{Heimgartner:2025a*}
-\item \bibentry{Heimgartner+Reiffer:2025*}
-\item \bibentry{Heimgartner+Wang:2025b*}
-\item \bibentry{Heimgartner:2025b*}
-\item \bibentry{Heimgartner:2025c*}
+\item \Sexpr{bibit("Heimgartner:2022*")}
+\item \Sexpr{bibit("Heimgartner:2024a*")}
+\item \Sexpr{bibit("Heimgartner:2024b*")}
+\item \Sexpr{bibit("Heimgartner:2025a*")}
+\item \Sexpr{bibit("Heimgartner+Reiffer:2025*")}
+\item \Sexpr{bibit("Heimgartner+Wang:2025b*")}
+\item \Sexpr{bibit("Heimgartner:2025b*")}
+\item \Sexpr{bibit("Heimgartner:2025c*")}
 \end{enumerate}

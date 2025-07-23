@@ -23,7 +23,7 @@ Study conception and design: all authors; analysis and interpretation of results
 \ChapterInfoEntry{
 The following changes were made
 }{%
-Most of the original text became part of the paper under review, underlying Chapter~\ref{ch:datapap} and is not repeated here. The original analysis modeled the telework frequency and used the baseline preference as explanatory variable. Here, we model the deviation from the baseline directly. Further, the random error component was added. While the qualitative conclusions did not change, modeling results did, with elasticities being even smaller. The methods section and the discussion of the results were adjusted accordingly.
+Most of the original text became part of the paper, underlying Chapter~\ref{ch:datapap} and is not repeated here. The original analysis modeled the telework frequency and used the baseline preference as explanatory variable. Here, we model the deviation from the baseline directly. Further, the random error component was added. While the qualitative conclusions did not change, modeling results did, with elasticities being even smaller. The methods section and the discussion of the results were adjusted accordingly.
 }%
 \end{ChapterInfoTable}
 
@@ -41,7 +41,7 @@ The question is investigated based on the stated preference (SP) data, collected
 
 \section{Methods} \label{sec:trb24-methods}
 
-In this section we present the modeling methodology for the discrete work arrangement choice and the impact of the work arrangement on the telework frequency (modeled as the deviation from the baseline preference). The first model is a multinomial logit discrete choice model (MNL) whereas the subsequent choice is modeled through an ordinal logistic regression (OL) with random error components.
+In this section we present the modeling methodology for the discrete work arrangement choice and the impact of the work arrangement on the telework frequency (modeled as the deviation from the baseline preference). The first model is a multinomial logit discrete choice model (MNL) whereas the subsequent choice is modeled through an ordinal logistic regression (OL) with random error components and individual specific choice availability.
 
 We now describe the two modeling frameworks separately, starting with the MNL: Let's recall that each decision maker $n$ was asked to choose between two unlabelled work arrangements $j$ in choice scenario $t$. The decision maker maximizes utility of the form $U_{njt} = V_{njt} + \varepsilon_{njt}$, where $V_{njt}$ is the observed part of utility and $\varepsilon_{njt}$ represents unobserved factors which follow a Gumbel (type I extreme value) distribution. The modeler assumes that $V_{njt}$ can be expressed as $\bx{njt}$, where $x_{njt}$ is a vector of observed variables relating to alternative $j$. It can be shown that the probability of observing decision maker $n$ choosing alternative $j$ (i.e., $V_{njt} > V_{nj't}, \forall j \neq j'$) in choice occasion $t$ is \citep[][Chapter~3]{Train:2009}
 %
@@ -75,7 +75,7 @@ y_{nt} =
 \end{cases}
 \end{equation}
 %
-This yields the following probability
+Since the baseline is individual-specific, the above depicted full choice set is never feasible. I.e., an individual that wishes to telework three days a week can maximally deviate $[-3, +2]$ days from this baseline. To model this, we specify separate OL model components, where each component has a different number of levels for the dependent variable. The following probability can be derived
 %
 \begin{equation}
 \begin{aligned}
@@ -88,12 +88,12 @@ P_{nkt} &= P(y_{nt} = k \mid x_{nt}, \mu_n) = P(\tau_{k-1} < y_{nt}^* \leq \tau_
 The likelihood (``integrating out'' the error component) can be written as
 %
 \begin{equation}
-L(\beta, \tau) = \int \prod_n^N \prod_k^K \prod_t^{T_n} ( P_{nkt} )^{y_{nkt}} f(\mu_n) \,d\mu_n
+L(\beta, \tau) = \int \prod_n^N \prod_k^{K_n} \prod_t^{T_n} ( P_{nkt} )^{y_{nkt}} f(\mu_n) \,d\mu_n
 \end{equation}
 %
-where $y_{nkt} = 1$ if $y_{nt}=k$ was observed and zero otherwise. $f(\mu_n)$ is the PDF of a normal distribution with mean 0 and variance $\sigma^2$.
+where $y_{nkt} = 1$ if $y_{nt}=k$ was observed and zero otherwise. $f(\mu_n)$ is the PDF of a normal distribution with mean 0 and variance $\sigma^2$. The subscript in $K_n$ reflects the fact that the choice set is individual-specific.
 
-The model is estimated using the \pkg{ordinal} \proglang{R}-package \citep{Christensen:2023}.
+The model is estimated using the \pkg{apollo} \proglang{R}-package \citep{Hess+Palma:2019}.
 
 %% -- Results ------------------------------------------------------------------
 
@@ -192,7 +192,7 @@ Last, coordinating office presence on Mondays and Fridays reduces the attractive
 
 \subsection{Telework frequency choice}
 
-The estimation results of the OL model are presented in Table~\ref{tab:trb24-ol-estimates}. Elasticities (expressed in number of days deviating from the baseline) are shown in the last column: For example, the elasticity corresponding to a salary increase by 10\% (compared to the reference of a 10\% salary reduction) reads 0.04 d/week. Overall, the computed elasticities are very small, suggesting that the proposed attributes have little lever to (dis-) incentivize deviations from the baseline preference.
+The estimation results of the OL model are presented in Table~\ref{tab:trb24-ol-estimates}. Elasticities (expressed in number of days deviating from the baseline) are shown in the last column: For example, the elasticity corresponding to a salary increase by 10\% (compared to the reference of a 10\% salary reduction) reads 0.1 d/week. Overall, the computed elasticities are very small, suggesting that the proposed attributes have little lever to (dis-) incentivize deviations from the baseline preference.
 
 {%
 \begin{center}
@@ -228,14 +228,14 @@ mat[, "Estimate"] <- ifelse(
   paste0(mat[, "Estimate"], "^{", mat[, "stars"], "}")
 )
 
-mat_struc <- mat[1:9, ]
+mat_struc <- mat[14:22, ]
 
 ## align thresholds
 mat_struc[, "Coef."] <- ifelse(stringr::str_starts(mat_struc[, "Coef."], "-"),
                                mat_struc[, "Coef."],
                                paste0("\\phantom{-}", mat_struc[, "Coef."]))
 
-mat <- mat[10:nrow(mat), ]
+mat <- mat[1:12, ]
 
 ## update coefs with \\quad
 mat[, "Coef."] <- paste0("\\quad ", mat[, "Coef."])
@@ -294,7 +294,7 @@ writeLines(mat_tex)
 \end{center}
 }%
 
-The estimated standard deviation (parameter) corresponding to the random error component ($\sigma$) is significant and quite substantial (see also the threshold estimates, ranging from -15.6 to 19.7 on the latent scale). This suggests that there are other (unobserved) factors nudging teleworkers to deviate from their baseline. Similarly, the baseline preference could be ``imprecisely'' measured or could have changed since the measurement.
+The estimated standard deviation (parameter) corresponding to the random error component ($\sigma$) is significant and quite substantial (see also the threshold estimates, ranging from -13.6 to 15.6 on the latent scale). This suggests that there are other (unobserved) factors nudging teleworkers to deviate from their baseline. Similarly, the baseline preference could be ``imprecisely'' measured or could have changed since the measurement.
 
 %% -- Conclusion ---------------------------------------------------------------
 
